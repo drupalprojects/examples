@@ -17,9 +17,9 @@
  */
 function page_example_help($path, $arg) {
   switch ($path) {
-    case 'admin/help#foo':
+    case 'admin/help#page_example':
       // Here is some help text for a custom page.
-      return t('This sentence contains all the letters in the English alphabet.');
+      return t('Demonstrates presentation of a basic page, with the menu entry.');
   }
 }
 
@@ -33,13 +33,13 @@ function page_example_help($path, $arg) {
  */
 function page_example_perm() {
   return array(
-	'administer foo' => array(
-	  'title' => t('Administer foo module'),
-	  'description' => t('Allow users to administer foo settings'),
+	'administer page_example' => array(
+	  'title' => t('Administer page_example module'),
+	  'description' => t('Allow users to administer page_example settings'),
 	),
-	'access foo content' => array(
-	  'title' => t('Access foo content'),
-	  'description' => t('Allow users to access foo content'),
+	'access page_example content' => array(
+	  'title' => t('Access page_example content'),
+	  'description' => t('Allow users to access page_example content'),
 	),
   );
 }
@@ -55,9 +55,9 @@ function page_example_perm() {
  *
  * With the below menu definitions, URLs will be interpreted as follows:
  *
- * If the user accesses http://example.com/?q=foo, then the menu system
+ * If the user accesses http://example.com/?q=page_example, then the menu system
  * will first look for a menu item with that path. In this case it will
- * find a match, and execute page_example_foo().
+ * find a match, and execute page_example_page_example().
  *
  * If the user accesses http://example.com/?q=bar, no match will be found,
  * and a 404 page will be displayed.
@@ -74,10 +74,10 @@ function page_example_perm() {
  */
 function page_example_menu() {
   // This is the minimum information you can provide for a menu item.
-  $items['foo'] = array(
-    'title' => 'Foo',
-    'page callback' => 'page_example_foo',
-    'access arguments' => array('access foo'),
+  $items['page_example'] = array(
+    'title' => 'Page Example',
+    'page callback' => 'page_example_page_example',
+    'access arguments' => array('access page_example'),
   );
 
   // By using the MENU_CALLBACK type, we can register the callback for this
@@ -111,8 +111,9 @@ function page_example_menu() {
  * If you do not want to use the theme system (for example for outputting an
  * image or XML), you should print the content yourself and not return anything.
  */
-function page_example_foo() {
-  return '<p>'. t('The quick brown fox jumps over the lazy dog.') .'</p>';
+function page_example_page_example() {
+  return '<p>'. t('This is a basic page example with simple content and a menu entry. For an example of a page without a menu entry, look at !barbaz',
+    array('!barbaz' => l('MENU_CALLBACK example','bar/baz/5/6'))) .'</p>';
 }
 
 /**
@@ -122,17 +123,16 @@ function page_example_foo() {
  * implementation we instructed the menu system to extract the last two
  * parameters of the path and pass them to this function as arguments.
  */
-function page_example_baz($alice, $bob) {
+function page_example_baz($firstarg, $secondarg) {
   // Make sure you don't trust the URL to be safe! Always check for exploits.
-  if (!is_numeric($alice) || !is_numeric($bob)) {
+  if (!is_numeric($firstarg) || !is_numeric($secondarg)) {
     // We will just show a standard "access denied" page in this case.
     return drupal_access_denied();
   }
 
-  $list[] = t("Alice's number was @number.", array('@number' => $alice));
-  $list[] = t("Bob's number was @number.", array('@number' => $bob));
-  $list[] = t('The total was @number.', array('@number' => $alice + $bob));
+  $list[] = t("First argument was @number.", array('@number' => $firstarg));
+  $list[] = t("Second argument was @number.", array('@number' => $secondarg));
 
-  return theme('item_list', $list);
+  return t("Arguments were parsed from the URL:") . theme('item_list', $list);
 }
 
