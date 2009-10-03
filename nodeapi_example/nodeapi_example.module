@@ -85,7 +85,9 @@ function nodeapi_example_nodeapi(&$node, $op, $teaser, $page) {
     // Insert is called after the node has been validated and saved to the
     // database. It gives us a chance to create our own record in the database.
     case 'insert':
-      db_query('INSERT INTO {nodeapi_example} (nid, rating) VALUES (%d, %d)', $node->nid, $node->nodeapi_example_rating);
+      if (variable_get('nodeapi_example_'. $node->type, 0)) {
+        db_query('INSERT INTO {nodeapi_example} (nid, rating) VALUES (%d, %d)', $node->nid, $node->nodeapi_example_rating);
+      }
       break;
 
     // Update is called when an existing node has been changed. Here, we use a
@@ -93,8 +95,10 @@ function nodeapi_example_nodeapi(&$node, $op, $teaser, $page) {
     // created before this module was installed won't already have a rating
     // saved so there would be nothing to update.
     case 'update':
-      db_query('DELETE FROM {nodeapi_example} WHERE nid = %d', $node->nid);
-      db_query('INSERT INTO {nodeapi_example} (nid, rating) VALUES (%d, %d)', $node->nid, $node->nodeapi_example_rating);
+      if (variable_get('nodeapi_example_'. $node->type, 0)) {
+        db_query('DELETE FROM {nodeapi_example} WHERE nid = %d', $node->nid);
+        db_query('INSERT INTO {nodeapi_example} (nid, rating) VALUES (%d, %d)', $node->nid, $node->nodeapi_example_rating);
+      }
       break;
 
     // Delete is called whn the node is being deleted, it gives us a chance
@@ -113,10 +117,12 @@ function nodeapi_example_nodeapi(&$node, $op, $teaser, $page) {
     // filters transform user-supplied content, whereas we are extending it with
     // additional information.
     case 'view':
-      $node->content['nodeapi_example'] = array(
+      if (variable_get('nodeapi_example_'. $node->type, 0)) {
+        $node->content['nodeapi_example'] = array(
         '#value' => theme('nodeapi_example_rating', $node->nodeapi_example_rating),
         '#weight' => -1,
-      );
+        );
+      }
       break;
   }
 }

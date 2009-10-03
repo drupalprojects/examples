@@ -6,6 +6,9 @@
  * This is an example outlining how a module can be used to define a new
  * node type.
  *
+ * (Note that custom node types are most often created with CCK in recent
+ * versions of Drupal.)
+ *
  * Our example node type will allow users to specify a "color" and a "quantity"
  * for their nodes; some kind of rudimentary inventory-tracking system, perhaps?
  * To store this extra information, we need an auxiliary database table.

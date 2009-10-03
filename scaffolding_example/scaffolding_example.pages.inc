@@ -21,7 +21,7 @@ function scaffolding_example_page() {
     }
   }
   else {
-    drupal_set_message(t('No records have been added.'));
+    drupal_set_message(t('No records have been added. To manage records go to !admin', array('!admin' => l('Scaffolding Admin', 'admin/build/scaffolding_example'))));
   }
 
   return $output;

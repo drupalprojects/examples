@@ -1,4 +1,5 @@
 ; $Id$
-name = Scaffolding
+name = Scaffolding Example
 description = Provides example scaffolding for a module that maintains its own database table, and exposes an editing interface for the module's data.
 core = 6.x
+package = Example modules
