@@ -1,5 +1,6 @@
 ; $Id$
-name = Block Example
+name = Block example
 description = An example outlining how a module can define blocks.
 package = Example modules
+version = VERSION
 core = 6.x

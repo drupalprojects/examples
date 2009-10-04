@@ -1,6 +1,7 @@
 ; $Id$
-name = Trigger example module
+name = Trigger example
 description = An example showing how a module can provide triggers that can have actions associated with them.
 package = Example modules
+version = VERSION
 core = 6.x
 dependencies[] = trigger

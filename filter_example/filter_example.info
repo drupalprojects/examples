@@ -1,5 +1,6 @@
 ; $Id$
-name = Filter Example
+name = Filter example
 description = An example module showing how to define a custom filter.
 package = Example modules
+version = VERSION
 core = 6.x

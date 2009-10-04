@@ -1,5 +1,6 @@
 ; $Id$
-name = Batch example module
+name = Batch example
 description = An example outlining how a module can define batch operations.
 package = Example modules
+version = VERSION
 core = 6.x
