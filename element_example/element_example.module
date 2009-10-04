@@ -30,11 +30,11 @@
  *
  * This just defines a page that we can use to test our form elements.
  */
-function example_element_menu() {
+function element_example_menu() {
   $items['example/element'] = array(
     'title' => 'Example element demo',
     'page callback' => 'drupal_get_form',
-    'page arguments' => array('example_element_demo_form'),
+    'page arguments' => array('element_example_demo_form'),
     'access arguments' => array('access content'),
   );
   return $items;
@@ -43,11 +43,11 @@ function example_element_menu() {
 /**
  * Implementation of hook_elements().
  */
-function example_element_elements() {
+function element_example_elements() {
   $type['phonenumber'] = array(
     '#input' => TRUE,
-    '#process' => array('example_element_phonenumber_expand'),
-    '#element_validate' => array('example_element_phonenumber_validate'),
+    '#process' => array('element_example_phonenumber_expand'),
+    '#element_validate' => array('element_example_phonenumber_validate'),
     '#default_value' => array('areacode' => '', 'number' => '', 'extension' => ''),
   );
   return $type;
@@ -56,7 +56,7 @@ function example_element_elements() {
 /**
  * Our process callback to expand the control.
  */
-function example_element_phonenumber_expand($element) {
+function element_example_phonenumber_expand($element) {
   $element['#tree'] = TRUE;
 
   if (!isset($element['#value'])) {
@@ -98,7 +98,7 @@ function example_element_phonenumber_expand($element) {
  *
  * Any problems are attached to the form element using form_error().
  */
-function example_element_phonenumber_validate($form, &$form_state) {
+function element_example_phonenumber_validate($form, &$form_state) {
   if (isset($form['#value']['areacode'])) {
     if (0 == preg_match('/^\d{3}$/', $form['#value']['areacode'])) {
       form_error($form['areacode'], t('The areacode is invalid.'));
@@ -118,7 +118,7 @@ function example_element_phonenumber_validate($form, &$form_state) {
  *
  * This lets us tell Drupal about our theme functions and their arguments.
  */
-function example_element_theme() {
+function element_example_theme() {
   return array(
     'phonenumber' => array(
       'arguments' => array('element'),
@@ -140,20 +140,20 @@ function theme_phonenumber($element) {
  * This is a simple form to demonstrate how to use the phonenumber element we've
  * defined.
  */
-function example_element_demo_form() {
-  $form['example_element_test_1'] = array(
+function element_example_demo_form() {
+  $form['element_example_test_1'] = array(
     '#type' => 'phonenumber',
     '#title' => t('Phone number 1'),
-    '#default_value' => variable_get('example_element_test_1',
+    '#default_value' => variable_get('element_example_test_1',
       array('areacode' => '123', 'number' => '456-7890', 'extension' => '')
     ),
     '#description' => t('A phone number.'),
   );
 
-  $form['example_element_test_2'] = array(
+  $form['element_example_test_2'] = array(
     '#type' => 'phonenumber',
     '#title' => t('Phone number 2'),
-    '#default_value' => variable_get('example_element_test_2',
+    '#default_value' => variable_get('element_example_test_2',
       array('areacode' => '', 'number' => '456-7890', 'extension' => '23')
     ),
     '#description' => t('Another phone number, a fax perhaps?'),
