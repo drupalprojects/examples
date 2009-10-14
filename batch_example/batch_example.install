@@ -1,6 +1,11 @@
 <?php
 // $Id$
 
+/**
+ * @file
+ * Batch example module's install and uninstall code.
+ */
+
 /*
  * Example of multipart update function.
  * The only difference with pre-Drupal 6 multipart updates is the existence

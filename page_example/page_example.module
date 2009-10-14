@@ -33,14 +33,14 @@ function page_example_help($path, $arg) {
  */
 function page_example_perm() {
   return array(
-	'administer page_example' => array(
-	  'title' => t('Administer page_example module'),
-	  'description' => t('Allow users to administer page_example settings'),
-	),
-	'access page_example content' => array(
-	  'title' => t('Access page_example content'),
-	  'description' => t('Allow users to access page_example content'),
-	),
+    'administer page_example' => array(
+      'title' => t('Administer page_example module'),
+      'description' => t('Allow users to administer page_example settings'),
+    ),
+    'access page_example content' => array(
+      'title' => t('Access page_example content'),
+      'description' => t('Allow users to access page_example content'),
+    ),
   );
 }
 
@@ -113,7 +113,7 @@ function page_example_menu() {
  */
 function page_example_page_example() {
   return '<p>'. t('This is a basic page example with simple content and a menu entry. For an example of a page without a menu entry, look at !barbaz',
-    array('!barbaz' => l('MENU_CALLBACK example','bar/baz/5/6'))) .'</p>';
+    array('!barbaz' => l('MENU_CALLBACK example', 'bar/baz/5/6'))) .'</p>';
 }
 
 /**

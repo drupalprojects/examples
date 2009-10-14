@@ -2,6 +2,11 @@
 // $Id$
 
 /**
+ * @file
+ * Node access example module's install and uninstall code.
+ */
+
+/**
  * Implementation of hook_install().
  */
 function node_access_example_install() {
