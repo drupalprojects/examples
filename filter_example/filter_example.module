@@ -125,15 +125,18 @@ function filter_example_filter($op, $delta = 0, $format = -1, $text = '') {
         // is to use the "prepare" operation to escape the special characters, and
         // to later replace our escaped version in the "process" step.
         //
-        // We'll use the bytes 0xFE and 0xFF to replace < and > here. These bytes
-        // are not valid in UTF-8 data and thus unlikely to cause problems.
+        // We'll use the unicode characters U+F8FF and U+F8FE (Private use
+        // characters) to replace < and > here. These characters are reserved
+        // by the Unicode standard for internal use in software.
+        // These characters are represented by the byte sequences \xEF\xA3\xBF and
+        // \xEF\xA3\xBE.
         case 'prepare':
-          return preg_replace('!<time ?/>!', '\xFEtime /\xFF', $text);
+          return preg_replace('!<time ?/>!', "\xEF\xA3\xBFtime /\xEF\xA3\xBE", $text);
 
         // Now, in the "process" step, we'll search for our escaped time tags and
         // to the real filtering.
         case 'process':
-          return str_replace('\xFEtime /\xFF', '<em>' . format_date(REQUEST_TIME) . '</em>', $text);
+          return str_replace("\xEF\xA3\xBFtime /\xEF\xA3\xBE", '<em>'. format_date(time()) .'</em>', $text);
       }
       break;
   }
