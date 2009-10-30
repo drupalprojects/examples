@@ -1,0 +1,64 @@
+<?php
+// $Id$
+
+/**
+ * @file
+ * Demo of some varieties of AHAH in Drupal 6.
+ * A tutorial based on this module is at http://randyfay.com/ahah.
+ *
+*/
+
+$path = drupal_get_path('module','ahah_example');
+
+/**
+ * Implement hook_menu().
+ */
+function ahah_example_menu() {
+  $items = array();
+
+  // Simple AHAH with its callback.
+  $items['ahah_example/simplest_ahah'] = array(
+    'title' => t('AHAH: Simplest Example'),
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('ahah_example_simplest'),
+    'access callback' => TRUE,
+    'file' => 'simplest_ahah.inc',
+  );
+  $items['ahah_example/simplest_ahah/callback'] = array(
+    'page callback' => 'ahah_example_simplest_callback',
+    'access callback' => TRUE,
+    'file' => 'simplest_ahah.inc',
+    );
+
+  // Automatically generate checkboxes.
+  $items['ahah_example/autocheckboxes'] = array(
+    'title' => t('AHAH: generate checkboxes'),
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('ahah_example_autocheckboxes'),
+    'access callback' => TRUE,
+    'file' => 'autocheckboxes.inc',
+  );
+  $items['ahah_example/autocheckboxes/callback'] = array(
+    'type' => MENU_CALLBACK,
+    'page callback' => 'ahah_example_autocheckboxes_callback',
+    'access callback' => TRUE,
+    'file' => 'autocheckboxes.inc',
+    );
+
+    // Automatically generate textfields.
+  $items['ahah_example/autotextfields'] = array(
+    'title' => t('AHAH: generate textfields'),
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('ahah_example_autotextfields'),
+    'access callback' => TRUE,
+    'file' => 'autotextfields.inc',
+  );
+  $items['ahah_example/autotextfields/callback'] = array(
+    'type' => MENU_CALLBACK,
+    'page callback' => 'ahah_example_autotextfields_callback',
+    'access callback' => TRUE,
+    'file' => 'autotextfields.inc',
+    );
+  return $items;
+}
+

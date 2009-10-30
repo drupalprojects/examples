@@ -1,0 +1,5 @@
+; $Id$
+name = AHAH Example
+description = Demonstrate Drupal AHAH forms
+package = Example modules
+core = 6.x
