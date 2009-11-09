@@ -1,0 +1,18 @@
+// $Id$
+
+examples x.x-x.x, xxxx-xx-xx
+----------------------------
+
+
+examples 6.x-1.x, xxxx-xx-xx
+----------------------------
+by ilo: add CHANGELOG.txt file.
+#610440 by rfay: D6 AHAH example. Originally from randyfay.com/ahah
+#595166 by alexanderpas: Coding style fix-up of example modules
+by rfay: add README.txt file.
+by Dave Reid: Updated and standardized .info files.
+by Dave Reid: Standardize module folder names.
+by rfay: Minor updates to several of the modules to make using them more
+obvious.
+by rfay: initial commit of examples module, a collection of modules that can be
+working, maintained examples. Moving the examples from contrib/docs as well.
