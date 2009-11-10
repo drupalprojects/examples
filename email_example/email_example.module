@@ -122,7 +122,7 @@ function email_example_mail_alter(&$message) {
   // For the purpose of this example, modify all the outgoing messages and
   // attach a site signature. The signature will be translated to the language
   // in which message was built.
-  $message['body'][] = t("--\nMail altered by email_example module.", NULL, $message['language']->language);
+  $message['body'][] = t("--\nMail altered by email_example module.", array(), $message['language']->language);
 }
 
 ///// Supporting functions ////

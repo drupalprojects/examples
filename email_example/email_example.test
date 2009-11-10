@@ -88,7 +88,7 @@ class EmailExampleTestCase extends DrupalWebTestCase {
     $this->assertTrue(
       strstr(
         $email['body'],
-        t("--\nMail altered by email_example module.", NULL, $language->language)
+        t("--\nMail altered by email_example module.", array(), $language->language)
       ),
       t('Email signature successfully verified.')
     );
