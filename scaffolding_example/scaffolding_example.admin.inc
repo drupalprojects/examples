@@ -206,9 +206,14 @@ function scaffolding_example_overview_pager() {
   $result = pager_query($sql, $limit);
 
   while ($record = db_fetch_array($result)) {
-    $rows[] = check_plain($record['title']);
-    $rows[] = check_plain($record['weight']);
-    $rows[] = _scaffolding_example_record_links($record);
+    // single row element
+    $row = array();
+    $row[] = check_plain($record['title']);
+    $row[] = check_plain($record['weight']);
+    $row[] = _scaffolding_example_record_links($record);
+
+    // Add this element to the table
+    $rows[] = $row;
   }
   if (!isset($rows)) {
     $rows[] = array(array('data' => t('No records have been added.'), 'colspan' => 3));
