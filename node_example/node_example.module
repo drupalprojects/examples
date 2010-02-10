@@ -39,7 +39,7 @@
  *   module is node_example_foo then node_example_foo_insert will be called
  *   when inserting the node).
  * - "description" provides a brief description of the node type, which is
- *   show up when a user accesses the "Create content" page for that node type.
+ *   shown when a user accesses the "Create content" page for that node type.
  *
  * The other optional, attributes:
  * - "has_title" boolean that indicates whether or not this node type has a
