@@ -34,7 +34,7 @@ function vertical_tabs_example_form_alter(&$form, $form_state, $form_id) {
     // Define a fieldset for our settings in the node edit form.
     $form['vertical_tabs_example'] = array(
       '#type' => 'fieldset',
-      '#title' => t('Custom vertical tab'),
+      '#title' => t('Example vertical tab'),
       '#collapsible' => TRUE,
       '#collapsed' => FALSE,
       // The #group value must be defined to be included in the vertical tabs
