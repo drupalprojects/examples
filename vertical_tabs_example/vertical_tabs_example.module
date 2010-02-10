@@ -8,7 +8,18 @@
  * only deals with elements visibility.
  */
 
-
+/**
+ * Implements hook_menu for a simple explanation page.
+ */
+function vertical_tabs_example_menu() {
+  $items['examples/vertical_tabs'] = array(
+    'title' => 'Vertical tabs example',
+    'description' => 'Shows how vertical tabs can best be supported by a custom module',
+    'page callback' => '_vertical_tabs_example_explanation',
+    'access callback' => TRUE,
+  );
+  return $items;
+}
 
 /**
  * Implement hook_form_alter().
@@ -17,11 +28,8 @@
  * panels to update the settings description.
  */
 function vertical_tabs_example_form_alter(&$form, $form_state, $form_id) {
-
+  // Only include on node add/edit forms.
   if (isset($form['#node']) && $form['#node']->type .'_node_form' == $form_id) {
-
-    // Include our custom javascript code, used by vertical tabs
-    drupal_add_js(drupal_get_path('module', 'vertical_tabs_example') . '/vertical_tabs_example.js');
 
     // Define a fieldset for our settings in the node edit form.
     $form['vertical_tabs_example'] = array(
@@ -29,6 +37,15 @@ function vertical_tabs_example_form_alter(&$form, $form_state, $form_id) {
       '#title' => t('Custom vertical tab'),
       '#collapsible' => TRUE,
       '#collapsed' => FALSE,
+      // The #group value must be defined to be included in the vertical tabs
+      // element by default.
+      '#group' => 'additional_settings',
+      // Attach the javascript for vertical tabs. Normally we would use
+      // drupal_add_js(), but the vertical tabs module supports this special
+      // Drupal 7 #attached property.
+      '#attached' => array(
+        'js' => array(drupal_get_path('module', 'vertical_tabs_example') . '/vertical_tabs_example.js'),
+      ),
       '#tree' => TRUE,
       '#weight' => -2,
     );
@@ -46,14 +63,10 @@ function vertical_tabs_example_form_alter(&$form, $form_state, $form_id) {
     // as only one element should be set visible.
     $form['vertical_tabs_example']['vertical_tabs_examplecontainer'] = array(
       '#type' => 'fieldset',
-      '#name' => 'test',
       '#title' => t('Custom setting'),
       // This attribute is required for vertical tabs to track elements beneath
       // it's own tree.
       '#parents' => array('vertical_tabs_example'),
-      // This attribute is used to identify the container and allow Javascript
-      // to show or hide it, based on the checkbox status.
-      '#attributes' => array('id' => 'vertical_tabs_example-custom-container'),
     );
 
     // The string of this textfield that will be shown as summary in the
@@ -64,21 +77,6 @@ function vertical_tabs_example_form_alter(&$form, $form_state, $form_id) {
       '#default_value' => '',
     );
   }
-
-}
-
-
-/**
- * Implements hook_menu for a simple explanation page.
- */
-function vertical_tabs_example_menu() {
-  $items['examples/vertical_tabs'] = array(
-    'title' => 'Vertical tabs example',
-    'description' => 'Shows how vertical tabs can best be supported by a custom module',
-    'page callback' => '_vertical_tabs_example_explanation',
-    'access callback' => TRUE,
-  );
-  return $items;
 }
 
 /**
