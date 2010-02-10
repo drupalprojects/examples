@@ -1,0 +1,89 @@
+<?php
+// $Id$
+
+/**
+ * @file
+ * Shows how to integrate your custom node options with vertical tabs module in
+ * Drupal 6. This example does not cover how to save / load custom setting, and
+ * only deals with elements visibility.
+ */
+
+
+
+/**
+ * Implement hook_form_alter().
+ *
+ * Adds custom fieldset to the node form, and attach ajax behaviour for vertical
+ * panels to update the settings description.
+ */
+function vertical_tabs_example_form_alter(&$form, $form_state, $form_id) {
+
+  if (isset($form['#node']) && $form['#node']->type .'_node_form' == $form_id) {
+
+    // Include our custom javascript code, used by vertical tabs
+    drupal_add_js(drupal_get_path('module', 'vertical_tabs_example') . '/vertical_tabs_example.js');
+
+    // Define a fieldset for our settings in the node edit form.
+    $form['vertical_tabs_example'] = array(
+      '#type' => 'fieldset',
+      '#title' => t('Custom vertical tab'),
+      '#collapsible' => TRUE,
+      '#collapsed' => FALSE,
+      '#tree' => TRUE,
+      '#weight' => -2,
+    );
+
+    // This checkbox is used to show or hide the custom settings form using
+    // javascript (altering states of a container defined later).
+    $form['vertical_tabs_example']['enabled'] = array(
+      '#type' => 'checkbox',
+      '#title' => t('Use custom configuration'),
+      '#default_value' => FALSE,
+    );
+
+    // This container will be used to store the whole form for our custom
+    // settings. This way, showing/hidding the form  using javascript is easier,
+    // as only one element should be set visible.
+    $form['vertical_tabs_example']['vertical_tabs_examplecontainer'] = array(
+      '#type' => 'fieldset',
+      '#name' => 'test',
+      '#title' => t('Custom setting'),
+      // This attribute is required for vertical tabs to track elements beneath
+      // it's own tree.
+      '#parents' => array('vertical_tabs_example'),
+      // This attribute is used to identify the container and allow Javascript
+      // to show or hide it, based on the checkbox status.
+      '#attributes' => array('id' => 'vertical_tabs_example-custom-container'),
+    );
+
+    // The string of this textfield that will be shown as summary in the
+    // vertical tab if the checkbox is enabled.
+    $form['vertical_tabs_example']['vertical_tabs_examplecontainer']['custom_setting'] = array(
+      '#type' => 'textfield',
+      '#title' => t('Use this custom setting'),
+      '#default_value' => '',
+    );
+  }
+
+}
+
+
+/**
+ * Implements hook_menu for a simple explanaton page.
+ */
+function vertical_tabs_example_menu() {
+  $items['examples/vertical_tabs'] = array(
+    'title' => 'Vertical tabs example',
+    'description' => 'Shows how vertical tabs can best be supported by a custom module',
+    'page callback' => '_vertical_tabs_example_explanation',
+    'access callback' => TRUE,
+  );
+  return $items;
+}
+
+/**
+ * Simple explanation page.
+ */
+function _vertical_tabs_example_explanation() {
+  return t("The Vertical Tabs Example shows how a custom module can best support vertical tabs. To see the effects of this module, look at the <a href='!node_add'>node/add</a> form", array('!node_add' => url('node/add')));
+}
