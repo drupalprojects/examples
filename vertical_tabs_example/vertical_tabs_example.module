@@ -69,7 +69,7 @@ function vertical_tabs_example_form_alter(&$form, $form_state, $form_id) {
 
 
 /**
- * Implements hook_menu for a simple explanaton page.
+ * Implements hook_menu for a simple explanation page.
  */
 function vertical_tabs_example_menu() {
   $items['examples/vertical_tabs'] = array(
