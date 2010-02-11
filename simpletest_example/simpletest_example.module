@@ -1,0 +1,99 @@
+<?php
+// $Id$
+/**
+ * @file
+ * An example of simpletest tests to accompany the tutorial at
+ * http://drupal.org/node/395012.
+ *
+ * This is built on a traditional node-type implementation.
+ *
+ */
+
+
+/**
+* Implementation of hook_node_info().
+*/
+function simpletest_example_node_info() {
+  return array(
+    'simpletest_example' => array(
+      'name' => t('simpletest_example page'),
+      'module' => 'simpletest_example',
+      'description' => t('simpletest_example page node type.'),
+    )
+  );
+}
+
+function simpletest_example_perm() {
+  return array('create simpletest_example', 'edit own simpletest_example');
+}
+
+/**
+ * Implementation of hook_access().
+ */
+function simpletest_example_access($op, $node) {
+  global $user;
+
+  if ($op == 'create') {
+    return (user_access('create simpletest_example'));
+  }
+
+  // This code has a BUG that we'll find in testing
+  // Correct version
+  // if ($op == 'update' || $op == 'delete') {
+
+  // Incorrect version we'll use to demonstrate test failure. We were always testing
+  // with User 1!
+  if ($op == 'delete') {
+    return (user_access('edit own simpletest_example') && ($user->uid == $node->uid));
+  }
+}
+/**
+* Implementation of hook_form().
+*/
+function simpletest_example_form(&$node) {
+  $type = node_get_types('type', $node);
+
+  if ($type->has_title) {
+    $form['title'] = array(
+      '#type' => 'textfield',
+      '#title' => check_plain($type->title_label),
+      '#required' => TRUE,
+      '#default_value' => $node->title,
+      '#weight' => -5
+    );
+  }
+
+  if ($type->has_body) {
+    $form['body_field'] = node_body_field($node, $type->body_label, $type->min_word_count);
+  }
+
+  return $form;
+}
+
+/**
+ * Implements hook_menu().
+ *
+ * Provide a form and explanation. Let the user turn on the error.
+ */
+function simpletest_example_menu() {
+  $items['examples/simpletest_example'] = array(
+    'title'           => 'Simpletest Example',
+    'description'     => 'Explain the simpletest example.',
+    'page callback'   => '_simpletest_example_explanation',
+    'access callback' => TRUE,
+  );
+  return $items;
+}
+
+/**
+ * Form to allow turning off the logic error.
+ * @param $form
+ * @param $form_state
+ */
+function _simpletest_example_explanation() {
+
+  $explanation =  t("This Simpletest Example is designed to give an introductory tutorial to writing
+    a simpletest test. Please see the <a href='http://drupal.org/node/395012'>associated tutorial</a>.");
+  return $explanation;
+}
+

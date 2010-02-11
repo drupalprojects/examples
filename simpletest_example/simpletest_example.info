@@ -1,0 +1,6 @@
+name = Simpletest Example
+description = Used to demonstrate a simpletest test suite.
+core = 6.x
+package = Example modules
+files[] = simpletest_example.module
+files[] = simpletest_example.test
