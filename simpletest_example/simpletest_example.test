@@ -52,12 +52,12 @@ class SimpletestExampleTestCase extends DrupalWebTestCase {
     // indicate that the examples module was failing tests.
     if (!$this->runningOnTestbot()) {
       $this->drupalGet("node/{$node->nid}/edit");
+      // Make sure we don't get a 401 unauthorized response:
+      $this->assertResponse(200, t('User is allowed to edit the content.'));      
 
-      // Looking for text to determine whether we were successful opening edit
-      // page.
-      $this->assertText(t("Edit Simpletest Example Node Type @title", array('@title' => $settings['title'])), "Found Page edit title");
-      // Looking for a DOM node by ID to see if we were successful.
-      $this->assertFieldById('edit-title', '', 'Found edit-title field as indication that we got to the edit page');
+      // Looking for title text in the page to determine whether we were
+      // successful opening edit form.
+      $this->assertText(t("@title", array('@title' => $settings['title'])), "Found title in edit form");
     }
   }
 
