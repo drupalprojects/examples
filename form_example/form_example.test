@@ -1,0 +1,123 @@
+<?php
+// $Id$
+
+/**
+ * @file
+ * test file for form_example module.
+ */
+
+/**
+ * Default test case for the form_example module.
+ */
+class FormExampleTestCase extends DrupalWebTestCase {
+
+  public static function getInfo() {
+    return array(
+      'name' => 'Form Example tests',
+      'description' => 'Various tests on the dbtng example module.' ,
+      'group' => 'Examples',
+    );
+  }
+
+  function setUp() {
+    parent::setUp('form_example');
+  }
+
+  /**
+   * Test each tutorial
+   */
+  function testTutorials() {
+    // Tutorial #1
+    $this->drupalGet('form_example/tutorial');
+    $this->assertText(t('#10'));
+
+    // #2
+    $this->drupalPost('form_example/tutorial/2', array('name' => t('name')), t('Submit'));
+
+    // #4
+    $this->drupalPost('form_example/tutorial/4',
+      array('first' => t('firstname'), 'last' => t('lastname')), t('Submit'));
+    $this->drupalPost('form_example/tutorial/4', array(), t('Submit'));
+    $this->assertText(t('First name field is required'));
+    $this->assertText(t('Last name field is required'));
+
+    // #5
+    $this->drupalPost('form_example/tutorial/5',
+      array('first' => t('firstname'), 'last' => t('lastname')), t('Submit'));
+    $this->assertText(t('Please enter your first name'));
+    $this->drupalPost('form_example/tutorial/4', array(), t('Submit'));
+    $this->assertText(t('First name field is required'));
+    $this->assertText(t('Last name field is required'));
+
+    // #6
+    $this->drupalPost('form_example/tutorial/6',
+      array('first' => t('firstname'), 'last' => t('lastname'), 'year_of_birth' => 1955),
+      t('Submit'));
+    $this->assertNoText(t('Enter a year between 1900 and 2000'));
+    $this->drupalPost('form_example/tutorial/6',
+      array('first' => t('firstname'), 'last' => t('lastname'), 'year_of_birth' => 1855),
+      t('Submit'));
+
+    $this->assertText(t('Enter a year between 1900 and 2000'));
+
+
+    // #7
+    $this->drupalPost('form_example/tutorial/7',
+      array('first' => t('firstname'), 'last' => t('lastname'), 'year_of_birth' => 1955),
+      t('Submit'));
+    $this->assertText(t('The form has been submitted. name="firstname lastname", year of birth=1955'));
+    $this->drupalPost('form_example/tutorial/7',
+      array('first' => t('firstname'), 'last' => t('lastname'), 'year_of_birth' => 1855),
+      t('Submit'));
+
+    $this->assertText(t('Enter a year between 1900 and 2000'));
+
+
+    // #8
+    $this->drupalPost('form_example/tutorial/8',
+      array('first' => t('firstname'), 'last' => t('lastname'), 'year_of_birth' => 1955),
+      t('Submit'));
+    $this->assertText(t('The form has been submitted. name="firstname lastname", year of birth=1955'));
+    $this->drupalPost('form_example/tutorial/8',
+      array('first' => t('firstname'), 'last' => t('lastname'), 'year_of_birth' => 1855),
+      t('Submit'));
+    $this->assertText(t('Enter a year between 1900 and 2000'));
+    $this->drupalPost('form_example/tutorial/8',
+      array('first' => t('firstname'), 'last' => t('lastname'), 'year_of_birth' => 1855),
+      t('Reset form'));
+    $this->assertNoText(t('Enter a year between 1900 and 2000'));
+
+    // #9
+    $this->drupalPost('form_example/tutorial/9',
+      array('first' => t('firstname'), 'last' => t('lastname'), 'year_of_birth' => 1955),
+      t('Add another name'));
+    $this->assertText(t('Name #2'));
+    $this->drupalPost(NULL,
+      array(
+        'first' => t('firstname'), 'last' => t('lastname'), 'year_of_birth' => 1955,
+        'first2' => t('firstname2'), 'last2' => t('lastname2'), 'year_of_birth2' => 1956,
+      ), t('Submit'));
+    $this->assertText(t('The form has been submitted. name="firstname lastname", year of birth=1955'));
+    $this->assertText(t('Second name: name="firstname2 lastname2", year of birth=1956'));
+
+
+    // #10
+    $this->drupalPost('form_example/tutorial/10',
+      array('first' => t('firstname'), 'last' => t('lastname'), 'year_of_birth' => 1955),
+      t('Add another name'));
+    $this->assertText(t('Name #2'));
+
+    $this->drupalPost(NULL,
+      array(
+        'first' => t('firstname'), 'last' => t('lastname'), 'year_of_birth' => 1955,
+        'first2' => t('firstname2'), 'last2' => t('lastname2'), 'year_of_birth2' => 1956,
+      ), t('Next >>'));
+
+    $this->drupalPost(NULL, array('color' => t('green')), t('Submit'));
+    $this->assertText(t('The form has been submitted. name="firstname lastname", year of birth=1955'));
+    $this->assertText(t('Second name: name="firstname2 lastname2", year of birth=1956'));
+    $this->assertText(t('And the favorite color is green'));
+  }
+
+}
+
