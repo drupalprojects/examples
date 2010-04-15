@@ -59,6 +59,27 @@ function ahah_example_menu() {
     'access callback' => TRUE,
     'file' => 'autotextfields.inc',
     );
+    // Automatically generate textfields.
+  $items['ahah_example/dependent_dropdown'] = array(
+    'title' => t('AHAH: dependent dropdown'),
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('ahah_example_dropdown'),
+    'access callback' => TRUE,
+    'file' => 'dependent_dropdown.inc',
+  );
+  $items['ahah_example/dependent_dropdown/callback'] = array(
+    'type' => MENU_CALLBACK,
+    'page callback' => 'ahah_example_dropdown_callback',
+    'access callback' => TRUE,
+    'file' => 'dependent_dropdown.inc',
+    );
   return $items;
 }
 
+
+/**
+ * Implements hook_init() to add module css.
+ */
+function ahah_example_init() {
+  drupal_add_css(drupal_get_path('module', 'ahah_example') . '/ahah_example.css');
+}
