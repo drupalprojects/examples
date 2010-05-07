@@ -1,5 +1,6 @@
-name = Simpletest Example
-description = Used to demonstrate a simpletest test suite.
+; $Id$
+name = SimpleTest Example
+description = Used to demonstrate the SimpleTest test suite.
 core = 6.x
 package = Example modules
 files[] = simpletest_example.module

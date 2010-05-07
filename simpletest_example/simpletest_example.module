@@ -1,18 +1,17 @@
 <?php
 // $Id$
+
 /**
  * @file
  * An example of simpletest tests to accompany the tutorial at
  * http://drupal.org/node/395012.
  *
  * This is built on a traditional node-type implementation.
- *
  */
 
-
 /**
-* Implementation of hook_node_info().
-*/
+ * Implementation of hook_node_info().
+ */
 function simpletest_example_node_info() {
   return array(
     'simpletest_example' => array(
@@ -23,6 +22,9 @@ function simpletest_example_node_info() {
   );
 }
 
+/**
+ * Implementation of hook_perm().
+ */
 function simpletest_example_perm() {
   return array('create simpletest_example', 'edit own simpletest_example');
 }
@@ -47,9 +49,10 @@ function simpletest_example_access($op, $node) {
     return (user_access('edit own simpletest_example') && ($user->uid == $node->uid));
   }
 }
+
 /**
-* Implementation of hook_form().
-*/
+ * Implementation of hook_form().
+ */
 function simpletest_example_form(&$node) {
   $type = node_get_types('type', $node);
 
@@ -71,14 +74,14 @@ function simpletest_example_form(&$node) {
 }
 
 /**
- * Implements hook_menu().
+ * Implementation of hook_menu().
  *
  * Provide a form and explanation. Let the user turn on the error.
  */
 function simpletest_example_menu() {
   $items['examples/simpletest_example'] = array(
-    'title'           => 'Simpletest Example',
-    'description'     => 'Explain the simpletest example.',
+    'title'           => 'SimpleTest Example',
+    'description'     => 'Explain the SimpleTest example.',
     'page callback'   => '_simpletest_example_explanation',
     'access callback' => TRUE,
   );
@@ -86,14 +89,11 @@ function simpletest_example_menu() {
 }
 
 /**
- * Form to allow turning off the logic error.
- * @param $form
- * @param $form_state
+ * Page to explain this example.
  */
 function _simpletest_example_explanation() {
+  $explanation =  t("This SimpleTest Example is designed to give an introductory tutorial to writing a SimpleTest test. Please see the <a href='http://drupal.org/node/395012'>associated tutorial</a>.");
 
-  $explanation =  t("This Simpletest Example is designed to give an introductory tutorial to writing
-    a simpletest test. Please see the <a href='http://drupal.org/node/395012'>associated tutorial</a>.");
   return $explanation;
 }
 
