@@ -69,7 +69,8 @@ function ahah_example_autocheckboxes_callback() {
   $form = drupal_rebuild_form($form_id, $form_state, $args, $form_build_id);
 
   $checkboxes = $form['checkboxes'];
-  $output = drupal_render($checkboxes);
+  $output = theme('status_messages');  
+  $output .= drupal_render($checkboxes);
 
   // Final rendering callback.
   print drupal_json(array('status' => TRUE, 'data' => $output));

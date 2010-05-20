@@ -78,7 +78,8 @@ function ahah_example_autotextfields_callback() {
   $form = drupal_rebuild_form($form_id, $form_state, $args, $form_build_id);
 
   $textfields = $form['textfields'];
-  $output = drupal_render($textfields);
+  $output = theme('status_messages');  
+  $output .= drupal_render($textfields);
 
   // Final rendering callback.
   print drupal_json(array('status' => TRUE, 'data' => $output));
