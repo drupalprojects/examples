@@ -37,6 +37,9 @@ function ahah_example_autocheckboxes(&$form_state) {
       '#type' => 'checkbox',
       '#title' => "Checkbox $i",
     );
+    if (isset($form_state['values']["checkbox$i"])) {
+      $form['checkboxes']["checkbox$i"]['#default_value'] = $form_state['values']["checkbox$i"];
+    }
   }
 
   $form['submit'] = array(
