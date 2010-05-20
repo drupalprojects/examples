@@ -17,6 +17,7 @@ function ahah_example_autocheckboxes(&$form_state) {
       'path' => 'ahah_example/autocheckboxes/callback',
       'wrapper' => 'checkboxes',
       'effect' => 'fade',
+      // 'event' => 'change', // default value: does not need to be set explicitly.
     ),
 
   );

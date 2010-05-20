@@ -30,7 +30,7 @@ function ahah_example_dropdown(&$form_state, $my_values = array()) {
     '#ahah' => array(
       'path' => 'ahah_example/dependent_dropdown/callback',
       'wrapper' => 'dropdown-second-replace',
-      'event' => 'change',
+      // 'event' => 'change', // default value: does not need to be set explicitly.
     ),
   );  
 

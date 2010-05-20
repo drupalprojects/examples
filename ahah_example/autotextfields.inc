@@ -27,6 +27,7 @@ function ahah_example_autotextfields(&$form_state) {
       'path' => 'ahah_example/autotextfields/callback',
       'wrapper' => 'textfields',
       'effect' => 'fade',
+      // 'event' => 'change', // default value: does not need to be set explicitly.
 
     ),
   );
