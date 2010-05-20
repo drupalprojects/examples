@@ -172,10 +172,10 @@ function batch_example_op_1($nid, &$context) {
   $node = node_load($nid, NULL, TRUE);
 
   // Store some result for post-processing in the finished callback.
-  $context['results'][] = $node->nid . ' : ' . $node->title;
+  $context['results'][] = $node->nid . ' : ' . check_plain($node->title);
 
   // Optional message displayed under the progressbar.
-  $context['message'] = 'Loading ' . $node->title;
+  $context['message'] = t('Loading @title', array('@title' => $node->title));
 }
 
 /**
@@ -224,12 +224,12 @@ function batch_example_op_2(&$context) {
     $node = node_load($row['nid'], NULL, TRUE);
 
     // Store some result for post-processing in the finished callback.
-    $context['results'][] = $node->nid . ' : ' . $node->title;
+    $context['results'][] = $node->nid . ' : ' . check_plain($node->title);
 
     // Update our progress information.
     $context['sandbox']['progress']++;
     $context['sandbox']['current_node'] = $node->nid;
-    $context['message'] = $node->title;
+    $context['message'] = check_plain($node->title);
   }
 
   // Inform the batch engine that we are not finished,
