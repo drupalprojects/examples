@@ -70,6 +70,9 @@ function page_example_perm() {
  * again not finding a match, it will look for example/baz/%/%. This time it finds
  * a match, and so will execute page_example_baz(1, 2). Note the parameters
  * being passed; this is a very useful technique.
+ *
+ * The @link menu_example.module Menu Example @endlink provides extensive
+ * examples for hook_menu().
  */
 function page_example_menu() {
   // This is the minimum information you can provide for a menu item. This menu

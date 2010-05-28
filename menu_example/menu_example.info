@@ -1,0 +1,6 @@
+; $Id$
+name = Menu example
+description = An example of advanced uses of the menu APIs.
+package = Example modules
+version = VERSION
+core = 6.x
