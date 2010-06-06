@@ -163,7 +163,7 @@ function node_example_form(&$node) {
  *
  * Errors should be signaled with form_set_error().
  */
-function node_example_validate($node) {
+function node_example_validate($node, &$form) {
   if ($node->quantity) {
     if (!is_numeric($node->quantity)) {
       form_set_error('quantity', t('The quantity must be a number.'));
