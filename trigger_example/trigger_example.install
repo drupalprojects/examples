@@ -1,0 +1,15 @@
+<?php
+// $Id$
+
+/**
+ * @file
+ * Install, update and uninstall functions for the trigger_example module.
+ */
+
+/**
+ * Implementation of hook_uninstall().
+ */
+function trigger_example_uninstall() {
+
+  variable_del('trigger_example_pings');
+}
