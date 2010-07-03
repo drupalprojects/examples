@@ -206,7 +206,7 @@ function node_example_update($node) {
  */
 function node_example_nodeapi(&$node, $op, $teaser, $page) {
   switch ($op) {
-    case 'delete_revision':
+    case 'delete revision':
       // Notice that we're matching a single revision based on the node's vid.
       db_query('DELETE FROM {node_example} WHERE vid = %d', $node->vid);
       break;
