@@ -89,9 +89,9 @@ function page_example_menu() {
   //
   // Notice that the 'page arguments' is an array of numbers. These will be
   // replaced with the corresponding parts of the menu path. In this case a 0
-  // would be replaced by 'bar', a 1 by 'baz', and like wise 2 and 3 will be
-  // replaced by what ever the user provides. These will be passed as arguments
-  // to the page_example_baz() function.
+  // would be replaced by 'example', a 1 by 'baz', and like wise 2 and 3 will
+  // be replaced by what ever the user provides. These will be passed as
+  // arguments to the page_example_baz() function.
   $items['example/baz/%/%'] = array(
     'title' => 'Baz',
     'page callback' => 'page_example_baz',
