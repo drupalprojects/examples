@@ -13,8 +13,8 @@ function ahah_example_autotextfields(&$form_state) {
     '#title' => t('Ask me my first name'),
     '#default_value' => $default_first_name,
     '#ahah' => array(
-      'path' => 'ahah_example/autotextfields/callback',
-      'wrapper' => 'textfields',
+      'path' => 'examples/ahah_example/autotextfields/callback',
+      'wrapper' => 'textfield-wrapper',
       'effect' => 'fade',
     )
   );
@@ -24,8 +24,8 @@ function ahah_example_autotextfields(&$form_state) {
    '#default_value' => $default_last_name,
 
     '#ahah' => array(
-      'path' => 'ahah_example/autotextfields/callback',
-      'wrapper' => 'textfields',
+      'path' => 'examples/ahah_example/autotextfields/callback',
+      'wrapper' => 'textfield-wrapper',
       'effect' => 'fade',
       // 'event' => 'change', // default value: does not need to be set explicitly.
 
@@ -34,7 +34,7 @@ function ahah_example_autotextfields(&$form_state) {
 
   $form['textfields'] = array(
     '#title' => t("Generated text fields for first and last name"),
-    '#prefix' => '<div id="textfields">',
+    '#prefix' => '<div id="textfield-wrapper">',
     '#suffix' => '</div>',
     '#type' => 'fieldset',
     '#description' => t('This is where we put automatically generated textfields'),
@@ -65,19 +65,14 @@ function ahah_example_autotextfields(&$form_state) {
 
 
 function ahah_example_autotextfields_callback() {
-  $form_state = array('storage' => NULL, 'submitted' => FALSE);
-  $form_build_id = $_POST['form_build_id'];
-  $form = form_get_cache($form_build_id, $form_state);
-
-  $args = $form['#parameters'];
-  $form_id = array_shift($args);
-  $form_state['post'] = $form['#post'] = $_POST;
-  $form['#programmed'] = $form['#redirect'] = FALSE;
-
-  drupal_process_form($form_id, $form, $form_state);
-  $form = drupal_rebuild_form($form_id, $form_state, $args, $form_build_id);
-
+  $form = ahah_example_callback_helper();
+	
   $textfields = $form['textfields'];
+  
+  // Remove the prefix/suffix wrapper so we don't double it up.
+  unset($textfields['#prefix'], $textfields['#suffix']);
+  
+  // Render the output.
   $output = theme('status_messages');  
   $output .= drupal_render($textfields);
 

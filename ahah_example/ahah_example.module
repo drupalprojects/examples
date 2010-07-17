@@ -12,70 +12,121 @@ $path = drupal_get_path('module','ahah_example');
 
 /**
  * Implement hook_menu().
+ *
+ * Note that each item has both an entry point to prepare the form, and also
+ * a callback function that provides and AHAH menu callback.
  */
 function ahah_example_menu() {
   $items = array();
 
-  // Simple AHAH with its callback.
-  $items['ahah_example/simplest_ahah'] = array(
-    'title' => t('AHAH: Simplest Example'),
+  $items['examples/ahah_example'] = array(
+    'title' => 'AHAH Examples',
     'page callback' => 'drupal_get_form',
     'page arguments' => array('ahah_example_simplest'),
     'access callback' => TRUE,
     'file' => 'simplest_ahah.inc',
   );
-  $items['ahah_example/simplest_ahah/callback'] = array(
+  // Simple AHAH with its callback.
+  $items['examples/ahah_example/simplest_ahah'] = array(
+    'title' => 'Simplest',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('ahah_example_simplest'),
+    'access callback' => TRUE,
+    'type' => MENU_DEFAULT_LOCAL_TASK,
+    'file' => 'simplest_ahah.inc',
+    'weight' => 0,
+  );
+  $items['examples/ahah_example/simplest_ahah/callback'] = array(
     'page callback' => 'ahah_example_simplest_callback',
     'access callback' => TRUE,
     'file' => 'simplest_ahah.inc',
-    );
+    'type' => MENU_CALLBACK,
+  );
 
   // Automatically generate checkboxes.
-  $items['ahah_example/autocheckboxes'] = array(
-    'title' => t('AHAH: generate checkboxes'),
+  $items['examples/ahah_example/autocheckboxes'] = array(
+    'title' => 'Generate checkboxes',
     'page callback' => 'drupal_get_form',
     'page arguments' => array('ahah_example_autocheckboxes'),
     'access callback' => TRUE,
+    'type' => MENU_LOCAL_TASK,
+    'weight' => 2,
     'file' => 'autocheckboxes.inc',
   );
-  $items['ahah_example/autocheckboxes/callback'] = array(
-    'type' => MENU_CALLBACK,
+  $items['examples/ahah_example/autocheckboxes/callback'] = array(
     'page callback' => 'ahah_example_autocheckboxes_callback',
     'access callback' => TRUE,
     'file' => 'autocheckboxes.inc',
-    );
+    'type' => MENU_CALLBACK,
+  );
 
     // Automatically generate textfields.
-  $items['ahah_example/autotextfields'] = array(
-    'title' => t('AHAH: generate textfields'),
+  $items['examples/ahah_example/autotextfields'] = array(
+    'title' => 'Generate textfields',
     'page callback' => 'drupal_get_form',
     'page arguments' => array('ahah_example_autotextfields'),
     'access callback' => TRUE,
+    'type' => MENU_LOCAL_TASK,
+    'weight' => 4,
     'file' => 'autotextfields.inc',
   );
-  $items['ahah_example/autotextfields/callback'] = array(
-    'type' => MENU_CALLBACK,
+  $items['examples/ahah_example/autotextfields/callback'] = array(
     'page callback' => 'ahah_example_autotextfields_callback',
     'access callback' => TRUE,
     'file' => 'autotextfields.inc',
+    'type' => MENU_CALLBACK,
     );
     // Automatically generate textfields.
-  $items['ahah_example/dependent_dropdown'] = array(
-    'title' => t('AHAH: dependent dropdown'),
+  $items['examples/ahah_example/dependent_dropdown'] = array(
+    'title' => 'Degrading dependent dropdown',
     'page callback' => 'drupal_get_form',
     'page arguments' => array('ahah_example_dropdown'),
     'access callback' => TRUE,
+    'weight' => 4,
+    'type' => MENU_LOCAL_TASK,
     'file' => 'dependent_dropdown.inc',
   );
-  $items['ahah_example/dependent_dropdown/callback'] = array(
-    'type' => MENU_CALLBACK,
+  $items['examples/ahah_example/dependent_dropdown/callback'] = array(
     'page callback' => 'ahah_example_dropdown_callback',
     'access callback' => TRUE,
     'file' => 'dependent_dropdown.inc',
-    );
+    'type' => MENU_CALLBACK,
+  );
+  $items['examples/ahah_example/simple_validation'] = array(
+    'title' => 'Simple Validation',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('ahah_example_simple_validation'),
+    'access callback' => TRUE,
+    'type' => MENU_LOCAL_TASK,
+    'file' => 'ahah_example_simple_validation.inc',
+    'weight' => 6,
+  );
+  $items['examples/ahah_example/simple_validation/callback'] = array(
+    'page callback' => 'ahah_example_simple_validation_callback',
+    'access callback' => TRUE,
+    'file' => 'ahah_example_simple_validation.inc',
+    'type' => MENU_CALLBACK,
+  );
+
   return $items;
 }
 
+/**
+ * Does the very standard things that must be done in any normal callback.
+ * Used by each callback in this example module.
+ */
+function ahah_example_callback_helper() {
+	$form_state = array('storage' => NULL, 'submitted' => FALSE);
+  $form_build_id = $_POST['form_build_id'];
+  $form = form_get_cache($form_build_id, $form_state);
+  $args = $form['#parameters'];
+  $form_id = array_shift($args);
+  $form_state['post'] = $form['#post'] = $_POST;
+  $form['#programmed'] = $form['#redirect'] = FALSE;
+  drupal_process_form($form_id, $form, $form_state);
+  $form = drupal_rebuild_form($form_id, $form_state, $args, $form_build_id);
+	return $form;
+}
 
 /**
  * Implements hook_init() to add module css.

@@ -14,7 +14,7 @@ function ahah_example_autocheckboxes(&$form_state) {
     '#options' => array(1=>1, 2=>2, 3=>3, 4=>4),
     '#default_value' => $default,
     '#ahah' => array(
-      'path' => 'ahah_example/autocheckboxes/callback',
+      'path' => 'examples/ahah_example/autocheckboxes/callback',
       'wrapper' => 'checkboxes',
       'effect' => 'fade',
       // 'event' => 'change', // default value: does not need to be set explicitly.
@@ -56,25 +56,15 @@ function ahah_example_autocheckboxes(&$form_state) {
  * we want to provide.
  */
 function ahah_example_autocheckboxes_callback() {
-  $form_state = array('storage' => NULL, 'submitted' => FALSE);
-  $form_build_id = $_POST['form_build_id'];
-  $form = form_get_cache($form_build_id, $form_state);
-
-  $args = $form['#parameters'];
-  $form_id = array_shift($args);
-  $form_state['post'] = $form['#post'] = $_POST;
-  $form['#programmed'] = $form['#redirect'] = FALSE;
-
-  // HACK: Select values changing never get recognized.
-  unset ($form['howmany']['#value']);
-
-  drupal_process_form($form_id, $form, $form_state);
-  $form = drupal_rebuild_form($form_id, $form_state, $args, $form_build_id);
-
+  $form = ahah_example_callback_helper();
+	
   $checkboxes = $form['checkboxes'];
+  // Remove the wrapper so we don't double it up.
+  unset($checkboxes['#prefix'], $checkboxes['#suffix']);
+
   $output = theme('status_messages');  
   $output .= drupal_render($checkboxes);
-
+  
   // Final rendering callback.
   print drupal_json(array('status' => TRUE, 'data' => $output));
   exit();
