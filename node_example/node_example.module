@@ -113,7 +113,7 @@ function node_example_perm() {
  * specific to this node type. This hook requires us to return an array with
  * a sub array containing information for each element in the form.
  */
-function node_example_form(&$node) {
+function node_example_form(&$node, $form_state) {
   // The site admin can decide if this node type has a title and body, and how
   // the fields should be labeled. We need to load these settings so we can
   // build the node form correctly.
