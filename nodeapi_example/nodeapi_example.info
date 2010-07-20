@@ -2,5 +2,4 @@
 name = NodeAPI example
 description = An example module showing how to extend existing content types.
 package = Example modules
-version = VERSION
 core = 6.x
