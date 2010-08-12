@@ -15,6 +15,14 @@
  * and delete the node by providing an additional access realm that grants
  * privileges to the node's author.
  *
+ * Database definition:
+ * @code
+ *   CREATE TABLE node_access_example (
+ *     nid int(10) unsigned NOT NULL default '0' PRIMARY KEY,
+ *     private int,
+ *     KEY `node_example_nid` (nid)
+ *   )
+ * @endcode
  */
 
 /**
@@ -24,16 +32,7 @@
  * has access to "private" content. This permission is defined here.
  */
 function node_access_example_perm() {
-  return array(
-    'access private content' => array(
-      'title' => t('Access private content'),
-      'description' => t('May view posts that are marked private.'),
-    ),
-    'edit private content' => array(
-      'title' => t('Edit private content'),
-      'description' => t('May edit posts that are marked private.'),
-    ),
-  );
+  return array('access private content', 'edit private content');
 }
 
 /**
@@ -78,10 +77,10 @@ function node_access_example_node_access_records($node) {
     $grants = array();
     $grants[] = array(
       'realm' => 'example',
-      'gid' => 1,
-      'grant_view' => 1,
-      'grant_update' => 0,
-      'grant_delete' => 0,
+      'gid' => TRUE,
+      'grant_view' => TRUE,
+      'grant_update' => FALSE,
+      'grant_delete' => FALSE,
       'priority' => 0,
     );
 
@@ -90,9 +89,9 @@ function node_access_example_node_access_records($node) {
     $grants[] = array(
       'realm' => 'example_author',
       'gid' => $node->uid,
-      'grant_view' => 1,
-      'grant_update' => 1,
-      'grant_delete' => 1,
+      'grant_view' => TRUE,
+      'grant_update' => TRUE,
+      'grant_delete' => TRUE,
       'priority' => 0,
     );
     return $grants;
@@ -119,38 +118,22 @@ function node_access_example_form_alter(&$form, $form_state) {
 
 /**
  * Implementation of hook_nodeapi().
- */
-
-function node_access_example_nodeapi_load(&$node) {
-  $node->private = db_result(db_query('SELECT private FROM {node_access_example} WHERE nid = :nid', array(':nid' => $node->nid)));
-}
-
-/**
- * Implementation of hook_nodeapi_delete().
  *
  * The module must track the access status of the node.
  */
-
-function node_access_example_nodeapi_delete(&$node) {
-  db_delete('node_access_example')->condition('nid', $node->nid)->execute();
-}
-
-/**
- * Implementation of hook_nodeapi_insert().
- *
- * The module must track the access status of the node.
- */
-function node_access_example_nodeapi_insert(&$node) {
-  if (isset($node->private)) {
-    db_insert('node_access_example')->fields(array('nid' => $node->nid, 'private' => (int)$node->private))->execute();
+function node_access_example_nodeapi(&$node, $op, $arg = 0) {
+  switch ($op) {
+    case 'load':
+      $node->private = db_result(db_query('SELECT private FROM {node_access_example} WHERE nid = %d', $node->nid));
+      break;
+    case 'insert':
+      db_query('INSERT INTO {node_access_example} (nid, private) VALUES (%d, %d)', $node->nid, $node->private);
+      break;
+    case 'update':
+      db_query('UPDATE {node_access_example} SET private = %d WHERE nid = %d', $node->private, $node->nid);
+      break;
+    case 'delete':
+      db_query('DELETE FROM {node_access_example} WHERE nid = %d', $node->nid);
+      break;
   }
-}
-
-/**
- * Implementation of hook_nodeapi_update().
- *
- * The module must track the access status of the node.
- */
-function node_access_example_nodeapi_update(&$node) {
-  db_query('UPDATE {node_access_example} SET private = %d WHERE nid = %d', $node->private, $node->nid);
 }
