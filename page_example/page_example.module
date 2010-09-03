@@ -17,7 +17,7 @@
  */
 function page_example_help($path, $arg) {
   switch ($path) {
-    case 'example/foo':
+    case 'examples/help#simple':
       // Here is some help text for a custom page. This information will be
       // introduced in the page when viewing example/foo URL.
       return t('This sentence contains all the letters in the English alphabet.');
@@ -34,8 +34,8 @@ function page_example_help($path, $arg) {
  */
 function page_example_perm() {
   return array(
-    'access foo content',
-    'access baz content',
+    'access simple page',
+    'access arguments page',
   );
 }
 
@@ -76,11 +76,18 @@ function page_example_perm() {
  */
 function page_example_menu() {
   // This is the minimum information you can provide for a menu item. This menu
-  // item will be created in the default menu: Navigation.
-  $items['example/foo'] = array(
-    'title' => 'Page example: (foo)',
-    'page callback' => 'page_example_foo',
-    'access arguments' => array('access foo content'),
+  // item will be created in the default menu.
+  $items['examples/page_example'] = array(
+    'title' => 'Page Example',
+    'page callback' => 'page_example_description',
+    'access callback' => TRUE,
+    'expanded' => TRUE,
+  );
+
+  $items['examples/page_example/simple'] = array(
+    'title' => 'Simple - no arguments',
+    'page callback' => 'page_example_simple',
+    'access arguments' => array('access simple page'),
   );
 
   // By using the MENU_CALLBACK type, we can register the callback for this
@@ -92,16 +99,21 @@ function page_example_menu() {
   // would be replaced by 'example', a 1 by 'baz', and like wise 2 and 3 will
   // be replaced by what ever the user provides. These will be passed as
   // arguments to the page_example_baz() function.
-  $items['example/baz/%/%'] = array(
-    'title' => 'Baz',
-    'page callback' => 'page_example_baz',
-    'page arguments' => array(2, 3),
-    'access arguments' => array('access baz content'),
+  $items['examples/page_example/arguments/%/%'] = array(
+    'title' => 'Page example with arguments',
+    'page callback' => 'page_example_arguments',
+    'page arguments' => array(3, 4),
+    'access arguments' => array('access arguments page'),
     'type' => MENU_CALLBACK,
   );
 
   return $items;
 }
+
+function page_example_description() {
+  return '<p>'.t('The page_example provides two pages, "simple" and "arguments". The <a href="@simple_link">simple page</a> just returns a string for display. The <a href="@arguments_link">arguments page</a> takes two arguments and displays them, as in @arguments_link', array('@simple_link' => url('examples/page_example/simple', array('absolute' => TRUE)), '@arguments_link' => url('examples/page_example/arguments/23/56', array('absolute' => TRUE)))).'<p>';
+}
+
 
 /**
  * A simple page callback.
@@ -114,28 +126,28 @@ function page_example_menu() {
  * If you do not want to use the theme system (for example for outputting an
  * image or XML), you should print the content yourself and not return anything.
  */
-function page_example_foo() {
-  return '<p>' . t('The quick brown fox jumps over the lazy dog.') . ' </p>';
+function page_example_simple() {
+  return '<p>' . t('Simple page: The quick brown fox jumps over the lazy dog.') . '</p>';
 }
 
 /**
  * A more complex page callback that takes arguments.
  *
- * The arguments are passed in from the page URL. The in our hook_menu
+ * The arguments are passed in from the page URL. There in our hook_menu
  * implementation we instructed the menu system to extract the last two
  * parameters of the path and pass them to this function as arguments.
  */
-function page_example_baz($alice, $bob) {
-  // Make sure you don't trust the URL to be safe! Always check for threats.
-  if (!is_numeric($alice) || !is_numeric($bob)) {
+function page_example_arguments($first, $second) {
+  // Make sure you don't trust the URL to be safe! Always check for exploits.
+  if (!is_numeric($first) || !is_numeric($second)) {
     // We will just show a standard "access denied" page in this case.
-    return drupal_access_denied();
+    drupal_access_denied();
+    return;  // We actually don't get here.
   }
 
-  $list[] = t("Alice's number was @number.", array('@number' => $alice));
-  $list[] = t("Bob's number was @number.", array('@number' => $bob));
-  $list[] = t('The total was @number.', array('@number' => $alice + $bob));
+  $list[] = t("First number was @number.", array('@number' => $first));
+  $list[] = t("Second number was @number.", array('@number' => $second));
+  $list[] = t('The total was @number.', array('@number' => $first + $second));
 
-  return t("baz content") . theme('item_list', $list);
+  return theme('item_list', $list);
 }
-
