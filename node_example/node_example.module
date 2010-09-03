@@ -11,24 +11,30 @@
  *
  * Our example node type will allow users to specify a "color" and a "quantity"
  * for their nodes; some kind of rudimentary inventory-tracking system, perhaps?
- * To store this extra information, we need an auxiliary database table.
- *
- * Database definition:
- * @code
- *   CREATE TABLE node_example (
- *     vid int(10) unsigned NOT NULL default '0',
- *     nid int(10) unsigned NOT NULL default '0',
- *     color varchar(255) NOT NULL default '',
- *     quantity int(10) unsigned NOT NULL default '0',
- *     PRIMARY KEY (vid, nid),
- *     KEY `node_example_nid` (nid)
- *   )
- * @endcode
+ * To store this extra information, we need an auxiliary database table as
+ * defined in node_example_schema().
  */
 
 /**
- * Implementation of hook_node_info(). This function replaces hook_node_name()
- * and hook_node_types() from 4.6. Drupal 5 expands this hook significantly.
+ * Implementation of hook_menu().
+ */
+function node_example_menu() {
+  $items['examples/node_example'] = array(
+    'title' => 'Node Example',
+    'page callback' => 'node_example_info',
+    'access callback' => TRUE,
+  );
+  return $items;
+}
+
+/**
+ * Explain how the module demonstrates a new node type.node_example.test
+ */
+function node_example_info() {
+	return t('The node example defines a new node type, "Example node type 1", which can be created at !link.', array('!link' => l(t('node/add/example-node-type-1'), 'node/add/example-node-type-1')));
+}
+/**
+ * Implementation of hook_node_info().
  *
  * This is a required node hook. This function describes the nodes provided by
  * this module.
@@ -50,17 +56,22 @@
  * - "body_label": the label for the body field of this content type.
  * - "min_word_count": the minimum number of words for the body field to be
  *   considered valid for this content type.
+ *
+ * The key in this example, "example_node_type_1", is the "machine name" of the
+ * node type and is stored in {node}.type. The node's type value cannot be
+ * changed through the admin interface.
+ *
  */
 function node_example_node_info() {
   return array(
-    'node_example' => array(
-      'name' => t('Example node'),
+    'example_node_type_1' => array(
+      'name' => t('Example node type 1'),
       'module' => 'node_example',
-      'description' => t("This is an example node type with a few fields."),
+      'description' => t("An example node type with a few fields."),
       'has_title' => TRUE,
-      'title_label' => t('Example Title'),
+      'title_label' => t('Example Node Type 1 Title'),
       'has_body' => TRUE,
-      'body_label' => t('Example Body'),
+      'body_label' => t('Example Node Type 1 Body'),
     )
   );
 }
@@ -130,7 +141,7 @@ function node_example_form(&$node, $form_state) {
   }
 
   if ($type->has_body) {
-    // In Drupal 6, we can use node_body_field() to get the body and filter
+    // In Drupal 6, we use node_body_field() to get the body and filter
     // elements. This replaces the old textarea + filter_form() method of
     // setting this up. It will also ensure the teaser splitter gets set up
     // properly.

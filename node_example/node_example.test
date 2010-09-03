@@ -1,0 +1,48 @@
+<?php
+// $Id$
+
+/**
+ * @file
+ * Simpletest case for node_example module.
+ *
+ * Verify example module functionality.
+ */
+
+/**
+ * Functionality tests for node example module.
+ */
+class NodeExampleTestCase extends DrupalWebTestCase {
+
+  public static function getInfo() {
+    return array(
+      'name' => 'Node example',
+      'description' => 'Verify the custom node type creation.',
+      'group' => 'Examples',
+    );
+  }
+
+  function setUp() {
+    // Enable the module.
+    parent::setUp('node_example');
+  }
+
+  /**
+   * Verify the functionality of the example module.
+   */
+  function testNodeCreation() {
+    // Create and login user.
+    $account = $this->drupalCreateUser(array('access content', 'create example content'));
+    $this->drupalLogin($account);
+
+    // Create a new node. The image makes it more complicated, so skip it.
+    $edit = array(
+      'title' => $this->randomName(),
+      'color' => 'red',
+      'quantity' => 100,
+    );
+    $this->drupalPost('node/add/example-node-type-1', $edit, t('Save'));
+    $this->assertText(t("Example node type 1 @title has been created", array('@title' => $edit['title'])));
+    $this->assertText(t('The order is for @number @color items', array('@number' => $edit['quantity'], '@color' => $edit['color'])));
+  }
+}
+
