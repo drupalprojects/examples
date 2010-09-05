@@ -1,5 +1,0 @@
-; $Id$
-name = Element example
-description = An example demonstrating how a module can define custom form elements.
-package = Example modules
-core = 6.x

@@ -6,23 +6,28 @@
  * Examples demonstrating the Drupal Form API.
  */
 
+require_once('form_example_elements.inc');
 
 /**
  * Implements hook_menu() to set up the URLs (menu entries) for the
  * form examples.
  */
 function form_example_menu() {
-  $items = array();
-  $items['form_example/tutorial'] = array(
-    'title' => t('Form Example: Tutorial'),
+  $items['examples/form_example'] = array(
+    'title' => t('Form Example'),
+    'page callback' => 'form_example_info',
+    'access callback' => TRUE,
+  );
+  $items['examples/form_example/tutorial'] = array(
+    'title' => t('Tutorial'),
     'page callback' => 'drupal_get_form',
     'page arguments' => array('form_example_tutorial_1'),
     'access callback' => TRUE,
     'description' => t('A set of ten tutorials'),
     'file' => 'form_example_tutorial.inc',
-    'type' => MENU_NORMAL_ITEM,
+    'weight' => -20,
   );
-  $items['form_example/tutorial/1'] = array(
+  $items['examples/form_example/tutorial/1'] = array(
     'title' => t('#1'),
     'page callback' => 'drupal_get_form',
     'page arguments' => array('form_example_tutorial_1'),
@@ -31,7 +36,7 @@ function form_example_menu() {
     'type' => MENU_DEFAULT_LOCAL_TASK,
     'file' => 'form_example_tutorial.inc',
   );
-  $items['form_example/tutorial/2'] = array(
+  $items['examples/form_example/tutorial/2'] = array(
     'title' => t('#2'),
     'page callback' => 'drupal_get_form',
     'page arguments' => array('form_example_tutorial_2'),
@@ -40,7 +45,7 @@ function form_example_menu() {
     'type' => MENU_LOCAL_TASK,
     'file' => 'form_example_tutorial.inc',
   );
-  $items['form_example/tutorial/3'] = array(
+  $items['examples/form_example/tutorial/3'] = array(
     'title' => t('#3'),
     'page callback' => 'drupal_get_form',
     'page arguments' => array('form_example_tutorial_3'),
@@ -49,7 +54,7 @@ function form_example_menu() {
     'type' => MENU_LOCAL_TASK,
     'file' => 'form_example_tutorial.inc',
   );
-  $items['form_example/tutorial/4'] = array(
+  $items['examples/form_example/tutorial/4'] = array(
     'title' => t('#4'),
     'page callback' => 'drupal_get_form',
     'page arguments' => array('form_example_tutorial_4'),
@@ -58,7 +63,7 @@ function form_example_menu() {
     'type' => MENU_LOCAL_TASK,
     'file' => 'form_example_tutorial.inc',
   );
-  $items['form_example/tutorial/5'] = array(
+  $items['examples/form_example/tutorial/5'] = array(
     'title' => t('#5'),
     'page callback' => 'drupal_get_form',
     'page arguments' => array('form_example_tutorial_5'),
@@ -67,7 +72,7 @@ function form_example_menu() {
     'type' => MENU_LOCAL_TASK,
     'file' => 'form_example_tutorial.inc',
   );
-  $items['form_example/tutorial/6'] = array(
+  $items['examples/form_example/tutorial/6'] = array(
     'title' => t('#6'),
     'page callback' => 'drupal_get_form',
     'page arguments' => array('form_example_tutorial_6'),
@@ -76,7 +81,7 @@ function form_example_menu() {
     'type' => MENU_LOCAL_TASK,
     'file' => 'form_example_tutorial.inc',
   );
-  $items['form_example/tutorial/7'] = array(
+  $items['examples/form_example/tutorial/7'] = array(
     'title' => t('#7'),
     'page callback' => 'drupal_get_form',
     'page arguments' => array('form_example_tutorial_7'),
@@ -85,7 +90,7 @@ function form_example_menu() {
     'type' => MENU_LOCAL_TASK,
     'file' => 'form_example_tutorial.inc',
   );
-  $items['form_example/tutorial/8'] = array(
+  $items['examples/form_example/tutorial/8'] = array(
     'title' => t('#8'),
     'page callback' => 'drupal_get_form',
     'page arguments' => array('form_example_tutorial_8'),
@@ -94,7 +99,7 @@ function form_example_menu() {
     'type' => MENU_LOCAL_TASK,
     'file' => 'form_example_tutorial.inc',
   );
-  $items['form_example/tutorial/9'] = array(
+  $items['examples/form_example/tutorial/9'] = array(
     'title' => t('#9'),
     'page callback' => 'drupal_get_form',
     'page arguments' => array('form_example_tutorial_9'),
@@ -103,7 +108,7 @@ function form_example_menu() {
     'type' => MENU_LOCAL_TASK,
     'file' => 'form_example_tutorial.inc',
   );
-  $items['form_example/tutorial/10'] = array(
+  $items['examples/form_example/tutorial/10'] = array(
     'title' => t('#10'),
     'page callback' => 'drupal_get_form',
     'page arguments' => array('form_example_tutorial_10'),
@@ -113,20 +118,57 @@ function form_example_menu() {
     'file' => 'form_example_tutorial.inc',
     'weight' => 10,
   );
+  $items['examples/form_example/element_example'] = array(
+    'title' => 'Element example',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('form_example_element_demo_form'),
+    'access callback' => TRUE,
+    'file' => 'form_example_elements.inc',
+  );
 
   return $items;
 }
 
+/**
+ * Simple page callback to give feedback to the user about this example.
+ */
+function form_example_info() {
+  return t('The form example provides <a href="!tutorial_url">tutorial examples</a> tied to the <a href="!handbook_url">handbook</a> and <a href="!element_url">form element examples</a>.', array('!tutorial_url' => url('examples/form_example/tutorial'), '!handbook_url' => 'http://drupal.org/node/262422', '!element_url' => url('examples/form_example/element_example')));
+}
 
 /**
  * Implements hook_help() to provide a bit of help.
  */
 function form_example_help($path, $arg) {
   switch($path) {
-    case 'form_example/tutorial':
+    case 'examples/form_example/tutorial':
       $help = t('This form example tutorial for Drupal 6 is the code from the <a href="http://drupal.org/node/262422">Handbook 10-step tutorial</a>');
+      break;
+    case 'examples/form_example/element_example':
+      $help = t('The Element Example shows how modules can provide their own Form API element types. Four different element types are demonstrated.');
+      break;
   }
   if (!empty($help)) {
     return '<p>' . $help . '</p>';
   }
+}
+
+
+/**
+ * Implementation of form_example_elements().
+ *
+ * To keep the various pieces of the example together, this just returns
+ * _form_example_elements().
+ */
+function form_example_elements() {
+  return _form_example_elements();
+}
+/**
+ * Implementation of hook_theme().
+ *
+ * To keep the various parts of the example together, this actually returns
+ * _form_example_element_theme().
+ */
+function form_example_theme() {
+  return _form_example_element_theme();
 }
