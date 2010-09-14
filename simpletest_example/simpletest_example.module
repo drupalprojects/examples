@@ -44,7 +44,7 @@ function simpletest_example_access($op, $node) {
   // if ($op == 'update' || $op == 'delete') {
 
   // Incorrect version we'll use to demonstrate test failure. We were always testing
-  // with User 1!
+  // with User 1, so it always allowed access and the bug wasn't noticed!
   if ($op == 'delete') {
     return (user_access('edit own simpletest_example') && ($user->uid == $node->uid));
   }
@@ -76,7 +76,7 @@ function simpletest_example_form(&$node) {
 /**
  * Implementation of hook_menu().
  *
- * Provide a form and explanation. Let the user turn on the error.
+ * Provide an explanation.
  */
 function simpletest_example_menu() {
   $items['examples/simpletest_example'] = array(
