@@ -22,7 +22,6 @@ function ahah_example_autocheckboxes(&$form_state) {
 
   );
 
-
   $form['checkboxes'] = array(
     '#title' => t("Generated Checkboxes"),
     '#prefix' => '<div id="checkboxes">',
@@ -52,19 +51,33 @@ function ahah_example_autocheckboxes(&$form_state) {
 }
 
 /**
+ * Submit handler for autocheckboxes.
+ * Gets called even when our select is active, so we use the
+ * $form_state to determine whether the submit handler should actually do
+ * anything.
+ */
+function ahah_example_autocheckboxes_submit($form, &$form_state) {
+  if (!empty($form_state['ahah_submission'])) {
+    return;
+  }
+
+  // Continue to handle submit processing.
+}
+
+/**
  * Callback for autocheckboxes. Process the form with the number of checkboxes
  * we want to provide.
  */
 function ahah_example_autocheckboxes_callback() {
   $form = ahah_example_callback_helper();
-	
+
   $checkboxes = $form['checkboxes'];
   // Remove the wrapper so we don't double it up.
   unset($checkboxes['#prefix'], $checkboxes['#suffix']);
 
-  $output = theme('status_messages');  
+  $output = theme('status_messages');
   $output .= drupal_render($checkboxes);
-  
+
   // Final rendering callback.
   print drupal_json(array('status' => TRUE, 'data' => $output));
   exit();

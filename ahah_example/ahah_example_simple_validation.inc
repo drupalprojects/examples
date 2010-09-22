@@ -43,27 +43,42 @@ function ahah_example_simple_validation_validate(&$form, &$form_state) {
 		form_set_error('two_words_required', t('You have to enter at least two words'));
 	}
 }
+
+/**
+ * Submit handler for autocheckboxes.
+ * Gets called even when our select is active, so we use the
+ * $form_state to determine whether the submit handler should actually do
+ * anything.
+ */
+function ahah_example_simple_validation_submit($form, &$form_state) {
+  if (!empty($form_state['ahah_submission'])) {
+    return;
+  }
+
+  // Continue to handle submit processing.
+}
+
 /**
  * Callback for autocheckboxes. Process the form with the number of checkboxes
  * we want to provide.
  */
 function ahah_example_simple_validation_callback() {
   $form = ahah_example_callback_helper();
-  
-  // This section prepares the actual output that will be returned to the 
+
+  // This section prepares the actual output that will be returned to the
   // browser.
   $selected_portion = $form['wrapper_fieldset']['two_words_required'];
-  
+
   // To avoid doubling-up the wrapper, we have to remove it here.
   unset($selected_portion['#prefix'], $selected_portion['#suffix']);
-  
+
   // Now render and output.
   $output = drupal_render($selected_portion);
-  
+
   // Include (optionally) the results of any drupal_set_message() calls that
   // may have occurred.
-  $output .= theme('status_messages');  
-  
+  $output .= theme('status_messages');
+
   // Output the results and exit.
   print drupal_json(array('status' => TRUE, 'data' => $output));
   exit();

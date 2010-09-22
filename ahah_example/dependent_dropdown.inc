@@ -109,11 +109,15 @@ function ahah_example_dropdown_continue($form, &$form_state) {
  * Default submit handler for form. This one happens when the main submit
  * button is pressed.
  */
-function ahax_example_dropdown_submit($form, &$form_state) {
+function ahah_example_dropdown_submit($form, &$form_state) {
+  // If an AHAH submission, it's just the dependent dropdown working.
+  if (!empty($form_state['ahah_submission'])) {
+    return;
+  }
 
   if ($form_state['clicked_button']['#id'] == 'edit-submit') {
       $form_state['rebuild'] = FALSE;
-      drupal_set_message(t('Your values have been submitted. dropdown_first=@first, dependent_dropdown=@second', array('@first' => $form_state['values']['dropdown_first'], '@second' => $form_state['values']['dependent_dropdown_wrapper']['dependent_dropdown'])));
+      drupal_set_message(t('Your values have been submitted. master_dropdown=@first, dependent_dropdown=@second', array('@first' => $form_state['values']['master_dropdown'], '@second' => $form_state['values']['dependent_dropdown_holder']['dependent_dropdown'])));
   }
 
   // edit-next or anything else will cause rebuild.

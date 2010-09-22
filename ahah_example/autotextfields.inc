@@ -63,17 +63,31 @@ function ahah_example_autotextfields(&$form_state) {
   return $form;
 }
 
+/**
+ * Submit handler for autotextfields.
+ * Gets called even when our select is active, so we use the
+ * $form_state to determine whether the submit handler should actually do
+ * anything.
+ */
+function ahah_example_autotextfields_submit($form, &$form_state) {
+  if (!empty($form_state['ahah_submission'])) {
+    return;
+  }
+
+  // Continue to handle submit processing.
+}
+
 
 function ahah_example_autotextfields_callback() {
   $form = ahah_example_callback_helper();
-	
+
   $textfields = $form['textfields'];
-  
+
   // Remove the prefix/suffix wrapper so we don't double it up.
   unset($textfields['#prefix'], $textfields['#suffix']);
-  
+
   // Render the output.
-  $output = theme('status_messages');  
+  $output = theme('status_messages');
   $output .= drupal_render($textfields);
 
   // Final rendering callback.
