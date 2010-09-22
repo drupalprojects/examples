@@ -15,7 +15,7 @@ function ahah_example_simplest(&$form_state) {
 	 '#type' => 'markup',
 	 '#value' => '<div>' . t('This is the very simplest AHAH example, which just replaces the HTML for a div on the page. Notice the more advanced examples in the other tabs.') . '</div>',
 	);
-	
+
   $initial_markup = '<div style="width: 150px; height: 150px; border: 1px solid black">' . t('This box will be replaced') . '</div>';
 
   $form['box'] = array(
@@ -44,7 +44,7 @@ function ahah_example_simplest(&$form_state) {
 function ahah_example_simplest_callback() {
   $colors = preg_split('/[ ,]+/', "aqua, black, blue, fuchsia, gray, green, lime, maroon, navy, olive, purple, red, silver, teal, white, yellow");
   $color = $colors[array_rand($colors)];
-  $output = '<div id="box" style="background-color:' . $color .
+  $output = '<div style="background-color:' . $color .
     '; width: 150px; height: 150px; border: 1px solid black;">This is ' . $color . ' box</div>';
   print drupal_json(array('status' => TRUE, 'data' => $output));
   exit();
