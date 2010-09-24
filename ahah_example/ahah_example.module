@@ -116,7 +116,7 @@ function ahah_example_menu() {
  * Used by each callback in this example module.
  */
 function ahah_example_callback_helper() {
-	$form_state = array('storage' => NULL, 'submitted' => FALSE);
+  $form_state = array('storage' => NULL, 'submitted' => FALSE);
   $form_build_id = $_POST['form_build_id'];
   $form = form_get_cache($form_build_id, $form_state);
   $args = $form['#parameters'];
@@ -127,7 +127,7 @@ function ahah_example_callback_helper() {
   $form['#programmed'] = $form['#redirect'] = FALSE;
   drupal_process_form($form_id, $form, $form_state);
   $form = drupal_rebuild_form($form_id, $form_state, $args, $form_build_id);
-	return $form;
+  return $form;
 }
 
 /**
