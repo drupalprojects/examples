@@ -1,3 +1,5 @@
+# $Id$
+
 AHAH example provides three simple examples of AHAH in Drupal 6.
 
 There is a tutorial based on this module at http://randyfay.com/ahah.

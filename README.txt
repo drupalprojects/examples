@@ -1,3 +1,5 @@
+# $Id$
+
 Examples modules
 
 This set of modules is intended to show how to use various Drupal features.
