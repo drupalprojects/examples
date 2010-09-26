@@ -821,8 +821,11 @@ function form_example_tutorial_10_submit($form, &$form_state) {
       array('@first' => $page_one_values['first'], '@last' => $page_one_values['last'], '@year_of_birth' => $page_one_values['year_of_birth'])));
 
     if (!empty($page_one_values['first'])) {
+      $first2 = isset($page_one_values['first2']) ? $page_one_values['first2'] : '';
+      $last2  = isset($page_one_values['last2']) ? $page_one_values['last2'] : '';
+      $year2  = isset($page_one_values['year_of_birth2']) ? $page_one_values['year_of_birth2'] : '';
       drupal_set_message(t('Second name: name="@first @last", year of birth=@year_of_birth',
-        array('@first' => $page_one_values['first2'], '@last' => $page_one_values['last2'], '@year_of_birth' => $page_one_values['year_of_birth2'])));
+        array('@first' => $first2, '@last' => $last2, '@year_of_birth' => $year2)));
     }
     drupal_set_message(t('And the favorite color is @color', array('@color' => $form_state['values']['color'])));
 
