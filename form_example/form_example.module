@@ -118,6 +118,16 @@ function form_example_menu() {
     'file' => 'form_example_tutorial.inc',
     'weight' => 10,
   );
+  $items['examples/form_example/tutorial/11'] = array(
+    'title' => t('#11'),
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('form_example_tutorial_11'),
+    'access callback' => TRUE,
+    'description' => t('Tutorial 11: Form with file upload'),
+    'type' => MENU_LOCAL_TASK,
+    'file' => 'form_example_tutorial.inc',
+    'weight' => 11,
+  );
   $items['examples/form_example/element_example'] = array(
     'title' => 'Element example',
     'page callback' => 'drupal_get_form',
@@ -140,7 +150,7 @@ function form_example_info() {
  * Implements hook_help() to provide a bit of help.
  */
 function form_example_help($path, $arg) {
-  switch($path) {
+  switch ($path) {
     case 'examples/form_example/tutorial':
       $help = t('This form example tutorial for Drupal 6 is the code from the <a href="http://drupal.org/node/262422">Handbook 10-step tutorial</a>');
       break;

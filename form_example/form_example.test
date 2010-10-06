@@ -117,6 +117,24 @@ class FormExampleTestCase extends DrupalWebTestCase {
     $this->assertText(t('The form has been submitted. name="firstname lastname", year of birth=1955'));
     $this->assertText(t('Second name: name="firstname2 lastname2", year of birth=1956'));
     $this->assertText(t('And the favorite color is green'));
+
+    // #11
+    // Get sample images.
+    $images = $this->drupalGetTestFiles('image');
+
+    foreach ($images as $image) {
+      $this->drupalPost('examples/form_example/tutorial/11', array('files[file]' => $image->filename), t('Submit'));
+      $this->assertText(t('The form has been submitted and the image has been saved, filename: @filename.', array('@filename' => $image->basename)));
+    }
+    // Try invalid files
+    $files = $this->drupalGetTestFiles('html');
+    foreach ($files as $file) {
+      $this->drupalPost('examples/form_example/tutorial/11', array('files[file]' => $file->filename), t('Submit'));
+      // Can't find a quick way to rebuild the whole validation string, so check
+      // only that file has not been submitted.
+      $this->assertText(t('The selected file @filename could not be uploaded.', array('@filename' => $file->basename)));
+    }
+
   }
 
   /**
@@ -127,12 +145,12 @@ class FormExampleTestCase extends DrupalWebTestCase {
     $edit = array(
       'form_example_textfield' => $this->randomName(),
       'form_example_checkbox' => TRUE,
-      'form_example_element_discrete[areacode]' => sprintf('%03d', rand(0,999)),
-      'form_example_element_discrete[prefix]' => sprintf('%03d', rand(0,999)),
-      'form_example_element_discrete[extension]' => sprintf('%04d', rand(0,9999)),
-      'form_example_element_combined[areacode]' => sprintf('%03d', rand(0,999)),
-      'form_example_element_combined[prefix]' => sprintf('%03d', rand(0,999)),
-      'form_example_element_combined[extension]' => sprintf('%04d', rand(0,9999)),
+      'form_example_element_discrete[areacode]' => sprintf('%03d', rand(0, 999)),
+      'form_example_element_discrete[prefix]' => sprintf('%03d', rand(0, 999)),
+      'form_example_element_discrete[extension]' => sprintf('%04d', rand(0, 9999)),
+      'form_example_element_combined[areacode]' => sprintf('%03d', rand(0, 999)),
+      'form_example_element_combined[prefix]' => sprintf('%03d', rand(0, 999)),
+      'form_example_element_combined[extension]' => sprintf('%04d', rand(0, 9999)),
     );
     $this->drupalPost('examples/form_example/element_example', $edit, t('Submit'));
     $this->assertText(t('form_example_textfield has value @value', array('@value' => $edit['form_example_textfield'])));

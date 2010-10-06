@@ -555,9 +555,9 @@ function form_example_tutorial_9_new_name($form, &$form_state) {
 
 function form_example_tutorial_9_clear($form, &$form_state) {
   // Ensures fields are blank after the reset button is clicked.
-  unset ($form_state['values']);
+  unset($form_state['values']);
   // Ensures the reset button removes the new_name button.
-  unset ($form_state['storage']);
+  unset($form_state['storage']);
   // Setting $form_state['rebuild'] = TRUE causes the default submit
   // function to be skipped and the form to be rebuilt.
 
@@ -742,8 +742,8 @@ function form_example_tutorial_10_new_name($form, &$form_state) {
 }
 
 function form_example_tutorial_10_clear($form, &$form_state) {
-  unset ($form_state['values']);
-  unset ($form_state['storage']);
+  unset($form_state['values']);
+  unset($form_state['storage']);
 
   $form_state['rebuild'] = TRUE;
 }
@@ -832,7 +832,83 @@ function form_example_tutorial_10_submit($form, &$form_state) {
     // $form_state['storage'] must be unset for redirection to occur. Otherwise
     // $form_state['rebuild'] is automatically set and this form will be
     // rebuilt.
-    unset ($form_state['storage']);
+    unset($form_state['storage']);
     $form_state['redirect'] = 'node'; // Redirects the user to /node.
   }
+}
+
+//////////////// Tutorial Example 11 //////////////////////
+
+/**
+ * Example 11: A form with a file upload field.
+ *
+ * This example allows the user to upload a file to Drupal which is stored
+ * physically and with a reference in the database. In this example, only
+ * png, gif, jpg, and jpeg files are allowed.
+ *
+ * @see form_example_tutorial_11_validate()
+ * @see form_example_tutorial_11_submit()
+ * @ingroup form_example
+ *
+ */
+function form_example_tutorial_11($form_state) {
+  // This is required to upload files.
+  // enctype="multipart/form-data" required by browsers to handle files.
+  $form = array(
+    '#attributes' => array('enctype' => "multipart/form-data"),
+  );
+
+  $form['file'] = array(
+    '#type' => 'file',
+    '#title' => t('Image'),
+    '#description' => t('Upload a file, allowed extensions: jpg, jpeg, png, gif'),
+  );
+
+  $form['submit'] = array(
+    '#type' => 'submit',
+    '#value' => t('Submit'),
+  );
+
+  return $form;
+}
+
+/**
+ * Validate handler for form_example_tutorial_11().
+ * Verify the valid extensions, and verify content is an image also.
+ */
+function form_example_tutorial_11_validate($form, &$form_state) {
+  $file = file_save_upload('file', array(
+    'file_validate_extensions' => array('png gif jpg jpeg'),
+    'file_validate_is_image' => array(),
+  ));
+  
+  // If the file passed validation:
+  if (isset($file->filename)) {
+    // Move the file, into the Drupal file system
+    if (file_move($file, $file->filename)) {
+      // Update the new file location in the database.
+      drupal_write_record('files', $file, 'fid');
+      // Save the file for use in the submit handler.
+      $form_state['storage']['file'] = $file;
+    }
+    else {
+      form_set_error('file', t('Failed to write the uploaded file the site\'s file folder.'));
+    }
+  }
+  else {
+    form_set_error('file', t('Invalid file, only images with the extension png, gif, jpg, jpeg are allowed'));
+  }
+}
+
+/**
+ * Submit handler for form_example_tutorial_11().
+ */
+function form_example_tutorial_11_submit($form, &$form_state) {
+  $file = $form_state['storage']['file'];
+  // We are done with the file, remove it from storage.
+  unset($form_state['storage']['file']);
+  // Make the storage of the file permanent
+  file_set_status($file, FILE_STATUS_PERMANENT);
+  // Set a response to the user.
+  drupal_set_message(t('The form has been submitted and the image has been saved, filename: @filename.', array('@filename' => $file->filename)));
 }

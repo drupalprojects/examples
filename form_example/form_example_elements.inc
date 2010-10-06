@@ -75,8 +75,8 @@ function _form_example_elements() {
     // needs its own value callback.
   );
 
-	// This discrete phonenumber element keeps its values as the separate elements
-	// area code, prefix, extension.
+  // This discrete phonenumber element keeps its values as the separate elements
+  // area code, prefix, extension.
   $types['form_example_phonenumber_discrete'] = array(
     '#input' => TRUE,
 
@@ -136,11 +136,11 @@ function form_type_form_example_checkbox_value($form, $edit = FALSE) {
  * Process callback for the discrete version of phonenumber.
  */
 function form_example_phonenumber_discrete_process($element, $edit, &$form_state, $complete_form) {
-	// #tree = TRUE means that the values in $form_state['values'] will be stored
-	// hierarchically. In this case, the parts of the element will appear in
-	// $form_state['values'] as
-	// $form_state['values']['<element_name>']['areacode'],
-	// $form_state['values']['<element_name>']['prefix'],
+  // #tree = TRUE means that the values in $form_state['values'] will be stored
+  // hierarchically. In this case, the parts of the element will appear in
+  // $form_state['values'] as
+  // $form_state['values']['<element_name>']['areacode'],
+  // $form_state['values']['<element_name>']['prefix'],
   // etc. This technique is preferred when an element has member form
   // elements.
   $element['#tree'] = TRUE;
@@ -315,8 +315,8 @@ function theme_form_example_checkbox($element) {
  * are placed next to each other, rather than on separate lines.
  */
 function theme_form_example_phonenumber_discrete($element) {
-	// #children represents all the sublevels elements already rendered in HTML.
-	// Here it contains the three parts of the 'phonenumber' element type ('areacode', 'prefix' and 'extension').
+  // #children represents all the sublevels elements already rendered in HTML.
+  // Here it contains the three parts of the 'phonenumber' element type ('areacode', 'prefix' and 'extension').
   return theme('form_element', $element, '<div class="container-inline">' . $element['#children'] . '</div>');
 }
 
