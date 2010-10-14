@@ -1,0 +1,6 @@
+; $Id$
+name = Token example
+description = An example module showing how to define and use tokens.
+dependencies[] = token
+package = Example modules
+core = 6.x

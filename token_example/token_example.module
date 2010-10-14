@@ -1,0 +1,202 @@
+<?php
+// $Id$
+
+/**
+ * @file
+ * The Token API module.
+ *
+ * The Token module provides an API for providing tokens to other modules.
+ * Tokens are small bits of text that can be placed into larger documents
+ * via simple placeholders, like %site-name or [user].
+ *
+ * @ingroup token
+ */
+
+/**
+ * Implements hook_menu().
+ */
+function token_example_menu() {
+  $items['examples/token'] = array(
+    'title' => 'Token example',
+    'description' => 'Test replacement tokens in real time.',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('token_example_example_form'),
+    'access callback' => TRUE,
+  );
+  return $items;
+}
+
+/**
+ * Implements hook_token_list().
+ */
+function token_example_token_list($type = 'all') {
+  module_load_include('tokens.inc', 'token_example');
+  return _token_example_token_list($type);
+}
+
+/**
+ * Implements hook_token_values().
+ */
+function token_example_token_values($type, $object = NULL) {
+  module_load_include('tokens.inc', 'token_example');
+  return _token_example_token_values($type, $object);
+}
+
+/**
+ * Form builder; display lists of supported token entities and text to tokenize.
+ */
+function token_example_example_form($form_state) {
+  $entities = token_entity_info();
+  $token_types = array();
+
+  foreach ($entities as $entity_type => $info) {
+    $object_callback = "_token_example_get_{$entity_type}";
+    if (function_exists($object_callback) && $objects = $object_callback()) {
+      $form[$entity_type] = array(
+        '#type' => 'select',
+        '#title' => $info['label'],
+        '#options' => array(0 => t('Not selected')) + $objects,
+        '#default_value' => isset($form_state['storage'][$entity_type]) ? $form_state['storage'][$entity_type] : 0,
+        '#access' => !empty($objects),
+      );
+
+      // Build a list of supported token types based on the available entites.
+      if ($form[$entity_type]['#access']) {
+        $token_types[] = $entity_type;
+      }
+    }
+  }
+
+  $form['text'] = array(
+    '#type' => 'textarea',
+    '#title' => t('Enter your text here'),
+    '#default_value' => 'Hello [user-name]!',
+  );
+
+  // Display the results of tokenized text.
+  if (!empty($form_state['storage']['text'])) {
+    $form['text']['#default_value'] = $form_state['storage']['text'];
+
+    $data = array();
+    foreach (array_keys($entities) as $entity_type) {
+      if (!empty($form_state['storage'][$entity_type])) {
+        $object = token_entity_load($entity_type, $form_state['storage'][$entity_type]);
+        $data[$entity_type] = $object;
+      }
+    }
+
+    // Display the tokenized text.
+    $form['text_tokenized'] = array(
+      '#type' => 'item',
+      '#title' => t('Result'),
+      '#value' => token_replace_multiple($form_state['storage']['text'], $data),
+    );
+
+    // If raw tokens were used, escape the output and add a warning.
+    if (strpos($form_state['storage']['text'], '-raw') !== FALSE) {
+      $form['text_tokenized']['#value'] = check_plain($form['text_tokenized']['#value']);
+      $form['text_tokenized']['#description'] = t('Note that dangerous token results will still be filtered.');
+    }
+  }
+
+  $form['submit'] = array(
+    '#type' => 'submit',
+    '#value' => t('Submit'),
+  );
+
+  $form['token_tree'] = array(
+    '#value' => theme('token_tree', $token_types),
+  );
+
+  return $form;
+}
+
+/**
+ * Submit callback; store the submitted values into storage.
+ */
+function token_example_example_form_submit($form, &$form_state) {
+  $form_state['storage'] = $form_state['values'];
+  $form_state['rebuild'] = TRUE;
+}
+
+function token_entity_info() {
+  $info['node'] = array(
+    'label' => t('Content'),
+  );
+  $info['comment'] = array(
+    'label' => t('Comment'),
+  );
+  $info['user'] = array(
+    'label' => t('User'),
+  );
+  return $info;
+}
+
+function token_entity_load($entity_type, $entity_id) {
+  switch ($entity_type) {
+    case 'node':
+      return node_load($entity_id);
+    case 'comment':
+      $sql = 'SELECT c.cid, c.pid, c.nid, c.subject, c.comment, c.format, c.timestamp, c.name, c.mail, c.homepage, u.uid, u.name AS registered_name, u.signature, u.signature_format, u.picture, u.data, c.status FROM {comments} c INNER JOIN {users} u ON c.uid = u.uid WHERE c.cid = %d';
+      return db_fetch_object(db_query($sql, $entity_id));
+    case 'user':
+      return user_load($entity_id);
+  }
+}
+
+/**
+ * Build a list of available content.
+ */
+function _token_example_get_node() {
+  if (!user_access('access content') && !user_access('administer nodes')) {
+    return array();
+  }
+
+  $sql = "SELECT n.nid, n.title FROM {node} n WHERE n.status = %d ORDER BY n.created DESC";
+  $query = db_query_range(db_rewrite_sql($sql), 1, 0, 10);
+
+  $nodes = array();
+  while ($result = db_fetch_object($query)) {
+    $nodes[$result->nid] = $result->title;
+  }
+  $nodes = array_map('check_plain', $nodes);
+  return $nodes;
+}
+
+/**
+ * Build a list of available comments.
+ */
+function _token_example_get_comment() {
+  if (!module_exists('comment') || (!user_access('access comments') && !user_access('administer comments'))) {
+    return array();
+  }
+
+  $sql = 'SELECT c.cid, c.subject FROM {comments} c WHERE c.status = %d ORDER BY c.timestamp DESC';
+  $query = db_query_range(db_rewrite_sql($sql, 'c', 'cid'), COMMENT_PUBLISHED, 0, 10);
+
+  $comments = array();
+  while ($result = db_fetch_object($query)) {
+    $comments[$result->cid] = $result->subject;
+  }
+  $comments = array_map('check_plain', $comments);
+  return $comments;
+}
+
+/**
+ * Build a list of availalbe user accounts.
+ */
+function _token_example_get_user() {
+  if (!user_access('access user profiles') && !user_access('administer users')) {
+    return array();
+  }
+
+  $sql = 'SELECT u.uid, u.name FROM {users} u WHERE u.uid > 0 AND u.status = 1';
+  $query = db_query_range($sql, 0, 1);
+
+  $accounts = array();
+  while ($result = db_fetch_object($query)) {
+    $accounts[$result->uid] = $result->name;
+  }
+  $accounts = array_map('check_plain', $accounts);
+  return $accounts;
+}

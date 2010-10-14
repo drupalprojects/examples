@@ -1,0 +1,49 @@
+<?php
+// $Id$
+
+/**
+ * @file
+ * Test cases for Testing the token example module.
+ */
+
+class TokenExampleTestCase extends DrupalWebTestCase {
+  protected $web_user;
+
+  public static function getInfo() {
+    return array(
+      'name' => 'Token example functionality',
+      'description' => 'Verify the token example interface.',
+      'group' => 'Examples',
+      'dependencies' => array('token'),
+    );
+  }
+
+  function setUp() {
+    parent::setUp('token', 'token_example');
+    $this->web_user = $this->drupalCreateUser();
+    $this->drupalLogin($this->web_user);
+  }
+
+  function testInterface() {
+    $this->drupalGet('examples/token');
+    $this->assertNoFieldByName('node');
+    $this->assertNoFieldByName('user');
+
+    $edit = array(
+      'text' => 'User [user-name] is trying the token example!',
+    );
+    $this->drupalPost(NULL, $edit, t('Submit'));
+    $this->assertText('User ' . $this->web_user->name . ' is trying the token example!');
+
+    $node = $this->drupalCreateNode(array('title' => 'Example node', 'status' => 1));
+    $this->drupalGet('examples/token');
+    $this->assertFieldByName('node');
+
+    $edit = array(
+      'text' => 'Would you like to view the [type-name] [title]?',
+      'node' => $node->nid,
+    );
+    $this->drupalPost(NULL, $edit, t('Submit'));
+    $this->assertText('Would you like to view the Page Example node?');
+  }
+}
