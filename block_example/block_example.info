@@ -1,5 +1,6 @@
 ; $Id$
+
 name = Block example
-description = An example outlining how a module can define blocks.
-package = Example modules
+description = Demonstrates how to define blocks.
 core = 6.x
+package = Example modules

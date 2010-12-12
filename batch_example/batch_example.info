@@ -1,5 +1,6 @@
 ; $Id$
+
 name = Batch example
-description = An example outlining how a module can define batch operations.
-package = Example modules
+description = Demonstrates how to define batch operations.
 core = 6.x
+package = Example modules

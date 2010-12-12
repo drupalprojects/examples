@@ -1,8 +1,6 @@
 ; $Id$
+
 name = Form example
-description = Examples of using the Drupal Form API.
-package = Example modules
+description = Demonstrates how to use Drupal's form API.
 core = 6.x
-files[] = form_example.module
-files[] = form_example.install
-files[] = form_example.test
+package = Example modules

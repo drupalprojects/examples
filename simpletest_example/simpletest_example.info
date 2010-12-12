@@ -1,7 +1,6 @@
 ; $Id$
-name = SimpleTest Example
-description = Used to demonstrate the SimpleTest test suite.
+
+name = SimpleTest example
+description = Demonstrates how to define SimpleTest tests.
 core = 6.x
 package = Example modules
-files[] = simpletest_example.module
-files[] = simpletest_example.test

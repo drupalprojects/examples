@@ -1,5 +1,6 @@
 ; $Id$
-name = E-mail Example
-description = Demonstrate Drupal's e-mail APIs.
-package = Example modules
+
+name = E-mail example
+description = Demonstrates how to use Drupal's e-mail API.
 core = 6.x
+package = Example modules

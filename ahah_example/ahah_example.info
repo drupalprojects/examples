@@ -1,5 +1,6 @@
 ; $Id$
-name = AHAH Example
-description = Demonstrate Drupal AHAH forms
-package = Example modules
+
+name = AHAH example
+description = Demonstrates how to define AHAH forms.
 core = 6.x
+package = Example modules

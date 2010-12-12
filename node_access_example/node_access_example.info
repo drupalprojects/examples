@@ -1,5 +1,6 @@
 ; $Id$
+
 name = Node access example
-description = An example illustrating how to restrict access to nodes based on some criterion associated with the user.
-package = Example modules
+description = Demonstrates how to restrict access to nodes.
 core = 6.x
+package = Example modules

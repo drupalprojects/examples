@@ -1,5 +1,6 @@
 ; $Id$
+
 name = Menu example
-description = An example of advanced uses of the menu APIs.
-package = Example modules
+description = Demonstrates how to use Drupal's menu API.
 core = 6.x
+package = Example modules

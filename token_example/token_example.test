@@ -24,9 +24,7 @@ class TokenExampleTestCase extends DrupalWebTestCase {
     $this->drupalLogin($this->web_user);
   }
 
-  /* This is currently disabled because PIFR can't handle it. */
-  /* rfay 2010-10-31 */
-  function TEMP_DO_NOT_RUN_testInterface() {
+  function testInterface() {
     $this->drupalGet('examples/token');
     $this->assertNoFieldByName('node');
     $this->assertNoFieldByName('user');

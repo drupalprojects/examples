@@ -1,6 +1,6 @@
 ; $Id$
-name = Vertical tabs example
-description = Show how to use vertical tabs for enhancing user experience.
+name = Vertical Tabs example
+description = Demonstrates how to integrate Vertical Tabs.
 core = 6.x
 package = Example modules
 dependencies[] = vertical_tabs
