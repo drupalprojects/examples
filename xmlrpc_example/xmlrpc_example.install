@@ -1,0 +1,23 @@
+<?php
+// $Id$
+
+/**
+ * @file
+ * Install, update and uninstall functions for the xmlrpc_example module.
+ */
+
+/**
+ * Implementation of hook_uninstall().
+ *
+ * Removes all the variables created by this module.
+ */
+function xmlrpc_example_uninstall() {
+  $variables = array(
+    'xmlrpc_example_server_min',
+    'xmlrpc_example_server_max',
+    'xmlrpc_example_alter_enabled',
+  );
+  foreach ($variables as $variable) {
+    variable_del($variable);
+  }
+}
