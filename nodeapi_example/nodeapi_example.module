@@ -39,6 +39,10 @@ function nodeapi_example_form_alter(&$form, $form_state, $form_id) {
     // into the form.
     $node = $form['#node'];
     if (variable_get('nodeapi_example_'. $form['type']['#value'], 0)) {
+    // Note that $form['nodeapi_example_rating'] will become
+    // $node->nodeapi_example_rating in hook_nodeapi validate op
+    // This also means that if there is a fieldgroup defined,
+    // $form['group']['field'], that it will become $node->field.
       $form['nodeapi_example_rating'] = array(
         '#type' => 'select',
         '#title' => t('Rating'),
