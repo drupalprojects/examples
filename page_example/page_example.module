@@ -50,33 +50,34 @@ function page_example_perm() {
  *
  * With the below menu definitions, URLs will be interpreted as follows:
  *
- * If the user accesses http://example.com/?q=example/foo, then the menu system
- * will first look for a menu item with that path. In this case it will
- * find a match, and execute page_example_foo().
+ * If the user accesses http://example.com/?q=examples/page_example, then the
+ * menu system will look for a menu item with that path. In this case it will
+ * find a match, and execute page_example_description().
  *
- * If the user accesses http://example.com/?q=example, no match will be found,
- * and a 404 page will be displayed. They same will happen for the urls:
- *  - http://example.com/?q=example/baz
- *  - http://example.com/?q=example/baz/1
+ * If the user accesses http://example.com/?q=examples/page_example/simple but
+ * does not have the required 'access simple page' permission, access will be
+ * denied.
  *
- * If the user accesses http://example.com/?q=example/baz, the menu system
- * will not find a match, as the menu entries are registered with the form:
- * a/b/c/d. All the elements included in the menu entry definition should be
- * present for the menu system to match the request.
+ * If http://example.com/?q=examples/page_example/arguments/1/2 is accessed,
+ * the menu system will first look for examples/page_example/arguments/1/2. Not
+ * finding a match, it will look for examples/page_example/arguments/1/%. Again
+ * not finding a match, it will look for examples/page_example/arguments/%/2.
+ * Yet again not finding a match, it will look for example/arguments/%/%. This
+ * time it finds a match, and so will execute page_example_arguments(1, 2). Note
+ * the parameters being passed; this is a very useful technique.
  *
- * If the user accesses http://example.com/?q=example/baz/1/2, the menu system
- * will first look for example/baz/1/2. Not finding a match, it will look for
- * example/baz/1/%. Again not finding a match, it will look for example/baz/%/2. Yet
- * again not finding a match, it will look for example/baz/%/%. This time it finds
- * a match, and so will execute page_example_baz(1, 2). Note the parameters
- * being passed; this is a very useful technique.
+ * If http://example.com/?q=examples/page_example/arguments/1 is accessed, the
+ * menu system will match 'examples/page_example', and not
+ * 'examples/page_example/arguments/%/%'. The menu entries for the latter
+ * require 5 arguments. All the elements included in the menu entry definition
+ * should be present for the menu system to match the request.
  *
- * The @link menu_example.module Menu Example @endlink provides extensive
+ * The @link menu_example.module Menu Example @endlink provides more extensive
  * examples for hook_menu().
  */
 function page_example_menu() {
   // This is the minimum information you can provide for a menu item. This menu
-  // item will be created in the default menu.
+  // item will be created in the default menu (Navigation).
   $items['examples/page_example'] = array(
     'title' => 'Page Example',
     'page callback' => 'page_example_description',
@@ -84,6 +85,10 @@ function page_example_menu() {
     'expanded' => TRUE,
   );
 
+  // This example checks if the user has permission to access the page. Users
+  // that do not have the 'access simple page' permission will be denied. An
+  // array containing the required permissions is given in 'access arguments'
+  // and here we use the default 'access callback', which is 'user_access'.
   $items['examples/page_example/simple'] = array(
     'title' => 'Simple - no arguments',
     'page callback' => 'page_example_simple',
@@ -91,14 +96,16 @@ function page_example_menu() {
   );
 
   // By using the MENU_CALLBACK type, we can register the callback for this
-  // path but do not have the item show up in the menu; the admin is not allowed
-  // to enable the item in the menu, either.
+  // path but not have the item show up in the menu.
   //
   // Notice that the 'page arguments' is an array of numbers. These will be
   // replaced with the corresponding parts of the menu path. In this case a 0
-  // would be replaced by 'example', a 1 by 'baz', and like wise 2 and 3 will
-  // be replaced by what ever the user provides. These will be passed as
-  // arguments to the page_example_baz() function.
+  // would be replaced by 'examples', a 1 by 'page_example', a 2 by 'arguments'
+  // and likewise 3 and 4 will be replaced by whatever the user provides. We
+  // will pass these last two as arguments to the page_example_arguments()
+  // function.
+  //
+  // Only users with the 'access arguments page' permission have access.
   $items['examples/page_example/arguments/%/%'] = array(
     'title' => 'Page example with arguments',
     'page callback' => 'page_example_arguments',
