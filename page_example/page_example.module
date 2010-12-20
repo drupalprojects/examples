@@ -8,23 +8,6 @@
  */
 
 /**
- * Implementation of hook_help().
- *
- * Throughout Drupal, hook_help() is used to display help text at the top of
- * pages. Some other parts of Drupal pages get explanatory text from these hooks
- * as well. We use it here to illustrate how to add help text to the pages your
- * module defines.
- */
-function page_example_help($path, $arg) {
-  switch ($path) {
-    case 'examples/help#simple':
-      // Here is some help text for a custom page. This information will be
-      // introduced in the page when viewing example/foo URL.
-      return t('This sentence contains all the letters in the English alphabet.');
-  }
-}
-
-/**
  * Implementation of hook_perm().
  *
  * Since the access to our new custom pages will be granted based on
