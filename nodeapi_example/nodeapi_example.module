@@ -82,7 +82,8 @@ function nodeapi_example_nodeapi(&$node, $op, $teaser, $page) {
     // Now we need to take care of loading one of the extended nodes from the
     // database. An array containing our extra field needs to be returned.
     case 'load':
-      $rating = db_result(db_query('SELECT rating FROM {nodeapi_example} WHERE nid = %d', $node->nid));
+      // we match against vid in order to keep up with the current revision
+      $rating = db_result(db_query('SELECT rating FROM {nodeapi_example} WHERE vid = %d', $node->vid));
       return array('nodeapi_example_rating' => $rating);
       break;
 
@@ -90,7 +91,7 @@ function nodeapi_example_nodeapi(&$node, $op, $teaser, $page) {
     // database. It gives us a chance to create our own record in the database.
     case 'insert':
       if (variable_get('nodeapi_example_'. $node->type, 0)) {
-        db_query('INSERT INTO {nodeapi_example} (nid, rating) VALUES (%d, %d)', $node->nid, $node->nodeapi_example_rating);
+        db_query('INSERT INTO {nodeapi_example} (nid, vid, rating) VALUES (%d, %d, %d)', $node->nid, $node->vid, $node->nodeapi_example_rating);
       }
       break;
 
@@ -100,15 +101,24 @@ function nodeapi_example_nodeapi(&$node, $op, $teaser, $page) {
     // saved so there would be nothing to update.
     case 'update':
       if (variable_get('nodeapi_example_'. $node->type, 0)) {
-        db_query('DELETE FROM {nodeapi_example} WHERE nid = %d', $node->nid);
-        db_query('INSERT INTO {nodeapi_example} (nid, rating) VALUES (%d, %d)', $node->nid, $node->nodeapi_example_rating);
+        db_query('DELETE FROM {nodeapi_example} WHERE vid = %d', $node->vid);
+        db_query('INSERT INTO {nodeapi_example} (nid, vid, rating) VALUES (%d, %d, %d)', $node->nid, $node->vid, $node->nodeapi_example_rating);
       }
       break;
 
-    // Delete is called whn the node is being deleted, it gives us a chance
+    // Delete is called when the node is being deleted, it gives us a chance
     // to delete the rating too.
+    // This will delete all revisions as well.
     case 'delete':
       db_query('DELETE FROM {nodeapi_example} WHERE nid = %d', $node->nid);
+      break;
+
+    // When a node revision is deleted, we need to remove the corresponding
+    // record from our table. The only way to handle revision deletion is by
+    // implementing hook_nodeapi().
+    case 'delete revision':
+      // Notice that we're matching a single revision based on the node's vid.
+      db_query('DELETE FROM {nodeapi_example} WHERE vid = %d', $node->vid);
       break;
 
     // Finally, we need to take care of displaying our rating when the node is

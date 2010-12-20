@@ -25,13 +25,36 @@ function nodeapi_example_uninstall() {
  */
 function nodeapi_example_schema() {
   $schema['nodeapi_example'] = array(
-    'fields' => array(
-      'nid'    => array('type' => 'int', 'unsigned' => TRUE, 'not null' => TRUE, 'default' => 0),
-      'rating' => array('type' => 'int', 'unsigned' => TRUE, 'not null' => TRUE, 'default' => 0),
+  'fields' => array(
+      'id' => array(
+      'type' => 'serial',
+      'not null' => TRUE,
+      'description' => t('Primary Key: Unique ID.'),
     ),
-    'primary key' => array('nid'),
+    'nid' => array(
+      'type' => 'int',
+      'unsigned' => TRUE,
+      'not null' => TRUE,
+      'default' => 0,
+      'description' => t('node id for the rating'),
+    ),
+    'vid' => array(
+      'type' => 'int',
+      'unsigned' => TRUE,
+      'not null' => TRUE,
+      'default' => 0,
+      'description' => t('version id for rating'),
+    ),
+    'rating' => array(
+      'type' => 'int',
+      'unsigned' => TRUE,
+      'not null' => TRUE,
+      'default' => 0,
+      'description' => t('rating for this node'),
+    ),
+  ),
+  'primary key' => array('id'),
   );
-
   return $schema;
 }
 
