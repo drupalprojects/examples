@@ -8,6 +8,19 @@
  */
 
 /**
+ * @defgroup menu_example Example: Menu API
+ * @ingroup examples
+ * @{
+ * Examples using Menu API. (drupal 6)
+ *
+ * Demonstrates uses of the Menu APIs in Drupal, including hook_menu(),
+ * hook_menu_alter(), and hook_menu_link_alter().
+ *
+ * This example is part of the Examples for Developers Project which you can download
+ * and experiment with here: http://drupal.org/project/examples
+ */
+
+/**
  * Implementatation of hook_menu().
  */
 function menu_example_menu() {
@@ -459,3 +472,7 @@ function menu_example_arg_optional_to_arg($arg) {
   // If our argument is not provided, give a default of 99.
   return (empty($arg) || $arg == '%') ? 99 : $arg;
 }
+
+/**
+ * @} End of "defgroup menu_example".
+ */

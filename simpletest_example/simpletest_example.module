@@ -10,6 +10,21 @@
  */
 
 /**
+ * @defgroup simpletest_example Example: Simpletest
+ * @ingroup examples
+ * @{
+ * Creating tests. (drupal 6)
+ *
+ * This example accompanies the tutorial at
+ * http://drupal.org/node/395012.
+ *
+ * This is built on a traditional node-type implementation.
+ *
+ * This example is part of the Examples for Developers Project which you can download
+ * and experiment with here: http://drupal.org/project/examples
+ */
+
+/**
  * Implementation of hook_node_info().
  */
 function simpletest_example_node_info() {
@@ -97,3 +112,6 @@ function _simpletest_example_explanation() {
   return $explanation;
 }
 
+/**
+ * @} End of "defgroup simpletest_example".
+ */

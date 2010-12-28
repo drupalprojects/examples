@@ -26,6 +26,37 @@
  */
 
 /**
+ * @defgroup node_access_example Example: Node Access
+ * @ingroup examples
+ * @{
+ * Examples of node access restriction. (drupal 6)
+ *
+ * This is an example illustrating how to restrict access to nodes based on
+ * some criterion associated with the user.
+ *
+ * This example module will simply set a single flag on a node: 'private'. If
+ * the flag is set, only users with the 'view private content' flag can see
+ * the node, and all users with 'edit private content' can edit (but not
+ * delete) the node.
+ *
+ * Additionally we will ensure that the node author can always view, edit,
+ * and delete the node by providing an additional access realm that grants
+ * privileges to the node's author.
+ *
+ * Database definition:
+ * @code
+ *   CREATE TABLE node_access_example (
+ *     nid int(10) unsigned NOT NULL default '0' PRIMARY KEY,
+ *     private int,
+ *     KEY `node_example_nid` (nid)
+ *   )
+ * @endcode
+ *
+ * This example is part of the Examples for Developers Project which you can download
+ * and experiment with here: http://drupal.org/project/examples
+ */
+
+/**
  * Implementation of hook_perm().
  *
  * In this example, we will use a simple permission to determine whether a user
@@ -137,3 +168,7 @@ function node_access_example_nodeapi(&$node, $op, $arg = 0) {
       break;
   }
 }
+
+/**
+ * @} End of "defgroup node_access_example".
+ */

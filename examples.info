@@ -1,0 +1,5 @@
+; $Id$
+name = Examples For Developers
+description = A variety of example code for you to learn from and hack upon.
+package = Example modules
+core = 6.x

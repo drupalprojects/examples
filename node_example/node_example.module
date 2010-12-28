@@ -16,6 +16,27 @@
  */
 
 /**
+ * @defgroup node_example Example: Node
+ * @ingroup examples
+ * @{
+ * Creating a new content type in a module. (drupal 6)
+ *
+ * This is an example outlining how a module can be used to define a new
+ * node type.
+ *
+ * (Note that custom node types are most often created with CCK in recent
+ * versions of Drupal.)
+ *
+ * Our example node type will allow users to specify a "color" and a "quantity"
+ * for their nodes; some kind of rudimentary inventory-tracking system, perhaps?
+ * To store this extra information, we need an auxiliary database table as
+ * defined in node_example_schema().
+ *
+ * This example is part of the Examples for Developers Project which you can download
+ * and experiment with here: http://drupal.org/project/examples
+ */
+
+/**
  * Implementation of hook_menu().
  */
 function node_example_menu() {
@@ -289,3 +310,7 @@ function theme_node_example_order_info($node) {
   $output .= '</div>';
   return $output;
 }
+
+/**
+ * @} End of "defgroup node_example".
+ */

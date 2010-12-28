@@ -11,6 +11,19 @@
  */
 
 /**
+ * @defgroup nodeapi_example Example: NodeAPI
+ * @ingroup examples
+ * @{
+ * Modifying a node during its life-cycle. (drupal 6)
+ *
+ * This example demostrates 'piggy-backing' some data on the
+ * node in another database table.
+ *
+ * This example is part of the Examples for Developers Project which you can download
+ * and experiment with here: http://drupal.org/project/examples
+ */
+
+/**
  * Implementation of hook_form_alter().
  *
  * By implementing this hook, we're able to modify any form. We'll only make
@@ -18,7 +31,7 @@
  *
  * We need to have a way for administrators to indicate which content types
  * should have our rating field added. This is done by inserting a checkbox in
- * the node's content type configuration page.
+ * the node's content type configuration page, in the 'Workflow' group.
  */
 function nodeapi_example_form_alter(&$form, $form_state, $form_id) {
   if ($form_id == 'node_type_form' && isset($form['identity']['type'])) {
@@ -176,3 +189,7 @@ function theme_nodeapi_example_rating($rating) {
   return $output;
 }
 
+/**
+ * @} End of "defgroup nodeapi_example".
+ */
+ 

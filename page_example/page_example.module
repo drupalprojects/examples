@@ -8,6 +8,19 @@
  */
 
 /**
+ * @defgroup page_example Example: Page
+ * @ingroup examples
+ * @{
+ * Create a page in a module. (drupal 6)
+ *
+ * This example demonstrates how a module can be used to display a
+ * custom page at a given URL.
+ *
+ * This example is part of the Examples for Developers Project which you can download
+ * and experiment with here: http://drupal.org/project/examples
+ */
+
+/**
  * Implementation of hook_perm().
  *
  * Since the access to our new custom pages will be granted based on
@@ -141,3 +154,7 @@ function page_example_arguments($first, $second) {
 
   return theme('item_list', $list);
 }
+
+/**
+ * @} End of "defgroup page_example".
+ */

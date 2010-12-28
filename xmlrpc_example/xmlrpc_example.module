@@ -2,7 +2,29 @@
 // $Id$
 /**
  * @file
- * This is an example of how to implement and XML-RPC server by registering
+ * This is an example of how to implement an XML-RPC server by registering
+ * callbacks to specific methods and how to make xmlrpc calls using the builtin
+ * xmlrpc() factory provided by Drupal.
+ *
+ * For experimentation you may be interested in the
+ * @link http://drupal.org/project/xmlrpctester XMLRPC Tester module @endlink.
+ *
+ * Note that the @link http://drupal.org/project/services Services module @endlink
+ * is probably the more common way to do XMLRPC at this time.
+ *
+ * @see hook_xmlrpc()
+ * @see xmlrpc()
+ * @see xmlrpc_errno()
+ * @see xmlrpc_error_msg()
+ */
+
+/**
+ * @defgroup xmlrpc_example Example: XML-RPC
+ * @ingroup examples
+ * @{
+ * XML-RPC client/server. (drupal 6)
+ *
+ * This is an example of how to implement an XML-RPC server by registering
  * callbacks to specific methods and how to make xmlrpc calls using the builtin
  * xmlrpc() factory provided by Drupal.
  *
@@ -289,3 +311,7 @@ function xmlrpc_example_client_subtract_submit($form, &$form_state) {
 }
 
 // End of client part of the module.
+
+/**
+ * @} End of "defgroup xmlrpc_example".
+ */

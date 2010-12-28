@@ -8,8 +8,20 @@
  * The Token module provides an API for providing tokens to other modules.
  * Tokens are small bits of text that can be placed into larger documents
  * via simple placeholders, like %site-name or [user].
+ */
+
+/**
+ * @defgroup token_example Example: Token API
+ * @ingroup examples
+ * @{
+ * Examples using the Token API. (drupal 6)
  *
- * @ingroup token
+ * The Token module provides an API for providing tokens to other modules.
+ * Tokens are small bits of text that can be placed into larger documents
+ * via simple placeholders, like %site-name or [user].
+ *
+ * This example is part of the Examples for Developers Project which you can download
+ * and experiment with here: http://drupal.org/project/examples
  */
 
 /**
@@ -200,3 +212,7 @@ function _token_example_get_user() {
   $accounts = array_map('check_plain', $accounts);
   return $accounts;
 }
+
+/**
+ * @} End of "defgroup token_example".
+ */

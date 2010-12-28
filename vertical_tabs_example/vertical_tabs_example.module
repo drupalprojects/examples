@@ -9,6 +9,20 @@
  */
 
 /**
+ * @defgroup vertical_tabs_example Example: Vertical Tabs
+ * @ingroup examples
+ * @{
+ * Using vertical_tabs module. (drupal 6)
+ *
+ * Shows how to integrate your custom node options with vertical tabs module in
+ * Drupal 6. This example does not cover how to save / load custom setting, and
+ * only deals with elements visibility.
+ *
+ * This example is part of the Examples for Developers Project which you can download
+ * and experiment with here: http://drupal.org/project/examples
+ */
+
+/**
  * Implements hook_menu for a simple explanation page.
  */
 function vertical_tabs_example_menu() {
@@ -85,3 +99,7 @@ function vertical_tabs_example_form_alter(&$form, $form_state, $form_id) {
 function _vertical_tabs_example_explanation() {
   return t("The Vertical Tabs Example shows how a custom module can best support vertical tabs. To see the effects of this module, look at the <a href='!node_add'>node/add</a> form", array('!node_add' => url('node/add')));
 }
+
+/**
+ * @} End of "defgroup vertical_tabs_example".
+ */

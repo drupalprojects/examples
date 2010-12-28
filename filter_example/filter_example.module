@@ -13,6 +13,21 @@
  */
 
 /**
+ * @defgroup filter_example Example: Filter
+ * @ingroup examples
+ * @{
+ * Defining a filter in a module. (drupal 6)
+ *
+ * To show all the capabilities of the filter system, we will define two filters
+ * in this module. One will substitute the string "foo" with an administratively-
+ * defined replacement string. The other will find a custom XML tag, <time />, and
+ * replace it by the current time.
+ *
+ * This example is part of the Examples for Developers Project which you can download
+ * and experiment with here: http://drupal.org/project/examples
+ */
+
+/**
  * Implementation of hook_filter_tips().
  *
  * This hook allows filters to provide help text to users during the content
@@ -142,3 +157,7 @@ function filter_example_filter($op, $delta = 0, $format = -1, $text = '') {
       break;
   }
 }
+
+/**
+ * @} End of "defgroup filter_example".
+ */

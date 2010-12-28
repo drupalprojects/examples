@@ -8,6 +8,16 @@
  *
 */
 
+/**
+ * @defgroup ahah_example Example: AHAH
+ * @ingroup examples
+ * @{
+ * AHAH examples. (drupal 6)
+ *
+ * This example is part of the Examples for Developers Project which you can download
+ * and experiment with here: http://drupal.org/project/examples
+ */
+
 $path = drupal_get_path('module','ahah_example');
 
 /**
@@ -136,3 +146,7 @@ function ahah_example_callback_helper() {
 function ahah_example_init() {
   drupal_add_css(drupal_get_path('module', 'ahah_example') . '/ahah_example.css');
 }
+
+/**
+ * @} End of "defgroup ahah_example".
+ */

@@ -2,6 +2,16 @@
 // $Id$
 
 /**
+ * @defgroup trigger_example Example: Trigger
+ * @ingroup examples
+ * @{
+ * Examples of module-defined triggers. (drupal 6)
+ *
+ * This example is part of the Examples for Developers Project which you can download
+ * and experiment with here: http://drupal.org/project/examples
+ */
+
+/**
  * Implementation of hook_help().
  */
 function trigger_example_help($path, $arg) {
@@ -152,3 +162,7 @@ function trigger_example_form_submit($form, &$form_state) {
     trigger_example_pong();
   }
 }
+
+/**
+ * @} End of "defgroup trigger_example".
+ */

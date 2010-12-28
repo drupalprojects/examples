@@ -12,19 +12,27 @@
  */
 
 /**
+ * @defgroup batch_example Example: Batch API
+ * @ingroup examples
+ * @{
+ * Examples using batch API. (drupal 6)
+ *
  * 2 'harmless' batches are defined :
  * batch 1 : Load 100 times the node with the lowest nid
  * batch 2 : Load all nodes, 20 times
  *           (uses a progressive op : load nodes by groups of 5)
  *
  * The module defines the following pages :
- * /batch_example/example_1 :
+ * - /batch_example/example_1 :
  *   Simple form, lets you pick the batch that should be executed
- * /batch_example/example_2 :
+ * - /batch_example/example_2 :
  *   Multistep form : perform batch 1 and batch 2 as separate submission steps.
- * /batch_example/example_3
+ * - /batch_example/example_3 :
  *   No form - start a batch simply by clicking a link
  *   (not really user friendly, should probably be avoided)
+ *
+ * This example is part of the Examples for Developers Project which you can download
+ * and experiment with here: http://drupal.org/project/examples
  */
 
 /**
@@ -143,12 +151,6 @@ function batch_example_page() {
 }
 
 /**
- * @defgroup batch_definitions Example batch definitions
- * @{
- * Definitions of the batches used in this module.
- */
-
-/**
  * Batch 1 : Load 100 times the node with the lowest nid
  */
 function batch_example_batch_1() {
@@ -258,5 +260,5 @@ function batch_example_finished($success, $results, $operations) {
 }
 
 /**
- * @} End of "defgroup batch_definitions".
+ * @} End of "defgroup batch_example".
  */
