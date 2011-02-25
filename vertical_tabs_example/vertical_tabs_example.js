@@ -1,4 +1,3 @@
-// $Id$
 
 // The following line will prevent a JavaScript error if this file is included
 // and vertical tabs are disabled.

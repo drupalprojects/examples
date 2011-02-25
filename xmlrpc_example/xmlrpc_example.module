@@ -1,5 +1,4 @@
 <?php
-// $Id$
 /**
  * @file
  * This is an example of how to implement an XML-RPC server by registering

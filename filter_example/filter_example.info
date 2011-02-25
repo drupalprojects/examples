@@ -1,4 +1,3 @@
-; $Id$
 
 name = Filter example
 description = Demonstrates how to define filters.

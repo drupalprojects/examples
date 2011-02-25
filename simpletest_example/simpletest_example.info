@@ -1,4 +1,3 @@
-; $Id$
 
 name = SimpleTest example
 description = Demonstrates how to define SimpleTest tests.

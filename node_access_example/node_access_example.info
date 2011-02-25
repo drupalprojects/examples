@@ -1,4 +1,3 @@
-; $Id$
 
 name = Node access example
 description = Demonstrates how to restrict access to nodes.

@@ -1,4 +1,3 @@
-; $Id$
 
 name = NodeAPI example
 description = Demonstrates how to alterate existing content types.

@@ -1,4 +1,3 @@
-; $Id$
 
 name = XMLRPC example
 description = Demonstrates how to implement XML-RPC callbacks.

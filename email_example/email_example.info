@@ -1,4 +1,3 @@
-; $Id$
 
 name = E-mail example
 description = Demonstrates how to use Drupal's e-mail API.

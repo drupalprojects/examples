@@ -1,4 +1,3 @@
-# $Id$
 
 AHAH example provides three simple examples of AHAH in Drupal 6.
 

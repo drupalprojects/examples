@@ -1,4 +1,3 @@
-; $Id$
 name = Vertical Tabs example
 description = Demonstrates how to integrate Vertical Tabs.
 core = 6.x
