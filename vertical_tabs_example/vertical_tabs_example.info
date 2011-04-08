@@ -1,4 +1,0 @@
-name = Vertical tabs example
-description = Show how to use vertical tabs for enhancing user experience.
-core = 7.x
-package = Example modules

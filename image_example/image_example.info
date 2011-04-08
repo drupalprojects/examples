@@ -1,8 +1,0 @@
-
-name = Image Example
-description = Example implementation of image.module hooks.
-package = Example modules
-core = 7.x
-core = 7.x
-dependencies[] = image
-files[] = image_example.test

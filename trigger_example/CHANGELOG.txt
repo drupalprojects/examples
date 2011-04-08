@@ -1,2 +1,0 @@
-
-#618578 by ilo, rfay: D7 trigger example module
