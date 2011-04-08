@@ -263,7 +263,7 @@ function form_example_tutorial_6(&$form_state) {
 function form_example_tutorial_6_validate($form, &$form_state) {
   $year_of_birth = $form_state['values']['year_of_birth'];
   if ($year_of_birth && ($year_of_birth < 1900 || $year_of_birth > 2000)) {
-    form_set_error('year_of_birth', 'Enter a year between 1900 and 2000.');
+    form_set_error('year_of_birth', t('Enter a year between 1900 and 2000.'));
   }
 }
 
@@ -322,7 +322,7 @@ function form_example_tutorial_7($form_state) {
 function form_example_tutorial_7_validate($form, &$form_state) {
     $year_of_birth = $form_state['values']['year_of_birth'];
     if ($year_of_birth && ($year_of_birth < 1900 || $year_of_birth > 2000)) {
-        form_set_error('year_of_birth', 'Enter a year between 1900 and 2000.');
+        form_set_error('year_of_birth', t('Enter a year between 1900 and 2000.'));
     }
 }
 
@@ -422,13 +422,13 @@ function form_example_tutorial_8_validate($form, &$form_state) {
     $first_name = $form_state['values']['first'];
     $last_name = $form_state['values']['last'];
     if (!$first_name) {
-        form_set_error('first', 'Please enter your first name.');
+        form_set_error('first', t('Please enter your first name.'));
     }
     if (!$last_name) {
-        form_set_error('last', 'Please enter your last name.');
+        form_set_error('last', t('Please enter your last name.'));
     }
     if ($year_of_birth && ($year_of_birth < 1900 || $year_of_birth > 2000)) {
-        form_set_error('year_of_birth', 'Enter a year between 1900 and 2000.');
+        form_set_error('year_of_birth', t('Enter a year between 1900 and 2000.'));
     }
 }
 
@@ -572,26 +572,26 @@ function form_example_tutorial_9_validate($form, &$form_state) {
   $first_name = $form_state['values']['first'];
   $last_name = $form_state['values']['last'];
   if (!$first_name) {
-    form_set_error('first', 'Please enter your first name.');
+    form_set_error('first', t('Please enter your first name.'));
   }
   if (!$last_name) {
-    form_set_error('last', 'Please enter your last name.');
+    form_set_error('last', t('Please enter your last name.'));
   }
   if ($year_of_birth && ($year_of_birth < 1900 || $year_of_birth > 2000)) {
-    form_set_error('year_of_birth', 'Enter a year between 1900 and 2000.');
+    form_set_error('year_of_birth', t('Enter a year between 1900 and 2000.'));
   }
   if ($form_state['storage']['new_name']) {
     $year_of_birth = $form_state['values']['year_of_birth2'];
     $first_name = $form_state['values']['first2'];
     $last_name = $form_state['values']['last2'];
     if (!$first_name) {
-      form_set_error('first2', 'Please enter your first name.');
+      form_set_error('first2', t('Please enter your first name.'));
     }
     if (!$last_name) {
-      form_set_error('last2', 'Please enter your last name.');
+      form_set_error('last2', t('Please enter your last name.'));
     }
     if ($year_of_birth && ($year_of_birth < 1900 || $year_of_birth > 2000)) {
-      form_set_error('year_of_birth2', 'Enter a year between 1900 and 2000.');
+      form_set_error('year_of_birth2', t('Enter a year between 1900 and 2000.'));
     }
   }
 }
@@ -755,7 +755,7 @@ function form_example_tutorial_10_validate($form, &$form_state) {
   if (isset($form_state['storage']['page_two'])) {
     $color = $form_state['values']['color'];
     if (!$color) {
-      form_set_error('color', 'Please enter a color.');
+      form_set_error('color', t('Please enter a color.'));
     }
     return;
   }
@@ -764,26 +764,26 @@ function form_example_tutorial_10_validate($form, &$form_state) {
   $first_name = $form_state['values']['first'];
   $last_name = $form_state['values']['last'];
   if (!$first_name) {
-    form_set_error('first', 'Please enter your first name.');
+    form_set_error('first', t('Please enter your first name.'));
   }
   if (!$last_name) {
-    form_set_error('last', 'Please enter your last name.');
+    form_set_error('last', t('Please enter your last name.'));
   }
   if ($year_of_birth && ($year_of_birth < 1900 || $year_of_birth > 2000)) {
-    form_set_error('year_of_birth', 'Enter a year between 1900 and 2000.');
+    form_set_error('year_of_birth', t('Enter a year between 1900 and 2000.'));
   }
   if ($form_state['storage']['new_name']) {
     $year_of_birth = $form_state['values']['year_of_birth2'];
     $first_name = $form_state['values']['first2'];
     $last_name = $form_state['values']['last2'];
     if (!$first_name) {
-      form_set_error('first2', 'Please enter your first name.');
+      form_set_error('first2', t('Please enter your first name.'));
     }
     if (!$last_name) {
-      form_set_error('last2', 'Please enter your last name.');
+      form_set_error('last2', t('Please enter your last name.'));
     }
     if ($year_of_birth && ($year_of_birth < 1900 || $year_of_birth > 2000)) {
-      form_set_error('year_of_birth2', 'Enter a year between 1900 and 2000.');
+      form_set_error('year_of_birth2', t('Enter a year between 1900 and 2000.'));
     }
   }
 }
@@ -880,7 +880,7 @@ function form_example_tutorial_11_validate($form, &$form_state) {
     'file_validate_extensions' => array('png gif jpg jpeg'),
     'file_validate_is_image' => array(),
   ));
-  
+
   // If the file passed validation:
   if (isset($file->filename)) {
     // Move the file, into the Drupal file system
