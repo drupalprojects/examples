@@ -46,6 +46,6 @@ function ahah_example_simplest_callback() {
   $color = $colors[array_rand($colors)];
   $output = '<div style="background-color:' . $color .
     '; width: 150px; height: 150px; border: 1px solid black;">This is ' . $color . ' box</div>';
-  print drupal_json(array('status' => TRUE, 'data' => $output));
+  drupal_json(array('status' => TRUE, 'data' => $output));
   exit();
 }

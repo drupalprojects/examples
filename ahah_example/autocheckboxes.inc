@@ -79,6 +79,6 @@ function ahah_example_autocheckboxes_callback() {
   $output .= drupal_render($checkboxes);
 
   // Final rendering callback.
-  print drupal_json(array('status' => TRUE, 'data' => $output));
+  drupal_json(array('status' => TRUE, 'data' => $output));
   exit();
 }

@@ -91,6 +91,6 @@ function ahah_example_autotextfields_callback() {
   $output .= drupal_render($textfields);
 
   // Final rendering callback.
-  print drupal_json(array('status' => TRUE, 'data' => $output));
+  drupal_json(array('status' => TRUE, 'data' => $output));
   exit();
 }

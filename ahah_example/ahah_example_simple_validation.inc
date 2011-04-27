@@ -80,6 +80,6 @@ function ahah_example_simple_validation_callback() {
   $output .= theme('status_messages');
 
   // Output the results and exit.
-  print drupal_json(array('status' => TRUE, 'data' => $output));
+  drupal_json(array('status' => TRUE, 'data' => $output));
   exit();
 }
