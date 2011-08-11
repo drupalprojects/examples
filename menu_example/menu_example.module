@@ -43,7 +43,7 @@ function menu_example_menu() {
 
     // Arguments to the page callback. Here's we'll use them just to provide
     // content for our page.
-    'page arguments' => array(t('This page is displayed by the simplest (and base) menu example. Note that the title of the page is the same as the link title. You can also <a href="!link">visit a similar page with no menu link</a>', array('!link' => url('menu_example/path_only')))),
+    'page arguments' => array(t('This page is displayed by the simplest (and base) menu example. Note that the title of the page is the same as the link title. You can also <a href="!link">visit a similar page with no menu link</a>. Also, note that there is a hook_menu_alter() example that has changed the path of one of the menu items.', array('!link' => url('menu_example/path_only')))),
 
     // This is to be accessible to all users, so 'access callback' can be set
     // to TRUE, meaning that we should bypass all access checks.
@@ -271,6 +271,14 @@ function menu_example_menu() {
     'access callback' => TRUE,
     'weight' => 70,
   );
+
+  $items['menu_example/menu_original_path'] = array(
+    'title' => 'Menu path that will be altered by hook_menu_alter()',
+    'page callback' => '_menu_example_menu_page',
+    'page arguments' => array(t('This menu item was created strictly to allow the hook_menu_alter() function to have something to operate on. hook_menu defined the path as menu_example/menu_original_path. The hook_menu_alter() changes it to menu_example/menu_altered_path. You can try navigating to both paths and see what happens!')),
+    'access callback' => TRUE,
+    'weight' => 80,
+  );
   return $items;
 }
 
@@ -285,7 +293,7 @@ function _menu_example_basic_instructions($content = NULL) {
   'This is the base page of the Menu Example. There are a number of examples
   here, from the most basic (like this one) to extravagant mappings of loaded
   placeholder arguments. Enjoy!');
-  return '<div>' . $base_content . '</div><div>' . $content . '</div>';
+  return '<div>' . $base_content . '</div><br /><div>' . $content . '</div>';
 }
 
 /**
@@ -370,7 +378,7 @@ function menu_example_id_load($id) {
 /**
  * Implements hook_menu_alter().
  *
- * Changes the path 'logout' to the Spanish 'salir'.
+ * Changes the path 'menu_example/menu_original_path' to 'menu_example/menu_altered_path'.
  * Changes the title callback of the 'user/UID' menu item.
  *
  * Remember that hook_menu_alter() only runs at menu_rebuild() time, not every
@@ -381,10 +389,13 @@ function menu_example_id_load($id) {
  *   menu_router table.
  */
 function menu_example_menu_alter(&$items) {
-  // Change the path 'logout' to a Spanish 'salir''.
-  if (!empty($items['logout'])) {
-    $items['salir'] = $items['logout'];
-    unset($items['logout']);
+  // Change the path 'menu_example/menu_original_path' to 'menu_example/menu_altered_path'. This change will
+  // prevent the page from appearing at the original path (since the item is being unset).
+  // You will need to go to menu_example/menu_altered_path manually to see the page.
+  if (!empty($items['menu_example/menu_original_path'])) {
+    $items['menu_example/menu_altered_path'] = $items['menu_example/menu_original_path'];
+    $items['menu_example/menu_altered_path']['title'] = 'Menu item altered by hook_menu_alter()';
+    unset($items['menu_example/menu_original_path']);
   }
 
   // Here we will change the title callback to our own function, changing the
