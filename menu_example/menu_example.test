@@ -78,9 +78,8 @@ class MenuExampleTestCase extends DrupalWebTestCase {
     $this->assertResponse(200);
     $this->assertText('This menu entry will not show');
 
-    // Verify that the 'logout' link has been changed to 'salir'.
-    $this->drupalGet('salir');
-    $this->drupalGet('user');
-    $this->clickLink(t('Create new account'));
+    $this->drupalGet('menu_example/menu_altered_path');
+    $this->assertText('This menu item was created strictly to allow the hook_menu_alter()');
+
   }
 }
