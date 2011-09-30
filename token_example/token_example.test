@@ -36,7 +36,6 @@ class TokenExampleTestCase extends DrupalWebTestCase {
 
     $node = $this->drupalCreateNode(array('title' => 'Example node', 'status' => 1));
     $this->drupalGet('examples/token');
-    $this->assertFieldByName('node');
 
     $edit = array(
       'text' => 'Would you like to view the [type-name] [title]?',
