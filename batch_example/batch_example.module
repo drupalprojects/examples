@@ -235,7 +235,17 @@ function batch_example_op_2(&$context) {
 
   // Inform the batch engine that we are not finished,
   // and provide an estimation of the completion level we reached.
-  if ($context['sandbox']['progress'] != $context['sandbox']['max']) {
+  if ($context['sandbox']['progress'] >= $context['sandbox']['max']) {
+    // Because the batch engine cannot handle a finished result greater than
+    // one due to http://drupal.org/node/600836 we should always check if
+    // the current progress is equal or greater to the total number if items
+    // to process. For example, if a node is added while this batch process
+    // is running, the progress value will end up being one greater than the
+    // max value. This will cause an infinite loop. We prevent this from
+    // happening by always checking if progress is greater or equal to max.
+    $context['finished'] = 1;
+  }
+  else {
     $context['finished'] = $context['sandbox']['progress'] / $context['sandbox']['max'];
   }
 }
