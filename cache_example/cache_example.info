@@ -1,6 +1,0 @@
-name = Cache Example
-description = An example outlining how to use Cache API.
-package = Example modules
-core = 7.x
-
-files[] = cache_example.test

@@ -1,5 +1,0 @@
-name = Cron example
-description = Demonstrates hook_cron() and related features
-package = Example modules
-core = 7.x
-files[] = cron_example.test

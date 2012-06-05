@@ -1,5 +1,0 @@
-name = AJAX Example
-description = An example module showing how to use Drupal AJAX forms
-package = Example modules
-core = 7.x
-files[] = ajax_example.test

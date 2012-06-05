@@ -1,6 +1,0 @@
-name = Simpletest Example
-description = Provides simpletest_example page node type.
-package = Example modules
-core = 7.x
-dependencies[] = simpletest
-files[] = simpletest_example.test

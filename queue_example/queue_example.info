@@ -1,5 +1,0 @@
-name = Queue example
-description = Examples of using the Drupal Queue API.
-package = Example modules
-core = 7.x
-files[] = queue_example.test

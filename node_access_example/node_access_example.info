@@ -1,5 +1,0 @@
-name = Node access example
-description = Demonstrates how a module can use Drupal's node access system
-package = Example modules
-core = 7.x
-files[] = node_access_example.test

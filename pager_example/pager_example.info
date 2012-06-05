@@ -1,5 +1,0 @@
-name = Pager example
-description = Demonstrates a page with content in a pager
-package = Example modules
-core = 7.x
-files[] = pager_example.test

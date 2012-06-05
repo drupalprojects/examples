@@ -1,5 +1,0 @@
-name = NodeAPI example
-description = Demonstrates using the hook_node_* APIs (formerly hook_nodeapi) to alter a node from a different module.
-package = Example modules
-core = 7.x
-files[] = nodeapi_example.test

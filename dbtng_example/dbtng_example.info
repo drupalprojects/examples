@@ -1,5 +1,0 @@
-name = DBTNG example
-description = An example module showing how use the database API: DBTNG.
-package = Example modules
-core = 7.x
-files[] = dbtng_example.test

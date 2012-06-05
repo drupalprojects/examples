@@ -1,7 +1,0 @@
-name = Render example
-description = Demonstrates drupal_render's capabilities and altering render arrays
-package = Example modules
-core = 7.x
-dependencies[] = devel
-stylesheets[all][] = render_example.css
-files[] = render_example.test

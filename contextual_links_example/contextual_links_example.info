@@ -1,5 +1,0 @@
-name = Contextual links example
-description = Demonstrates how to use contextual links for enhancing the user experience.
-package = Example modules
-core = 7.x
-files[] = contextual_links_example.test

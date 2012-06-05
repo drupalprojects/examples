@@ -1,6 +1,0 @@
-name = Token example
-description = An example module showing how to define and use tokens.
-package = Example modules
-core = 7.x
-dependencies[] = token
-files[] = token_example.test

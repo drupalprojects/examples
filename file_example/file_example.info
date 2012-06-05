@@ -1,6 +1,0 @@
-name = File example
-description = Examples of using the Drupal File API and Stream Wrappers.
-package = Example modules
-core = 7.x
-files[] = file_example_session_streams.inc
-files[] = file_example.test

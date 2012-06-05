@@ -1,4 +1,0 @@
-name = Tabledrag Example
-description = Demonstrates how to create tabledrag forms.
-package = Example modules
-core = 7.x

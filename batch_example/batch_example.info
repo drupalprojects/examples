@@ -1,5 +1,0 @@
-name = Batch example
-description = An example outlining how a module can define batch operations.
-package = Example modules
-core = 7.x
-files[] = batch_example.test

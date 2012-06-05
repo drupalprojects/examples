@@ -1,5 +1,0 @@
-name = RDF Example
-description = Demonstrates an RDF mapping using the RDF mapping API.
-package = Example modules
-core = 7.x
-files[] = rdf_example.test

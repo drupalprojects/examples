@@ -1,5 +1,0 @@
-name = Filter example
-description = An example module showing how to define a custom filter.
-package = Example modules
-core = 7.x
-files[] = filter_example.test

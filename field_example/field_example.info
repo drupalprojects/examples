@@ -1,5 +1,0 @@
-name = Field Example
-description = An implementation of a field to show the Field API
-package = Example modules
-core = 7.x
-files[] = field_example.test
