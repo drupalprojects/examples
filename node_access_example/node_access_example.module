@@ -66,6 +66,13 @@ function node_access_example_perm() {
 }
 
 /**
+ * Here we define a constant for our node access grant ID, for the example realm. 
+ * This ID could be any integer, but here we choose 23, 
+ * because it is this author's favorite number.
+ */
+define('NODE_ACCESS_EXAMPLE_GRANT_ALL', 23);
+
+/**
  * Implementation of hook_node_grants().
  *
  * Tell the node access system what GIDs the user belongs to for each realm.
@@ -80,11 +87,11 @@ function node_access_example_perm() {
  */
 function node_access_example_node_grants($account, $op) {
   if ($op == 'view' && user_access('access private content', $account)) {
-    $grants['example'] = array(1);
+    $grants['example'] = array(NODE_ACCESS_EXAMPLE_GRANT_ALL);
   }
 
   if (($op == 'update' || $op == 'delete') && user_access('edit private content', $account)) {
-    $grants['example'] = array(1);
+    $grants['example'] = array(NODE_ACCESS_EXAMPLE_GRANT_ALL);
   }
 
   $grants['example_author'] = array($account->uid);
@@ -107,7 +114,7 @@ function node_access_example_node_access_records($node) {
     $grants = array();
     $grants[] = array(
       'realm' => 'example',
-      'gid' => TRUE,
+      'gid' => NODE_ACCESS_EXAMPLE_GRANT_ALL,
       'grant_view' => TRUE,
       'grant_update' => FALSE,
       'grant_delete' => FALSE,
