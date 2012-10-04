@@ -30,8 +30,9 @@
  *   No form - start a batch simply by clicking a link
  *   (not really user friendly, should probably be avoided)
  *
- * This example is part of the Examples for Developers Project which you can download
- * and experiment with here: http://drupal.org/project/examples
+ * This example is part of the Examples for Developers Project which
+ * you can download and experiment with here:
+ * http://drupal.org/project/examples
  */
 
 /**
@@ -88,11 +89,25 @@ function batch_example_simple_form() {
   return $form;
 }
 
+/**
+ * Submit handler for the form 'batch_example_simple_form'.
+ *
+ * This submit handler will be called when the user clicks 'Go' in
+ * the form.
+ */
 function batch_example_simple_form_submit($form, &$form_state) {
+  // Dropdown will return 'batch_1' or 'batch_2'
   $values =& $form_state['values'];
 
+  // Create a string with the function name 'batch_example_batch_1'
+  // or 'batch_example_batch_2'
   $function = 'batch_example_' . $values['batch'];
+
+  // Load the $batch variable with an array containing the details
+  // of what to run
   $batch = $function();
+
+  // Start the batch process running
   batch_set($batch);
 
   // Redirection takes place as usual.
@@ -142,15 +157,21 @@ function batch_example_multistep_form_submit($form, &$form_state) {
 function batch_example_page() {
   batch_set(batch_example_batch_1());
 
-  // We're not inside a form submission workflow, so we have to manually
-  // trigger the batch processing - this issues a drupal_goto and thus ends
-  // current request.
-  // We also specify here where we want to redirect after batch processing.
+  // We're not inside a form submission workflow, so we have to
+  // manually trigger the batch processing - this issues a
+  // drupal_goto and thus ends current request.
+  // We also specify here where we want to redirect after batch
+  // processing.
   batch_process('batch_example/example_1');
 }
 
 /**
  * Batch 1 : Load 100 times the node with the lowest nid
+ *
+ * This method does not yet do the work; it simply builds an array
+ * of the work which needs to be done during the batch processing.
+ * The results of this function will be passed to the batch processor
+ * for actual processing.
  */
 function batch_example_batch_1() {
   $nid = db_result(db_query_range("SELECT nid FROM {node} ORDER BY nid ASC", 0, 1));
@@ -159,6 +180,9 @@ function batch_example_batch_1() {
   for ($i = 0; $i<100; $i++) {
     $operations[] = array('batch_example_op_1', array($nid));
   }
+
+  // Create an array which contains an array of the operations to
+  // perform and a method to call when the operations are all finished
   $batch = array(
     'operations' => $operations,
     'finished' => 'batch_example_finished',
@@ -167,7 +191,7 @@ function batch_example_batch_1() {
 }
 
 /**
- * Batch operation for batch 1 : lode a node...
+ * Batch operation for batch 1 : load a node...
  */
 function batch_example_op_1($nid, &$context) {
   $node = node_load($nid, NULL, TRUE);
@@ -181,6 +205,11 @@ function batch_example_op_1($nid, &$context) {
 
 /**
  * Batch 2 : load all nodes 5 by 5, 20 times (Multipart operation)
+ *
+ * This method does not yet do the work; it simply builds an array
+ * of the work which needs to be done during the batch processing.
+ * The results of this function will be passed to the batch
+ * processor for actual processing.
  */
 function batch_example_batch_2() {
   $operations = array();
