@@ -2,17 +2,18 @@
 
 /**
  * @file
- * This is an example illustrating how to restrict access to nodes based on
- * some criterion associated with the user.
  *
- * This example module will simply set a single flag on a node: 'private'. If
- * the flag is set, only users with the 'view private content' flag can see
- * the node, and all users with 'edit private content' can edit (but not
- * delete) the node.
+ * This is an example illustrating how to restrict access to nodes based
+ * on some criterion associated with the user.
  *
- * Additionally we will ensure that the node author can always view, edit,
- * and delete the node by providing an additional access realm that grants
- * privileges to the node's author.
+ * This example module will simply set a single flag on a node:
+ * 'private'. If the flag is set, only users with the 'view private
+ * content' flag can see the node, and all users with 'edit private
+ * content' can edit (but not delete) the node.
+ *
+ * Additionally we will ensure that the node author can always view,
+ * edit, and delete the node by providing an additional access realm that
+ * grants privileges to the node's author.
  *
  * Database definition:
  * @code
@@ -30,17 +31,17 @@
  * @{
  * Examples of node access restriction. (drupal 6)
  *
- * This is an example illustrating how to restrict access to nodes based on
- * some criterion associated with the user.
+ * This is an example illustrating how to restrict access to nodes based
+ * on some criterion associated with the user.
  *
- * This example module will simply set a single flag on a node: 'private'. If
- * the flag is set, only users with the 'view private content' flag can see
- * the node, and all users with 'edit private content' can edit (but not
- * delete) the node.
+ * This example module will simply set a single flag on a node:
+ * 'private'. If the flag is set, only users with the 'view private
+ * content' flag can see the node, and all users with 'edit private
+ * content' can edit (but not delete) the node.
  *
- * Additionally we will ensure that the node author can always view, edit,
- * and delete the node by providing an additional access realm that grants
- * privileges to the node's author.
+ * Additionally we will ensure that the node author can always view,
+ * edit, and delete the node by providing an additional access realm that
+ * grants privileges to the node's author.
  *
  * Database definition:
  * @code
@@ -66,46 +67,97 @@ function node_access_example_perm() {
 }
 
 /**
- * Here we define a constant for our node access grant ID, for the example realm. 
- * This ID could be any integer, but here we choose 23, 
+ * Here we define a constant for our node access grant ID, for the example realm.
+ * This ID could be any integer, but here we choose 23,
  * because it is this author's favorite number.
  */
 define('NODE_ACCESS_EXAMPLE_GRANT_ALL', 23);
 
 /**
- * Implementation of hook_node_grants().
+ * Implements hook_node_grants().
  *
- * Tell the node access system what GIDs the user belongs to for each realm.
- * In this example, we are providing two realms: the example realm, which
- * has just one group id (1) and the user is either a member or not depending
- * upon the operation and the access permission set.
+ * Tell the node access system what grant IDs the user belongs to for
+ * each realm, based on the operation being performed.
  *
- * We are also setting up a realm for the node author, though, to give it
- * special privileges. That has 1 GID for every UID, and each user is
- * automatically a member of the group where GID == UID.
+ * When the user tries to perform an operation on the node, Drupal calls
+ * hook_node_grants() to determine grant ID and realm for the user.
+ * Drupal looks up the grant ID and realm for the node, and compares them
+ * to the grant ID and realm provided here. If grant ID and realm match
+ * for both user and node, then the operation is allowed.
  *
+ * Grant ID and realm are both determined per node, by your module in
+ * hook_node_access_records().
+ *
+ * In our example, we've created three access realms: One for authorship,
+ * and two that track with the permission system.
+ *
+ * We always add node_access_example_author to the list of grants, with a
+ * grant ID equal to their user ID. We do this because in our model,
+ * authorship always gives you permission to edit or delete your nodes,
+ * even if they're marked private.
+ *
+ * Then we compare the user's permissions to the operation to determine
+ * whether the user falls into the other two realms:
+ * node_access_example_view, and/or node_access_example_edit. If the user
+ * has the 'access any private content' permission we defined in
+ * hook_permission(), they're declared as belonging to the
+ * node_access_example_realm. Similarly, if they have the 'edit any
+ * private content' permission, we add the node_access_example_edit realm
+ * to the list of grants they have.
+ *
+ * @see node_access_example_perm()
+ * @see node_access_example_node_access_records()
  */
 function node_access_example_node_grants($account, $op) {
   if ($op == 'view' && user_access('access private content', $account)) {
-    $grants['example'] = array(NODE_ACCESS_EXAMPLE_GRANT_ALL);
+    $grants['node_access_example'] = array(NODE_ACCESS_EXAMPLE_GRANT_ALL);
   }
 
   if (($op == 'update' || $op == 'delete') && user_access('edit private content', $account)) {
-    $grants['example'] = array(NODE_ACCESS_EXAMPLE_GRANT_ALL);
+    $grants['node_access_example'] = array(NODE_ACCESS_EXAMPLE_GRANT_ALL);
   }
 
-  $grants['example_author'] = array($account->uid);
+  $grants['node_access_example_author'] = array($account->uid);
   return $grants;
 }
 
+
 /**
- * Implementation of hook_node_access_records().
+ * Implements hook_node_access_records().
  *
  * All node access modules must implement this hook. If the module is
- * interested in the privacy of the node passed in, return a list
- * of node access values for each grant ID we offer. Since this
- * example module only offers 1 grant ID, we will only ever be
- * returning one record.
+ * interested in the privacy of the node passed in, return a list of node
+ * access values for each grant ID we offer.
+ *
+ * In this example, for each node which is marked private, we define two
+ * realms:
+ *
+ * The first realm is 'node_access_example' which have a single grant ID.
+ * The user is either a member of these realms or not, depending upon the
+ * operation and the access permission set.
+ *
+ * The second is 'node_access_example_author.' It gives the node author
+ * special privileges. 'node_access_example_author' has one grant ID for
+ * every UID, and each user is automatically a member of the group where
+ * GID == UID. This has the effect of giving each user their own grant ID
+ * for nodes they authored, within this realm.
+ *
+ * Drupal calls this hook when a node is saved, or when access
+ * permissions change in order to rebuild the node access database
+ * table(s).
+ *
+ * The array you return will define the realm and the grant ID for the
+ * given node. This is stored in the {node_access} table for subsequent
+ * comparison against the user's realm and grant IDs, which you'll supply
+ * in hook_node_grants().
+ *
+ * Realm names and grant IDs are arbitrary. Official drupal naming
+ * conventions do not cover access realms, but since all realms are
+ * stored in the same database table, it's probably a good idea to use
+ * descriptive names which follow the module name, such as
+ * 'mymodule_realmname'.
+ *
+ * @see node_access_example_node_grants()
  */
 function node_access_example_node_access_records($node) {
   // We only care about the node if it's been marked private. If not, it is
@@ -113,7 +165,7 @@ function node_access_example_node_access_records($node) {
   if (!empty($node->private)) {
     $grants = array();
     $grants[] = array(
-      'realm' => 'example',
+      'realm' => 'node_access_example',
       'gid' => NODE_ACCESS_EXAMPLE_GRANT_ALL,
       'grant_view' => TRUE,
       'grant_update' => FALSE,
@@ -124,7 +176,7 @@ function node_access_example_node_access_records($node) {
     // For the example_author array, the GID is equivalent to a UID, which
     // means there are many many groups of just 1 user.
     $grants[] = array(
-      'realm' => 'example_author',
+      'realm' => 'node_access_example_author',
       'gid' => $node->uid,
       'grant_view' => TRUE,
       'grant_update' => TRUE,
@@ -138,9 +190,9 @@ function node_access_example_node_access_records($node) {
 /**
  * Implementation of hook_form_alter()
  *
- * This module adds a simple checkbox to the node form labeled private. If the
- * checkbox is labelled, only the node author and users with 'access private content'
- * privileges may see it.
+ * This module adds a simple checkbox to the node form labeled
+ * private. If the checkbox is labelled, only the node author and
+ * users with 'access private content' privileges may see it.
  */
 function node_access_example_form_alter(&$form, $form_state) {
   if ($form['#id'] == 'node-form') {
