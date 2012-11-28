@@ -10,14 +10,34 @@
  * @defgroup page_example Example: Page
  * @ingroup examples
  * @{
- * Create a page in a module. (drupal 6)
+ * Create a page in a module. (Drupal 6)
  *
  * This example demonstrates how a module can be used to display a
  * custom page at a given URL.
  *
- * This example is part of the Examples for Developers Project which you can download
- * and experiment with here: http://drupal.org/project/examples
+ * This example is part of the Examples for Developers Project
+ * which you can download and experiment with here:
+ * http://drupal.org/project/examples
  */
+
+/**
+ * Implementation of hook_help().
+ */
+function page_example_help($path, $arg) {
+  switch ($path) {
+    case 'admin/help#page_example':
+      $output = page_example_description();
+      $output .= '<p>';
+      $output .= t("The simple page requires 'access simple page'
+        permission. The different permissions page requires
+        'access content' permission. The custom access
+        callback page requires 'access content' permission
+        and the visitor to be signed in. The arguments page
+        requires 'access arguments page' permission.");
+      $output .= '</p>';
+      return $output;
+  }
+}
 
 /**
  * Implementation of hook_perm().
@@ -28,6 +48,8 @@
  * administration pages.
  */
 function page_example_perm() {
+  // Defining permissions for your module is as simple as returning an array of
+  // strings.
   return array(
     'access simple page',
     'access arguments page',
@@ -45,6 +67,9 @@ function page_example_perm() {
  *
  * With the below menu definitions, URLs will be interpreted as follows:
  *
+ * Note that the URLs below are written as though Clean URLs are not
+ * enabled on the site.
+ *
  * If the user accesses http://example.com/?q=examples/page_example, then the
  * menu system will look for a menu item with that path. In this case it will
  * find a match, and execute page_example_description().
@@ -58,8 +83,8 @@ function page_example_perm() {
  * finding a match, it will look for examples/page_example/arguments/1/%. Again
  * not finding a match, it will look for examples/page_example/arguments/%/2.
  * Yet again not finding a match, it will look for example/arguments/%/%. This
- * time it finds a match, and so will execute page_example_arguments(1, 2). Note
- * the parameters being passed; this is a very useful technique.
+ * time it finds a match, and so will execute page_example_arguments(1, 2).
+ * Note the parameters being passed; this is a very useful technique.
  *
  * If http://example.com/?q=examples/page_example/arguments/1 is accessed, the
  * menu system will match 'examples/page_example', and not
@@ -67,12 +92,24 @@ function page_example_perm() {
  * require 5 arguments. All the elements included in the menu entry definition
  * should be present for the menu system to match the request.
  *
+ * If the user accesses
+ * http://example.com/?q=examples/page_example/different-permission but
+ * does not have the required 'access content' permission, access will be
+ * denied.
+ *
+ * If the user accesses
+ * http://example.com/?q=examples/page_example/custom-access-callback but
+ * does not have the required 'access content' permission and/or
+ * is not signed in, access will be denied.
+ *
  * The @link menu_example.module Menu Example @endlink provides more extensive
  * examples for hook_menu().
  */
 function page_example_menu() {
   // This is the minimum information you can provide for a menu item. This menu
   // item will be created in the default menu (Navigation).
+  // Specifying 'access callback' => TRUE causes this menu item to be
+  // available for all roles.
   $items['examples/page_example'] = array(
     'title' => 'Page Example',
     'page callback' => 'page_example_description',
@@ -109,11 +146,52 @@ function page_example_menu() {
     'type' => MENU_CALLBACK,
   );
 
+  // You are not limited to checking for permissions defined by
+  // this module. You can also check for permissions defined by
+  // other modules. In this case, we will check for permissions
+  // defined by node.module
+  $items['examples/page_example/different-permission'] = array(
+    'title' => 'Page example checking for other permissions',
+    'page callback' => 'page_example_other_permissions',
+    'access arguments' => array('access content'),
+  );
+
+  // You can also define your own access callback function.
+  $items['examples/page_example/custom-access-callback'] = array(
+    'title' => 'Page example using a custom access callback',
+    'page callback' => 'page_example_custom_access_page',
+    'access callback' => 'page_example_custom_access_callback',
+  );
   return $items;
 }
 
+/**
+ * None of these page examples makes use of the Form API.
+ * The @link form_example.module Form Example @endlink provides
+ * examples that do.
+ */
 function page_example_description() {
-  return '<p>'.t('The page_example provides two pages, "simple" and "arguments". The <a href="@simple_link">simple page</a> just returns a string for display. The <a href="@arguments_link">arguments page</a> takes two arguments and displays them, as in @arguments_link', array('@simple_link' => url('examples/page_example/simple', array('absolute' => TRUE)), '@arguments_link' => url('examples/page_example/arguments/23/56', array('absolute' => TRUE)))).'<p>';
+  $output = '<p>';
+  $output .= t('The page_example provides four pages, "simple", "arguments",
+    "different permissions" and "custom access callback".
+    The <a href="@simple_link">simple page</a>,
+    <a href="@dp_link">different permissions page</a> and
+    <a href="@cac_link">custom access callback page</a>
+    just return a string for display.
+    The <a href="@arguments_link">arguments page</a> takes
+    two arguments and displays them,
+    as in @arguments_link.',
+    array(
+      '@simple_link' => url('examples/page_example/simple',
+        array('absolute' => TRUE)),
+      '@dp_link' => url('examples/page_example/different-permission',
+        array('absolute' => TRUE)),
+      '@cac_link' => url('examples/page_example/custom-access-callback',
+        array('absolute' => TRUE)),
+      '@arguments_link' => url('examples/page_example/arguments/23/56',
+        array('absolute' => TRUE))));
+  $output .= '</p>';
+  return $output;
 }
 
 
@@ -135,12 +213,12 @@ function page_example_simple() {
 /**
  * A more complex page callback that takes arguments.
  *
- * The arguments are passed in from the page URL. There in our hook_menu
+ * The arguments are passed in from the page URL. In our hook_menu
  * implementation we instructed the menu system to extract the last two
  * parameters of the path and pass them to this function as arguments.
  */
 function page_example_arguments($first, $second) {
-  // Make sure you don't trust the URL to be safe! Always check for exploits.
+  // Make sure you don't trust the arguments to be safe! Always check for exploits.
   if (!is_numeric($first) || !is_numeric($second)) {
     // We will just show a standard "access denied" page in this case.
     drupal_access_denied();
@@ -155,5 +233,30 @@ function page_example_arguments($first, $second) {
 }
 
 /**
+ * Page callback to demonstrate checking for the 'access content' permission.
+ */
+function page_example_other_permissions() {
+  return '<p>' . t('Evidently, you are authorized to view content on the site.') . '</p>';
+}
+
+/**
+ * If your custom access callback function checks
+ * for permissions, it should still use user_access.
+ * You may add whatever additional logic you like, though.
+ */
+function page_example_custom_access_callback() {
+  global $user;
+  return user_access('access simple page') && $user->uid > 0;
+}
+
+/**
+ * Page callback to demonstrate a custom access callback.
+ */
+function page_example_custom_access_page() {
+  return '<p>' . t('Welcome to the custom access page, registered visitor.') . '</p>';
+}
+
+/**
  * @} End of "defgroup page_example".
  */
+
