@@ -13,8 +13,24 @@
  * @{
  * AHAH examples. (drupal 6)
  *
- * This example is part of the Examples for Developers Project which you can download
- * and experiment with here: http://drupal.org/project/examples
+ * Provides simple examples of using AHAH with Drupal 6.
+ *
+ *  - simplest_ahah: A tremendously simple example that just swaps out a div
+ *    when you click the submit button (simplest_ahah)
+ *   
+ *  - autocheckboxes: Regenerate a form with the number of checkboxes
+ *    determined by a select pulldown.
+ *   
+ *  - autotextfields: Regenerate a form with various textfields based on
+ *    whether a checkbox is clicked.
+ *
+ *  - dependent_dropdown: Change the value of dropdowns based on the
+ *    value of other dropdowns.
+ *
+ * There is a tutorial based on this module at http://randyfay.com/ahah
+ *
+ * This example is part of the Examples for Developers Project which you can
+ * download and experiment with here: http://drupal.org/project/examples
  */
 
 $path = drupal_get_path('module','ahah_example');
@@ -33,7 +49,7 @@ function ahah_example_menu() {
     'page callback' => 'drupal_get_form',
     'page arguments' => array('ahah_example_simplest'),
     'access callback' => TRUE,
-    'file' => 'simplest_ahah.inc',
+    'file' => 'ahah_example_simplest_ahah.inc',
   );
   // Simple AHAH with its callback.
   $items['examples/ahah_example/simplest_ahah'] = array(
@@ -42,13 +58,13 @@ function ahah_example_menu() {
     'page arguments' => array('ahah_example_simplest'),
     'access callback' => TRUE,
     'type' => MENU_DEFAULT_LOCAL_TASK,
-    'file' => 'simplest_ahah.inc',
+    'file' => 'ahah_example_simplest_ahah.inc',
     'weight' => 0,
   );
   $items['examples/ahah_example/simplest_ahah/callback'] = array(
     'page callback' => 'ahah_example_simplest_callback',
     'access callback' => TRUE,
-    'file' => 'simplest_ahah.inc',
+    'file' => 'ahah_example_simplest_ahah.inc',
     'type' => MENU_CALLBACK,
   );
 
@@ -60,12 +76,12 @@ function ahah_example_menu() {
     'access callback' => TRUE,
     'type' => MENU_LOCAL_TASK,
     'weight' => 2,
-    'file' => 'autocheckboxes.inc',
+    'file' => 'ahah_example_autocheckboxes.inc',
   );
   $items['examples/ahah_example/autocheckboxes/callback'] = array(
     'page callback' => 'ahah_example_autocheckboxes_callback',
     'access callback' => TRUE,
-    'file' => 'autocheckboxes.inc',
+    'file' => 'ahah_example_autocheckboxes.inc',
     'type' => MENU_CALLBACK,
   );
 
@@ -77,12 +93,12 @@ function ahah_example_menu() {
     'access callback' => TRUE,
     'type' => MENU_LOCAL_TASK,
     'weight' => 4,
-    'file' => 'autotextfields.inc',
+    'file' => 'ahah_example_autotextfields.inc',
   );
   $items['examples/ahah_example/autotextfields/callback'] = array(
     'page callback' => 'ahah_example_autotextfields_callback',
     'access callback' => TRUE,
-    'file' => 'autotextfields.inc',
+    'file' => 'ahah_example_autotextfields.inc',
     'type' => MENU_CALLBACK,
     );
     // Automatically generate textfields.
@@ -93,12 +109,12 @@ function ahah_example_menu() {
     'access callback' => TRUE,
     'weight' => 4,
     'type' => MENU_LOCAL_TASK,
-    'file' => 'dependent_dropdown.inc',
+    'file' => 'ahah_example_dependent_dropdown.inc',
   );
   $items['examples/ahah_example/dependent_dropdown/callback'] = array(
     'page callback' => 'ahah_example_dropdown_callback',
     'access callback' => TRUE,
-    'file' => 'dependent_dropdown.inc',
+    'file' => 'ahah_example_dependent_dropdown.inc',
     'type' => MENU_CALLBACK,
   );
   $items['examples/ahah_example/simple_validation'] = array(

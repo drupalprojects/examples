@@ -45,7 +45,8 @@ function ahah_example_simple_validation_validate(&$form, &$form_state) {
 }
 
 /**
- * Submit handler for autocheckboxes.
+ * Submit handler for simple validation.
+ *
  * Gets called even when our select is active, so we use the
  * $form_state to determine whether the submit handler should actually do
  * anything.
@@ -59,8 +60,9 @@ function ahah_example_simple_validation_submit($form, &$form_state) {
 }
 
 /**
- * Callback for autocheckboxes. Process the form with the number of checkboxes
- * we want to provide.
+ * Callback for simple validation.
+ *
+ * Process the form with the number of checkboxes we want to provide.
  */
 function ahah_example_simple_validation_callback() {
   $form = ahah_example_callback_helper();
