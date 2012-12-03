@@ -1,0 +1,175 @@
+<?php
+
+/**
+ * @file
+ * An example of the User API.
+ */
+
+/**
+ * @defgroup user_example Example: User API
+ * @ingroup examples
+ * @{
+ * Examples using user API. (drupal 6)
+ *
+ * This module shows how to save information to the
+ * database that can be attached to users when they are loaded with
+ * user_load().
+ *
+ * In Drupal 7 and forward, this functionality would be accomplished
+ * by attaching a field to the user entity, either in code or through
+ * the Drupal UI.
+ */
+
+/**
+ * Implementation of hook_menu().
+ *
+ * This is not required for the User API. However, we implement this so we can
+ * add a page describing how this module works. To learn about how the menu
+ * system works, see page_example.module.
+ */
+function user_example_menu() {
+  $items = array();
+
+  $items['examples/user_example'] = array(
+    'title' => 'User Example',
+    'page callback' => 'user_example_page',
+    'access arguments' => array('access content'),
+  );
+
+  return $items;
+}
+
+/**
+ * Implementation of hook_user().
+ *
+ * There is often confusion between the $edit and the $account parameters.
+ * $edit is an array, and consists only of the subset of data that is being
+ * changed for the user account. When saving a new account, this will contain
+ * quite a bit of information (user name, email address, etc) whereas updating
+ * an existing account will contain just the fields being modified. $account
+ * is a user object containing the account details as they existed when it was
+ * loaded with user_load. If your code needs to access a common user property
+ * such as uid, nearly always it should come from $account->uid instead of the
+ * $edit array.
+ */
+function user_example_user($op, &$edit, &$account, $category = NULL) {
+  // In general, it's good practice to refactor anything longer than a few
+  // lines into their own subfunctions. Then it becomes possible to split them
+  // out into separate files using module_load_include() to load the include
+  // file before calling the function.
+  switch ($op) {
+    case 'delete':
+      db_query("DELETE FROM {user_example} WHERE uid = %d", $account->uid);
+      break;
+
+    case 'form':
+      // This ensures that our form elements are only added on the "Edit" tab,
+      // and not any other subtasks on the form.
+      if ($category == 'account') {
+        return _user_example_add_color_element(&$edit, &$account);
+      }
+      break;
+
+    case 'insert':
+    case 'update':
+      // This function handles both the update and save cases, since it's
+      // possible to update a user account that doesn't have a row in the
+      // {user_example} table yet.
+      _user_example_color_save(&$edit, &$account);
+      break;
+
+    case 'load':
+      if ($favorite_color = db_result(db_query("SELECT favorite_color FROM {user_example} WHERE uid = %d", $account->uid))) {
+        $account->favorite_color = $favorite_color;
+      }
+      break;
+
+    case 'validate':
+      _user_example_color_validate(&$edit, &$account);
+      break;
+  }
+}
+
+/**
+ * Helper function to add a "What is your favorite color?" dropdown to the user
+ * edit form.
+ *
+ * @param &$edit
+ *   The array of form values submitted by the user.
+ * @param &$account
+ *   The user object who's form we are altering.
+ *
+ * @return
+ *   The form elements to add into the user edit form.
+ */
+function _user_example_add_color_element(&$edit, &$account) {
+  $form = array();
+
+  $form['favorite_color'] = array(
+    '#type' => 'select',
+    '#title' => t('Favorite color'),
+    '#options' => array(
+      'red' => t('Red'),
+      'green' => t('Green'),
+      'blue' => t('Blue'),
+      'black' => t('Black'),
+    ),
+    '#default_value' => (!empty($account->favorite_color) ? $account->favorite_color : 'blue'),
+  );
+
+  return $form;
+}
+
+/**
+ * Validate that the user selected a valid favorite color. Note that this is
+ * called from hook_user('validate') so we can validate data saved both through
+ * the user edit form and data saved by calls to user_save().
+ *
+ * @param &$edit
+ *   The array of form values submitted by the user.
+ * @param &$account
+ *   The user object who's new data needs to be validated.
+ */
+function _user_example_color_validate(&$edit, &$account) {
+  // Black is the absence of color, not a color itself.
+  if ($edit['favorite_color'] == 'black') {
+    // Any validation errors should be set with form_set_error().
+    form_set_error('favorite_color', t('Black is not a color.'));
+  }
+}
+
+/**
+ * Save a user's favorite color to the database.
+ *
+ * @param &$edit
+ *   The array of form values submitted by the user.
+ * @param &$account
+ *   The user object who's favorite color is being saved.
+ */
+function _user_example_color_save(&$edit, &$account) {
+  // We need two queries to handle the INSERT and UPDATE cases.
+  if (!db_result(db_query("SELECT TRUE from {user_example} WHERE uid = %d", $account->uid))) {
+    db_query("INSERT INTO {user_example} (uid, favorite_color) VALUES (%d, '%s')", $account->uid, $edit['favorite_color']);
+  }
+  else {
+    db_query("UPDATE {user_example} SET favorite_color = '%s' WHERE uid = %d", $edit['favorite_color'], $account->uid);
+  }
+
+  // We need to set this to NULL so the value also doesn't get saved in the
+  // default "data" serialized array in the {users} table.
+  $edit['favorite_color'] = NULL;
+}
+
+/**
+ * Page callback to display information about this module. In "real" modules,
+ * user hook_help() or the Advanced Help module instead of hardcoded page
+ * callbacks.
+ */
+function user_example_page() {
+  $output = '<p>' . t('The user_example provides examples of the Drupal User API for saving a user\'s favorite color to the database. To try out the example, click on the "My account" link and then click on the "Edit" tab.') . '</p>';
+  return $output;
+}
+
+/**
+ * @} End of "defgroup user_example".
+ */

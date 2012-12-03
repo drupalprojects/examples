@@ -1,0 +1,56 @@
+<?php
+
+/**
+ * @file
+ * Install hooks for the user_example module.
+ */
+
+/**
+ * Implementation of hook_install().
+ *
+ * @ingroup user_example
+ */
+function user_example_install() {
+  drupal_install_schema('user_example');
+}
+
+/**
+ * Implementation of hook_uninstall().
+ *
+ * @ingroup user_example
+ */
+function user_example_uninstall() {
+  drupal_uninstall_schema('user_example');
+}
+
+/**
+ * Implementation of hook_schema().
+ *
+ * @ingroup user_example
+ */
+function user_example_schema() {
+  $schema = array();
+  $schema['user_example'] = array(
+    'description' => "Stores a user's favorite color.",
+    'fields' => array(
+      'uid' => array(
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+        'default' => 0,
+        'description' => 'Primary Key: {users}.uid for user.',
+      ),
+      'favorite_color' => array(
+        'type' => 'text',
+        'size' => 'tiny',
+        'not null' => TRUE,
+        'default' => "",
+        'description' => 'The favorite color of the user.',
+      ),
+    ),
+    'primary_key' => array('uid'),
+  );
+
+  return $schema;
+}
+

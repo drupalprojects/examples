@@ -1,0 +1,4 @@
+name = User example
+description = Demonstrates how to user the User API.
+core = 6.x
+package = Example modules
