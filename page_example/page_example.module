@@ -173,14 +173,16 @@ function page_example_menu() {
 function page_example_description() {
   $output = '<p>';
   $output .= t('The page_example provides four pages, "simple", "arguments",
-    "different permissions" and "custom access callback".
-    The <a href="@simple_link">simple page</a>,
+    "different permissions" and "custom access callback".');
+  $output .= '</p>';
+  $output .= '<p>';
+  $output .= t('The <a href="@simple_link">simple page</a>,
     <a href="@dp_link">different permissions page</a> and
     <a href="@cac_link">custom access callback page</a>
     just return a string for display.
     The <a href="@arguments_link">arguments page</a> takes
     two arguments and displays them,
-    as in @arguments_link.',
+    as in <a href="@arguments_link">@arguments_link</a>.',
     array(
       '@simple_link' => url('examples/page_example/simple',
         array('absolute' => TRUE)),
@@ -191,9 +193,13 @@ function page_example_description() {
       '@arguments_link' => url('examples/page_example/arguments/23/56',
         array('absolute' => TRUE))));
   $output .= '</p>';
+  $output .= '<p>';
+  $output .= t('Note also that because these pages use permissions to
+    limit access to the content, unprivileged or anonymous users
+    will receive \'Access Denied\' errors.');
+  $output .= '</p>';
   return $output;
 }
-
 
 /**
  * A simple page callback.
