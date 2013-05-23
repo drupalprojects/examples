@@ -1,0 +1,4 @@
+name = Theming example
+description = An example module showing how to use theming.
+package = Example modules
+core = 6.x

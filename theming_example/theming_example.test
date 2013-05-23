@@ -1,0 +1,42 @@
+<?php
+
+/**
+ * @file
+ * Test case for Testing the theming example module.
+ *
+ * This file contains the test cases to check if module is performing as
+ * expected.
+ *
+ */
+class ThemingExampleTestCase extends DrupalWebTestCase {
+  // protected $web_user;
+
+  public static function getInfo() {
+    return array(
+      'name' => 'Theming example functionality',
+      'description' => 'Basic theming tests.',
+      'group' => 'Examples',
+    );
+  }
+
+  /**
+   * Enable modules and create user with specific permissions.
+   */
+  function setUp() {
+    parent::setUp('theming_example');
+  }
+
+  /**
+   * Check basic UI.
+   */
+  function testThemingExampleBasic() {
+    $this->drupalGet('');
+    $this->assertLink(t('Basic Theming Example'));
+    $this->clickLink(t('Basic Theming Example'));
+    $this->assertText(t('Basic examples of pages that are run through theme functions'));
+    $this->assertLink(t('Theming with a template and preprocess function'));
+    $this->clickLink(t('Theming with a template and preprocess function'));
+    $this->assertText(t('This is in a template file.'));
+    $this->assertText(t('This text was added in a preprocess function.'));
+  }
+}
