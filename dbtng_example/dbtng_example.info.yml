@@ -1,4 +1,5 @@
 name: DBTNG example
+type: module
 description: 'An example module showing how use the database API: DBTNG.'
 package: Example modules
 core: 8.x
