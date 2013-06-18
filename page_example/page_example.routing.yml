@@ -1,0 +1,34 @@
+# In order to create pages is necessary to define routes for them. The
+# following lines defines three of them for this module.
+page_example_description:
+  pattern: 'examples/page_example'
+  defaults:
+    _content: '\Drupal\page_example\Controller\PageExampleController::description'
+  requirements:
+    _access: 'TRUE'
+# If the user accesses http://example.com/?q=examples/page_example/simple,
+# the menu system will first look for a route with that path. In this case it
+# will find a match, and execute the _content callback.
+page_example_simple:
+  pattern: 'examples/page_example/simple'
+  defaults:
+    _content: '\Drupal\page_example\Controller\PageExampleController::simple'
+  requirements:
+    _permission: 'access simple page'
+# @fixme Update this comment.
+# If the user accesses
+# http://example.com/?q=examples/page_example/arguments/1/2, the routing
+# system will first look for examples/page_example/arguments/1/2. Not finding
+# a match, it will look for examples/page_example/arguments/1/%. Again not
+# finding a match, it will look for examples/page_example/arguments/%/2.
+# Yet again not finding a match, it will look for
+# examples/page_example/arguments/%/%. This time it finds a match, and so will
+# execute page_example_arguments(1, 2). Since the parameters are passed to
+# the function after the match, the function can do additional checking or
+# make use of them before executing the callback function.
+page_example_arguments:
+  pattern: 'examples/page_example/arguments/{first}/{second}'
+  defaults:
+    _content: '\Drupal\page_example\Controller\PageExampleController::arguments'
+  requirements:
+    _permission: 'access arguments page'
