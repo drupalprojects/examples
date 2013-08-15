@@ -61,7 +61,7 @@ function block_example_page() {
  */
 function block_example_block_view_alter(array &$build, \Drupal\block\BlockPluginInterface $block) {
   // We'll search for the string 'uppercase'.
-  $definition = $block->getDefinition();
+  $definition = $block->getPluginDefinition();
   if ((!empty($build['#configuration']['label']) && stristr($build['#configuration']['label'], 'uppercase')) || (!empty($definition['subject']) && stristr($definition['subject'], 'uppercase'))) {
     // This will uppercase the block title.
     $build['#configuration']['label'] = drupal_strtoupper($build['#configuration']['label']);

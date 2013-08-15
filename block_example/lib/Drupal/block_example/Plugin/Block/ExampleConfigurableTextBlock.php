@@ -57,7 +57,7 @@ class ExampleConfigurableTextBlock extends BlockBase {
   /**
    * Implements \Drupal\block\BlockBase::blockBuild().
    */
-  public function blockBuild() {
+  public function build() {
     return array(
       '#type' => 'markup',
       '#markup' => $this->configuration['block_example_string'],

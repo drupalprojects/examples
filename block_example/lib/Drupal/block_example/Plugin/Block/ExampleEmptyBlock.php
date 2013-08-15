@@ -26,7 +26,7 @@ class ExampleEmptyBlock extends BlockBase {
   /**
    * Implements \Drupal\block\BlockBase::blockBuild().
    */
-  public function blockBuild() {
+  public function build() {
     return array();
   }
 

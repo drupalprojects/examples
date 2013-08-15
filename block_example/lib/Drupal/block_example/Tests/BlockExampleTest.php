@@ -39,63 +39,50 @@ class BlockExampleTest extends WebTestBase {
   }
 
   /**
-   * Login user, create an example node, and test block functionality through
-   * the admin and user interfaces.
+   * Tests block_example functionality.
    */
   function testBlockExampleBasic() {
     // Login the admin user.
     $this->drupalLogin($this->web_user);
     $theme_name = config('system.theme')->get('default');
 
-    // Find the blocks in the settings page.
-    $this->drupalGet('admin/structure/block/list/block_plugin_ui:' . $theme_name . '/add');
+    // Verify the blocks are listed to be added.
+    $this->drupalGet('admin/structure/block/list/' . $theme_name . '/add');
     $this->assertRaw(t('Title of first block (example_configurable_text)'), 'Block configurable-string found.');
     $this->assertRaw(t('Example: empty block'), 'Block empty-block found.');
+    $this->assertRaw(t('Example: uppercase this please'), 'Block uppercase found.');
 
-    // Add blocks
-    // Create a new block and make sure it gets uppercased.
-    $edit = array(
-      'settings[label]' => t('Title of first block (example_configurable_text)'),
+    // Define and place blocks.
+    $example_configurable_text = array(
+      'label' => t('Title of first block (example_configurable_text)'),
       'machine_name' => 'block_example_example_configurable_text',
-      'region' => 'sidebar_first',
     );
-    $this->drupalPost('admin/structure/block/add/example_configurable_text/' . $theme_name , $edit, t('Save block'));
-    $this->assertText(t('The block configuration has been saved.'));
-    $this->assertText($edit['settings[label]']);
-
-    $this->drupalGet('admin/structure/block');
-    $this->assertLinkByHref(url('admin/structure/block/manage/' . $theme_name . '.block_example_example_configurable_text/configure'));
-
-    $edit = array(
-      'settings[label]' => t('Configurable block to be uppercased'),
+    $this->drupalPlaceBlock('example_configurable_text', $example_configurable_text, $theme_name);
+    $example_uppercase = array(
+      'label' => t('Configurable block to be uppercased'),
       'machine_name' => 'uppercased_block',
-      'region' => 'sidebar_first',
     );
-    $this->drupalPost('admin/structure/block/add/example_uppercase/' . $theme_name, $edit, t('Save block'));
-
-    $edit = array(
-      'settings[label]' => t('Example: empty block'),
+    $this->drupalPlaceBlock('example_uppercase', $example_uppercase, $theme_name);
+    $example_empty = array(
+      'label' => t('Example: empty block'),
       'machine_name' => 'block_example_example_empty',
-      'region' => 'sidebar_first',
     );
-    $this->drupalPost('admin/structure/block/add/example_empty/' . $theme_name, $edit, t('Save block'));
+    $this->drupalPlaceBlock('example_empty', $example_empty, $theme_name);
 
-    // Verify that blocks are not shown
+    // Verify that blocks are there. Empty block will not be shown, because it is empty.
     $this->drupalGet('/');
-    $this->assertRaw(t('Title of first block (example_configurable_text)'), 'Block configurable test not found.');
-    $this->assertNoRaw(t('Title of second block (example_empty)'), 'Block empty not found.');
+    $this->assertRaw($example_configurable_text['label'], 'Block configurable test not found.');
+    $this->assertNoRaw($example_uppercase['label'], 'Block uppercase with normal label not found.');
+    $this->assertRaw(drupal_strtoupper($example_uppercase['label']), 'Block uppercase with uppercased label found.');
+    $this->assertNoRaw($example_empty['label'], 'Block empty not found.');
 
-    // Verify that blocks are there. Empty block will not be shown, because it is empty
-    $this->drupalGet('/');
-    $this->assertRaw(t('Title of first block (example_configurable_text)'), 'Block configurable text found.');
-
-    // Change content of configurable text block
+    // Change content of configurable text block.
     $edit = array(
       'settings[block_example_string_text]' => $this->randomName(),
     );
-    $this->drupalPost('admin/structure/block/manage/' . $theme_name . '.block_example_example_configurable_text/configure', $edit, t('Save block'));
+    $this->drupalPost('admin/structure/block/manage/' . $theme_name . '.block_example_example_configurable_text', $edit, t('Save block'));
 
-    // Verify that new content is shown
+    // Verify that new content is shown.
     $this->drupalGet('/');
     $this->assertRaw($edit['settings[block_example_string_text]'], 'Content of configurable text block successfully verified.');
   }
