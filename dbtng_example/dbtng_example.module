@@ -404,14 +404,14 @@ function dbtng_example_form_add($form, &$form_state) {
  * Submit handler for 'add entry' form.
  */
 function dbtng_example_form_add_submit($form, &$form_state) {
-  global $user;
+  $account = \Drupal::request()->attributes->get('_account');
 
   // Save the submitted entry.
   $entry = array(
     'name'    => $form_state['values']['name'],
     'surname' => $form_state['values']['surname'],
     'age'     => $form_state['values']['age'],
-    'uid'     => $user->uid,
+    'uid'     => $account->id(),
   );
   $return = dbtng_example_entry_insert($entry);
   if ($return) {
@@ -504,7 +504,7 @@ function dbtng_example_form_update_callback($form, $form_state) {
  * Submit handler for 'update entry' form.
  */
 function dbtng_example_form_update_submit($form, &$form_state) {
-  global $user;
+  $account = \Drupal::request()->attributes->get('_account');
 
   // Save the submitted entry.
   $entry = array(
@@ -512,7 +512,7 @@ function dbtng_example_form_update_submit($form, &$form_state) {
     'name' => $form_state['values']['name'],
     'surname' => $form_state['values']['surname'],
     'age' => $form_state['values']['age'],
-    'uid' => $user->uid,
+    'uid' => $account->id(),
   );
   $count = dbtng_example_entry_update($entry);
   drupal_set_message(t('Updated entry @entry (@count row updated)', array('@count' => $count, '@entry' => print_r($entry, TRUE))));
