@@ -1,0 +1,120 @@
+<?php
+/**
+ * @file
+ *   Demonstrates use of the Cron API in Drupal - hook_cron().
+ */
+
+/**
+ * @defgroup cron_example Example: Cron
+ * @ingroup examples
+ * @{
+ * Example using Cron API, including hook_cron() and hook_queue_info().
+ *
+ * This example is part of the Examples for Developers Project
+ * which you can download and experiment with at
+ * http://drupal.org/project/examples
+ */
+
+/**
+ * Implements hook_cron().
+ *
+ * hook_cron() is the traditional (pre-Drupal 7) hook for doing "background"
+ * processing. It gets called every time the Drupal cron runs and must decide
+ * what it will do.
+ *
+ * In this example, it does a watchdog() call after the time named in
+ * the variable 'cron_example_next_execution' has arrived, and then it
+ * resets that variable to a time in the future.
+ */
+function cron_example_cron() {
+  $config = Drupal::config('examples.cron');
+  // Default to an hourly interval. Of course, cron has to be running at least
+  // hourly for this to work.
+  $interval = $config->get('interval');
+  $interval = !empty($interval) ? $interval : 3600;
+
+  // We usually don't want to act every time cron runs (which could be every
+  // minute) so keep a time for the next run in a variable.
+  $next_execution = $config->get('next_execution');
+  $next_execution = !empty($next_execution) ? $next_execution : 0;
+  if (time() >= $next_execution) {
+    // This is a silly example of a cron job.
+    // It just makes it obvious that the job has run without
+    // making any changes to your database.
+    watchdog('cron_example', 'cron_example ran');
+    if (!empty($GLOBALS['cron_example_show_status_message'])) {
+      drupal_set_message(t('cron_example executed at %time', array('%time' => date_iso8601(time()))));
+    }
+    $config->set('next_execution', time() + $interval)->save();
+  }
+}
+
+
+/**
+ * Implements hook_queue_info().
+ *
+ * hook_queue_info() and family are new since Drupal 7, and allow any
+ * process to add work to the queue to be acted on when cron runs. Queues are
+ * described and worker callbacks are provided, and then only the worker
+ * callback needs to be implemented.
+ *
+ * All the details of queue use are done by the cron_queue implementation, so
+ * one doesn't need to know much about DrupalQueue().
+ *
+ * @see queue_example.module
+ */
+function cron_example_queue_info() {
+  $queues['cron_example_queue_1'] = array(
+    'worker callback' => 'cron_example_queue_1_worker',
+    'cron' => array(
+      // One second max runtime per cron run.
+      'time' => 1,
+    ),
+  );
+  $queues['cron_example_queue_2'] = array(
+    'worker callback' => 'cron_example_queue_2_worker',
+    'cron' => array(
+      'time' => 20,
+    ),
+  );
+  return $queues;
+}
+
+/**
+ * Queue worker for Queue 1.
+ *
+ * @param $item
+ *   Any object to be worked on.
+ */
+function cron_example_queue_1_worker($item) {
+  cron_example_queue_report_work(1, $item);
+}
+
+/**
+ * Queue worker for Queue 2.
+ *
+ * @param $item
+ *   Any object to be worked on.
+ */
+function cron_example_queue_2_worker($item) {
+  cron_example_queue_report_work(2, $item);
+}
+
+/**
+ * Simple reporter for the workers.
+ *
+ * @param $worker
+ *   (integer) worker number
+ * @param $item
+ *   (object) the $item which was stored in the cron queue.
+ */
+function cron_example_queue_report_work($worker, $item) {
+  if (!empty($GLOBALS['cron_example_show_status_message'])) {
+    drupal_set_message(t('Queue @worker worker processed item with sequence @sequence created at @time', array('@worker' => $worker, '@sequence' => $item->sequence, '@time' => date_iso8601($item->created))));
+  }
+  watchdog('cron_example', 'Queue @worker worker processed item with sequence @sequence created at @time', array('@worker' => $worker, '@sequence' => $item->sequence, '@time' => date_iso8601($item->created)));
+}
+
+/**
+ * @} End of "defgroup cron_example".
+ */
