@@ -1,7 +1,0 @@
-# In order to create pages is necessary to define routes for them.
-phpunit_example_description:
-  pattern: 'examples/page_example'
-  defaults:
-    _content: '\Drupal\phpunit_example\Controller\PHPUnitExampleController::description'
-  requirements:
-    _access: 'TRUE'
