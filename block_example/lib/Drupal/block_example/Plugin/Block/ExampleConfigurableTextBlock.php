@@ -23,9 +23,9 @@ use Drupal\Core\Annotation\Translation;
 class ExampleConfigurableTextBlock extends BlockBase {
 
   /**
-   * Overrides \Drupal\block\BlockBase::settings().
+   * Overrides \Drupal\block\BlockBase::defaultConfiguration().
    */
-  public function settings() {
+  public function defaultConfiguration() {
     return array(
       'block_example_string' => t('A default value. This block was created at %time', array('%time' => date('c'))),
       'cache' => DRUPAL_CACHE_PER_ROLE,
