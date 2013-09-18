@@ -1,7 +1,7 @@
 # In order to create pages is necessary to define routes for them. The
 # following lines defines three of them for this module.
 page_example_description:
-  pattern: 'examples/page_example'
+  path: 'examples/page_example'
   defaults:
     _content: '\Drupal\page_example\Controller\PageExampleController::description'
   requirements:
@@ -10,7 +10,7 @@ page_example_description:
 # the menu system will first look for a route with that path. In this case it
 # will find a match, and execute the _content callback.
 page_example_simple:
-  pattern: 'examples/page_example/simple'
+  path: 'examples/page_example/simple'
   defaults:
     _content: '\Drupal\page_example\Controller\PageExampleController::simple'
   requirements:
@@ -27,7 +27,7 @@ page_example_simple:
 # the function after the match, the function can do additional checking or
 # make use of them before executing the callback function.
 page_example_arguments:
-  pattern: 'examples/page_example/arguments/{first}/{second}'
+  path: 'examples/page_example/arguments/{first}/{second}'
   defaults:
     _content: '\Drupal\page_example\Controller\PageExampleController::arguments'
   requirements:
