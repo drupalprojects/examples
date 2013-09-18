@@ -7,18 +7,17 @@
 
 namespace Drupal\block_example\Plugin\Block;
 
+use Drupal\block\Annotation\Block;
 use Drupal\block\BlockBase;
 use Drupal\Core\Annotation\Translation;
-use Drupal\Component\Annotation\Plugin;
 
 /**
  * Provides a 'Example: empty block' block.
  *
- * @Plugin(
+ * @Block(
  *   id = "example_empty",
  *   subject = @Translation("Example: empty block"),
- *   admin_label = @Translation("Example: empty block"),
- *   module = "block_example"
+ *   admin_label = @Translation("Example: empty block")
  * )
  */
 class ExampleEmptyBlock extends BlockBase {

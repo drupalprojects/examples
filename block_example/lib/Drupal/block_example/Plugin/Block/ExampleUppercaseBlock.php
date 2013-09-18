@@ -7,18 +7,17 @@
 
 namespace Drupal\block_example\Plugin\Block;
 
+use Drupal\block\Annotation\Block;
 use Drupal\block\BlockBase;
 use Drupal\Core\Annotation\Translation;
-use Drupal\Component\Annotation\Plugin;
 
 /**
  * Provides a 'Example: uppercase this please' block.
  *
- * @Plugin(
+ * @Block(
  *   id = "example_uppercase",
  *   subject = @Translation("uppercase this please"),
- *   admin_label = @Translation("Example: uppercase this please"),
- *   module = "block_example"
+ *   admin_label = @Translation("Example: uppercase this please")
  * )
  */
 class ExampleUppercaseBlock extends BlockBase {

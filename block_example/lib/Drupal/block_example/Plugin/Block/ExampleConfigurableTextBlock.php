@@ -7,18 +7,17 @@
 
 namespace Drupal\block_example\Plugin\Block;
 
+use Drupal\block\Annotation\Block;
 use Drupal\block\BlockBase;
 use Drupal\Core\Annotation\Translation;
-use Drupal\Component\Annotation\Plugin;
 
 /**
  * Provides a 'Example: configurable text string' block.
  *
- * @Plugin(
+ * @Block(
  *   id = "example_configurable_text",
  *   subject = @Translation("Title of first block (example_configurable_text)"),
- *   admin_label = @Translation("Title of first block (example_configurable_text)"),
- *   module = "block_example"
+ *   admin_label = @Translation("Title of first block (example_configurable_text)")
  * )
  */
 class ExampleConfigurableTextBlock extends BlockBase {
