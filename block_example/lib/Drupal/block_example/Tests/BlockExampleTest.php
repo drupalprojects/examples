@@ -80,7 +80,7 @@ class BlockExampleTest extends WebTestBase {
     $edit = array(
       'settings[block_example_string_text]' => $this->randomName(),
     );
-    $this->drupalPost('admin/structure/block/manage/' . $theme_name . '.block_example_example_configurable_text', $edit, t('Save block'));
+    $this->drupalPostForm('admin/structure/block/manage/' . $theme_name . '.block_example_example_configurable_text', $edit, t('Save block'));
 
     // Verify that new content is shown.
     $this->drupalGet('/');

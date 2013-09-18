@@ -49,17 +49,17 @@ class CronExampleTestCase extends WebTestBase {
 
     // Initial run should cause cron_example_cron() to fire.
     $post = array();
-    $this->drupalPost('examples/cron_example', $post, t('Run cron now'));
+    $this->drupalPostForm('examples/cron_example', $post, t('Run cron now'));
     $this->assertText(t('cron_example executed at'));
 
     // Forcing should also cause cron_example_cron() to fire.
     $post['cron_reset'] = TRUE;
-    $this->drupalPost(NULL, $post, t('Run cron now'));
+    $this->drupalPostForm(NULL, $post, t('Run cron now'));
     $this->assertText(t('cron_example executed at'));
 
     // But if followed immediately and not forced, it should not fire.
     $post['cron_reset'] = FALSE;
-    $this->drupalPost(NULL, $post, t('Run cron now'));
+    $this->drupalPostForm(NULL, $post, t('Run cron now'));
     $this->assertNoText(t('cron_example executed at'));
 
 
@@ -68,17 +68,17 @@ class CronExampleTestCase extends WebTestBase {
       'num_items' => 5,
       'queue' => 'cron_example_queue_1',
     );
-    $this->drupalPost(NULL, $post, t('Add jobs to queue'));
+    $this->drupalPostForm(NULL, $post, t('Add jobs to queue'));
     $this->assertText('There are currently 5 items in queue 1 and 0 items in queue 2');
     $post = array(
       'num_items' => 100,
       'queue' => 'cron_example_queue_2',
     );
-    $this->drupalPost(NULL, $post, t('Add jobs to queue'));
+    $this->drupalPostForm(NULL, $post, t('Add jobs to queue'));
     $this->assertText('There are currently 5 items in queue 1 and 100 items in queue 2');
 
     $post = array();
-    $this->drupalPost('examples/cron_example', $post, t('Run cron now'));
+    $this->drupalPostForm('examples/cron_example', $post, t('Run cron now'));
     $this->assertPattern('/Queue 1 worker processed item with sequence 5 /');
     $this->assertPattern('/Queue 2 worker processed item with sequence 100 /');
   }

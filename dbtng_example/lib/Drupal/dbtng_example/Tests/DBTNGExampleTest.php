@@ -44,7 +44,7 @@ class DBTNGExampleTest extends WebTestBase {
 
     //Test the add tab.
     // Add the new entry.
-    $this->drupalPost('examples/dbtng/add',
+    $this->drupalPostForm('examples/dbtng/add',
       array('name'  => 'Some', 'surname' => 'Anonymous', 'age' => 33), t('Add'));
     // Now find the new entry.
     $this->drupalGet('examples/dbtng');
@@ -63,7 +63,7 @@ class DBTNGExampleTest extends WebTestBase {
     $entry = $result[0];
     unset($entry->uid);
     $entry->name = 'NewFirstName';
-    $this->drupalPost('examples/dbtng/update',
+    $this->drupalPostForm('examples/dbtng/update',
       (array)$entry, t('Update'));
     // Now find the new entry.
     $this->drupalGet('examples/dbtng');
