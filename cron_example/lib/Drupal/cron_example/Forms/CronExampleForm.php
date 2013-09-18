@@ -6,12 +6,12 @@
 
 namespace Drupal\cron_example\Forms;
 
-use Drupal\system\SystemConfigFormBase;
+use Drupal\Core\Form\ConfigFormBase;
 
 /**
  * Form with examples on how to use cron.
  */
-class CronExampleForm extends SystemConfigFormBase {
+class CronExampleForm extends ConfigFormBase {
 
   /**
    * {@inheritdoc}
