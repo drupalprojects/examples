@@ -10,18 +10,18 @@ namespace Drupal\page_example\Controller;
 use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
 
 /**
- * Controller routines for filter routes.
+ * Controller routines for page example routes.
  */
 class PageExampleController {
 
   /**
-   * Displays a page with a descriptive page.
+   * Constructs a page with descriptive content.
    *
    * Our router maps this method to the path 'examples/page_example'.
    */
   function description() {
     $build = array(
-      '#markup' => t('<p>The page_example provides two pages, "simple" and "arguments".</p><p>The <a href="@simple_link">simple page</a> just returns a renderable array for display.</p><p>The <a href="@arguments_link">arguments page</a> takes two arguments and displays them, as in @arguments_link</p>', array('@simple_link' => url('examples/page_example/simple', array('absolute' => TRUE)), '@arguments_link' => url('examples/page_example/arguments/23/56', array('absolute' => TRUE))))
+      '#markup' => t('<p>The Page example module provides two pages, "simple" and "arguments".</p><p>The <a href="@simple_link">simple page</a> just returns a renderable array for display.</p><p>The <a href="@arguments_link">arguments page</a> takes two arguments and displays them, as in @arguments_link</p>', array('@simple_link' => url('examples/page_example/simple', array('absolute' => TRUE)), '@arguments_link' => url('examples/page_example/arguments/23/56', array('absolute' => TRUE))))
     );
 
     return $build;
@@ -30,16 +30,12 @@ class PageExampleController {
   /**
    * Constructs a simple page.
    *
-   * The simple _content callback, mapped to the path
-   * 'examples/page_example/simple'.
+   * The router _content callback, maps the path 'examples/page_example/simple'
+   * to this method.
    *
-   * _content callbacks return a renderable array with the content area of the
-   * page. The theme system will later render and surround the content in the
+   * _content callbacks return a renderable array for the content area of the
+   * page. The theme system will later render and surround the content with the
    * appropriate blocks, navigation, and styling.
-   *
-   * @todo: Is this paragraph valid?
-   * If you do not want to use the theme system (for example for outputting an
-   * image or XML), just return the right response object.
    */
   function simple() {
     return array(
@@ -54,12 +50,14 @@ class PageExampleController {
    * 'examples/page_example/arguments/{first}/{second}'.
    *
    * The arguments in brackets are passed to this callback from the page URL.
+   * The placeholder names "first" and "second" can have any value but should
+   * match the callback method variable names; i.e. $first and $second.
    *
    * This function also demonstrates a more complex render array in the returned
-   * values. Instead of just rendering the HTML with a theme('item_list'), the
-   * list is left unrendered, and a #theme attached to it so that it can be
-   * rendered as late as possible, giving more parts of the system a chance to
-   * change it if necessary.
+   * values. Instead of rendering the HTML with theme('item_list'), content is
+   * left un-rendered, and the theme function name is set using #theme. This
+   * content will now be rendered as late as possible, giving more parts of the
+   * system a chance to change it if necessary.
    *
    * Consult @link http://drupal.org/node/930760 Render Arrays documentation
    * @endlink for details.
@@ -92,4 +90,5 @@ class PageExampleController {
     );
     return $render_array;
   }
+
 }

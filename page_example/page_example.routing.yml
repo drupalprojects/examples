@@ -1,31 +1,46 @@
-# In order to create pages is necessary to define routes for them. The
-# following lines defines three of them for this module.
+# In order to to create pages it is necessary to define routes for them. A route
+# maps a URL path to a controller. It defines with what function or method will
+# be called when a URL is accessed. The following lines defines three of them
+# for this module.
+
+# Menu items corresponding to these URLs are defined separately in the hook_menu
+# implementation of this module.
+# @see page_example_menu()
+
+# If the user accesses http://example.com/?q=examples/page_example, the routing
+# system will look for a route with that path. In this case it will find a
+# match, and execute the _content callback. In this case the callback is defined
+# as a classname ("\Drupal\page_example\Controller\PageExampleController")
+# and a method ("description"). Access to this path is not restricted.
 page_example_description:
   path: 'examples/page_example'
   defaults:
     _content: '\Drupal\page_example\Controller\PageExampleController::description'
   requirements:
     _access: 'TRUE'
+
 # If the user accesses http://example.com/?q=examples/page_example/simple,
-# the menu system will first look for a route with that path. In this case it
-# will find a match, and execute the _content callback.
+# the routing system will look for a route with that path. In this case it will
+# find a match, and execute the _content callback. Access to this path requires
+# "access simple page" permission.
 page_example_simple:
   path: 'examples/page_example/simple'
   defaults:
     _content: '\Drupal\page_example\Controller\PageExampleController::simple'
   requirements:
     _permission: 'access simple page'
-# @fixme Update this comment.
+
 # If the user accesses
-# http://example.com/?q=examples/page_example/arguments/1/2, the routing
-# system will first look for examples/page_example/arguments/1/2. Not finding
-# a match, it will look for examples/page_example/arguments/1/%. Again not
-# finding a match, it will look for examples/page_example/arguments/%/2.
-# Yet again not finding a match, it will look for
-# examples/page_example/arguments/%/%. This time it finds a match, and so will
-# execute page_example_arguments(1, 2). Since the parameters are passed to
-# the function after the match, the function can do additional checking or
-# make use of them before executing the callback function.
+# http://example.com/?q=examples/page_example/arguments/1/2, the routing system
+# will first look for examples/page_example/arguments/1/2. Not finding a match,
+# it will look for examples/page_example/arguments/1/{*}. Again not finding a
+# match, it will look for examples/page_example/arguments/{*}/2. Yet again not
+# finding a match, it will look for examples/page_example/arguments/{*}/{*}.
+# This time it finds a match, and so will execute page_example_arguments(1, 2).
+# Since the parameters are passed to the function after the match, the function
+# can do additional checking or make use of them before executing the callback
+# function. The placeholder names "first" and "second" are arbitrary but must
+# match the variable names in the callback method, e.g. "$first" and "$second".
 page_example_arguments:
   path: 'examples/page_example/arguments/{first}/{second}'
   defaults:

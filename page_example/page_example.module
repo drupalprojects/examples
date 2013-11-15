@@ -23,13 +23,16 @@
  * for the module as a whole or for specific paths. Where the help appears
  * depends on the $path specified.
  *
- * In the first example below, the help text will appear on the simple page
- * defined in hook_menu below in the region designated for help text.
+ * Help text will be displayed in the region designated for help text. Typically
+ * this is the 'Help' region which can be found at admin/structure/block.
  *
- * In the second example, the text will be available through the module page as
- * a link beside the module or on the admin help page (admin/help) in the list
- * of help topics using the name of the module. To specify help in the admin
- * section use the module name in the path as in the second case below.
+ * The help text in the first example below, will appear on the simple page at
+ * examples/page_example/simple.
+ *
+ * The second example text will be available on the admin help page (admin/help)
+ * in the list of help topics using the name of the module. To specify help in
+ * the admin section combine the path and the module name using '#' as in the
+ * example below.
  *
  * @see hook_help()
  */
@@ -50,7 +53,7 @@ function page_example_help($path, $arg) {
  *
  * Since the access to our new custom pages will be granted based on
  * special permissions, we need to define what those permissions are here.
- * This ensures that they are available to enable on the user role
+ * This ensures that they are available to enable on the permissions
  * administration pages.
  */
 function page_example_permission() {
@@ -69,14 +72,17 @@ function page_example_permission() {
 /**
  * Implements hook_menu().
  *
- * We will define some menu items, and their paths will be interpreted as follows:
+ * This hook defines menu items, links that appear in a menu. Here we define
+ * menu links with their title, path, description etc. All things related to
+ * handling the page request, like access control and request handling is
+ * defined in the routing definition in page_example.routing.yml.
  *
  * @see hook_menu()
  * @see menu_example
  */
 function page_example_menu() {
 
-  // This menu item will be created in the default menu, usually Navigation.
+  // These menu item will be created in the Tools menu, which is the default.
   $items['examples/page_example'] = array(
     'title' => 'Page Example',
     'route_name' => 'page_example_description',
