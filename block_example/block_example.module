@@ -1,9 +1,9 @@
 <?php
+
 /**
  * @file
  * Module file for block_example.
  */
-
 /**
  * @defgroup block_example Example: Block
  * @ingroup examples
@@ -22,21 +22,10 @@
  */
 function block_example_menu() {
   $items['examples/block_example'] = array(
-    'page callback' => 'block_example_page',
-    'access callback' => TRUE,
     'title' => 'Block Example',
+    'route_name' => 'block_example.description',
   );
   return $items;
-}
-
-/**
- * Simple page function to explain what the block example is about.
- */
-function block_example_page() {
-  $page = array(
-    '#markup' => t('The Block Example provides two sample blocks which demonstrate the various block APIs. To experiment with the blocks, enable and configure them on <a href="@url">the block admin page</a>.', array('@url' => url('admin/structure/block'))),
-  );
-  return $page;
 }
 
 /**
