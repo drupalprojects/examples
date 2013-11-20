@@ -107,8 +107,9 @@ class PageExampleTest extends WebTestBase {
     //$this->drupalGet('examples/page_example/arguments/' . $first . '/' . $this->randomString());
     //$this->assertResponse(403, 'Invalid argument for arguments content successfully verified');
 
-    // Verify invalid argument call to arguments content.
-    $this->drupalGet('examples/page_example/arguments/' . $this->randomString() . '/' . $second);
+    // Verify invalid argument call to arguments content. Add a_ to make sure
+    // that the random string isn't numeric.
+    $this->drupalGet('examples/page_example/arguments/' . 'a_' . $this->randomString() . '/' . $second);
     $this->assertResponse(403, 'Invalid argument for arguments content successfully verified');
 
     // Check if user can't access simple page
