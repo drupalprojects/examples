@@ -98,9 +98,11 @@ class PageExampleTest extends WebTestBase {
     $this->assertRaw(t('Second number was @number.', array('@number' => $second)), 'Second argument successfully verified.');
     $this->assertRaw(t('The total was @number.', array('@number' => $first + $second)), 'arguments content successfully verified.');
 
+    // @fixme Revisit to readd if new routing system provides a way to do
+    // inclomplete arguments call and we implement it on this example.
     // Verify incomplete argument call to arguments content.
-    $this->drupalGet('examples/page_example/arguments/' . $first . '/');
-    $this->assertText('provides two pages');
+//    $this->drupalGet('examples/page_example/arguments/' . $first . '/');
+//    $this->assertText('provides two pages');
     // Verify invalid argument call to arguments content.
     $this->drupalGet('examples/page_example/arguments/' . $first . '/' . urlencode($this->randomString()));
     $this->assertResponse(403, 'Invalid argument for arguments content successfully verified');
