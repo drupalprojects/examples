@@ -101,18 +101,19 @@ class PageExampleTest extends WebTestBase {
     // @fixme Revisit to readd if new routing system provides a way to do
     // inclomplete arguments call and we implement it on this example.
     // Verify incomplete argument call to arguments content.
-    // $this->drupalGet('examples/page_example/arguments/' . $first . '/');
-    // $this->assertText('provides two pages');
+    //$this->drupalGet('examples/page_example/arguments/' . $first . '/');
+    //$this->assertText('provides two pages');
     // Verify invalid argument call to arguments content.
-    //$this->drupalGet('examples/page_example/arguments/' . $first . '/' . $this->randomString());
+    //$this->drupalGet('examples/page_example/arguments/' . $first . '/' . urlencode($this->randomString()));
     //$this->assertResponse(403, 'Invalid argument for arguments content successfully verified');
 
     // Verify invalid argument call to arguments content. Add a_ to make sure
     // that the random string isn't numeric.
-    $this->drupalGet('examples/page_example/arguments/' . 'a_' . $this->randomString() . '/' . $second);
+    $this->drupalGet('examples/page_example/arguments/' . urlencode('a_' . $this->randomString()) . '/' . $second);
     $this->assertResponse(403, 'Invalid argument for arguments content successfully verified');
 
     // Check if user can't access simple page
     $this->pageExampleVerifyNoAccess('examples/page_example/simple');
   }
+
 }
