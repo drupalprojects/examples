@@ -1,0 +1,6 @@
+cache_example:
+  path: 'examples/cache_example'
+  defaults:
+    _form: '\Drupal\cache_example\Forms\CacheExampleForm'
+  requirements:
+    _access: 'TRUE'
