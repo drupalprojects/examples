@@ -1,5 +1,5 @@
-name: Cache Example
+name: Cache example
 description: 'An example outlining how to use Cache API.'
-package: Examples
+package: Example modules
 core: 8.x
 type: module
