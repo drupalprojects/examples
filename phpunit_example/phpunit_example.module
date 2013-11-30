@@ -1,0 +1,53 @@
+<?php
+/**
+ * @file
+ * Module file for phpunit_example.
+ */
+
+/**
+ * @defgroup phpunit_example Example: PHPUnit
+ * @ingroup examples
+ * @{
+ * This example demonstrates PHPUnit for Drupal 8 unit testing.
+ */
+
+/**
+ * Implements hook_help().
+ *
+ * @see hook_help()
+ *
+ * @return string
+ *   Translated string for the help text.
+ */
+function phpunit_example_help($path, $arg) {
+  switch ($path) {
+    case 'examples/phpunit_example':
+      // Help text for the simple page registered for this path.
+      return t('This is the help text for PHPUnit example.');
+  }
+}
+
+/**
+ * Implements hook_menu().
+ *
+ * We will define a single menu route, so that we can give the user some
+ * helpful introductory information.
+ *
+ * @see hook_menu()
+ * @see menu_example
+ *
+ * @return array
+ *   Complex array describing our menu item.
+ */
+function phpunit_example_menu() {
+  $items['examples/phpunit_example'] = array(
+    'title' => 'PHPUnit Example',
+    'route_name' => 'phpunit_example_description',
+    'expanded' => TRUE,
+  );
+  return $items;
+}
+
+/**
+ * @} End of "defgroup phpunit_example".
+ */
