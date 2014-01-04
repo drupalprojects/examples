@@ -60,7 +60,7 @@ class PageExampleTest extends WebTestBase {
   /**
    * Main test.
    *
-   * Login user, create an example node, and test blog functionality through
+   * Login user, create an example node, and test page functionality through
    * the admin and user interfaces.
    */
   function testPageExampleBasic() {
@@ -94,7 +94,7 @@ class PageExampleTest extends WebTestBase {
     $this->webUser = $this->drupalCreateUser(array('access arguments page'));
     $this->drupalLogin($this->webUser);
 
-    // Verify that user can access simple content.
+    // Verify that user can access arguments content.
     $first = self::randomNumber(3);
     $second = self::randomNumber(3);
     $this->drupalGet('examples/page_example/arguments/' . $first . '/' . $second);
@@ -104,14 +104,12 @@ class PageExampleTest extends WebTestBase {
     $this->assertRaw(t('Second number was @number.', array('@number' => $second)), 'Second argument successfully verified.');
     $this->assertRaw(t('The total was @number.', array('@number' => $first + $second)), 'arguments content successfully verified.');
 
-    // @todo: These assertions sporadically fail. For now we scapegoat the
-    // alpha nature of Drupal 8. Revisit and make better.
     // Verify incomplete argument call to arguments content.
-//    $this->drupalGet('examples/page_example/arguments/' . $first . '/');
-//    $this->assertText('provides two pages');
+    $this->drupalGet('examples/page_example/arguments/' . $first . '/');
+    $this->assertResponse(404, 'User got 404 on incomplete arguments request.');
     // Verify invalid argument call to arguments content.
-//    $this->drupalGet('examples/page_example/arguments/' . $first . '/' . urlencode($this->randomString()));
-//    $this->assertResponse(403, 'Invalid argument for arguments content successfully verified');
+    $this->drupalGet('examples/page_example/arguments/' . $first . '/a_' . urlencode($this->randomString()));
+    $this->assertResponse(403, 'User got 403 on invalid argument for arguments.');
 
     // Verify invalid argument call to arguments content. Add a_ to make sure
     // that the random string isn't numeric.
