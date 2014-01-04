@@ -1,0 +1,8 @@
+name: 'Tour example'
+type: module
+description: 'An example of how to create a tour in Drupal 8.'
+package: Example modules
+core: 8.x
+dependencies:
+  - tour
+  - toolbar
