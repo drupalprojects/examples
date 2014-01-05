@@ -107,14 +107,18 @@ class PageExampleTest extends WebTestBase {
     // Verify incomplete argument call to arguments content.
     $this->drupalGet('examples/page_example/arguments/' . $first . '/');
     $this->assertResponse(404, 'User got 404 on incomplete arguments request.');
-    // Verify invalid argument call to arguments content.
-    $this->drupalGet('examples/page_example/arguments/' . $first . '/a_' . urlencode($this->randomString()));
-    $this->assertResponse(403, 'User got 403 on invalid argument for arguments.');
 
-    // Verify invalid argument call to arguments content. Add a_ to make sure
-    // that the random string isn't numeric.
-    $this->drupalGet('examples/page_example/arguments/' . urlencode('a_' . $this->randomString()) . '/' . $second);
-    $this->assertResponse(403, 'Invalid argument for arguments content successfully verified');
+    // Verify 403 for invalid second argument. Add 'a_' to make sure the
+    // random string isn't numeric.
+    $this->drupalGet('examples/page_example/arguments/' . $first . '/' .
+      urlencode( 'a_' . $this->randomString()));
+    $this->assertResponse(403, 'User got 403 for string argument in second position.');
+
+    // Verify 403 for invalid first argument. Add 'a_' to make sure the
+    // random string isn't numeric.
+    $this->drupalGet('examples/page_example/arguments/' .
+      urlencode('a_' . $this->randomString()) . '/' . $second);
+    $this->assertResponse(403, 'User got 403 for string argument in first position.');
 
     // Check if user can't access simple page
     $this->pageExampleVerifyNoAccess('examples/page_example/simple');
