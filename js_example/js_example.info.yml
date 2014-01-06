@@ -1,0 +1,5 @@
+name: 'JavaScript Example'
+description: 'An example module showing how to use some of the new JavaScript features in Drupal 8'
+type: module
+package: 'Example modules'
+core: 8.x

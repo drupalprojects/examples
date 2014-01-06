@@ -1,0 +1,52 @@
+<?php
+
+/**
+ * @file
+ * Examples showing how to use some of the new JavaScript features in Drupal 8.
+ */
+
+/**
+ * @defgroup js_example Example: JavaScript
+ * @ingroup examples
+ * @{
+ * Examples using Drupal 8's built-in JavaScript.
+ */
+
+/**
+ * Implements hook_theme().
+ */
+function js_example_theme() {
+  return array(
+    'my_accordion' => array(
+      'template' => 'accordion',
+      'variables' => array('title' => NULL),
+    ),
+  );
+}
+
+/**
+ * Implements hook_menu().
+ */
+function js_example_menu() {
+  $items = array();
+  $items['examples/js_example'] = array(
+    'title' => 'JavaScript Example',
+    'route_name' => 'js_example.info',
+    'expanded' => TRUE,
+  );
+  $items['examples/js_example/weights'] = array(
+    'title' => 'JS weighting in action',
+    'route_name' => 'js_example.weights',
+    'expanded' => TRUE,
+  );
+  $items['examples/js_example/accordion'] = array(
+    'title' => 'jQuery UI accordion',
+    'route_name' => 'js_example.accordion',
+    'expanded' => TRUE,
+  );
+  return $items;
+}
+
+/**
+ * @} End of "defgroup js_example".
+ */
