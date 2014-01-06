@@ -108,16 +108,12 @@ class PageExampleTest extends WebTestBase {
     $this->drupalGet('examples/page_example/arguments/' . $first . '/');
     $this->assertResponse(404, 'User got 404 on incomplete arguments request.');
 
-    // Verify 403 for invalid second argument. Add 'a_' to make sure the
-    // random string isn't numeric.
-    $this->drupalGet('examples/page_example/arguments/' . $first . '/' .
-      urlencode( 'a_' . $this->randomString()));
+    // Verify 403 for invalid second argument.
+    $this->drupalGet('examples/page_example/arguments/' . $first . '/non-numeric-argument');
     $this->assertResponse(403, 'User got 403 for string argument in second position.');
 
-    // Verify 403 for invalid first argument. Add 'a_' to make sure the
-    // random string isn't numeric.
-    $this->drupalGet('examples/page_example/arguments/' .
-      urlencode('a_' . $this->randomString()) . '/' . $second);
+    // Verify 403 for invalid first argument.
+    $this->drupalGet('examples/page_example/arguments/non-numeric-argument/' . $second);
     $this->assertResponse(403, 'User got 403 for string argument in first position.');
 
     // Check if user can't access simple page
