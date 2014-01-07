@@ -1,0 +1,18 @@
+type: locked_content_type
+uuid: 303C6419-366D-423F-897B-3489489557DA
+name: 'Example: Locked Content Type'
+description: 'Demo of a locked content type. Locking must be done in code. You must uninstall this module before you can delete the content type.'
+help: ''
+has_title: true
+title_label: Title
+settings:
+  node:
+    preview: 1
+    options:
+      status: true
+      promote: true
+      sticky: false
+      revision: false
+    submitted: true
+status: true
+langcode: en

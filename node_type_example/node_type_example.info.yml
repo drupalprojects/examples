@@ -1,0 +1,7 @@
+name: Node Type Example
+description: The simplest example of implementing a node content type in a module.
+package: Example modules
+type: module
+core: 8.x
+dependencies:
+  -node
