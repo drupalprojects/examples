@@ -50,8 +50,21 @@ class DBTNGExampleController {
         $rows[] = array_map('check_plain', $entry);
       }
       // Make a table for them.
-      $header = array(t('Id'), t('Created by'), t('Name'), t('Surname'), t('Age'));
-      $output .= theme('table', array('header' => $header, 'rows' => $rows, 'attributes' => array('id' => 'dbtng-example-advanced-list')));
+      $header = array(
+        t('Id'),
+        t('Created by'),
+        t('Name'),
+        t('Surname'),
+        t('Age')
+      );
+      $output .= theme('table', array(
+        'header' => $header,
+        'rows' => $rows,
+        'attributes' => array(
+          'id' => 'dbtng-example-advanced-list'
+         )
+        )
+      );
     }
     else {
       drupal_set_message(t('No entries meet the filter criteria (Name = "John" and Age > 18).'));

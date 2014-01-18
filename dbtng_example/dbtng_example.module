@@ -11,6 +11,7 @@
  * @link database Database abstraction layer documentation @endlink and
  * at @link http://drupal.org/node/310069 @endlink.
  */
+
 /**
  * @defgroup dbtng_example Example: Database (DBTNG)
  * @ingroup examples

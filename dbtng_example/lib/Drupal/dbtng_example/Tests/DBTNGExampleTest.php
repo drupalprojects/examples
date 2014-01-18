@@ -41,14 +41,22 @@ class DBTNGExampleTest extends WebTestBase {
   /**
    * Test the UI.
    */
-  function testUI() {
+  public function testUI() {
     // Test the basic list.
     $this->drupalGet('examples/dbtng');
     $this->assertPattern("/John[td\/<>\w]+Doe/", "Text 'John Doe' found in table");
 
-    //Test the add tab.
+    // Test the add tab.
     // Add the new entry.
-    $this->drupalPostForm('examples/dbtng/add', array('name' => 'Some', 'surname' => 'Anonymous', 'age' => 33), t('Add'));
+    $this->drupalPostForm(
+      'examples/dbtng/add',
+      array(
+        'name' => 'Some',
+        'surname' => 'Anonymous',
+        'age' => 33,
+      ),
+      t('Add')
+    );
     // Now find the new entry.
     $this->drupalGet('examples/dbtng');
     $this->assertPattern("/Some[td\/<>\w]+Anonymous/", "Text 'Some Anonymous' found in table");

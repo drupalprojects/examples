@@ -1,7 +1,7 @@
 <?php
 /**
  * @file
- *   Demonstrates use of the Cron API in Drupal - hook_cron().
+ * Demonstrates use of the Cron API in Drupal - hook_cron().
  */
 
 /**
@@ -83,7 +83,7 @@ function cron_example_queue_info() {
 /**
  * Queue worker for Queue 1.
  *
- * @param $item
+ * @param object $item
  *   Any object to be worked on.
  */
 function cron_example_queue_1_worker($item) {
@@ -93,7 +93,7 @@ function cron_example_queue_1_worker($item) {
 /**
  * Queue worker for Queue 2.
  *
- * @param $item
+ * @param object $item
  *   Any object to be worked on.
  */
 function cron_example_queue_2_worker($item) {
@@ -103,16 +103,28 @@ function cron_example_queue_2_worker($item) {
 /**
  * Simple reporter for the workers.
  *
- * @param $worker
- *   (integer) worker number
- * @param $item
- *   (object) the $item which was stored in the cron queue.
+ * @param integer $worker
+ *   Worker number.
+ * @param object $item
+ *   The $item which was stored in the cron queue.
  */
 function cron_example_queue_report_work($worker, $item) {
   if (!empty($GLOBALS['cron_example_show_status_message'])) {
-    drupal_set_message(t('Queue @worker worker processed item with sequence @sequence created at @time', array('@worker' => $worker, '@sequence' => $item->sequence, '@time' => date_iso8601($item->created))));
+    drupal_set_message(t('Queue @worker worker processed item with sequence @sequence created at @time',
+      array(
+        '@worker' => $worker,
+        '@sequence' => $item->sequence,
+        '@time' => date_iso8601($item->created))
+      )
+    );
   }
-  watchdog('cron_example', 'Queue @worker worker processed item with sequence @sequence created at @time', array('@worker' => $worker, '@sequence' => $item->sequence, '@time' => date_iso8601($item->created)));
+  watchdog('cron_example', 'Queue @worker worker processed item with sequence @sequence created at @time',
+    array(
+      '@worker' => $worker,
+      '@sequence' => $item->sequence,
+      '@time' => date_iso8601($item->created)
+    )
+  );
 }
 
 /**

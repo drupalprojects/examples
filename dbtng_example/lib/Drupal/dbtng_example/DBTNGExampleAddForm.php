@@ -14,14 +14,14 @@ use Drupal\Core\Form\FormInterface;
  */
 class DBTNGExampleAddForm implements FormInterface {
 
-  function getFormID() {
+  public function getFormID() {
     return 'dbtng_add_form';
   }
 
   /**
    * Prepare a simple form to add an entry, with all the interesting fields.
    */
-  function buildForm(array $form, array &$form_state) {
+  public function buildForm(array $form, array &$form_state) {
     $form = array();
 
     $form['add'] = array(
@@ -55,7 +55,7 @@ class DBTNGExampleAddForm implements FormInterface {
   /**
    * Validate the form.
    */
-  function validateForm(array &$form, array &$form_state) {
+  public function validateForm(array &$form, array &$form_state) {
     // Confirm that age is numeric.
     if (!intval($form_state['values']['age'])) {
       form_set_error('age', t('Age needs to be a number'));
@@ -65,7 +65,7 @@ class DBTNGExampleAddForm implements FormInterface {
   /**
    * Submit handler for 'add entry' form.
    */
-  function submitForm(array &$form, array &$form_state) {
+  public function submitForm(array &$form, array &$form_state) {
     // Gather the current user so the new record has ownership.
     $account = \Drupal::currentUser();
     // Save the submitted entry.

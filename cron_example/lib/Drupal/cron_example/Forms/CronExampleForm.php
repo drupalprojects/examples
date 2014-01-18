@@ -149,7 +149,7 @@ class CronExampleForm extends ConfigFormBase {
 
     $queue = \Drupal::queue($queue);
 
-    for ($i=1; $i <= $num_items; $i++) {
+    for ($i = 1; $i <= $num_items; $i++) {
       $item = new \stdClass();
       $item->created = time();
       $item->sequence = $i;

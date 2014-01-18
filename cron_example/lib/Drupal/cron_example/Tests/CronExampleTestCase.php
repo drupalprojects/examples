@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @file
  * Test case for testing the cron example module.
@@ -8,16 +9,22 @@
  * @addtogroup cron_example
  * @{
  */
+
 namespace Drupal\cron_example\Tests;
+
 use Drupal\simpletest\WebTestBase;
 
 /**
  * cron_example test class
  */
 class CronExampleTestCase extends WebTestBase {
-  public static $modules = array('cron_example');
-  protected $web_user;
 
+  public static $modules = array('cron_example');
+  protected $webUser;
+
+  /**
+   * {@inheritdoc}
+   */
   public static function getInfo() {
     return array(
       'name' => 'Cron example functionality',
@@ -27,21 +34,20 @@ class CronExampleTestCase extends WebTestBase {
   }
 
   /**
-   * Enable modules and create user with specific permissions.
+   * {@inheritdoc}
    */
-  function setUp() {
+  public function setUp() {
     parent::setUp();
     // Create user. Search content permission granted for the search block to
     // be shown.
-    $this->web_user = $this->drupalCreateUser(array('administer site configuration'));
-    $this->drupalLogin($this->web_user);
+    $this->webUser = $this->drupalCreateUser(array('administer site configuration'));
+    $this->drupalLogin($this->webUser);
   }
 
   /**
-   * Login user, create an example node, and test block functionality through
-   * the admin and user interfaces.
+   * Create an example node, test block through admin and user interfaces.
    */
-  function testCronExampleBasic() {
+  public function testCronExampleBasic() {
     // Pretend that cron has never been run (even though simpletest seems to
     // run it once...)
     variable_set('cron_example_next_execution', 0);
@@ -62,7 +68,6 @@ class CronExampleTestCase extends WebTestBase {
     $this->drupalPostForm(NULL, $post, t('Run cron now'));
     $this->assertNoText(t('cron_example executed at'));
 
-
     $this->assertText(t('There are currently 0 items in queue 1 and 0 items in queue 2'));
     $post = array(
       'num_items' => 5,
@@ -82,6 +87,7 @@ class CronExampleTestCase extends WebTestBase {
     $this->assertPattern('/Queue 1 worker processed item with sequence 5 /');
     $this->assertPattern('/Queue 2 worker processed item with sequence 100 /');
   }
+
 }
 
 /**

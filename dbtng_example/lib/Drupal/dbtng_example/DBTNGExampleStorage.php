@@ -1,5 +1,10 @@
 <?php
 
+/**
+ * @file
+ * Contains \Drupal\dbtng_example\DBTNGExampleStorage
+ */
+
 namespace Drupal\dbtng_example;
 
 class DBTNGExampleStorage {
@@ -14,12 +19,12 @@ class DBTNGExampleStorage {
    * and terminate your application if the exception is not handled, it is best
    * to employ try/catch.
    *
-   * @param $entry
+   * @param array $entry
    *   An array containing all the fields of the database record.
    *
    * @see db_insert()
    */
-  static function insert($entry) {
+  public static function insert($entry) {
     $return_value = NULL;
     try {
       $return_value = db_insert('dbtng_example')
@@ -37,22 +42,25 @@ class DBTNGExampleStorage {
   /**
    * Update an entry in the database.
    *
-   * @param $entry
+   * @param array $entry
    *   An array containing all the fields of the item to be updated.
    *
+   * @return integer
+   * 
    * @see db_update()
    */
-  static function update($entry) {
+  public static function update($entry) {
     try {
       // db_update()...->execute() returns the number of rows updated.
       $count = db_update('dbtng_example')
           ->fields($entry)
           ->condition('pid', $entry['pid'])
           ->execute();
-    } catch (Exception $e) {
+    }
+    catch (Exception $e) {
       drupal_set_message(t('db_update failed. Message = %message, query= %query', array(
             '%message' => $e->getMessage(),
-            '%query' => $e->query_string
+            '%query' => $e->query_string,
           )), 'error');
     }
     return $count;
@@ -67,7 +75,7 @@ class DBTNGExampleStorage {
    *
    * @see db_delete()
    */
-  static function delete($entry) {
+  public static function delete($entry) {
     db_delete('dbtng_example')
         ->condition('pid', $entry['pid'])
         ->execute();
@@ -97,8 +105,8 @@ class DBTNGExampleStorage {
    * @endcode
    *
    * But for more dynamic queries, Drupal provides the db_select()
-   * API method, so there are several ways to perform the same SQL query.
-   * See the @link http://drupal.org/node/310075 handbook page on dynamic queries. @endlink
+   * API method, so there are several ways to perform the same SQL query. See
+   * the @link http://drupal.org/node/310075 handbook page on dynamic queries. @endlink
    *
    * @code
    *   // SELECT * FROM {dbtng_example} WHERE uid = 0 AND name = 'John'
@@ -135,7 +143,8 @@ class DBTNGExampleStorage {
    *
    * @param $entry
    *   An array containing all the fields used to search the entries in the table.
-   * @return
+   *
+   * @return object
    *   An object containing the loaded entries if found.
    *
    * @see db_select()
@@ -144,7 +153,7 @@ class DBTNGExampleStorage {
    * @see http://drupal.org/node/310075
    *
    */
-  static function load($entry = array()) {
+  public static function load($entry = array()) {
     // Read all fields from the dbtng_example table.
     $select = db_select('dbtng_example', 'example');
     $select->fields('example');
@@ -157,13 +166,15 @@ class DBTNGExampleStorage {
     return $select->execute()->fetchAll();
   }
 
-  /*
+  /**
+   * Load dbtng_example records joined with user records.
+   *
    * DBTNG also helps processing queries that return several rows, providing the
    * found objects in the same query execution call.
    *
    * This function queries the database using a JOIN between users table and the
-   * example entries, to provide the username that created the entry, and creates
-   * a table with the results, processing each row.
+   * example entries, to provide the username that created the entry, and
+   * creates a table with the results, processing each row.
    *
    * SELECT
    *  e.pid as pid, e.name as name, e.surname as surname, e.age as age
@@ -178,8 +189,7 @@ class DBTNGExampleStorage {
    * @see db_select()
    * @see http://drupal.org/node/310075
    */
-
-  static function advancedLoad() {
+  public static function advancedLoad() {
     $select = db_select('dbtng_example', 'e');
     // Join the users table, so we can get the entry creator's username.
     $select->join('users', 'u', 'e.uid = u.uid');
