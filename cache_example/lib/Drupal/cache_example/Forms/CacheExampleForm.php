@@ -47,10 +47,9 @@ class CacheExampleForm extends FormBase {
       // Recursively get all files from Drupal's folder.
       $files_count = count(file_scan_directory('.', '/.*/'));
 
-
-      // Since we have recalculated, we now need to store the new data into cache.
-      // Complex data types will be automatically serialized before being saved
-      // into cache.
+      // Since we have recalculated, we now need to store the new data into
+      // cache. Complex data types will be automatically serialized before
+      // being saved into cache.
       // Here we use the default setting and create an unexpiring cache item.
       // See below for an example that creates an expiring cache item.
       \Drupal::cache()->set('cache_example_files_count', $files_count, CacheBackendInterface::CACHE_PERMANENT);
@@ -58,7 +57,6 @@ class CacheExampleForm extends FormBase {
 
     $end_time = microtime(TRUE);
     $duration = $end_time - $start_time;
-
 
     // Format intro message.
     $intro_message = '<p>' . t('This example will search the entire drupal folder and display a count of the files in it.') . ' ';
@@ -124,7 +122,7 @@ class CacheExampleForm extends FormBase {
         300 => t('5 minutes from form submission'),
       ),
       '#default_value' => -10,
-      '#description' => t('Any cache item can be set to only expire when explicitly cleared, or to expire at a given time.')
+      '#description' => t('Any cache item can be set to only expire when explicitly cleared, or to expire at a given time.'),
     );
     $form['expiration_demo']['create_cache_item'] = array(
       '#type' => 'submit',
@@ -162,7 +160,8 @@ class CacheExampleForm extends FormBase {
    * Submit handler that explicitly clears cache_example_files_count from cache.
    */
   public function expireFiles($form, &$form_state) {
-    // Clear cached data. This function will delete cached object from cache bin.
+    // Clear cached data. This function will delete cached object from cache
+    // bin.
     //
     // The first argument is cache id to be deleted. Since we've provided it
     // explicitly, it will be removed whether or not it has an associated
@@ -181,7 +180,7 @@ class CacheExampleForm extends FormBase {
   public function createExpiringItem($form, &$form_state) {
 
     $tags = array(
-      'cache_example' => array(1)
+      'cache_example' => array(1),
     );
 
     $interval = $form_state['values']['expiration'];
@@ -193,8 +192,9 @@ class CacheExampleForm extends FormBase {
       $expiration = time() + $interval;
       $expiration_friendly = format_date($expiration);
     }
-    // Set the expiration to the actual Unix timestamp of the end of the required
-    // interval. Also add a tag to it to be able to clear caches more precise.
+    // Set the expiration to the actual Unix timestamp of the end of the
+    // required interval. Also add a tag to it to be able to clear caches more
+    // precise.
     \Drupal::cache()->set('cache_example_expiring_item', $expiration_friendly, $expiration, $tags);
     drupal_set_message(t('cache_example_expiring_item was set to expire at %time', array('%time' => $expiration_friendly)));
   }
@@ -205,20 +205,24 @@ class CacheExampleForm extends FormBase {
   public function cacheClearing($form, &$form_state) {
     switch ($form_state['values']['cache_clear_type']) {
       case 'expire':
-        // Here we'll remove all cache keys in the 'cache' bin that have expired.
+        // Here we'll remove all cache keys in the 'cache' bin that have
+        // expired.
         \Drupal::cache()->garbageCollection();
         drupal_set_message(t('\Drupal::cache()->garbageCollection() was called, removing any expired cache items.'));
         break;
+
       case 'remove_all':
         // This removes all keys in a bin using a super-wildcard. This
         // has nothing to do with expiration. It's just brute-force removal.
         \Drupal::cache()->deleteAll();
         drupal_set_message(t('ALL entries in the "cache" bin were removed with \Drupal::cache()->deleteAll().'));
         break;
-        case 'remove_tag':
-        // This removes cache entries with the tag "cache_example" set to 1 in the "cache".
+
+      case 'remove_tag':
+        // This removes cache entries with the tag "cache_example" set to 1 in
+        // the "cache".
         $tags = array(
-          'cache_example' => array(1)
+          'cache_example' => array(1),
         );
         \Drupal::cache()->deleteTags($tags);
         drupal_set_message(t('Cache entries with the tag "cache_example" set to 1 in the "cache" bin were removed with \Drupal::cache()->deleteTags($tags).'));

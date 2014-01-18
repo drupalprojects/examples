@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @file
  * Test case for testing the cache example module.
@@ -8,12 +9,18 @@
  * @addtogroup cache_example
  * @{
  */
+
 namespace Drupal\cache_example\Tests;
+
 use Drupal\simpletest\WebTestBase;
 
 class CacheExampleTestCase extends WebTestBase {
+
   public static $modules = array('cache_example');
 
+  /**
+   * {@inheritdoc}
+   */
   public static function getInfo() {
     return array(
       'name' => 'Cache example functionality',
@@ -23,16 +30,19 @@ class CacheExampleTestCase extends WebTestBase {
   }
 
   /**
-   * Load cache example page and test if displaying uncached version. Reload once again and test
-   * if displaying cached version. Find reload link and click on it. Clear cache at the end and
-   * test if displaying uncached version again.
+   * Load cache example page and test if displaying uncached version.
+   *
+   * Reload once again and test if displaying cached version. Find reload link
+   * and click on it. Clear cache at the end and test if displaying uncached
+   * version again.
    */
-  function testCacheExampleBasic() {
+  public function testCacheExampleBasic() {
     // We need administrative privileges to clear the cache.
     $admin_user = $this->drupalCreateUser(array('administer site configuration'));
     $this->drupalLogin($admin_user);
 
-    // Get uncached output of cache example page and assert some things to be sure.
+    // Get uncached output of cache example page and assert some things to be
+    // sure.
     $this->drupalGet('examples/cache_example');
     $this->assertText('Source: actual file search');
     // Reload the page; the number should be cached.
@@ -46,22 +56,22 @@ class CacheExampleTestCase extends WebTestBase {
     // Create a cached item. First make sure it doesn't already exist.
     $this->assertText('Cache item does not exist');
     $this->drupalPostForm('examples/cache_example', array('expiration' => -10), t('Create a cache item with this expiration'));
-    // We should now have an already-expired item
+    // We should now have an already-expired item.
     $this->assertText('Cache item exists and is set to expire');
-    // Now do the expiration operation
+    // Now do the expiration operation.
     $this->drupalPostForm('examples/cache_example', array('cache_clear_type' => 'expire'), t('Clear or expire cache'));
     // And verify that it was removed.
     $this->assertText('Cache item does not exist');
 
     // Create a cached item. This time we'll make it not expire.
     $this->drupalPostForm('examples/cache_example', array('expiration' => 'never_remove'), t('Create a cache item with this expiration'));
-    // We should now have an never-remove item
+    // We should now have an never-remove item.
     $this->assertText('Cache item exists and is set to expire at Never expires');
-    // Now do the expiration operation
+    // Now do the expiration operation.
     $this->drupalPostForm('examples/cache_example', array('cache_clear_type' => 'expire'), t('Clear or expire cache'));
     // And verify that it was not removed.
     $this->assertText('Cache item exists and is set to expire at Never expires');
-    // Now do full removal
+    // Now do full removal.
     $this->drupalPostForm('examples/cache_example', array('cache_clear_type' => 'remove_tag'), t('Clear or expire cache'));
     // And verify that it was removed.
     $this->assertText('Cache item does not exist');

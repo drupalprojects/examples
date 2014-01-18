@@ -4,6 +4,7 @@
  * @file
  * Module file for block_example.
  */
+
 /**
  * @defgroup block_example Example: Block
  * @ingroup examples

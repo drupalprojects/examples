@@ -35,9 +35,9 @@
 #   label:      The lable for the tip. This will be rendered in an h3 element.
 #   body:       The body of the tip. HTML markup is allowed.
 #   weight:     Tips within a tour are ordered by weight, beginning with the
-#               lowest number. Negative values are acceptible.
+#               lowest number. Negative values are acceptable.
 #   location:   Defines the location of the tip, relative to its target.
-#               Acceptible values include: top, bottom, left, & right. If the
+#               Acceptable values include: top, bottom, left, & right. If the
 #               location is not defined, the default value (bottom) will be
 #               used.
 #   attributes: Attributes provdied to the tip for various purposes. Use the

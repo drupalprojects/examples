@@ -17,8 +17,12 @@ class BlockExampleTest extends WebTestBase {
    * @var array
    */
   public static $modules = array('block', 'search', 'block_example');
-  protected $web_user;
 
+  protected $WebUser;
+
+  /**
+   * {@inheritdoc}
+   */
   public static function getInfo() {
     return array(
       'name' => 'Block example functionality',
@@ -30,19 +34,19 @@ class BlockExampleTest extends WebTestBase {
   /**
    * Enable modules and create user with specific permissions.
    */
-  function setUp() {
+  public function setUp() {
     parent::setUp();
     // Create user. Search content permission granted for the search block to
     // be shown.
-    $this->web_user = $this->drupalCreateUser(array('administer blocks', 'search content'));
+    $this->WebUser = $this->drupalCreateUser(array('administer blocks', 'search content'));
   }
 
   /**
    * Tests block_example functionality.
    */
-  function testBlockExampleBasic() {
+  public function testBlockExampleBasic() {
     // Login the admin user.
-    $this->drupalLogin($this->web_user);
+    $this->drupalLogin($this->WebUser);
     $theme_name = config('system.theme')->get('default');
 
     // Verify the blocks are listed to be added.

@@ -125,7 +125,7 @@ class Reflection_ProtectedPrivatesTest extends UnitTestCase {
     $pp = new ProtectedPrivates();
     // Use the reflection to invoke on the object.
     // This should throw an exception.
-    $sum = $privateMethod->invokeArgs($pp, array($a, $b));
+    $privateMethod->invokeArgs($pp, array($a, $b));
   }
 
   /**
