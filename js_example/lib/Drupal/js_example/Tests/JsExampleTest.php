@@ -43,7 +43,7 @@ class JsExampleTest extends WebTestBase {
       'examples/js_example/weights',
       'examples/js_example/accordion',
     );
-    foreach($paths as $path) {
+    foreach ($paths as $path) {
       $this->drupalGet($path);
       $this->assertResponse(200, 'Visited ' . $path);
     }

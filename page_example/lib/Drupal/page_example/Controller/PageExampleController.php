@@ -19,9 +19,14 @@ class PageExampleController {
    *
    * Our router maps this method to the path 'examples/page_example'.
    */
-  function description() {
+  public function description() {
     $build = array(
-      '#markup' => t('<p>The Page example module provides two pages, "simple" and "arguments".</p><p>The <a href="@simple_link">simple page</a> just returns a renderable array for display.</p><p>The <a href="@arguments_link">arguments page</a> takes two arguments and displays them, as in @arguments_link</p>', array('@simple_link' => url('examples/page_example/simple', array('absolute' => TRUE)), '@arguments_link' => url('examples/page_example/arguments/23/56', array('absolute' => TRUE))))
+      '#markup' => t('<p>The Page example module provides two pages, "simple" and "arguments".</p><p>The <a href="@simple_link">simple page</a> just returns a renderable array for display.</p><p>The <a href="@arguments_link">arguments page</a> takes two arguments and displays them, as in @arguments_link</p>',
+        array(
+          '@simple_link' => url('examples/page_example/simple', array('absolute' => TRUE)),
+          '@arguments_link' => url('examples/page_example/arguments/23/56', array('absolute' => TRUE)),
+        )
+      ),
     );
 
     return $build;
@@ -37,9 +42,9 @@ class PageExampleController {
    * page. The theme system will later render and surround the content with the
    * appropriate blocks, navigation, and styling.
    */
-  function simple() {
+  public function simple() {
     return array(
-      '#markup' => '<p>' . t('Simple page: The quick brown fox jumps over the lazy dog.') . '</p>'
+      '#markup' => '<p>' . t('Simple page: The quick brown fox jumps over the lazy dog.') . '</p>',
     );
   }
 
@@ -70,7 +75,7 @@ class PageExampleController {
    * @throws \Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException
    *   If the parameters are invalid.
    */
-  function arguments($first, $second) {
+  public function arguments($first, $second) {
     // Make sure you don't trust the URL to be safe! Always check for exploits.
     if (!is_numeric($first) || !is_numeric($second)) {
       // We will just show a standard "access denied" page in this case.

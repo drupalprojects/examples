@@ -31,13 +31,13 @@ class PageExampleTest extends WebTestBase {
   /**
    * Generates a random string of ASCII numeric characters (values 48 to 57).
    *
-   * @param $length
+   * @param int $length
    *   Length of random string to generate.
    *
-   * @return
+   * @return string
    *   Randomly generated string.
    */
-  private static function randomNumber($length = 8) {
+  protected static function randomNumber($length = 8) {
     $str = '';
     for ($i = 0; $i < $length; $i++) {
       $str .= chr(mt_rand(48, 57));
@@ -48,11 +48,11 @@ class PageExampleTest extends WebTestBase {
   /**
    * Verify that current user has no access to page.
    *
-   * @param $url
+   * @param string $url
    *   URL to verify.
    */
   function pageExampleVerifyNoAccess($url) {
-    // Test that page returns 403 Access Denied
+    // Test that page returns 403 Access Denied.
     $this->drupalGet($url);
     $this->assertResponse(403);
   }
@@ -63,9 +63,9 @@ class PageExampleTest extends WebTestBase {
    * Login user, create an example node, and test page functionality through
    * the admin and user interfaces.
    */
-  function testPageExampleBasic() {
+  public function testPageExampleBasic() {
     // Verify that anonymous user can't access the pages created by
-    // page_example module
+    // page_example module.
     $this->pageExampleVerifyNoAccess('examples/page_example/simple');
     $this->pageExampleVerifyNoAccess('examples/page_example/arguments/1/2');
 
@@ -116,7 +116,7 @@ class PageExampleTest extends WebTestBase {
     $this->drupalGet('examples/page_example/arguments/non-numeric-argument/' . $second);
     $this->assertResponse(403, 'User got 403 for string argument in first position.');
 
-    // Check if user can't access simple page
+    // Check if user can't access simple page.
     $this->pageExampleVerifyNoAccess('examples/page_example/simple');
   }
 

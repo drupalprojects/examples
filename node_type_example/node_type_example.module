@@ -4,6 +4,7 @@
  * @file
  * node_type_example module file.
  */
+
 /**
  * @defgroup node_type_example Example: Config Node Type
  * @ingroup examples

@@ -72,7 +72,8 @@ class BlockExampleTest extends WebTestBase {
     );
     $this->drupalPlaceBlock('example_empty', $example_empty, $theme_name);
 
-    // Verify that blocks are there. Empty block will not be shown, because it is empty.
+    // Verify that blocks are there. Empty block will not be shown, because it
+    // is empty.
     $this->drupalGet('/');
     $this->assertRaw($example_configurable_text['label'], 'Block configurable test not found.');
     $this->assertNoRaw($example_uppercase['label'], 'Block uppercase with normal label not found.');
@@ -85,11 +86,14 @@ class BlockExampleTest extends WebTestBase {
     $edit = array(
       'settings[block_example_string_text]' => $this->randomName(),
     );
-    $this->drupalPostForm('admin/structure/block/manage/' . $theme_name . '.block_example_example_configurable_text', $edit, t('Save block'));
+    $this->drupalPostForm('admin/structure/block/manage/' .
+      $theme_name .
+      '.block_example_example_configurable_text', $edit, t('Save block'));
 
     // Verify that new content is shown.
     $this->drupalGet('/');
-    $this->assertRaw($edit['settings[block_example_string_text]'], 'Content of configurable text block successfully verified.');
+    $this->assertRaw($edit['settings[block_example_string_text]'],
+      'Content of configurable text block successfully verified.');
     */
   }
 

@@ -14,6 +14,9 @@ use Drupal\Core\Form\FormInterface;
  */
 class DBTNGExampleAddForm implements FormInterface {
 
+  /**
+   * {@inheritdoc}
+   */
   public function getFormID() {
     return 'dbtng_add_form';
   }

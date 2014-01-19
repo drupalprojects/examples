@@ -17,7 +17,7 @@ class NodeTypeExampleController {
   /**
    * A simple controller method to explain what this module is about.
    */
-  function description() {
+  public function description() {
     $build = array(
       '#markup' => t(
           '<p>Config Node Type Example is a basic example of defining a content type through configuration YAML files.</p>

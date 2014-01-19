@@ -97,7 +97,6 @@ function page_example_menu() {
   // Notice there is not a declaration entry for
   // 'examples/page_example/arguments/{first}/{second}' because that is only a
   // routing item, and not a menu item (which needs to appear on menu).
-
   return $items;
 }
 

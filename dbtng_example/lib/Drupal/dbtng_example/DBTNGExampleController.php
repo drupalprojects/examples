@@ -55,14 +55,14 @@ class DBTNGExampleController {
         t('Created by'),
         t('Name'),
         t('Surname'),
-        t('Age')
+        t('Age'),
       );
       $output .= theme('table', array(
         'header' => $header,
         'rows' => $rows,
         'attributes' => array(
-          'id' => 'dbtng-example-advanced-list'
-         )
+          'id' => 'dbtng-example-advanced-list',
+         ),
         )
       );
     }

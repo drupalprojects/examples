@@ -103,18 +103,20 @@ function cron_example_queue_2_worker($item) {
 /**
  * Simple reporter for the workers.
  *
- * @param integer $worker
+ * @param int $worker
  *   Worker number.
  * @param object $item
  *   The $item which was stored in the cron queue.
  */
 function cron_example_queue_report_work($worker, $item) {
   if (!empty($GLOBALS['cron_example_show_status_message'])) {
-    drupal_set_message(t('Queue @worker worker processed item with sequence @sequence created at @time',
-      array(
-        '@worker' => $worker,
-        '@sequence' => $item->sequence,
-        '@time' => date_iso8601($item->created))
+    drupal_set_message(
+      t('Queue @worker worker processed item with sequence @sequence created at @time',
+        array(
+          '@worker' => $worker,
+          '@sequence' => $item->sequence,
+          '@time' => date_iso8601($item->created),
+        )
       )
     );
   }
@@ -122,7 +124,7 @@ function cron_example_queue_report_work($worker, $item) {
     array(
       '@worker' => $worker,
       '@sequence' => $item->sequence,
-      '@time' => date_iso8601($item->created)
+      '@time' => date_iso8601($item->created),
     )
   );
 }

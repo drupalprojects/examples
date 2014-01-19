@@ -21,6 +21,9 @@ class PHPUnitExampleSimpleTest extends WebTestBase {
 
   public static $modules = array('phpunit_example');
 
+  /**
+   * {@inheritdoc}
+   */
   public static function getInfo() {
     return array(
       'name' => 'PHPUnit Example Tests',

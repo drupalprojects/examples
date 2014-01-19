@@ -43,7 +43,6 @@ class ExamplesTest extends WebTestBase {
    * @todo: Replace module_exists with Drupal::moduleHandler() ..etc.
    */
   public function testExamples() {
-    //$this->assertTrue(Drupal::moduleHandler()->moduleExists('examples'));
     $this->assertTrue(module_exists('examples'));
   }
 

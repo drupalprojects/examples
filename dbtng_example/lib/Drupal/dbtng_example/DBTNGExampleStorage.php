@@ -30,10 +30,11 @@ class DBTNGExampleStorage {
       $return_value = db_insert('dbtng_example')
           ->fields($entry)
           ->execute();
-    } catch (Exception $e) {
+    }
+    catch (Exception $e) {
       drupal_set_message(t('db_insert failed. Message = %message, query= %query', array(
             '%message' => $e->getMessage(),
-            '%query' => $e->query_string
+            '%query' => $e->query_string,
           )), 'error');
     }
     return $return_value;
@@ -45,7 +46,8 @@ class DBTNGExampleStorage {
    * @param array $entry
    *   An array containing all the fields of the item to be updated.
    *
-   * @return integer
+   * @return int
+   *   The number of updated rows.
    * 
    * @see db_update()
    */
@@ -141,8 +143,9 @@ class DBTNGExampleStorage {
    *     ->execute();
    * @endcode
    *
-   * @param $entry
-   *   An array containing all the fields used to search the entries in the table.
+   * @param array $entry
+   *   An array containing all the fields used to search the entries in the
+   *   table.
    *
    * @return object
    *   An object containing the loaded entries if found.
@@ -151,7 +154,6 @@ class DBTNGExampleStorage {
    * @see db_query()
    * @see http://drupal.org/node/310072
    * @see http://drupal.org/node/310075
-   *
    */
   public static function load($entry = array()) {
     // Read all fields from the dbtng_example table.

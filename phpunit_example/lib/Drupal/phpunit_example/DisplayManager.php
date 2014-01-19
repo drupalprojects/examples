@@ -26,18 +26,45 @@ class DisplayManager {
 
   protected $items;
 
+  /**
+   * Add a displayable item.
+   *
+   * @param DisplayInfoInterface $item
+   *   The item to add.
+   */
   public function addDisplayableItem(DisplayInfoInterface $item) {
     $this->items[$item->getDisplayName()] = $item;
   }
 
+  /**
+   * A count of how many items exist.
+   *
+   * @return int
+   *   The number of items that exist.
+   */
   public function countDisplayableItems() {
     return count($this->items);
   }
 
+  /**
+   * All displayable items.
+   *
+   * @return array
+   *   The displayable items.
+   */
   public function displayableItems() {
     return $this->items;
   }
 
+  /**
+   * Find an item by its name.
+   *
+   * @param string $name
+   *   The name to find.
+   *
+   * @return DisplayInfoInterface|null
+   *   The found item, or NULL if none is found.
+   */
   public function item($name) {
     if (isset($this->items[$name])) {
       return $this->items[$name];

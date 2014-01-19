@@ -45,10 +45,10 @@ class NodeTypeExampleTest extends WebTestBase {
    * - That we can create content using the user interface.
    * - That our created content does appear in the database.
    */
-  function testNodeTypes() {
+  public function testNodeTypes() {
     // Log in an admin user.
-    $adminUser = $this->drupalCreateUser(array('administer content types'));
-    $this->drupalLogin($adminUser);
+    $admin_user = $this->drupalCreateUser(array('administer content types'));
+    $this->drupalLogin($admin_user);
 
     // Get a list of content types.
     $this->drupalGet('admin/structure/types');
@@ -58,14 +58,14 @@ class NodeTypeExampleTest extends WebTestBase {
 
     // Check for the locked status of our content types.
     // $nodeType will be of type Drupal\node\NodeTypeInterface
-    $nodeType = node_type_load('basic_content_type');
-    $this->assertFalse($nodeType->isLocked(), 'basic_content_type is not locked.');
-    $nodeType = node_type_load('locked_content_type');
-    $this->assertEqual('locked_content_type', $nodeType->isLocked(), 'locked_content_type is locked.');
+    $node_type = node_type_load('basic_content_type');
+    $this->assertFalse($node_type->isLocked(), 'basic_content_type is not locked.');
+    $node_type = node_type_load('locked_content_type');
+    $this->assertEqual('locked_content_type', $node_type->isLocked(), 'locked_content_type is locked.');
 
     // Log in a content creator.
-    $creatorUser = $this->drupalCreateUser(array('create basic_content_type content'));
-    $this->drupalLogin($creatorUser);
+    $creator_user = $this->drupalCreateUser(array('create basic_content_type content'));
+    $this->drupalLogin($creator_user);
 
     // Create a node.
     $edit = array();
