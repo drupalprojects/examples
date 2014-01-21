@@ -2,7 +2,7 @@
 
 /**
  * @file
- * Contains Drupal\phpunit_example\Tests\Double_DisplayManagerTest
+ * Contains Drupal\phpunit_example\Tests\DisplayManagerTest
  */
 
 namespace Drupal\phpunit_example\Tests;
@@ -19,7 +19,7 @@ use Drupal\phpunit_example\DisplayInfoInterface;
  * @ingroup phpunit_example
  * @group phpunit_example
  */
-class Double_DisplayManagerTest extends UnitTestCase {
+class DisplayManagerTest extends UnitTestCase {
 
   /**
    * {@inheritdoc}

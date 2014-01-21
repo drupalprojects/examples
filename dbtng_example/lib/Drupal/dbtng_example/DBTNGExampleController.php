@@ -57,12 +57,13 @@ class DBTNGExampleController {
         t('Surname'),
         t('Age'),
       );
-      $output .= theme('table', array(
-        'header' => $header,
-        'rows' => $rows,
-        'attributes' => array(
-          'id' => 'dbtng-example-advanced-list',
-         ),
+      $output .= theme('table',
+        array(
+          'header' => $header,
+          'rows' => $rows,
+          'attributes' => array(
+            'id' => 'dbtng-example-advanced-list',
+          ),
         )
       );
     }

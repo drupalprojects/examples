@@ -2,7 +2,7 @@
 
 /**
  * @file
- * Contains Drupal\phpunit_example\Tests\Reflection_ProtectedPrivatesTest
+ * Contains Drupal\phpunit_example\Tests\ProtectedPrivatesTest
  */
 
 namespace Drupal\phpunit_example\Tests;
@@ -41,7 +41,7 @@ use Drupal\phpunit_example\Tests\Subclasses\ProtectedPrivatesSubclass;
  * @ingroup phpunit_example
  * @group phpunit_example
  */
-class Reflection_ProtectedPrivatesTest extends UnitTestCase {
+class ProtectedPrivatesTest extends UnitTestCase {
 
   /**
    * {@inheritdoc}
@@ -60,7 +60,7 @@ class Reflection_ProtectedPrivatesTest extends UnitTestCase {
   public function getAccessibleMethod($className, $methodName) {
     $class = new \ReflectionClass($className);
     $method = $class->getMethod($methodName);
-    $method->setAccessible(true);
+    $method->setAccessible(TRUE);
     return $method;
   }
 
@@ -68,8 +68,8 @@ class Reflection_ProtectedPrivatesTest extends UnitTestCase {
    * Good data provider.
    */
   public function addDataProvider() {
-    return array (
-      array (5, 2, 3),
+    return array(
+      array(5, 2, 3),
     );
   }
 
@@ -101,8 +101,8 @@ class Reflection_ProtectedPrivatesTest extends UnitTestCase {
    * Bad data provider.
    */
   public function addBadDataProvider() {
-    return array (
-      array ('string', array()),
+    return array(
+      array('string', array()),
     );
   }
 

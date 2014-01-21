@@ -49,7 +49,7 @@ INFOMARKUP
     $build = array();
     // Main container DIV.
     $build['content'] = array(
-      '#markup' => '<div id="js-weights"></div>'
+      '#markup' => '<div id="js-weights"></div>',
     );
     // Attach a CSS file to show which line is output by which script.
     $build['#attached']['css'] = array(drupal_get_path('module', 'js_example') .

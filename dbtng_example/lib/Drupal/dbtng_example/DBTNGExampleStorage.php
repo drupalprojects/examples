@@ -71,7 +71,7 @@ class DBTNGExampleStorage {
   /**
    * Delete an entry from the database.
    *
-   * @param $entry
+   * @param array $entry
    *   An array containing at least the person identifier 'pid' element of the
    *   entry to delete.
    *

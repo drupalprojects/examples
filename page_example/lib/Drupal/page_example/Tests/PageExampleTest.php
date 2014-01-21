@@ -51,7 +51,7 @@ class PageExampleTest extends WebTestBase {
    * @param string $url
    *   URL to verify.
    */
-  function pageExampleVerifyNoAccess($url) {
+  public function pageExampleVerifyNoAccess($url) {
     // Test that page returns 403 Access Denied.
     $this->drupalGet($url);
     $this->assertResponse(403);

@@ -2,7 +2,7 @@
 
 /**
  * @file
- * Contains Drupal\phpunit_example\Tests\ProviderException_AddClassTest
+ * Contains Drupal\phpunit_example\Tests\AddClassTest
  */
 
 namespace Drupal\phpunit_example\Tests;
@@ -36,7 +36,7 @@ use Drupal\phpunit_example\AddClass;
  * @ingroup phpunit_example
  * @group phpunit_example
  */
-class ProviderException_AddClassTest extends UnitTestCase {
+class AddClassTest extends UnitTestCase {
 
   /**
    * {@inheritdoc}
@@ -175,11 +175,11 @@ class ProviderException_AddClassTest extends UnitTestCase {
       }
     }
     // Create some data where $a is good and $b is bad.
-    foreach($badDataTypes as $badDatumB) {
+    foreach ($badDataTypes as $badDatumB) {
       $badData[] = array(1, $badDatumB);
     }
     // Create some data where $b is good and $a is bad.
-    foreach($badDataTypes as $badDatumA) {
+    foreach ($badDataTypes as $badDatumA) {
       $badData[] = array($badDatumA, 1);
     }
     return $badData;
