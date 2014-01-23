@@ -1,0 +1,6 @@
+name: Email Example
+type: module
+description: An example module that sends and alter drupal generated email messages.
+package: Example modules
+version: 8.x-1.x
+core: 8.x

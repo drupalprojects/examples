@@ -1,0 +1,7 @@
+email_example:
+  path: '/examples/email_example'
+  pattern: '/examples/email_example'
+  defaults:
+    _form: '\Drupal\email_example\Form\EmailExampleGetFormPage'
+  requirements:
+    _permission: 'access content'
