@@ -21,7 +21,7 @@ class NodeTypeExampleTest extends WebTestBase {
    *
    * @var array
    */
-  public static $modules = array('node_type_example');
+  public static $modules = array('node', 'node_type_example');
 
   /**
    * {@inheritdoc}

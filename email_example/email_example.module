@@ -149,10 +149,6 @@ function email_example_mail_alter(&$message) {
 }
 
 /**
- * @} End of "defgroup email_example".
- */
-
-/**
  * Implements hook_menu().
  */
 function email_example_menu() {
@@ -160,7 +156,11 @@ function email_example_menu() {
     'title' => 'E-mail Example: contact form',
     'description' => 'Callback for generating form.',
     'route_name' => 'email_example',
-    'type' => MENU_NORMAL_ITEM, // Default.
+    'type' => MENU_NORMAL_ITEM,
   );
   return $items;
 }
+
+/**
+ * @} End of "defgroup email_example".
+ */
