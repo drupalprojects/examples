@@ -1,0 +1,90 @@
+<?php
+
+/**
+ * @file
+ * Module file for simpletest_example
+ */
+
+/**
+ * @defgroup simpletest_example Example: Simpletest
+ * @ingroup examples
+ * @{
+ *
+ * An example of how to write functional tests using SimpleTest under
+ * Drupal 8.
+ *
+ * This module creates a new node type called 'SimpleTest Example Node Type,'
+ * so that we can test it.
+ *
+ * This code was originally written to accompany the tutorial at
+ * http://drupal.org/node/890654. That's a Drupal 7 example, but can still
+ * teach you much.
+ */
+
+/**
+ * Implements hook_permission().
+ *
+ * In this case we're adding an addition permission that does the same
+ * as the one the node module offers, just to demonstrate this error.
+ */
+function simpletest_example_permission() {
+  $perms = array();
+  $perms['extra special edit any simpletest_example'] = array(
+    'title' => t('Extra special edit any SimpleTest Example'),
+    'description' => t('Extra special edit any SimpleTest Example'),
+  );
+  return $perms;
+}
+
+/**
+ * Implements hook_node_access().
+ *
+ * Demonstrates a bug that we'll find in our test.
+ *
+ * If this is running on the testbot, we don't want the error to show so will
+ * work around it by testing to see if we're in the 'checkout' directory.
+ */
+function simpletest_example_node_access(\Drupal\node\NodeInterface $node, $op, $account, $lancode) {
+  // Gather the node type.
+  $type = $node->getType();
+  // If it's not a simpletest_example node, or if it's not operations we care
+  // about, then just ignore.
+  if ($type != 'simpletest_example' || ($op != 'update' && $op != 'delete')) {
+    return NODE_ACCESS_IGNORE;
+  }
+
+  // This code has a BUG that we'll find in testing.
+  //
+  // This is the incorrect version we'll use to demonstrate test failure.
+  // The correct version should have ($op == 'update' || $op == 'delete').
+  // The author had mistakenly always tested with User 1 so it always
+  // allowed access and the bug wasn't noticed!
+  if (($op == 'delete')  && (user_access('extra special edit any simpletest_example', $account) && ($account->id() == $node->getAuthorId()))) {
+    return NODE_ACCESS_ALLOW;
+  }
+
+  return NODE_ACCESS_DENY;
+}
+
+/**
+ * Implements hook_menu().
+ *
+ * We will define a single menu route, so that we can give the user some
+ * helpful introductory information.
+ *
+ * @see hook_menu()
+ * @see menu_example
+ */
+function simpletest_example_menu() {
+  $items['examples/simpletest_example'] = array(
+    'title' => 'SimpleTest Example',
+    'type' => MENU_NORMAL_ITEM,
+    'route_name' => 'simpletest_example_description',
+    'expanded' => TRUE,
+  );
+  return $items;
+}
+
+/**
+ * @} End of "defgroup simpletest_example".
+ */

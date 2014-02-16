@@ -1,0 +1,8 @@
+name: "SimpleTest Example Mock Module"
+type: module
+hidden: true
+description: "Mock module for the SimpleTest Example module."
+package: Example modules
+core: 8.x
+dependencies:
+  - simpletest_example

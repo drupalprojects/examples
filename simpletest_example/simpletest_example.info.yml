@@ -1,0 +1,10 @@
+name: SimpleTest Example
+type: module
+hidden: false
+description: 'Some demonstrations of SimpleTest-based testing in Drupal 8.'
+package: Example modules
+core: 8.x
+dependencies:
+  - simpletest
+  - node
+  - field
