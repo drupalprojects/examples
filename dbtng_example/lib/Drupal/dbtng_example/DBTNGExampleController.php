@@ -27,7 +27,17 @@ class DBTNGExampleController {
       }
       // Make a table for them.
       $header = array(t('Id'), t('uid'), t('Name'), t('Surname'), t('Age'));
-      $output .= theme('table', array('header' => $header, 'rows' => $rows));
+      $variables = array(
+        'header' => $header,
+        'rows' => $rows,
+        'attributes' => array(),
+        'caption' => NULL,
+        'sticky' => NULL,
+        'responsive' => TRUE,
+        'colgroups' => array(),
+        'empty' => t('No entries were found.'),
+      );
+      $output .= theme_table($variables);
     }
     else {
       drupal_set_message(t('No entries were found.'));
@@ -57,15 +67,18 @@ class DBTNGExampleController {
         t('Surname'),
         t('Age'),
       );
-      $output .= theme('table',
-        array(
-          'header' => $header,
-          'rows' => $rows,
-          'attributes' => array(
-            'id' => 'dbtng-example-advanced-list',
-          ),
-        )
+
+      $variables = array(
+        'header' => $header,
+        'rows' => $rows,
+        'attributes' => array('id' => 'dbtng-example-advanced-list'),
+        'caption' => NULL,
+        'sticky' => NULL,
+        'responsive' => TRUE,
+        'colgroups' => array(),
+        'empty' => t('No entries were found.'),
       );
+      $output .= theme_table($variables);
     }
     else {
       drupal_set_message(t('No entries meet the filter criteria (Name = "John" and Age > 18).'));
