@@ -47,7 +47,7 @@ class BlockExampleTest extends WebTestBase {
   public function testBlockExampleBasic() {
     // Login the admin user.
     $this->drupalLogin($this->WebUser);
-    $theme_name = config('system.theme')->get('default');
+    $theme_name = \Drupal::config('system.theme')->get('default');
 
     // Verify the blocks are listed to be added.
     $this->drupalGet('admin/structure/block/list/' . $theme_name);
