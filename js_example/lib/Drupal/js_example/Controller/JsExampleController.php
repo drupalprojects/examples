@@ -7,15 +7,20 @@
 
 namespace Drupal\js_example\Controller;
 
+use Drupal\Core\Controller\ControllerBase;
+
 /**
  * Controller for js_example pages.
  *
  * @ingroup js_example
  */
-class JsExampleController {
+class JsExampleController extends ControllerBase {
 
   /**
    * Example info page.
+   *
+   * @return array
+   *   A renderable array.
    */
   public function info() {
     $build['content'] = array(
@@ -33,6 +38,9 @@ INFOMARKUP
 
   /**
    * Weights implementation.
+   *
+   * @return array
+   *   A renderable array.
    */
   public function getJsWeightImplementation() {
     // Create an array of items with random-ish weight values.
@@ -96,21 +104,32 @@ INFOMARKUP
    * We're allowing a twig template to define our content in this case,
    * which isn't normally how things work, but it's easier to demonstrate
    * the JavaScript this way.
+   *
+   * @todo: Demonstrate using *.libraries.yml https://drupal.org/node/2201089
+   *
+   * @return array
+   *   A renderable array.
    */
   public function getJsAccordionImplementation() {
     $title = t('Click sections to expand or collapse:');
+    // Build using our theme. This gives us content, which is not a good
+    // practice, but which allows us to demonstrate adding JavaScript here.
     $build['myelement'] = array(
-      '#theme' => 'my_accordion',
+      '#theme' => 'js_example_accordion',
       '#title' => $title,
     );
-    $build['myelement']['#attached']['library'][] = array(
-      'system',
-      'jquery.ui.accordion',
+    // Build up our dependencies for this page as a library. Our accordion
+    // script needs jquery.ui.accordion. You can find the core scripts under
+    // core/assets/.
+    $build['myelement']['#attached']['library'] = array(
+      'core/jquery.ui.accordion',
     );
-    $build['myelement']['#attached']['js'][] = array(
-      'data' => '(function($){$(function() { $("#accordion").accordion(); })})(jQuery);',
-      'type' => 'inline',
+    // Add our script. It is tiny, but this demonstrates how to add it. We get
+    // the path for our module, and then append the path to our script.
+    $build['myelement']['#attached']['js'] = array(
+      drupal_get_path('module', 'js_example') . '/js/js_example_accordion.js' => array(),
     );
+    // Return the renderable array.
     return $build;
   }
 

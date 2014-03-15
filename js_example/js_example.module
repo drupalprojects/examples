@@ -17,7 +17,7 @@
  */
 function js_example_theme() {
   return array(
-    'my_accordion' => array(
+    'js_example_accordion' => array(
       'template' => 'accordion',
       'variables' => array('title' => NULL),
     ),
@@ -25,26 +25,27 @@ function js_example_theme() {
 }
 
 /**
- * Implements hook_menu().
+ * Implements hook_menu_link_defaults().
  */
-function js_example_menu() {
-  $items = array();
-  $items['examples/js_example'] = array(
-    'title' => 'JavaScript Example',
+function js_example_menu_link_defaults() {
+  $links['js_example.info'] = array(
+    'link_title' => 'JavaScript Example',
+    'description' => 'Some information about the JavaScript example.',
     'route_name' => 'js_example.info',
-    'expanded' => TRUE,
   );
-  $items['examples/js_example/weights'] = array(
-    'title' => 'JS weighting in action',
+  $links['js_example.weights'] = array(
+    'link_title' => 'JS weighting in action',
+    'description' => 'Show list weighting through JavaScript.',
     'route_name' => 'js_example.weights',
-    'expanded' => TRUE,
+    'parent' => 'js_example.info',
   );
-  $items['examples/js_example/accordion'] = array(
-    'title' => 'jQuery UI accordion',
+  $links['js_example.accordion'] = array(
+    'link_title' => 'jQuery UI accordion',
+    'description' => 'jQuery UI accordion demo.',
     'route_name' => 'js_example.accordion',
-    'expanded' => TRUE,
+    'parent' => 'js_example.info',
   );
-  return $items;
+  return $links;
 }
 
 /**
