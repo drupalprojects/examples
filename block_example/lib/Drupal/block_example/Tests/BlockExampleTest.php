@@ -25,7 +25,7 @@ class BlockExampleTest extends WebTestBase {
    */
   public static function getInfo() {
     return array(
-      'name' => 'Block example functionality',
+      'name' => 'Block Example functionality',
       'description' => 'Test the configuration options and block created by Block Example module.',
       'group' => 'Examples',
     );

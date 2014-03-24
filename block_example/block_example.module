@@ -17,16 +17,19 @@
  */
 
 /**
- * Implements hook_menu().
+ * Implements hook_menu_link_defaults().
  *
  * Provides a default page to explain what this module does.
+ *
+ * @return array
+ *   Return an associative array for our default menu items.
  */
-function block_example_menu() {
-  $items['examples/block_example'] = array(
-    'title' => 'Block Example',
+function block_example_menu_link_defaults() {
+  $links['block_example'] = array(
+    'link_title' => 'Block Example',
     'route_name' => 'block_example.description',
   );
-  return $items;
+  return $links;
 }
 
 /**

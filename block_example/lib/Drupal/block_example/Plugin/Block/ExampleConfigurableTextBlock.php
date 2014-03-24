@@ -28,7 +28,6 @@ class ExampleConfigurableTextBlock extends BlockBase {
   public function defaultConfiguration() {
     return array(
       'block_example_string' => t('A default value. This block was created at %time', array('%time' => date('c'))),
-      'cache' => DRUPAL_CACHE_PER_ROLE,
     );
   }
 
