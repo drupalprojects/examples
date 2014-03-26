@@ -9,6 +9,11 @@ namespace Drupal\block_example\Tests;
 
 use Drupal\simpletest\WebTestBase;
 
+/**
+ * Testing the Block Example module.
+ *
+ * @ingroup block_example
+ */
 class BlockExampleTest extends WebTestBase {
 
   /**
@@ -16,7 +21,7 @@ class BlockExampleTest extends WebTestBase {
    *
    * @var array
    */
-  public static $modules = array('block', 'search', 'block_example');
+  public static $modules = array('block', 'block_example');
 
   protected $WebUser;
 
@@ -36,9 +41,8 @@ class BlockExampleTest extends WebTestBase {
    */
   public function setUp() {
     parent::setUp();
-    // Create user. Search content permission granted for the search block to
-    // be shown.
-    $this->WebUser = $this->drupalCreateUser(array('administer blocks', 'search content'));
+    // Create user.
+    $this->WebUser = $this->drupalCreateUser(array('administer blocks'));
   }
 
   /**
@@ -56,45 +60,45 @@ class BlockExampleTest extends WebTestBase {
     $this->assertRaw(t('Example: uppercase this please'), 'Block uppercase found.');
 
     // Define and place blocks.
-    $example_configurable_text = array(
+    $settings_configurable = array(
       'label' => t('Title of first block (example_configurable_text)'),
-      'machine_name' => 'block_example_example_configurable_text',
+      'id' => 'block_example_example_configurable_text',
+      'theme' => $theme_name
     );
-    $this->drupalPlaceBlock('example_configurable_text', $example_configurable_text, $theme_name);
-    $example_uppercase = array(
+    $this->drupalPlaceBlock('example_configurable_text', $settings_configurable);
+
+    $settings_uppercase = array(
       'label' => t('Configurable block to be uppercased'),
-      'machine_name' => 'uppercased_block',
+      'id' => 'block_example_example_uppercased',
+      'theme' => $theme_name
     );
-    $this->drupalPlaceBlock('example_uppercase', $example_uppercase, $theme_name);
-    $example_empty = array(
+    $this->drupalPlaceBlock('example_uppercase', $settings_uppercase);
+
+    $settings_empty = array(
       'label' => t('Example: empty block'),
-      'machine_name' => 'block_example_example_empty',
+      'id' => 'block_example_example_empty',
+      'theme' => $theme_name
     );
-    $this->drupalPlaceBlock('example_empty', $example_empty, $theme_name);
+    $this->drupalPlaceBlock('example_empty', $settings_empty);
 
     // Verify that blocks are there. Empty block will not be shown, because it
     // is empty.
     $this->drupalGet('/');
-    $this->assertRaw($example_configurable_text['label'], 'Block configurable test not found.');
-    $this->assertNoRaw($example_uppercase['label'], 'Block uppercase with normal label not found.');
-    $this->assertRaw(drupal_strtoupper($example_uppercase['label']), 'Block uppercase with uppercased label found.');
-    $this->assertNoRaw($example_empty['label'], 'Block empty not found.');
+    $this->assertRaw($settings_configurable['label'], 'Block configurable test not found.');
+    $this->assertNoRaw($settings_uppercase['label'], 'Block uppercase with normal label not found.');
+    $this->assertRaw(drupal_strtoupper($settings_uppercase['label']), 'Block uppercase with uppercased label found.');
+    $this->assertNoRaw($settings_empty['label'], 'Block empty not found.');
 
     // Change content of configurable text block.
-    // @TODO: Make this work again.
-    /*
     $edit = array(
       'settings[block_example_string_text]' => $this->randomName(),
     );
-    $this->drupalPostForm('admin/structure/block/manage/' .
-      $theme_name .
-      '.block_example_example_configurable_text', $edit, t('Save block'));
+    $this->drupalPostForm('admin/structure/block/manage/' . $settings_configurable['id'], $edit, t('Save block'));
 
     // Verify that new content is shown.
     $this->drupalGet('/');
     $this->assertRaw($edit['settings[block_example_string_text]'],
       'Content of configurable text block successfully verified.');
-    */
   }
 
 }
