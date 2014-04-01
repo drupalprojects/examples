@@ -53,7 +53,7 @@ function email_example_mail($key, &$message, $params) {
       // Note that the message body is an array, not a string.
 
       $account = \Drupal::currentUser();
-      $message['body'][] = t('@name sent you the following message:', array('@name' => $account->name), $options);
+      $message['body'][] = t('@name sent you the following message:', array('@name' => $account->getUsername()), $options);
       // Because this is just user-entered text, we do not need to translate it.
 
       // Since user-entered text may have unintentional HTML entities in it like
