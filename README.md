@@ -1,12 +1,16 @@
 Examples for Developers
 =======================
 
-http://drupal.org/project/examples
+Project site: http://drupal.org/project/examples
+
+Code: https://drupal.org/project/examples/git-instructions
+
+Issues: https://drupal.org/project/issues/examples
 
 What Is This?
 -------------
 
-This set of modules is intended to provide working examples of Drupal's
+This set of modules is intended to provide working examples of Drupal 8's
 features and APIs.  The modules strive to be simple, well documented and
 modification friendly, in order to help developers quickly learn their inner
 workings.
@@ -22,9 +26,9 @@ How To Use The Examples
 There are three main ways to interact with the examples in this project:
 
 1. Enable the modules and use them within Drupal. Not all modules will have
-obvious things to see within Drupal. For instance, while the Page and Form API
-examples will show you forms, the Database API example will not show you much
-within Drupal itself.
+obvious things to see within your Drupal installation. For instance, while the
+Page and Form API examples will display forms, the Database API example does not
+have much that is visible within Drupal.
 
 2. Read the code. Much effort has gone into making the example code readable,
 not only in terms of the code itself, but also the extensive inline comments
@@ -35,32 +39,38 @@ do this:
 
 * https://api.drupal.org/api/examples is the main API site for all of Drupal.
 It has all manner of cross-linked references between the example code and the
-APIs being demonstrated.
+APIs being demonstrated. All of the Doxygen-based comments in the code are
+parsed and made browseable here.
 
 * http://drupalcode.org/project/examples.git allows you to browse the git
 repository for the Examples project.
 
 Note also that in the future, many modules from the Examples project will be
 moved into Drupal 8 core. This means some examples will come with Drupal
-itself. As of this writing, none have been moved yet.
+itself. As of this writing, none have been migrated to Drupal 8 yet.
 
 
 How To Install The Modules
 --------------------------
 
-1. Install Examples for Developers (unpacking it to your Drupal
-/modules directory if you're installing by hand, for example).
+1. The Examples project installs like any other Drupal module. There is extensive
+documentation on how to do this here:
 
-2. Enable any Example modules in Admin menu > Extend.
+https://drupal.org/documentation/install/modules-themes/modules-8
+
+2. Enable any Example sub-module you wish to explore in Admin menu > Extend.
 
 3. Rebuild access permissions if you are prompted to.
 
-4. Profit!  The examples will appear in your Navigation menu (on the left
-sidebar by default; you'll need to reenable it if you removed it).
+4. Profit!  The links for Examples material will appear in your Tools menu. This
+menu appears on the left sidebar by default. You'll need to reenable it if you
+removed it.
 
-Now you can read the code and its comments and see the result, experiment with
-it, and hopefully quickly grasp how things work.
+Having seen the behavior of the various example modules, you can move on to
+reading the code, experimenting with it, and hopefully grasp how things work.
 
 If you find a problem, incorrect comment, obsolete or improper code or such,
 please search for an issue about it at http://drupal.org/project/issues/examples
 If there isn't already an issue for it, please create a new one.
+
+Thanks.
