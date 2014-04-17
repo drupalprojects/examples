@@ -24,6 +24,15 @@ class BlockExampleMenuTest extends WebTestBase {
   public static $modules = array('block', 'block_example');
 
   /**
+   * The installation profile to use with this test.
+   *
+   * This test class requires the "Tools" block.
+   *
+   * @var string
+   */
+  protected $profile = 'minimal';
+
+  /**
    * {@inheritdoc}
    */
   public static function getInfo() {
@@ -32,6 +41,14 @@ class BlockExampleMenuTest extends WebTestBase {
       'description' => 'Test the user-facing menus in Block Example.',
       'group' => 'Examples',
     );
+  }
+
+  /**
+   * Test for a link to the block example in the Tools menu.
+   */
+  public function testBlockExampleLink() {
+    $this->drupalGet('');
+    $this->assertLinkByHref('examples/block_example');
   }
 
   /**

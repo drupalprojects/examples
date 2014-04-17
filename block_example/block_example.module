@@ -17,22 +17,6 @@
  */
 
 /**
- * Implements hook_menu_link_defaults().
- *
- * Provides a default page to explain what this module does.
- *
- * @return array
- *   Return an associative array for our default menu items.
- */
-function block_example_menu_link_defaults() {
-  $links['block_example'] = array(
-    'link_title' => 'Block Example',
-    'route_name' => 'block_example.description',
-  );
-  return $links;
-}
-
-/**
  * Implements hook_block_view_alter().
  *
  * This hook allows you to modify the output of any block in the system.
