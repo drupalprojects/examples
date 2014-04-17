@@ -59,9 +59,15 @@ class NodeTypeExampleTest extends WebTestBase {
     // Check for the locked status of our content types.
     // $nodeType will be of type Drupal\node\NodeTypeInterface
     $node_type = node_type_load('basic_content_type');
-    $this->assertFalse($node_type->isLocked(), 'basic_content_type is not locked.');
+    $this->assertTrue($node_type, 'basic_content_type exists.');
+    if ($node_type) {
+      $this->assertFalse($node_type->isLocked(), 'basic_content_type is not locked.');
+    }
     $node_type = node_type_load('locked_content_type');
-    $this->assertEqual('locked_content_type', $node_type->isLocked(), 'locked_content_type is locked.');
+    $this->assertTrue($node_type, 'locked_content_type exists.');
+    if ($node_type) {
+      $this->assertEqual('locked_content_type', $node_type->isLocked(), 'locked_content_type is locked.');
+    }
 
     // Log in a content creator.
     $creator_user = $this->drupalCreateUser(array('create basic_content_type content'));
