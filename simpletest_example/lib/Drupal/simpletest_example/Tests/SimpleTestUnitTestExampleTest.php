@@ -40,7 +40,7 @@ class SimpleTestUnitTestExampleTest extends UnitTestBase {
    */
   public static function getInfo() {
     return array(
-      'name' => 'SimpleTest Unit Testing Example',
+      'name' => 'SimpleTest Example Unit Testing',
       'description' => 'Test that simpletest_example_empty_mysql_date works properly.',
       'group' => 'Examples',
     );
