@@ -44,7 +44,7 @@ class DBTNGExampleTest extends WebTestBase {
   public function testUI() {
     // Test the basic list.
     $this->drupalGet('examples/dbtng');
-    $this->assertPattern("/John[td\/<>\w]+Doe/", "Text 'John Doe' found in table");
+    $this->assertPattern("/John[td\/<>\w\s]+Doe/", "Text 'John Doe' found in table");
 
     // Test the add tab.
     // Add the new entry.
@@ -59,7 +59,7 @@ class DBTNGExampleTest extends WebTestBase {
     );
     // Now find the new entry.
     $this->drupalGet('examples/dbtng');
-    $this->assertPattern("/Some[td\/<>\w]+Anonymous/", "Text 'Some Anonymous' found in table");
+    $this->assertPattern("/Some[td\/<>\w\s]+Anonymous/", "Text 'Some Anonymous' found in table");
     // Try the update tab.
     // Find out the pid of our "anonymous" guy.
     $result = DBTNGExampleStorage::load(array('surname' => 'Anonymous'));
@@ -73,7 +73,7 @@ class DBTNGExampleTest extends WebTestBase {
     $this->drupalPostForm('examples/dbtng/update', (array) $entry, t('Update'));
     // Now find the new entry.
     $this->drupalGet('examples/dbtng');
-    $this->assertPattern("/NewFirstName[td\/<>\w]+Anonymous/", "Text 'NewFirstName Anonymous' found in table");
+    $this->assertPattern("/NewFirstName[td\/<>\w\s]+Anonymous/", "Text 'NewFirstName Anonymous' found in table");
 
     // Try the advanced tab.
     $this->drupalGet('examples/dbtng/advanced');

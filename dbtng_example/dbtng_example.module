@@ -12,6 +12,8 @@
  * at @link http://drupal.org/node/310069 @endlink.
  */
 
+use Symfony\Component\HttpFoundation\Request;
+
 /**
  * @defgroup dbtng_example Example: Database (DBTNG)
  * @ingroup examples
@@ -65,23 +67,23 @@
  *
  * Show some help on each form provided by this module.
  */
-function dbtng_example_help($path) {
+function dbtng_example_help($route_name, Request $request) {
   $output = '';
-  switch ($path) {
-    case 'examples/dbtng':
+  switch ($route_name) {
+    case 'dbtng':
       $output = t('Generate a list of all entries in the database. There is no filter in the query.');
       break;
 
-    case 'examples/dbtng/advanced':
+    case 'dbtng_advanced':
       $output = t('A more complex list of entries in the database.') . ' ';
       $output .= t('Only the entries with name = "John" and age older than 18 years are shown, the username of the person who created the entry is also shown.');
       break;
 
-    case 'examples/dbtng/update':
+    case 'dbtng_update':
       $output = t('Demonstrates a database update operation.');
       break;
 
-    case 'examples/dbtng/add':
+    case 'dbtng_add':
       $output = t('Add an entry to the dbtng_example table.');
       break;
   }
