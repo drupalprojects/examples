@@ -7,10 +7,12 @@
 
 namespace Drupal\dbtng_example;
 
+use Drupal\Core\Controller\ControllerBase;
+
 /**
  * Controller for DBTNG Example.
  */
-class DBTNGExampleController {
+class DBTNGExampleController extends ControllerBase {
 
   /**
    * Render a list of entries in the database.

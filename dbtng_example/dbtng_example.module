@@ -91,37 +91,5 @@ function dbtng_example_help($route_name, Request $request) {
 }
 
 /**
- * Implements hook_menu().
- *
- * Set up calls to drupal_get_form() for all our example cases.
- */
-function dbtng_example_menu() {
-  $items = array();
-
-  $items['examples/dbtng'] = array(
-    'title' => 'DBTNG Example',
-    'route_name' => 'dbtng',
-  );
-  $items['examples/dbtng/list'] = array(
-    'title' => 'List',
-    'route_name' => 'dbtng_list',
-  );
-  $items['examples/dbtng/add'] = array(
-    'title' => 'Add entry',
-    'route_name' => 'dbtng_add',
-  );
-  $items['examples/dbtng/update'] = array(
-    'title' => 'Update entry',
-    'route_name' => 'dbtng_update',
-  );
-  $items['examples/dbtng/advanced'] = array(
-    'title' => 'Advanced list',
-    'route_name' => 'dbtng_advanced',
-  );
-
-  return $items;
-}
-
-/**
  * @} End of "defgroup dbtng_example".
  */

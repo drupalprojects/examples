@@ -7,12 +7,12 @@
 
 namespace Drupal\dbtng_example;
 
-use Drupal\Core\Form\FormInterface;
+use Drupal\Core\Form\FormBase;
 
 /**
  * Simple form to add an entry, with all the interesting fields.
  */
-class DBTNGExampleAddForm implements FormInterface {
+class DBTNGExampleAddForm extends FormBase {
 
   /**
    * {@inheritdoc}

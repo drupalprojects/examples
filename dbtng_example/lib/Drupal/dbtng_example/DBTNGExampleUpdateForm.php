@@ -7,12 +7,12 @@
 
 namespace Drupal\dbtng_example;
 
-use Drupal\Core\Form\FormInterface;
+use Drupal\Core\Form\FormBase;
 
 /**
  * Sample UI to update a record.
  */
-class DBTNGExampleUpdateForm implements FormInterface {
+class DBTNGExampleUpdateForm extends FormBase {
 
   /**
    * {@inheritdoc}
