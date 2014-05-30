@@ -39,6 +39,9 @@ INFOMARKUP
   /**
    * Weights implementation.
    *
+   * Here we demonstrate attaching a number of scripts to the render array.
+   * These scripts sort the content by it's 'weight' and color.
+   *
    * @return array
    *   A renderable array.
    */
@@ -63,29 +66,32 @@ INFOMARKUP
     $build['#attached']['css'] = array(drupal_get_path('module', 'js_example') .
       '/css/jsweights.css');
     // Attach some javascript files.
+    // Start by getting the path to our module.
+    $module_path = \drupal_get_path('module', 'js_example');
+    // Add our individual scripts as attachments.
     $build['#attached']['js'] = array(
       array(
-        'data' => drupal_get_path('module', 'js_example') . '/js/red.js',
+        'data' => $module_path . '/js/red.js',
         'weight' => $weights['red'],
       ),
       array(
-        'data' => drupal_get_path('module', 'js_example') . '/js/blue.js',
+        'data' => $module_path . '/js/blue.js',
         'weight' => $weights['blue'],
       ),
       array(
-        'data' => drupal_get_path('module', 'js_example') . '/js/green.js',
+        'data' => $module_path . '/js/green.js',
         'weight' => $weights['green'],
       ),
       array(
-        'data' => drupal_get_path('module', 'js_example') . '/js/brown.js',
+        'data' => $module_path . '/js/brown.js',
         'weight' => $weights['brown'],
       ),
       array(
-        'data' => drupal_get_path('module', 'js_example') . '/js/black.js',
+        'data' => $module_path . '/js/black.js',
         'weight' => $weights['black'],
       ),
       array(
-        'data' => drupal_get_path('module', 'js_example') . '/js/purple.js',
+        'data' => $module_path . '/js/purple.js',
         'weight' => $weights['purple'],
       ),
     );

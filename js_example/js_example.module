@@ -10,6 +10,14 @@
  * @ingroup examples
  * @{
  * Examples using Drupal 8's built-in JavaScript.
+ *
+ * We have two examples here.
+ *
+ * One 'weights' content and then sorts it by weight. This demonstrates
+ * attaching JavaScript through Drupal's render arrays.
+ *
+ * The other demonstrates adding an accordion effect to content, through
+ * Drupal's theme layer.
  */
 
 /**
@@ -22,30 +30,6 @@ function js_example_theme() {
       'variables' => array('title' => NULL),
     ),
   );
-}
-
-/**
- * Implements hook_menu_link_defaults().
- */
-function js_example_menu_link_defaults() {
-  $links['js_example.info'] = array(
-    'link_title' => 'JavaScript Example',
-    'description' => 'Some information about the JavaScript example.',
-    'route_name' => 'js_example.info',
-  );
-  $links['js_example.weights'] = array(
-    'link_title' => 'JS weighting in action',
-    'description' => 'Show list weighting through JavaScript.',
-    'route_name' => 'js_example.weights',
-    'parent' => 'js_example.info',
-  );
-  $links['js_example.accordion'] = array(
-    'link_title' => 'jQuery UI accordion',
-    'description' => 'jQuery UI accordion demo.',
-    'route_name' => 'js_example.accordion',
-    'parent' => 'js_example.info',
-  );
-  return $links;
 }
 
 /**
