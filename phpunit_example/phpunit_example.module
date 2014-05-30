@@ -25,23 +25,5 @@ function phpunit_example_help($path, $arg) {
 }
 
 /**
- * Implements hook_menu().
- *
- * We will define a single menu route, so that we can give the user some
- * helpful introductory information.
- *
- * @see hook_menu()
- * @see menu_example
- */
-function phpunit_example_menu() {
-  $items['examples/phpunit_example'] = array(
-    'title' => 'PHPUnit Example',
-    'route_name' => 'phpunit_example_description',
-    'expanded' => TRUE,
-  );
-  return $items;
-}
-
-/**
  * @} End of "defgroup phpunit_example".
  */
