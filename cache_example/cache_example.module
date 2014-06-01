@@ -32,18 +32,5 @@
  */
 
 /**
- * Implements hook_menu().
- */
-function cache_example_menu() {
-  $items = array();
-  $items['examples/cache_example'] = array(
-    'title' => 'Cache example',
-    'description' => 'Example of Drupal Cache API',
-  );
-
-  return $items;
-}
-
-/**
  * @} End of "defgroup cache_example".
  */

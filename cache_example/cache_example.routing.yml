@@ -1,4 +1,4 @@
-cache_example:
+cache_example.description:
   path: 'examples/cache_example'
   defaults:
     _form: '\Drupal\cache_example\Forms\CacheExampleForm'

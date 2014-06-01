@@ -5,18 +5,30 @@
  * Test case for testing the cache example module.
  */
 
-/**
- * @addtogroup cache_example
- * @{
- */
-
 namespace Drupal\cache_example\Tests;
 
 use Drupal\simpletest\WebTestBase;
 
+/**
+ * Tests for the cache_example module.
+ *
+ * @ingroup cache_example
+ */
 class CacheExampleTestCase extends WebTestBase {
 
+  /**
+   * Modules to enable.
+   *
+   * @var array
+   */
   public static $modules = array('cache_example');
+
+  /**
+   * The installation profile to use with this test.
+   *
+   * @var string
+   */
+  protected $profile = 'minimal';
 
   /**
    * {@inheritdoc}
@@ -30,21 +42,44 @@ class CacheExampleTestCase extends WebTestBase {
   }
 
   /**
-   * Load cache example page and test if displaying uncached version.
+   * Test menu links and routes.
    *
-   * Reload once again and test if displaying cached version. Find reload link
-   * and click on it. Clear cache at the end and test if displaying uncached
-   * version again.
+   * Test the following:
+   * - A link to the cache_example in the Tools menu.
+   * - That you can successfully access the cache_example form.
+   */
+  public function testCacheExampleMenu() {
+
+    // Test for a link to the cache_example in the Tools menu.
+    $this->drupalGet('');
+    $this->assertResponse(200, 'The Home page is available.');
+    $this->assertLinkByHref('examples/cache_example');
+
+    // Verify if the can successfully access the cache_example form.
+    $this->drupalGet('examples/cache_example');
+    $this->assertResponse(200, 'The Cache Example description page is available.');
+  }
+
+  /**
+   * Test that our caches function.
+   *
+   * Does the following:
+   * - Load cache example page and test if displaying uncached version.
+   * - Reload once again and test if displaying cached version.
+   * - Find reload link and click on it.
+   * - Clear cache at the end and test if displaying uncached version again.
    */
   public function testCacheExampleBasic() {
+
     // We need administrative privileges to clear the cache.
     $admin_user = $this->drupalCreateUser(array('administer site configuration'));
     $this->drupalLogin($admin_user);
 
-    // Get uncached output of cache example page and assert some things to be
-    // sure.
+    // Get initial page cache example page, first time accessed,
+    // and assert uncached output.
     $this->drupalGet('examples/cache_example');
     $this->assertText('Source: actual file search');
+
     // Reload the page; the number should be cached.
     $this->drupalGet('examples/cache_example');
     $this->assertText('Source: cached');
