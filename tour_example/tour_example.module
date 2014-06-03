@@ -34,21 +34,6 @@
  */
 
 /**
- * Implements hook_menu().
- *
- * Defines a menu link to the example page we will be touring.
- */
-function tour_example_menu() {
-  $items['examples/tour_example'] = array(
-    'title' => 'Tour Example',
-    'route_name' => 'tour_example_description',
-    'expanded' => TRUE,
-  );
-
-  return $items;
-}
-
-/**
  * Implements hook_admin_paths().
  *
  * Ensures that our path loads in the admin theme.

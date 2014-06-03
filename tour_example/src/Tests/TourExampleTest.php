@@ -2,7 +2,10 @@
 
 /**
  * @file
- * Regression tests for tour_example module.
+ * Contains \Drupal\tour_example\Tests\TourExampleTest.
+ *
+ * This file contains the test cases to check if tour_example is performing as
+ * expected.
  */
 
 namespace Drupal\tour_example\Tests;
@@ -16,7 +19,19 @@ use Drupal\tour\Tests\TourTestBasic;
  */
 class TourExampleTest extends TourTestBasic {
 
-  public static $modules = array('tour_example');
+  /**
+   * Modules to enable.
+   *
+   * @var array
+   */
+  public static $modules = array('tour', 'tour_example');
+
+  /**
+   * The installation profile to use with this test.
+   *
+   * @var string
+   */
+  protected $profile = 'minimal';
 
   /**
    * {@inheritdoc}
@@ -27,6 +42,24 @@ class TourExampleTest extends TourTestBasic {
       'description' => 'Regression tests for tour_example module.',
       'group' => 'Examples',
     );
+  }
+
+  /**
+   * Main test.
+   *
+   * Enable Tour Example and see if it can successfully return its main page
+   * and if there is a link to the tour example in the Tools menu.
+   */
+  public function testController() {
+
+    // Test for a link to the tour_example in the Tools menu.
+    $this->drupalGet('');
+    $this->assertResponse(200, 'The Home page is available.');
+    $this->assertLinkByHref('examples/tour_example');
+
+    // Verify if the can successfully access the tour_examples page.
+    $this->drupalGet('examples/tour_example');
+    $this->assertResponse(200, 'The Tour Example description page is available.');
   }
 
   /**
