@@ -18,8 +18,9 @@
 #   label:      A human readable name for the tour.
 #   status:     A boolean, defining whether the tour is enabled.
 #   langcode:   A two-letter language code defining the language of your tour.
-#   paths:      An array of paths that you want to tour to be available on.
-#               You may use wildcards (like *) in these URLs.
+#   routes:     An array of routes for which the tour is active. Specify these
+#               as an array with route_name and optional route_params (also an
+#               array). Route names are found in each module's routing.yml file.
 #
 #
 # TIP DEFINITIONS
@@ -55,8 +56,8 @@ id: tour-example
 module: tour_example
 label: 'Tour an example admin page'
 langcode: en
-paths:
-  - 'examples/tour_example'
+routes:
+  - route_name: tour_example_description
 tips:
   introduction:
     id: introduction

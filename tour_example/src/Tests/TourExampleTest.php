@@ -15,6 +15,8 @@ use Drupal\tour\Tests\TourTestBasic;
 /**
  * Regression tests for the tour_example module.
  *
+ * We use TourTestBasic to get some built-in tour tip testing assertions.
+ *
  * @ingroup tour_example
  */
 class TourExampleTest extends TourTestBasic {
@@ -50,7 +52,7 @@ class TourExampleTest extends TourTestBasic {
    * Enable Tour Example and see if it can successfully return its main page
    * and if there is a link to the tour example in the Tools menu.
    */
-  public function testController() {
+  public function testTourExample() {
 
     // Test for a link to the tour_example in the Tools menu.
     $this->drupalGet('');
@@ -60,29 +62,9 @@ class TourExampleTest extends TourTestBasic {
     // Verify if the can successfully access the tour_examples page.
     $this->drupalGet('examples/tour_example');
     $this->assertResponse(200, 'The Tour Example description page is available.');
-  }
 
-  /**
-   * Overloading testTips() to verify that the tour exists.
-   *
-   * We overload TourTestBasic::testTips() in order to verify the existence of
-   * the tour tips we created.
-   *
-   * We also have the option of calling assertToolTips() in a more direct
-   * fashion, but we won't do that here.
-   *
-   * @see Drupal\tour\Tests\TourTestBase::assertToolTips()
-   */
-  public function testTips() {
-    $this->tips = array(
-      'examples/tour_example' => array(
-        array('data-id' => 'tour-id-1'),
-        array('data-id' => 'tour-id-2'),
-        array('data-id' => 'tour-id-3'),
-        array('data-id' => 'tour-id-4'),
-      ),
-    );
-    parent::testTips();
+    // Verify that the tour tips exist on this page.
+    $this->assertTourTips();
   }
 
 }
