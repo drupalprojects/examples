@@ -41,16 +41,3 @@
  * @see https://drupal.org/node/2029519
  * @}
  */
-
-/**
- * Implements hook_menu().
- *
- * Provides a default page to explain what this module does.
- */
-function node_type_example_menu() {
-  $items['examples/node_type_example'] = array(
-    'title' => 'Config Node Type Example',
-    'route_name' => 'config_node_type_example.description',
-  );
-  return $items;
-}

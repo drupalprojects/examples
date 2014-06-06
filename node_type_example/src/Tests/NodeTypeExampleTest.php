@@ -2,7 +2,9 @@
 
 /**
  * @file
- * Definition of Drupal\node_type_example\Tests\NodeTypeExampleTest.
+ * Contains Drupal\node_type_example\Tests\NodeTypeExampleTest.
+ *
+ * Test cases for testing the node_type_example module.
  */
 
 namespace Drupal\node_type_example\Tests;
@@ -24,6 +26,16 @@ class NodeTypeExampleTest extends WebTestBase {
   public static $modules = array('node', 'node_type_example');
 
   /**
+   * The installation profile to use with this test.
+   *
+   * We need the 'minimal' profile in order to make sure the Tool block is
+   * available.
+   *
+   * @var string
+   */
+  protected $profile = 'minimal';
+
+  /**
    * {@inheritdoc}
    */
   public static function getInfo() {
@@ -32,6 +44,36 @@ class NodeTypeExampleTest extends WebTestBase {
       'description' => 'Test that our content types are successfully created.',
       'group' => 'Examples',
     );
+  }
+
+  /**
+   * Data provider for testing menu links.
+   *
+   * @return array
+   *   Array of page -> link relationships to check for.
+   *   - The key is the path to the page where our link should appear.
+   *   - The value is the link that should appear on that page.
+   */
+  protected function providerMenuLinks() {
+    return array(
+      '/' => 'examples/node_type_example',
+    );
+  }
+
+  /**
+   * Verify and validate that default menu links were loaded for this module.
+   */
+  public function testNodeTypeExample() {
+    // Test that our page loads.
+    $this->drupalGet('examples/node_type_example');
+    $this->assertResponse(200, 'Description page exists.');
+
+    // Test that our menu links were created.
+    $links = $this->providerMenuLinks();
+    foreach ($links as $page => $path) {
+      $this->drupalGet($page);
+      $this->assertLinkByHref($path);
+    }
   }
 
   /**
