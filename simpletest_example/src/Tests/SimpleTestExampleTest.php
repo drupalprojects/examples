@@ -38,6 +38,13 @@ class SimpleTestExampleTest extends WebTestBase {
   static public $modules = array('simpletest_example');
 
   /**
+   * The installation profile to use with this test.
+   *
+   * @var string
+   */
+  protected $profile = 'minimal';
+
+  /**
    * Give some info about our test to the testing system.
    *
    * Under SimpleTest, we have to return some information about our test to the
@@ -56,6 +63,23 @@ class SimpleTestExampleTest extends WebTestBase {
       'description' => 'Ensure that the simpletest_example content type provided functions properly.',
       'group' => 'Examples',
     );
+  }
+
+  /**
+   * Test SimpleTest Example menu and page.
+   *
+   * Enable SimpleTest Example and see if it can successfully return its main
+   * page and if there is a link to the simpletest_example in the Tools menu.
+   */
+  public function testSimpleTestExampleMenu() {
+    // Test for a link to the simpletest_example in the Tools menu.
+    $this->drupalGet('');
+    $this->assertResponse(200, 'The Home page is available.');
+    $this->assertLinkByHref('examples/simpletest_example');
+
+    // Verify if the can successfully access the simpletest_examples page.
+    $this->drupalGet('examples/simpletest_example');
+    $this->assertResponse(200, 'The SimpleTest Example description page is available.');
   }
 
   /**

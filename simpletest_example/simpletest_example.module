@@ -67,24 +67,5 @@ function simpletest_example_node_access(\Drupal\node\NodeInterface $node, $op, $
 }
 
 /**
- * Implements hook_menu().
- *
- * We will define a single menu route, so that we can give the user some
- * helpful introductory information.
- *
- * @see hook_menu()
- * @see menu_example
- */
-function simpletest_example_menu() {
-  $items['examples/simpletest_example'] = array(
-    'title' => 'SimpleTest Example',
-    'type' => MENU_NORMAL_ITEM,
-    'route_name' => 'simpletest_example_description',
-    'expanded' => TRUE,
-  );
-  return $items;
-}
-
-/**
  * @} End of "defgroup simpletest_example".
  */
