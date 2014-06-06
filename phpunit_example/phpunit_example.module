@@ -12,18 +12,5 @@
  */
 
 /**
- * Implements hook_help().
- *
- * @see hook_help()
- */
-function phpunit_example_help($path, $arg) {
-  switch ($path) {
-    case 'examples/phpunit_example':
-      // Help text for the simple page registered for this path.
-      return t('This is the help text for PHPUnit example.');
-  }
-}
-
-/**
  * @} End of "defgroup phpunit_example".
  */
