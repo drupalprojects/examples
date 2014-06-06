@@ -4,6 +4,8 @@
  * Module file for page_example_module.
  */
 
+use Symfony\Component\HttpFoundation\Request;
+
 /**
  * @defgroup page_example Example: Page
  * @ingroup examples
@@ -20,8 +22,8 @@
  * Implements hook_help().
  *
  * Through hook_help(), a module can make documentation available to the user
- * for the module as a whole or for specific paths. Where the help appears
- * depends on the $path specified.
+ * for the module as a whole or for specific routes. Where the help appears
+ * depends on the $route_name specified.
  *
  * Help text will be displayed in the region designated for help text. Typically
  * this is the 'Help' region which can be found at admin/structure/block.
@@ -31,20 +33,20 @@
  *
  * The second example text will be available on the admin help page (admin/help)
  * in the list of help topics using the name of the module. To specify help in
- * the admin section combine the path and the module name using '#' as in the
- * example below.
+ * the admin section combine the special route name of 'help.page' with the
+ * module's machine name, as in 'help.page.page_example' below.
  *
  * @see hook_help()
  */
-function page_example_help($path, $arg) {
-  switch ($path) {
-    case 'examples/page_example/simple':
+function page_example_help($route_name, Request $request) {
+  switch ($route_name) {
+    case 'page_example_simple':
       // Help text for the simple page registered for this path.
       return t('This is help text for the simple page.');
 
-    case 'admin/help#page_example':
+    case 'help.page.page_example':
       // Help text for the admin section, using the module name in the path.
-      return t("This is help text created in the page example's second case.");
+      return t("This is help text created in page example's implementation of hook_help().");
   }
 }
 
@@ -67,37 +69,6 @@ function page_example_permission() {
       'description' => t('Allow users to access page with arguments'),
     ),
   );
-}
-
-/**
- * Implements hook_menu().
- *
- * This hook defines menu items, links that appear in a menu. Here we define
- * menu links with their title, path, description etc. All things related to
- * handling the page request, like access control and request handling is
- * defined in the routing definition in page_example.routing.yml.
- *
- * @see hook_menu()
- * @see menu_example
- */
-function page_example_menu() {
-
-  // These menu item will be created in the Tools menu, which is the default.
-  $items['examples/page_example'] = array(
-    'title' => 'Page Example',
-    'route_name' => 'page_example_description',
-    'expanded' => TRUE,
-  );
-
-  $items['examples/page_example/simple'] = array(
-    'title' => 'Simple - no arguments',
-    'route_name' => 'page_example_simple',
-  );
-
-  // Notice there is not a declaration entry for
-  // 'examples/page_example/arguments/{first}/{second}' because that is only a
-  // routing item, and not a menu item (which needs to appear on menu).
-  return $items;
 }
 
 /**

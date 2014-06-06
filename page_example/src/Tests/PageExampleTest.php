@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @file
  * Test case for testing the page_example module.
@@ -13,8 +14,28 @@ use Drupal\simpletest\WebTestBase;
 
 class PageExampleTest extends WebTestBase {
 
+  /**
+   * Modules to enable.
+   *
+   * @var array
+   */
   public static $modules = array('page_example');
 
+  /**
+   * The installation profile to use with this test.
+   *
+   * We need the 'minimal' profile in order to make sure the Tool block is
+   * available.
+   *
+   * @var string
+   */
+  protected $profile = 'minimal';
+
+  /**
+   * User object for our test.
+   *
+   * @var \Drupal\user\Entity\User
+   */
   protected $webUser;
 
   /**
@@ -58,12 +79,53 @@ class PageExampleTest extends WebTestBase {
   }
 
   /**
+   * Data provider for testing menu links.
+   *
+   * @return array
+   *   Array of page -> link relationships to check for, keyed by the
+   *   permissions required to access them:
+   *   - Permission machine name. Empty string means no login.
+   *     - Key is path to the page where the link should appear.
+   *     - Value is the link that should appear on the page.
+   */
+  protected function providerMenuLinks() {
+    return array(
+      '' => array(
+        '/' => 'examples/page_example',
+      ),
+      'access simple page' => array(
+        'examples/page_example' => 'examples/page_example/simple',
+      ),
+    );
+  }
+
+  /**
+   * Verify and validate that default menu links were loaded for this module.
+   */
+  public function testPageExampleLinks() {
+    $data = $this->providerMenuLinks();
+    foreach ($data as $permission => $links) {
+      if ($permission) {
+        $user = $this->drupalCreateUser(array($permission));
+        $this->drupalLogin($user);
+      }
+      foreach ($links as $page => $path) {
+        $this->drupalGet($page);
+        $this->assertLinkByHref($path);
+      }
+      if ($permission) {
+        $this->drupalLogout();
+      }
+    }
+  }
+
+  /**
    * Main test.
    *
    * Login user, create an example node, and test page functionality through
    * the admin and user interfaces.
    */
-  public function testPageExampleBasic() {
+  public function testPageExample() {
     // Verify that anonymous user can't access the pages created by
     // page_example module.
     $this->pageExampleVerifyNoAccess('examples/page_example/simple');
