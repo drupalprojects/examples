@@ -68,7 +68,7 @@ function email_example_mail($key, &$message, $params) {
 /**
  * Sends an e-mail.
  *
- * @param $form_values
+ * @param array $form_values
  *   An array of values from the contact form fields that were submitted.
  *   There are just two relevant items: $form_values['email'] and
  *   $form_values['message'].
@@ -89,12 +89,12 @@ function email_example_mail_send($form_values) {
   $params = $form_values;
 
   // The language of the e-mail. This will one of three values:
-  // * $account->getPreferredLangcode(): Used for sending mail to a particular
+  // - $account->getPreferredLangcode(): Used for sending mail to a particular
   //   website user, so that the mail appears in their preferred language.
-  // * \Drupal::currentUser()->getPreferredLangcode(): Used when sending a mail
+  // - \Drupal::currentUser()->getPreferredLangcode(): Used when sending a mail
   //   back to the user currently viewing the site. This will send it in the
   //   language they're currently using.
-  // * \Drupal::languageManager()->getDefaultLanguage()->id: Used when sending
+  // - \Drupal::languageManager()->getDefaultLanguage()->id: Used when sending
   //   mail to a pre-existing, 'neutral' address, such as the system e-mail
   //   address, or when you're unsure of the language preferences of the
   //   intended recipient.
@@ -146,19 +146,6 @@ function email_example_mail_alter(&$message) {
     // Some modules use the body as a string, erroneously.
     $message['body'] .= $signature;
   }
-}
-
-/**
- * Implements hook_menu().
- */
-function email_example_menu() {
-  $items['/examples/email_example'] = array(
-    'title' => 'E-mail Example: contact form',
-    'description' => 'Callback for generating form.',
-    'route_name' => 'email_example',
-    'type' => MENU_NORMAL_ITEM,
-  );
-  return $items;
 }
 
 /**

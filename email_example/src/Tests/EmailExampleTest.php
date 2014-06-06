@@ -1,7 +1,8 @@
 <?php
+
 /**
  * @file
- * Test case for testing the email example module.
+ * Contains \Drupal\email_example\Tests\EmailExampleTest.
  *
  * This file contains the test cases to check if module is performing as
  * expected.
@@ -11,9 +12,30 @@ namespace Drupal\email_example\Tests;
 
 use Drupal\simpletest\WebTestBase;
 
+/**
+ * Tests for the email_example module.
+ *
+ * @ingroup email_example
+ */
 class EmailExampleTest extends WebTestBase {
+
+  /**
+   * Modules to enable.
+   *
+   * @var array
+   */
   public static $modules = array('email_example');
 
+  /**
+   * The installation profile to use with this test.
+   *
+   * @var string
+   */
+  protected $profile = 'minimal';
+
+  /**
+   * {@inheritdoc}
+   */
   public static function getInfo() {
     return array(
       'name' => 'Email example functionality',
@@ -23,21 +45,42 @@ class EmailExampleTest extends WebTestBase {
   }
 
   /**
-   * Tests the email form.
+   * Test our new email form.
+   *
+   * Tests for the following:
+   *
+   * - A link to the email_example in the Tools menu.
+   * - That you can successfully access the email_example page.
    */
-  function testEmailExampleBasic() {
+  public function testEmailExampleBasic() {
+    // Test for a link to the email_example in the Tools menu.
+    $this->drupalGet('');
+    $this->assertResponse(200, 'The Home page is available.');
+    $this->assertLinkByHref('examples/email_example');
+
+    // Verify if we can successfully access the email_example page.
     $this->drupalGet('examples/email_example');
+    $this->assertResponse(200, 'The Email Example description page is available.');
+
+    // Verifiy email form has email & message fields.
     $this->assertFieldById('edit-email', NULL, 'The email field appears.');
     $this->assertFieldById('edit-message', NULL, 'The message field appears.');
-    $edit = array('email' => 'example@example.com','message' => 'test');
+
+    // Verifiy email form is submitted.
+    $edit = array('email' => 'example@example.com', 'message' => 'test');
     $this->drupalPostForm('examples/email_example', $edit, t('Submit'));
     $this->assertResponse(200);
+
+    // Verifiy comfirmation page.
     $this->assertText(t('Your message has been sent.'), 'The text "Your message has been sent." appears on the email example page.', 'Form response with the right message.');
     $this->assertMailString('to', $edit['email'], 1);
+
+    // Verifiy correct email recieved.
     $from = \Drupal::config('system.site')->get('mail');
     $t_options = array('langcode' => \Drupal::languageManager()->getDefaultLanguage()->id);
     $this->assertMailString('subject', t('E-mail sent from @site-name', array('@site-name' => $from), $t_options), 1);
     $this->assertMailString('body', $edit['message'], 1);
     $this->assertMailString('body', t("\n--\nMail altered by email_example module.", array(), $t_options), 1);
   }
+
 }

@@ -1,6 +1,5 @@
-email_example:
-  path: '/examples/email_example'
-  pattern: '/examples/email_example'
+email_example.description:
+  path: 'examples/email_example'
   defaults:
     _form: '\Drupal\email_example\Form\EmailExampleGetFormPage'
   requirements:
