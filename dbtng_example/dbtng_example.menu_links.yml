@@ -1,6 +1,6 @@
 dbtng_example.description:
   title: DBTNG Example
-  route_name: dbtng
+  route_name: dbtng_example
 
 dbtng_example.list:
   title: List
