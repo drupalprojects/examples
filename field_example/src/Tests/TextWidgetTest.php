@@ -1,0 +1,105 @@
+<?php
+
+/**
+ * @file
+ * Definition of Drupal\field_example\Tests\TextWidgetTest.
+ */
+
+namespace Drupal\field_example\Tests;
+
+use Drupal\field_example\FieldExampleWebTestBase;
+
+class TextWidgetTest extends FieldExampleWebTestBase {
+  /**
+   * {@inheritdoc}
+   */
+  public static function getInfo() {
+    return array(
+      'name' => 'Field Example with Text Widget',
+      'description' => 'Create a content type with a example_field_rgb field, configure it with the field_example_text-widget, create a node and check for correct values.',
+      'group' => 'Examples',
+    );
+  }
+
+  /**
+   * Test basic functionality of the example field.
+   *
+   * - Creates a content type.
+   * - Adds a single-valued field_example_rgb to it.
+   * - Adds a multivalued field_example_rgb to it.
+   * - Creates a node of the new type.
+   * - Populates the single-valued field.
+   * - Populates the multivalued field with two items.
+   * - Tests the result.
+   */
+  public function testSingleValueField() {
+    // Add a single field as administrator user.
+    $this->drupalLogin($this->administratorAccount);
+    $this->fieldName = $this->createField('field_example_rgb', 'field_example_text', 'number');
+
+    // Now that we have a content type with the desired field, switch to the
+    // author user to create content with it.
+    $this->drupalLogin($this->authorAccount);
+    $this->drupalGet('node/add/' . $this->contentTypeName);
+
+    // Add a node.
+    $title = $this->randomName(20);
+    $edit = array(
+      'title[0][value]' => $title,
+      'field_' . $this->fieldName . '[0][value]' => '#000001',
+    );
+
+    // Create the content.
+    $this->drupalPostForm(NULL, $edit, t('Save'));
+    $this->assertText(t('@type @title has been created', array('@type' => $this->contentTypeName, '@title' => $title)));
+
+    // Verify the value is shown when viewing this node.
+    $output_strings = $this->xpath("//div[contains(@class,'field-type-field-example-rgb')]/div/div/p/text()");
+    $this->assertEqual((string) $output_strings[0], "The color code in this field is #000001");
+  }
+
+  /**
+   * Test basic functionality of the example field.
+   *
+   * - Creates a content type.
+   * - Adds a single-valued field_example_rgb to it.
+   * - Adds a multivalued field_example_rgb to it.
+   * - Creates a node of the new type.
+   * - Populates the single-valued field.
+   * - Populates the multivalued field with two items.
+   * - Tests the result.
+   */
+  public function testMultiValueField() {
+    // Add a single field as administrator user.
+    $this->drupalLogin($this->administratorAccount);
+    $this->fieldName = $this->createField('field_example_rgb', 'field_example_text', '-1');
+
+    // Now that we have a content type with the desired field, switch to the
+    // author user to create content with it.
+    $this->drupalLogin($this->authorAccount);
+    $this->drupalGet('node/add/' . $this->contentTypeName);
+
+    // Add a node.
+    $title = $this->randomName(20);
+    $edit = array(
+      'title[0][value]' => $title,
+      'field_' . $this->fieldName . '[0][value]' => '#00ff00',
+    );
+
+    // We want to add a 2nd item to the multivalue field, so hit "add another".
+    $this->drupalPostForm(NULL, $edit, t('Add another item'));
+
+    $edit = array(
+      'field_' . $this->fieldName . '[1][value]' => '#ffffff',
+    );
+
+    // Now we can fill in the second item in the multivalue field and save.
+    $this->drupalPostForm(NULL, $edit, t('Save'));
+    $this->assertText(t('@type @title has been created', array('@type' => $this->contentTypeName, '@title' => $title)));
+
+    // Verify the value is shown when viewing this node.
+    $output_strings = $this->xpath("//div[contains(@class,'field-type-field-example-rgb')]/div/div/p/text()");
+    $this->assertEqual((string) $output_strings[0], "The color code in this field is #00ff00");
+    $this->assertEqual((string) $output_strings[1], "The color code in this field is #ffffff");
+  }
+}
