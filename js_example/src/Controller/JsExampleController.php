@@ -37,10 +37,33 @@ INFOMARKUP
   }
 
   /**
-   * Weights implementation.
+   * Weights demonstration.
    *
    * Here we demonstrate attaching a number of scripts to the render array.
-   * These scripts sort the content by it's 'weight' and color.
+   * These scripts generate content according to 'weight' and color.
+   *
+   * In this controller, on the Drupal side, we do three main things:
+   * - Create a container DIV, with an ID all the scripts can recognize.
+   * - Attach some scripts which generate color-coded content. We use the
+   *   'weight' attribute to set the order in which the scripts are included.
+   * - Add the color->weight array to drupalSettings, which is where Drupal
+   *   passes data out to JavaScript.
+   *
+   * Each of the color scripts (red.js, blue.js, etc) uses jQuery to find our
+   * DIV, and then add some content to it. The order in which the color scripts
+   * execute will end up being the order of the content.
+   *
+   * The 'weight' form atttribute determines the order in which a script is
+   * output to the page. To see this in action:
+   * - Uncheck the 'Aggregate Javascript files' setting at:
+   *   admin/config/development/performance.
+   * - Load the page: examples/js_example/weights. Examine the page source.
+   *   You will see that the color js scripts have been added in the <head>
+   *   element in weight order.
+   *
+   * To test further, change a weight in the $weights array below, then save
+   * this file and reload examples/js_example/weights. Examine the new source
+   * to see the reordering.
    *
    * @return array
    *   A renderable array.
@@ -58,7 +81,8 @@ INFOMARKUP
 
     // Start building the content.
     $build = array();
-    // Main container DIV.
+    // Main container DIV. We give it a unique ID so that the JavaScript can
+    // find it using jQuery.
     $build['content'] = array(
       '#markup' => '<div id="js-weights"></div>',
     );
@@ -68,7 +92,9 @@ INFOMARKUP
     // Attach some javascript files.
     // Start by getting the path to our module.
     $module_path = \drupal_get_path('module', 'js_example');
-    // Add our individual scripts as attachments.
+    // Add our individual scripts as attachments. We add them in an arbitrary
+    // order, but the 'weight' attribute will cause Drupal to render (and thus
+    // load and execute) them in the weighted order.
     $build['#attached']['js'] = array(
       array(
         'data' => $module_path . '/js/red.js',
@@ -95,7 +121,10 @@ INFOMARKUP
         'weight' => $weights['purple'],
       ),
     );
-    // Attach the weighted array to our JavaScript settings.
+    // Attach the weights array to our JavaScript settings. This allows the
+    // color scripts we just attached to discover their weight values, by
+    // accessing drupalSettings.js_weights.*color*. The color scripts only use
+    // this information for display to the user.
     $build['#attached']['js'][] = array(
       'type' => 'setting',
       'data' => array('js_weights' => $weights),
