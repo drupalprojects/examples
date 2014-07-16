@@ -4,6 +4,8 @@
  * Example of how to use Drupal's mail API.
  */
 
+use Drupal\Component\Utility\String;
+
 /**
  * @defgroup email_example Example: Email
  * @{
@@ -60,7 +62,7 @@ function email_example_mail($key, &$message, $params) {
       // '<' or '>', we need to make sure these entities are properly escaped,
       // as the body will later be transformed from HTML to text, meaning
       // that a normal use of '<' will result in truncation of the message.
-      $message['body'][] = check_plain($params['message']);
+      $message['body'][] = String::checkPlain($params['message']);
       break;
   }
 }
