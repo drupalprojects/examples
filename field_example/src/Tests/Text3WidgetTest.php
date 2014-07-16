@@ -9,17 +9,16 @@ namespace Drupal\field_example\Tests;
 
 use Drupal\field_example\FieldExampleWebTestBase;
 
+/**
+ * Functional tests of the 3text widget.
+ *
+ * Create a content type with a example_field_rgb field, configure it with the
+ * field_example_text-widget, create a node and check for correct values.
+ *
+ * @group field_example
+ * @group examples
+ */
 class Text3WidgetTest extends FieldExampleWebTestBase {
-  /**
-   * {@inheritdoc}
-   */
-  public static function getInfo() {
-    return array(
-      'name' => 'Field Example with Text3Widget',
-      'description' => 'Create a content type with a example_field_rgb field, configure it with the field_example_text-widget, create a node and check for correct values.',
-      'group' => 'Examples',
-    );
-  }
 
   /**
    * Test basic functionality of the example field.
@@ -37,7 +36,6 @@ class Text3WidgetTest extends FieldExampleWebTestBase {
     $this->drupalLogin($this->administratorAccount);
     $this->fieldName = $this->createField('field_example_rgb', 'field_example_3text', 'number');
     // Post-condition: Content type now has the desired field.
-
     // Switch to the author user to create content with this type and field.
     $this->drupalLogin($this->authorAccount);
     $this->drupalGet('node/add/' . $this->contentTypeName);
@@ -76,7 +74,6 @@ class Text3WidgetTest extends FieldExampleWebTestBase {
     $this->drupalLogin($this->administratorAccount);
     $this->fieldName = $this->createField('field_example_rgb', 'field_example_3text', '-1');
     // Post-condition: Content type now has the desired field.
-
     // Switch to the author user to create content with this type and field.
     $this->drupalLogin($this->authorAccount);
     $this->drupalGet('node/add/' . $this->contentTypeName);
@@ -107,4 +104,5 @@ class Text3WidgetTest extends FieldExampleWebTestBase {
     $this->assertEqual((string) $output_strings[0], "The color code in this field is #00ff00");
     $this->assertEqual((string) $output_strings[1], "The color code in this field is #ffffff");
   }
+
 }

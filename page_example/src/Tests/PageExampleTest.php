@@ -12,6 +12,12 @@ namespace Drupal\page_example\Tests;
 
 use Drupal\simpletest\WebTestBase;
 
+/**
+ * Creates page and render the content based on the arguments passed in the URL.
+ *
+ * @group page_example
+ * @group examples
+ */
 class PageExampleTest extends WebTestBase {
 
   /**
@@ -37,17 +43,6 @@ class PageExampleTest extends WebTestBase {
    * @var \Drupal\user\Entity\User
    */
   protected $webUser;
-
-  /**
-   * {@inheritdoc}
-   */
-  public static function getInfo() {
-    return array(
-      'name' => 'Page example functionality',
-      'description' => 'Creates page and render the content based on the arguments passed in the URL.',
-      'group' => 'Examples',
-    );
-  }
 
   /**
    * Generates a random string of ASCII numeric characters (values 48 to 57).

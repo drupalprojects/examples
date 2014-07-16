@@ -9,17 +9,18 @@ namespace Drupal\field_example\Tests;
 
 use Drupal\field_example\FieldExampleWebTestBase;
 
+/**
+ * Test basic functionality of the widgets.
+ *
+ * Create a content type with a example_field_rgb field, configure it with the
+ * field_example_text-widget, create a node and check for correct values.
+ *
+ * @group field_example
+ * @group examples
+ *
+ * @ingroup field_example
+ */
 class TextWidgetTest extends FieldExampleWebTestBase {
-  /**
-   * {@inheritdoc}
-   */
-  public static function getInfo() {
-    return array(
-      'name' => 'Field Example with Text Widget',
-      'description' => 'Create a content type with a example_field_rgb field, configure it with the field_example_text-widget, create a node and check for correct values.',
-      'group' => 'Examples',
-    );
-  }
 
   /**
    * Test basic functionality of the example field.
@@ -102,4 +103,5 @@ class TextWidgetTest extends FieldExampleWebTestBase {
     $this->assertEqual((string) $output_strings[0], "The color code in this field is #00ff00");
     $this->assertEqual((string) $output_strings[1], "The color code in this field is #ffffff");
   }
+
 }

@@ -12,6 +12,9 @@ use Drupal\simpletest\WebTestBase;
 /**
  * Test the user-facing menus in Field Example.
  *
+ * @group field_example
+ * @group examples
+ *
  * @ingroup field_example
  */
 class FieldExampleMenuTest extends WebTestBase {
@@ -31,17 +34,6 @@ class FieldExampleMenuTest extends WebTestBase {
    * @var string
    */
   protected $profile = 'minimal';
-
-  /**
-   * {@inheritdoc}
-   */
-  public static function getInfo() {
-    return array(
-      'name' => 'Field Example Menu Test',
-      'description' => 'Test the user-facing menus in Field Example.',
-      'group' => 'Examples',
-    );
-  }
 
   /**
    * Test for a link to the block example in the Tools menu.
