@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @file
  * Contains \Drupal\dbtng_example\Tests\DBTNGExampleTest
@@ -11,6 +12,11 @@ use Drupal\simpletest\WebTestBase;
 
 /**
  * Tests for the dbtng_example module.
+ *
+ * @group dbtng_example
+ * @group examples
+ *
+ * @ingroup dbtng_example
  */
 class DBTNGExampleTest extends WebTestBase {
 
@@ -30,17 +36,6 @@ class DBTNGExampleTest extends WebTestBase {
    * @var string
    */
   protected $profile = 'minimal';
-
-  /**
-   * {@inheritdoc}
-   */
-  public static function getInfo() {
-    return array(
-      'name' => 'DBTNG example tests',
-      'description' => 'Various tests on the dbtng example module.',
-      'group' => 'Examples',
-    );
-  }
 
   /**
    * Regression test for dbtng_example.
