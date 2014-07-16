@@ -10,6 +10,11 @@ namespace Drupal\config_entity_example\Tests;
 use Drupal\simpletest\WebTestBase;
 
 /**
+ * Test the Config Entity Example module.
+ *
+ * @group config_entity_example
+ * @group examples
+ *
  * @ingroup config_entity_example
  */
 class ConfigEntityExampleTest extends WebTestBase {
