@@ -10,9 +10,11 @@ namespace Drupal\block_example\Tests;
 use Drupal\simpletest\WebTestBase;
 
 /**
- * Testing the Block Example module.
+ * Test the configuration options and block created by Block Example module.
  *
  * @ingroup block_example
+ * @group block_example
+ * @group examples
  */
 class BlockExampleTest extends WebTestBase {
 
@@ -24,17 +26,6 @@ class BlockExampleTest extends WebTestBase {
   public static $modules = array('block', 'block_example');
 
   protected $WebUser;
-
-  /**
-   * {@inheritdoc}
-   */
-  public static function getInfo() {
-    return array(
-      'name' => 'Block Example functionality',
-      'description' => 'Test the configuration options and block created by Block Example module.',
-      'group' => 'Examples',
-    );
-  }
 
   /**
    * Enable modules and create user with specific permissions.

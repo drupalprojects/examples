@@ -13,6 +13,8 @@ use Drupal\simpletest\WebTestBase;
  * Test the user-facing menus in Block Example.
  *
  * @ingroup block_example
+ * @group block_example
+ * @group examples
  */
 class BlockExampleMenuTest extends WebTestBase {
 
@@ -31,17 +33,6 @@ class BlockExampleMenuTest extends WebTestBase {
    * @var string
    */
   protected $profile = 'minimal';
-
-  /**
-   * {@inheritdoc}
-   */
-  public static function getInfo() {
-    return array(
-      'name' => 'Block Example Menu Test',
-      'description' => 'Test the user-facing menus in Block Example.',
-      'group' => 'Examples',
-    );
-  }
 
   /**
    * Test for a link to the block example in the Tools menu.
