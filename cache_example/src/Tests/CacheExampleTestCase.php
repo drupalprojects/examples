@@ -13,6 +13,8 @@ use Drupal\simpletest\WebTestBase;
  * Tests for the cache_example module.
  *
  * @ingroup cache_example
+ * @group cache_example
+ * @group examples
  */
 class CacheExampleTestCase extends WebTestBase {
 
@@ -29,17 +31,6 @@ class CacheExampleTestCase extends WebTestBase {
    * @var string
    */
   protected $profile = 'minimal';
-
-  /**
-   * {@inheritdoc}
-   */
-  public static function getInfo() {
-    return array(
-      'name' => 'Cache example functionality',
-      'description' => 'Test the Cache Example module.',
-      'group' => 'Examples',
-    );
-  }
 
   /**
    * Test menu links and routes.
