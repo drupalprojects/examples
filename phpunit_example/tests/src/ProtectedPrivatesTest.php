@@ -14,7 +14,7 @@ use Drupal\phpunit_example\ProtectedPrivates;
 use Drupal\phpunit_example\Tests\Subclasses\ProtectedPrivatesSubclass;
 
 /**
- * A PHPUnit example test case against an example class.
+ * ProtectedPrivates unit testing of restricted methods.
  *
  * This test case demonstrates the following unit testing patterns and topics:
  * - Using reflection to test private class methods.
@@ -40,19 +40,9 @@ use Drupal\phpunit_example\Tests\Subclasses\ProtectedPrivatesSubclass;
  *
  * @ingroup phpunit_example
  * @group phpunit_example
+ * @group examples
  */
 class ProtectedPrivatesTest extends UnitTestCase {
-
-  /**
-   * {@inheritdoc}
-   */
-  public static function getInfo() {
-    return array(
-      'name' => 'ProtectedPrivates Unit Test',
-      'description' => 'Demonstrate unit testing of restricted methods.',
-      'group' => 'Examples',
-    );
-  }
 
   /**
    * Get an accessible method using reflection.

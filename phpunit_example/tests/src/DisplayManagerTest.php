@@ -12,25 +12,15 @@ use Drupal\phpunit_example\DisplayManager;
 use Drupal\phpunit_example\DisplayInfoInterface;
 
 /**
- * A PHPUnit example test case against an example class.
+ * DisplayManager unit test with doubles.
  *
  * @todo: More documentation.
  *
  * @ingroup phpunit_example
  * @group phpunit_example
+ * @group examples
  */
 class DisplayManagerTest extends UnitTestCase {
-
-  /**
-   * {@inheritdoc}
-   */
-  public static function getInfo() {
-    return array(
-      'name' => 'DisplayManager Unit Test',
-      'description' => 'Demonstrate unit testing with test doubles.',
-      'group' => 'Examples',
-    );
-  }
 
   /**
    * Test for DisplayManager's DisplayableItemInterface handling.

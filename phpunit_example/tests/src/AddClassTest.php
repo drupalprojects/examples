@@ -12,7 +12,7 @@ use Drupal\Tests\UnitTestCase;
 use Drupal\phpunit_example\AddClass;
 
 /**
- * A PHPUnit example test case against an example class.
+ * AddClass units tests.
  *
  * This test case demonstrates the following PHPUnit annotations:
  * - dataProvider
@@ -35,19 +35,9 @@ use Drupal\phpunit_example\AddClass;
  *
  * @ingroup phpunit_example
  * @group phpunit_example
+ * @group examples
  */
 class AddClassTest extends UnitTestCase {
-
-  /**
-   * {@inheritdoc}
-   */
-  public static function getInfo() {
-    return array(
-      'name' => 'AddClass Unit Test',
-      'description' => 'Show some simple unit tests',
-      'group' => 'Examples',
-    );
-  }
 
   /**
    * Very simple test of AddClass::add().
