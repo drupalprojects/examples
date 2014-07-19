@@ -18,6 +18,8 @@ use Drupal\tour\Tests\TourTestBasic;
  * We use TourTestBasic to get some built-in tour tip testing assertions.
  *
  * @ingroup tour_example
+ * @group tour_example
+ * @group examples
  */
 class TourExampleTest extends TourTestBasic {
 
@@ -34,17 +36,6 @@ class TourExampleTest extends TourTestBasic {
    * @var string
    */
   protected $profile = 'minimal';
-
-  /**
-   * {@inheritdoc}
-   */
-  public static function getInfo() {
-    return array(
-      'name' => 'Tour Example Tests',
-      'description' => 'Regression tests for tour_example module.',
-      'group' => 'Examples',
-    );
-  }
 
   /**
    * Main test.
