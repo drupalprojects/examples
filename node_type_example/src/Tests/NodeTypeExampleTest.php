@@ -12,9 +12,11 @@ namespace Drupal\node_type_example\Tests;
 use Drupal\simpletest\WebTestBase;
 
 /**
- * Tests for the node_type_example module.
+ * Test that our content types are successfully created.
  *
  * @ingroup node_type_example
+ * @group node_type_example
+ * @group examples
  */
 class NodeTypeExampleTest extends WebTestBase {
 
@@ -34,17 +36,6 @@ class NodeTypeExampleTest extends WebTestBase {
    * @var string
    */
   protected $profile = 'minimal';
-
-  /**
-   * {@inheritdoc}
-   */
-  public static function getInfo() {
-    return array(
-      'name' => 'Node Type Example Test',
-      'description' => 'Test that our content types are successfully created.',
-      'group' => 'Examples',
-    );
-  }
 
   /**
    * Data provider for testing menu links.
