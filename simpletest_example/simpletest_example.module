@@ -5,6 +5,9 @@
  * Module file for simpletest_example
  */
 
+use Drupal\node\NodeInterface;
+use \Drupal\Core\Session\AccountInterface;
+
 /**
  * @defgroup simpletest_example Example: Simpletest
  * @ingroup examples
@@ -31,7 +34,8 @@ function simpletest_example_permission() {
   $perms = array();
   $perms['extra special edit any simpletest_example'] = array(
     'title' => t('Extra special edit any SimpleTest Example'),
-    'description' => t('Extra special edit any SimpleTest Example'),
+    'description' => t('Allow user to edit any any SimpleTest Example content authored by any user.'),
+    'restrict access' => TRUE,
   );
   return $perms;
 }
@@ -44,7 +48,7 @@ function simpletest_example_permission() {
  * If this is running on the testbot, we don't want the error to show so will
  * work around it by testing to see if we're in the 'checkout' directory.
  */
-function simpletest_example_node_access(\Drupal\node\NodeInterface $node, $op, $account, $lancode) {
+function simpletest_example_node_access(NodeInterface $node, $op, AccountInterface $account, $langcode) {
   // Gather the node type.
   $type = $node->getType();
   // If it's not a simpletest_example node, or if it's not operations we care
@@ -59,7 +63,7 @@ function simpletest_example_node_access(\Drupal\node\NodeInterface $node, $op, $
   // The correct version should have ($op == 'update' || $op == 'delete').
   // The author had mistakenly always tested with User 1 so it always
   // allowed access and the bug wasn't noticed!
-  if (($op == 'delete')  && (user_access('extra special edit any simpletest_example', $account) && ($account->id() == $node->getAuthorId()))) {
+  if (($op == 'delete')  && ($account->hasPermission('extra special edit any simpletest_example') && ($account->id() == $node->getAuthorId()))) {
     return NODE_ACCESS_ALLOW;
   }
 

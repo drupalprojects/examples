@@ -9,42 +9,33 @@
 namespace Drupal\simpletest_example\Tests;
 
 use Drupal\simpletest_example\EmptyDateChecker;
-
 use Drupal\simpletest\UnitTestBase;
 
 /**
+ * Test that simpletest_example_empty_mysql_date works properly.
+ *
  * Although most core test cases are based on DrupalWebTestCase and are
  * functional tests (exercising the web UI) we also have DrupalUnitTestCase,
- * which executes much faster because a Drupal install does not have to be
- * one. No environment is provided to a test case based on DrupalUnitTestCase;
+ * which can execute much more quickly because it doesn't install Drupal for
+ * each test.
+ *
+ * No Drupal environment is provided to a test case based on DrupalUnitTestCase;
  * it must be entirely self-contained.
  *
+ * Note that as of Drupal 8, we also have PHPUnit-based unit testing as well.
+ * PHPUnit is much preferred for more strict unit tests, and meaningful code
+ * coverage reports.
+ *
  * @see DrupalUnitTestCase
+ * @see phpunit_example
  *
  * @ingroup simpletest_example
+ *
+ * SimpleTest uses group annotations to help you organize your tests.
+ * @group simpletest_example
+ * @group examples
  */
 class SimpleTestUnitTestExampleTest extends UnitTestBase {
-
-  /**
-   * Give some info about our test to the testing system.
-   *
-   * Under SimpleTest, we have to return some information about our test to the
-   * testing system.
-   *
-   * We give our test class a name, a description, and a group.
-   *
-   * @see Drupal\simpletest\TestBase::getInfo()
-   *
-   * @return array
-   *   A keyed array.
-   */
-  public static function getInfo() {
-    return array(
-      'name' => 'SimpleTest Example Unit Testing',
-      'description' => 'Test that simpletest_example_empty_mysql_date works properly.',
-      'group' => 'Examples',
-    );
-  }
 
   /**
    * Unit test of simpletest_example_empty_mysql_date().
@@ -76,4 +67,5 @@ class SimpleTestUnitTestExampleTest extends UnitTestBase {
     $message = 'A valid date should return FALSE.';
     $this->assertFalse($result, $message);
   }
+
 }

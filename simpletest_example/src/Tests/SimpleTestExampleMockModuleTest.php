@@ -11,6 +11,8 @@ namespace Drupal\simpletest_example\Tests;
 use Drupal\simpletest\WebTestBase;
 
 /**
+ * Demonstrate SimpleTest with a mock module.
+ *
  * SimpleTestExampleMockModuleTestCase allows us to demonstrate how you can
  * use a mock module to aid in functional testing in Drupal.
  *
@@ -20,12 +22,17 @@ use Drupal\simpletest\WebTestBase;
  * exercise the code in question.
  *
  * This test case class is very similar to SimpleTestExampleTestCase. The main
- * difference is that we enable the simpletest_example_test module in the
- * setUp() method. Then we can test for behaviors provided by that module.
+ * difference is that we enable the simpletest_example_test module by providing
+ * it in the $modules property. Then we can test for behaviors provided by that
+ * module.
  *
  * @see SimpleTestExampleTestCase
  *
  * @ingroup simpletest_example
+ *
+ * SimpleTest uses group annotations to help you organize your tests.
+ * @group simpletest_example
+ * @group examples
  */
 class SimpleTestExampleMockModuleTest extends WebTestBase {
 
@@ -37,28 +44,10 @@ class SimpleTestExampleMockModuleTest extends WebTestBase {
    *
    * @var array
    */
-  static public $modules = array('simpletest_example', 'simpletest_example_test');
-
-  /**
-   * Give some info about our test to the testing system.
-   *
-   * Under SimpleTest, we have to return some information about our test to the
-   * testing system.
-   *
-   * We give our test class a name, a description, and a group.
-   *
-   * @see Drupal\simpletest\TestBase::getInfo()
-   *
-   * @return array
-   *   A keyed array.
-   */
-  public static function getInfo() {
-    return array(
-      'name' => 'SimpleTest Mock Module Example',
-      'description' => "Ensure that we can modify SimpleTest Example's content types.",
-      'group' => 'Examples',
-    );
-  }
+  static public $modules = array(
+    'simpletest_example',
+    'simpletest_example_test',
+  );
 
   /**
    * Test modifications made by our mock module.
