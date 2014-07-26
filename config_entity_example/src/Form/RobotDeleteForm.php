@@ -37,7 +37,7 @@ class RobotDeleteForm extends EntityConfirmFormBase {
    */
   public function getQuestion() {
     return $this->t('Are you sure you want to delete robot %label?', array(
-      '%label' => $this->entity->label(),
+        '%label' => $this->entity->label(),
     ));
   }
 
@@ -55,17 +55,16 @@ class RobotDeleteForm extends EntityConfirmFormBase {
   }
 
   /**
-   * Gets the cancel route.
+   * Gets the cancel URL.
    *
-   * Provides the route name to go to if the user cancels the action. For entity
+   * Provides the URL to go to if the user cancels the action. For entity
    * delete forms, this is typically the route that points at the list
    * controller.
    *
-   * @return array
-   *   The route to go to if the user cancels the deletion. The key is
-   *   'route_name'. The value is the route name.
+   * @return \Drupal\Core\Url
+   *   The URL to go to if the user cancels the deletion.
    */
-  public function getCancelRoute() {
+  public function getCancelUrl() {
     return new Url('robot.list');
   }
 
