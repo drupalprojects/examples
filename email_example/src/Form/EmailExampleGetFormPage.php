@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @file
  * Contains \Drupal\email_example\Form\EmailExampleGetFormPage.
@@ -7,6 +8,7 @@
 namespace Drupal\email_example\Form;
 
 use Drupal\Core\Form\FormInterface;
+use Drupal\Core\Form\FormStateInterface;
 
 /**
  * File test form class.
@@ -24,17 +26,9 @@ class EmailExampleGetFormPage implements FormInterface {
   }
 
   /**
-   * Form constructor.
-   *
-   * @param array $form
-   *   An associative array containing the structure of the form.
-   * @param array $form_state
-   *   An associative array containing the current state of the form.
-   *
-   * @return array
-   *   The form structure.
+   * {@inheritdoc}
    */
-  public function buildForm(array $form, array &$form_state) {
+  public function buildForm(array $form, FormStateInterface $form_state) {
     $form['intro'] = array(
       '#markup' => t('Use this form to send a message to an e-mail address. No spamming!'),
     );
@@ -56,28 +50,19 @@ class EmailExampleGetFormPage implements FormInterface {
   }
 
   /**
-   * Form validation handler.
-   *
-   * @param array $form
-   *   An associative array containing the structure of the form.
-   * @param array $form_state
-   *   An associative array containing the current state of the form.
+   * {@inheritdoc}
    */
-  public function validateForm(array &$form, array &$form_state) {
+  public function validateForm(array &$form, FormStateInterface $form_state) {
     if (!valid_email_address($form_state['values']['email'])) {
       form_set_error('email', t('That e-mail address is not valid.'));
     }
   }
 
   /**
-   * Form submission handler.
-   *
-   * @param array $form
-   *   An associative array containing the structure of the form.
-   * @param array $form_state
-   *   An associative array containing the current state of the form.
+   * {@inheritdoc}
    */
-  public function submitForm(array &$form, array &$form_state) {
+  public function submitForm(array &$form, FormStateInterface $form_state) {
     email_example_mail_send($form_state['values']);
   }
+
 }

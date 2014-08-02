@@ -8,6 +8,7 @@
 namespace Drupal\dbtng_example;
 
 use Drupal\Core\Form\FormBase;
+use Drupal\Core\Form\FormStateInterface;
 
 /**
  * Sample UI to update a record.
@@ -24,7 +25,7 @@ class DBTNGExampleUpdateForm extends FormBase {
   /**
    * Sample UI to update a record.
    */
-  public function buildForm(array $form, array &$form_state) {
+  public function buildForm(array $form, FormStateInterface $form_state) {
     $form = array(
       '#prefix' => '<div id="updateform">',
       '#suffix' => '</div>',
@@ -40,12 +41,11 @@ class DBTNGExampleUpdateForm extends FormBase {
     }
 
     foreach ($entries as $entry) {
-      $options[$entry->pid] = t('@pid: @name @surname (@age)',
-        array(
-          '@pid' => $entry->pid,
-          '@name' => $entry->name,
-          '@surname' => $entry->surname,
-          '@age' => $entry->age,
+      $options[$entry->pid] = t('@pid: @name @surname (@age)', array(
+        '@pid' => $entry->pid,
+        '@name' => $entry->name,
+        '@surname' => $entry->surname,
+        '@age' => $entry->age,
         )
       );
       $keyed_entries[$entry->pid] = $entry;
@@ -98,7 +98,7 @@ class DBTNGExampleUpdateForm extends FormBase {
    *
    * When the pid changes, populates the defaults from the database in the form.
    */
-  public function updateCallback(array $form, array $form_state) {
+  public function updateCallback(array $form, FormStateInterface $form_state) {
     $entry = $form_state['entries'][$form_state['values']['pid']];
     // Setting the #value of items is the only way I was able to figure out
     // to get replaced defaults on these items. #default_value will not do it
@@ -110,19 +110,19 @@ class DBTNGExampleUpdateForm extends FormBase {
   }
 
   /**
-   * Validating the form.
+   * {@inheritdoc}
    */
-  public function validateForm(array &$form, array &$form_state) {
+  public function validateForm(array &$form, FormStateInterface $form_state) {
     // Confirm that age is numeric.
     if (!intval($form_state['values']['age'])) {
-      form_set_error('age', t('Age needs to be a number'));
+      $form_state->setError('age', t('Age needs to be a number'));
     }
   }
 
   /**
-   * Submit handler for 'update entry' form.
+   * {@inheritdoc}
    */
-  public function submitForm(array &$form, array &$form_state) {
+  public function submitForm(array &$form, FormStateInterface $form_state) {
     // Gather the current user so the new record has ownership.
     $account = \Drupal::currentUser();
     // Save the submitted entry.
@@ -134,11 +134,10 @@ class DBTNGExampleUpdateForm extends FormBase {
       'uid' => $account->id(),
     );
     $count = DBTNGExampleStorage::update($entry);
-    drupal_set_message(t('Updated entry @entry (@count row updated)',
-      array(
-        '@count' => $count,
-        '@entry' => print_r($entry, TRUE),
-      )
+    drupal_set_message(t('Updated entry @entry (@count row updated)', array(
+      '@count' => $count,
+      '@entry' => print_r($entry, TRUE),
+        )
     ));
   }
 

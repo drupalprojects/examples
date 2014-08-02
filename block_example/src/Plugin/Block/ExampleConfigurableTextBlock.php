@@ -10,9 +10,14 @@ namespace Drupal\block_example\Plugin\Block;
 use Drupal\block\Annotation\Block;
 use Drupal\block\BlockBase;
 use Drupal\Core\Annotation\Translation;
+use Drupal\Core\Form\FormStateInterface;
 
 /**
  * Provides a 'Example: configurable text string' block.
+ *
+ * Drupal\block\BlockBase gives us a very useful set of basic functionality for
+ * this configurable block. We can just fill in a few of the blanks with
+ * defaultConfiguration(), blockForm(), blockSubmit(), and build().
  *
  * @Block(
  *   id = "example_configurable_text",
@@ -23,7 +28,7 @@ use Drupal\Core\Annotation\Translation;
 class ExampleConfigurableTextBlock extends BlockBase {
 
   /**
-   * Overrides \Drupal\block\BlockBase::defaultConfiguration().
+   * {@inheritdoc}
    */
   public function defaultConfiguration() {
     return array(
@@ -32,9 +37,9 @@ class ExampleConfigurableTextBlock extends BlockBase {
   }
 
   /**
-   * Overrides \Drupal\block\BlockBase::blockForm().
+   * {@inheritdoc}
    */
-  public function blockForm($form, &$form_state) {
+  public function blockForm($form, FormStateInterface $form_state) {
     $form['block_example_string_text'] = array(
       '#type' => 'textfield',
       '#title' => t('Block contents'),
@@ -46,14 +51,15 @@ class ExampleConfigurableTextBlock extends BlockBase {
   }
 
   /**
-   * Overrides \Drupal\block\BlockBase::blockSubmit().
+   * {@inheritdoc}
    */
-  public function blockSubmit($form, &$form_state) {
-    $this->configuration['block_example_string'] = $form_state['values']['block_example_string_text'];
+  public function blockSubmit($form, FormStateInterface $form_state) {
+    $this->configuration['block_example_string']
+      = $form_state['values']['block_example_string_text'];
   }
 
   /**
-   * Implements \Drupal\block\BlockBase::blockBuild().
+   * {@inheritdoc}
    */
   public function build() {
     return array(

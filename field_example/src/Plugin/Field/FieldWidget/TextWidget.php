@@ -9,6 +9,7 @@ namespace Drupal\field_example\Plugin\Field\FieldWidget;
 
 use Drupal\Core\Field\FieldItemListInterface;
 use Drupal\Core\Field\WidgetBase;
+use Drupal\Core\Form\FormStateInterface;
 
 /**
  * Plugin implementation of the 'field_example_text' widget.
@@ -27,7 +28,7 @@ class TextWidget extends WidgetBase {
   /**
    * {@inheritdoc}
    */
-  public function formElement(FieldItemListInterface $items, $delta, array $element, array &$form, array &$form_state) {
+  public function formElement(FieldItemListInterface $items, $delta, array $element, array &$form, FormStateInterface $form_state) {
     $value = isset($items[$delta]->value) ? $items[$delta]->value : '';
     $element += array(
       '#type' => 'color',
@@ -42,4 +43,5 @@ class TextWidget extends WidgetBase {
     );
     return array('value' => $element);
   }
+
 }

@@ -8,6 +8,7 @@
 namespace Drupal\dbtng_example;
 
 use Drupal\Core\Form\FormBase;
+use Drupal\Core\Form\FormStateInterface;
 
 /**
  * Simple form to add an entry, with all the interesting fields.
@@ -22,9 +23,9 @@ class DBTNGExampleAddForm extends FormBase {
   }
 
   /**
-   * Prepare a simple form to add an entry, with all the interesting fields.
+   * {@inheritdoc}
    */
-  public function buildForm(array $form, array &$form_state) {
+  public function buildForm(array $form, FormStateInterface $form_state) {
     $form = array();
 
     $form['add'] = array(
@@ -56,9 +57,9 @@ class DBTNGExampleAddForm extends FormBase {
   }
 
   /**
-   * Validate the form.
+   * {@inheritdoc}
    */
-  public function validateForm(array &$form, array &$form_state) {
+  public function validateForm(array &$form, FormStateInterface $form_state) {
     // Confirm that age is numeric.
     if (!intval($form_state['values']['age'])) {
       form_set_error('age', t('Age needs to be a number'));
@@ -66,9 +67,9 @@ class DBTNGExampleAddForm extends FormBase {
   }
 
   /**
-   * Submit handler for 'add entry' form.
+   * {@inheritdoc}
    */
-  public function submitForm(array &$form, array &$form_state) {
+  public function submitForm(array &$form, FormStateInterface $form_state) {
     // Gather the current user so the new record has ownership.
     $account = \Drupal::currentUser();
     // Save the submitted entry.

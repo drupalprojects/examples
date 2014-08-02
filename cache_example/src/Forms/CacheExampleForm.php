@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @file
  * Contains \Drupal\cron_example\Form\CronExampleForm
@@ -7,6 +8,7 @@
 namespace Drupal\cache_example\Forms;
 
 use Drupal\Core\Form\FormBase;
+use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Cache\CacheBackendInterface;
 
 /**
@@ -24,8 +26,7 @@ class CacheExampleForm extends FormBase {
   /**
    * {@inheritdoc}
    */
-  public function buildForm(array $form, array &$form_state) {
-
+  public function buildForm(array $form, FormStateInterface $form_state) {
     // Log execution time.
     $start_time = microtime(TRUE);
 
@@ -78,13 +79,12 @@ class CacheExampleForm extends FormBase {
 
     $form['file_search']['statistics'] = array(
       '#type' => 'item',
-      '#markup' => t('%count files exist in this Drupal installation; @retrieval in @time ms. <br/>(Source: <span style="color:@color;">@source</span>)',
-        array(
-          '%count' => $files_count,
-          '@retrieval' => $retrieval,
-          '@time' => number_format($duration * 1000, 2),
-          '@color' => $color,
-          '@source' => empty($cache) ? t('actual file search') : t('cached'),
+      '#markup' => t('%count files exist in this Drupal installation; @retrieval in @time ms. <br/>(Source: <span style="color:@color;">@source</span>)', array(
+        '%count' => $files_count,
+        '@retrieval' => $retrieval,
+        '@time' => number_format($duration * 1000, 2),
+        '@color' => $color,
+        '@source' => empty($cache) ? t('actual file search') : t('cached'),
         )
       ),
     );
@@ -233,7 +233,7 @@ class CacheExampleForm extends FormBase {
   /**
    * {@inheritdoc}
    */
-  public function submitForm(array &$form, array &$form_state) {
+  public function submitForm(array &$form, FormStateInterface $form_state) {
 
   }
 

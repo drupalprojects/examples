@@ -9,6 +9,7 @@ namespace Drupal\config_entity_example\Form;
 
 use Drupal\Core\Entity\EntityConfirmFormBase;
 use Drupal\Core\Url;
+use Drupal\Core\Form\FormStateInterface;
 
 /**
  * Class RobotDeleteForm.
@@ -76,10 +77,10 @@ class RobotDeleteForm extends EntityConfirmFormBase {
    *
    * @param array $form
    *   An associative array containing the structure of the form.
-   * @param array $form_state
+   * @param Drupal\Core\Form\FormStateInterface $form_state
    *   An associative array containing the current state of the form.
    */
-  public function submit(array $form, array &$form_state) {
+  public function submit(array $form, FormStateInterface $form_state) {
     // Delete the entity.
     $this->entity->delete();
 

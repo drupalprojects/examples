@@ -9,7 +9,8 @@ namespace Drupal\config_entity_example\Form;
 
 use Drupal\Core\Url;
 use Drupal\Core\Entity\EntityForm;
-use \Drupal\Core\Entity\Query\QueryFactory;
+use Drupal\Core\Entity\Query\QueryFactory;
+use Drupal\Core\Form\FormStateInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
@@ -77,7 +78,7 @@ class RobotFormBase extends EntityForm {
    * @return array
    *   An associative array containing the robot add/edit form.
    */
-  public function buildForm(array $form, array &$form_state) {
+  public function buildForm(array $form, FormStateInterface $form_state) {
     // Get anything we need form the base class.
     $form = parent::buildForm($form, $form_state);
 
@@ -124,13 +125,13 @@ class RobotFormBase extends EntityForm {
    *   The entity ID.
    * @param array $element
    *   The form element.
-   * @param array $form_state
+   * @param FormStateInterface $form_state
    *   The form state.
    *
    * @return bool
    *   TRUE if this format already exists, FALSE otherwise.
    */
-  public function exists($entity_id, array $element, array $form_state) {
+  public function exists($entity_id, array $element, FormStateInterface $form_state) {
     // Use the query factory to build a new robot entity query.
     $query = $this->entityQueryFactory->get('robot');
 
@@ -149,13 +150,13 @@ class RobotFormBase extends EntityForm {
    *
    * @param array $form
    *   An associative array containing the structure of the form.
-   * @param array $form_state
+   * @param Drupal\Core\Form\FormStateInterface $form_state
    *   An associative array containing the current state of the form.
    *
    * @return array
    *   An array of supported actions for the current entity form.
    */
-  protected function actions(array $form, array &$form_state) {
+  protected function actions(array $form, FormStateInterface $form_state) {
     // Get the basic actins from the base class.
     $actions = parent::actions($form, $form_state);
 
@@ -171,10 +172,10 @@ class RobotFormBase extends EntityForm {
    *
    * @param array $form
    *   An associative array containing the structure of the form.
-   * @param array $form_state
+   * @param Drupal\Core\Form\FormStateInterface $form_state
    *   An associative array containing the current state of the form.
    */
-  public function validate(array $form, array &$form_state) {
+  public function validate(array $form, FormStateInterface $form_state) {
     parent::validate($form, $form_state);
 
     // Add code here to validate your config entity's form elements.
@@ -190,10 +191,10 @@ class RobotFormBase extends EntityForm {
    *
    * @param array $form
    *   An associative array containing the structure of the form.
-   * @param array $form_state
+   * @param Drupal\Core\Form\FormStateInterface $form_state
    *   An associative array containing the current state of the form.
    */
-  public function save(array $form, array &$form_state) {
+  public function save(array $form, FormStateInterface $form_state) {
     // Get the entity from the class variable. We don't need to do this, but
     // it often makes the code easier to read.
     $robot = $this->entity;
