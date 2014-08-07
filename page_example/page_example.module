@@ -4,7 +4,7 @@
  * Module file for page_example_module.
  */
 
-use Symfony\Component\HttpFoundation\Request;
+use Drupal\Core\Routing\RouteMatchInterface;
 
 /**
  * @defgroup page_example Example: Page
@@ -38,7 +38,7 @@ use Symfony\Component\HttpFoundation\Request;
  *
  * @see hook_help()
  */
-function page_example_help($route_name, Request $request) {
+function page_example_help($route_name, RouteMatchInterface $route_match) {
   switch ($route_name) {
     case 'page_example_simple':
       // Help text for the simple page registered for this path.

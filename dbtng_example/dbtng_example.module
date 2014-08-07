@@ -12,7 +12,7 @@
  * at @link http://drupal.org/node/310069 @endlink.
  */
 
-use Symfony\Component\HttpFoundation\Request;
+use Drupal\Core\Routing\RouteMatchInterface;
 
 /**
  * @defgroup dbtng_example Example: Database (DBTNG)
@@ -67,7 +67,7 @@ use Symfony\Component\HttpFoundation\Request;
  *
  * Show some help on each form provided by this module.
  */
-function dbtng_example_help($route_name, Request $request) {
+function dbtng_example_help($route_name, RouteMatchInterface $route_match) {
   $output = '';
   switch ($route_name) {
     case 'dbtng':

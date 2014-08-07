@@ -25,17 +25,5 @@
  */
 
 /**
- * Implements hook_help().
- */
-function examples_help($path, $arg) {
-  // re: http://drupal.org/node/767204
-  // 5. We need a master group (Examples) that will be in a main
-  // examples.module.
-  // The examples.module should be mostly doxy comments that point to the other
-  // examples.  It will also have a hook_help() explaining its purpose and how
-  // to access the other examples.
-}
-
-/**
  * @} End of 'defgroup examples'.
  */
