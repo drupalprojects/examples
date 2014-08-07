@@ -85,8 +85,8 @@ class SimpleTestExampleTest extends WebTestBase {
 
     // Create a node using the node/add form.
     $edit = array();
-    $edit['title[0][value]'] = $this->randomName(8);
-    $edit['body[0][value]'] = $this->randomName(16);
+    $edit['title[0][value]'] = $this->randomMachineName(8);
+    $edit['body[0][value]'] = $this->randomMachineName(16);
     $this->drupalPostForm('node/add/simpletest_example', $edit, t('Save'));
 
     // Check that our simpletest_example node has been created.
@@ -121,7 +121,7 @@ class SimpleTestExampleTest extends WebTestBase {
     // drupalCreateNode() uses the logged-in user by default.
     $settings = array(
       'type' => 'simpletest_example',
-      'title' => $this->randomName(32),
+      'title' => $this->randomMachineName(32),
     );
     $node = $this->drupalCreateNode($settings);
 

@@ -63,7 +63,7 @@ class SimpleTestExampleMockModuleTest extends WebTestBase {
     // Set up some content.
     $settings = array(
       'type' => 'simpletest_example',
-      'title' => $this->randomName(32),
+      'title' => $this->randomMachineName(32),
     );
     // Create the content node.
     $node = $this->drupalCreateNode($settings);

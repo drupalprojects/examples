@@ -68,14 +68,14 @@ class Text3Widget extends WidgetBase {
   /**
    * Validate the fields and convert them into a single value as text.
    */
-  public function validate($element, &$form_state) {
+  public function validate($element, FormStateInterface $form_state) {
     // Validate each of the textfield entries.
     $values = array();
     foreach (array('r', 'g', 'b') as $colorfield) {
       $values[$colorfield] = $element[$colorfield]['#value'];
       // If they left any empty, we'll set the value empty and quit.
       if (strlen($values[$colorfield]) == 0) {
-        \Drupal::formBuilder()->setValue($element, '', $form_state);
+        $form_state->setValueForElement($element, '');
         return;
       }
       // If they gave us anything that's not hex, reject it.
@@ -86,7 +86,7 @@ class Text3Widget extends WidgetBase {
 
     // Set the value of the entire form element.
     $value = strtolower(sprintf('#%02s%02s%02s', $values['r'], $values['g'], $values['b']));
-    \Drupal::formBuilder()->setValue($element, $value, $form_state);
+    $form_state->setValueForElement($element, $value);
   }
 
 }

@@ -2,7 +2,7 @@
 
 /**
  * @file
- * Contains \Drupal\field_example\Plugin\field\field_type\RgbItem.
+ * Contains Drupal\field_example\Plugin\Field\FieldType\RgbItem.
  */
 
 namespace Drupal\field_example\Plugin\Field\FieldType;

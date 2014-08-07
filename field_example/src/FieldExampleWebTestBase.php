@@ -55,7 +55,7 @@ class FieldExampleWebTestBase extends WebTestBase {
     parent::drupalLogin($this->administratorAccount);
 
     // Prepare a new content type where the field will be added.
-    $this->contentTypeName = strtolower($this->randomName(10));
+    $this->contentTypeName = strtolower($this->randomMachineName(10));
     $this->drupalGet('admin/structure/types/add');
     $edit = array(
       'name' => $this->contentTypeName,
@@ -89,7 +89,7 @@ class FieldExampleWebTestBase extends WebTestBase {
   protected function createField($type = 'field_example_rgb', $widget_type = 'field_example_text', $cardinality = 'number') {
     $this->drupalGet('admin/structure/types/manage/' . $this->contentTypeName . '/fields');
 
-    $field_name = strtolower($this->randomName(10));
+    $field_name = strtolower($this->randomMachineName(10));
     // Add a singleton field_example_text field.
     $edit = array(
       'fields[_add_new_field][label]' => $field_name,

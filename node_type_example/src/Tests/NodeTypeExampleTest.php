@@ -108,8 +108,8 @@ class NodeTypeExampleTest extends WebTestBase {
 
     // Create a node.
     $edit = array();
-    $edit['title[0][value]'] = $this->randomName(8);
-    $edit['body[0][value]'] = $this->randomName(16);
+    $edit['title[0][value]'] = $this->randomMachineName(8);
+    $edit['body[0][value]'] = $this->randomMachineName(16);
     $this->drupalPostForm('node/add/basic_content_type', $edit, t('Save'));
 
     // Check that the Basic page has been created.

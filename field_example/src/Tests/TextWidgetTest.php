@@ -44,7 +44,7 @@ class TextWidgetTest extends FieldExampleWebTestBase {
     $this->drupalGet('node/add/' . $this->contentTypeName);
 
     // Add a node.
-    $title = $this->randomName(20);
+    $title = $this->randomMachineName(20);
     $edit = array(
       'title[0][value]' => $title,
       'field_' . $this->fieldName . '[0][value]' => '#000001',
@@ -81,7 +81,7 @@ class TextWidgetTest extends FieldExampleWebTestBase {
     $this->drupalGet('node/add/' . $this->contentTypeName);
 
     // Add a node.
-    $title = $this->randomName(20);
+    $title = $this->randomMachineName(20);
     $edit = array(
       'title[0][value]' => $title,
       'field_' . $this->fieldName . '[0][value]' => '#00ff00',

@@ -25,7 +25,7 @@ class BlockExampleTest extends WebTestBase {
    */
   public static $modules = array('block', 'block_example');
 
-  protected $WebUser;
+  protected $webUser;
 
   /**
    * Enable modules and create user with specific permissions.
@@ -33,7 +33,7 @@ class BlockExampleTest extends WebTestBase {
   public function setUp() {
     parent::setUp();
     // Create user.
-    $this->WebUser = $this->drupalCreateUser(array('administer blocks'));
+    $this->webUser = $this->drupalCreateUser(array('administer blocks'));
   }
 
   /**
@@ -41,7 +41,7 @@ class BlockExampleTest extends WebTestBase {
    */
   public function testBlockExampleBasic() {
     // Login the admin user.
-    $this->drupalLogin($this->WebUser);
+    $this->drupalLogin($this->webUser);
     $theme_name = \Drupal::config('system.theme')->get('default');
 
     // Verify the blocks are listed to be added.
@@ -54,21 +54,21 @@ class BlockExampleTest extends WebTestBase {
     $settings_configurable = array(
       'label' => t('Title of first block (example_configurable_text)'),
       'id' => 'block_example_example_configurable_text',
-      'theme' => $theme_name
+      'theme' => $theme_name,
     );
     $this->drupalPlaceBlock('example_configurable_text', $settings_configurable);
 
     $settings_uppercase = array(
       'label' => t('Configurable block to be uppercased'),
       'id' => 'block_example_example_uppercased',
-      'theme' => $theme_name
+      'theme' => $theme_name,
     );
     $this->drupalPlaceBlock('example_uppercase', $settings_uppercase);
 
     $settings_empty = array(
       'label' => t('Example: empty block'),
       'id' => 'block_example_example_empty',
-      'theme' => $theme_name
+      'theme' => $theme_name,
     );
     $this->drupalPlaceBlock('example_empty', $settings_empty);
 
@@ -82,14 +82,13 @@ class BlockExampleTest extends WebTestBase {
 
     // Change content of configurable text block.
     $edit = array(
-      'settings[block_example_string_text]' => $this->randomName(),
+      'settings[block_example_string_text]' => $this->randomMachineName(),
     );
     $this->drupalPostForm('admin/structure/block/manage/' . $settings_configurable['id'], $edit, t('Save block'));
 
     // Verify that new content is shown.
     $this->drupalGet('/');
-    $this->assertRaw($edit['settings[block_example_string_text]'],
-      'Content of configurable text block successfully verified.');
+    $this->assertRaw($edit['settings[block_example_string_text]'], 'Content of configurable text block successfully verified.');
   }
 
 }

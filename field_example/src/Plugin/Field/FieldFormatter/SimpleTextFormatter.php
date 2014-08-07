@@ -2,7 +2,7 @@
 
 /**
  * @file
- * Definition of Drupal\field_example\Plugin\field\formatter\SimpleTextFormatter.
+ * Contains Drupal\field_example\Plugin\Field\FieldFormatter\SimpleTextFormatter.
  */
 
 namespace Drupal\field_example\Plugin\Field\FieldFormatter;

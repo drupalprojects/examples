@@ -41,7 +41,7 @@ class Text3WidgetTest extends FieldExampleWebTestBase {
     $this->drupalGet('node/add/' . $this->contentTypeName);
 
     // Fill the create form.
-    $title = $this->randomName(20);
+    $title = 'test_title';
     $edit = array(
       'title[0][value]' => $title,
       'field_' . $this->fieldName . '[0][value][r]' => '00',
@@ -79,7 +79,7 @@ class Text3WidgetTest extends FieldExampleWebTestBase {
     $this->drupalGet('node/add/' . $this->contentTypeName);
 
     // Fill the create form.
-    $title = $this->randomName(20);
+    $title = $this->randomMachineName(20);
     $edit = array(
       'title[0][value]' => $title,
       'field_' . $this->fieldName . '[0][value][r]' => '00',
