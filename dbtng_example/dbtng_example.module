@@ -63,33 +63,5 @@ use Drupal\Core\Routing\RouteMatchInterface;
  */
 
 /**
- * Implements hook_help().
- *
- * Show some help on each form provided by this module.
- */
-function dbtng_example_help($route_name, RouteMatchInterface $route_match) {
-  $output = '';
-  switch ($route_name) {
-    case 'dbtng':
-      $output = t('Generate a list of all entries in the database. There is no filter in the query.');
-      break;
-
-    case 'dbtng_advanced':
-      $output = t('A more complex list of entries in the database.') . ' ';
-      $output .= t('Only the entries with name = "John" and age older than 18 years are shown, the username of the person who created the entry is also shown.');
-      break;
-
-    case 'dbtng_update':
-      $output = t('Demonstrates a database update operation.');
-      break;
-
-    case 'dbtng_add':
-      $output = t('Add an entry to the dbtng_example table.');
-      break;
-  }
-  return $output;
-}
-
-/**
  * @} End of "defgroup dbtng_example".
  */

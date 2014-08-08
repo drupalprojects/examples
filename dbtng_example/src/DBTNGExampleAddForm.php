@@ -28,6 +28,10 @@ class DBTNGExampleAddForm extends FormBase {
   public function buildForm(array $form, FormStateInterface $form_state) {
     $form = array();
 
+    $form['message'] = array(
+      '#markup' => $this->t('Add an entry to the dbtng_example table.'),
+    );
+
     $form['add'] = array(
       '#type' => 'fieldset',
       '#title' => t('Add a person entry'),

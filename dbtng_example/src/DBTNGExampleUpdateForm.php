@@ -31,6 +31,10 @@ class DBTNGExampleUpdateForm extends FormBase {
       '#suffix' => '</div>',
     );
 
+    $form['message'] = array(
+      '#markup' => $this->t('Demonstrates a database update operation.'),
+    );
+
     $entries = DBTNGExampleStorage::load();
     $keyed_entries = array();
     if (empty($entries)) {
