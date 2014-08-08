@@ -7,7 +7,7 @@
 
 namespace Drupal\config_entity_example;
 
-use Drupal\Core\Entity\EntityAccessController;
+use Drupal\Core\Entity\EntityAccessControlHandler;
 use Drupal\Core\Entity\EntityInterface;
 use Drupal\Core\Session\AccountInterface;
 
@@ -20,7 +20,7 @@ use Drupal\Core\Session\AccountInterface;
  *
  * @ingroup config_entity_example
  */
-class RobotAccessController extends EntityAccessController {
+class RobotAccessController extends EntityAccessControlHandler {
 
   /**
    * {@inheritdoc}
