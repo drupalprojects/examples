@@ -1,0 +1,9 @@
+name: Content Entity Example
+type: module
+description: 'Provides ContentEntityExampleContact entity.'
+package: Example modules
+core: 8.x
+# These modules are required by the tests, must be available at bootstrap time
+dependencies:
+  - options
+  - entity_reference
