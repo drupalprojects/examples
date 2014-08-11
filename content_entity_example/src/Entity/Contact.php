@@ -7,11 +7,12 @@
 namespace Drupal\content_entity_example\Entity;
 
 use Drupal\Core\Entity\EntityStorageInterface;
-use Drupal\Core\Field\FieldDefinition;
+use Drupal\Core\Field\BaseFieldDefinition;
 use Drupal\Core\Entity\ContentEntityBase;
 use Drupal\Core\Entity\EntityTypeInterface;
 use Drupal\content_entity_example\ContactInterface;
 use Drupal\user\UserInterface;
+
 /**
  * Defines the ContentEntityExample entity.
  *
@@ -186,13 +187,13 @@ class Contact extends ContentEntityBase implements ContactInterface {
   public static function baseFieldDefinitions(EntityTypeInterface $entity_type) {
 
     // Standard field, used as unique if primary index.
-    $fields['id'] = FieldDefinition::create('integer')
+    $fields['id'] = BaseFieldDefinition::create('integer')
       ->setLabel(t('ID'))
       ->setDescription(t('The ID of the Contact entity.'))
       ->setReadOnly(TRUE);
 
     // Standard field, unique outside of the scope of the current project.
-    $fields['uuid'] = FieldDefinition::create('uuid')
+    $fields['uuid'] = BaseFieldDefinition::create('uuid')
       ->setLabel(t('UUID'))
       ->setDescription(t('The UUID of the Contact entity.'))
       ->setReadOnly(TRUE);
@@ -201,7 +202,7 @@ class Contact extends ContentEntityBase implements ContactInterface {
     // We set display options for the view as well as the form.
     // Users with correct privileges can change the view and edit configuration.
 
-    $fields['name'] = FieldDefinition::create('string')
+    $fields['name'] = BaseFieldDefinition::create('string')
       ->setLabel(t('Name'))
       ->setDescription(t('The name of the Contact entity.'))
       ->setSettings(array(
@@ -221,7 +222,7 @@ class Contact extends ContentEntityBase implements ContactInterface {
       ->setDisplayConfigurable('form', TRUE)
       ->setDisplayConfigurable('view', TRUE);
 
-    $fields['first_name'] = FieldDefinition::create('string')
+    $fields['first_name'] = BaseFieldDefinition::create('string')
       ->setLabel(t('First Name'))
       ->setDescription(t('The first name of the Contact entity.'))
       ->setSettings(array(
@@ -246,7 +247,7 @@ class Contact extends ContentEntityBase implements ContactInterface {
     // The values shown in the menu are 'male' and 'female'.
     // In the view the field content is shown as string.
     // In the form the choices are presented as options list.
-    $fields['gender'] = FieldDefinition::create('list_text')
+    $fields['gender'] = BaseFieldDefinition::create('list_text')
       ->setLabel(t('Gender'))
       ->setDescription(t('The gender of the Contact entity.'))
       ->setSettings(array(
@@ -271,7 +272,7 @@ class Contact extends ContentEntityBase implements ContactInterface {
     // Entity reference field, holds the reference to the user object.
     // The view shows the user name field of the user.
     // The form presents a auto complete field for the user name.
-    $fields['user_id'] = FieldDefinition::create('entity_reference')
+    $fields['user_id'] = BaseFieldDefinition::create('entity_reference')
       ->setLabel(t('User Name'))
       ->setDescription(t('The Name of the associated user.'))
       ->setSetting('target_type', 'user')
@@ -294,14 +295,14 @@ class Contact extends ContentEntityBase implements ContactInterface {
       ->setDisplayConfigurable('form', TRUE)
       ->setDisplayConfigurable('view', TRUE);
 
-    $fields['langcode'] = FieldDefinition::create('language')
+    $fields['langcode'] = BaseFieldDefinition::create('language')
       ->setLabel(t('Language code'))
       ->setDescription(t('The language code of ContentEntityExample entity.'));
-    $fields['created'] = FieldDefinition::create('created')
+    $fields['created'] = BaseFieldDefinition::create('created')
       ->setLabel(t('Created'))
       ->setDescription(t('The time that the entity was created.'));
 
-    $fields['changed'] = FieldDefinition::create('changed')
+    $fields['changed'] = BaseFieldDefinition::create('changed')
       ->setLabel(t('Changed'))
       ->setDescription(t('The time that the entity was last edited.'));
 
