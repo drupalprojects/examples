@@ -3,3 +3,5 @@ type: module
 description: 'A variety of example code for you to learn from and hack upon.'
 package: Example modules
 core: 8.x
+dependencies:
+  - toolbar

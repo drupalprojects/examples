@@ -3,3 +3,5 @@ description: 'An example module showing how to use some of the new JavaScript fe
 type: module
 package: 'Example modules'
 core: 8.x
+dependencies:
+  - examples

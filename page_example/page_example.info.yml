@@ -3,3 +3,5 @@ type: module
 description: 'An example module showing how to define a page to be displayed at a given URL.'
 package: Example modules
 core: 8.x
+dependencies:
+  - examples

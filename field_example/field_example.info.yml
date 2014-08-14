@@ -3,3 +3,5 @@ type: module
 description: An implementation of a field to show the Field API
 package: Example modules
 core: 8.x
+dependencies:
+  - examples

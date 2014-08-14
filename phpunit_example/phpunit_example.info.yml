@@ -3,3 +3,5 @@ type: module
 description: 'How to use PHPUnit-based tests with Drupal 8.'
 package: Example modules
 core: 8.x
+dependencies:
+  - examples

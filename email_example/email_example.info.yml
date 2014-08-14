@@ -4,3 +4,5 @@ description: An example module that sends and alter drupal generated email messa
 package: Example modules
 version: 8.x-1.x
 core: 8.x
+dependencies:
+  - examples

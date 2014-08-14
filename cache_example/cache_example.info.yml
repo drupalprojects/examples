@@ -3,3 +3,5 @@ description: 'An example outlining how to use Cache API.'
 package: Example modules
 core: 8.x
 type: module
+dependencies:
+  - examples

@@ -27,3 +27,89 @@
 /**
  * @} End of 'defgroup examples'.
  */
+
+/**
+ * Implements hook_toolbar().
+ */
+function examples_toolbar() {
+  // First, build an array of all example modules and their "root" path.
+  // We resort to this hard-coded way so as not to muck up each example.
+  $examples = array(
+    'block_example' => 'examples/block_example',
+    'cache_example' => 'examples/cache_example',
+    'config_entity_example' => 'examples/config_entity_example',
+    'content_entity_example' => 'content_entity_example_contact/list',
+    'dbtng_example' => 'examples/dbtng_example',
+    'email_example' => 'examples/email_example',
+    'field_example' => 'examples/field_example',
+    'form_example' => 'examples/form_example',
+    'js_example' => 'examples/js_example',
+    'node_type_example' => 'examples/node_type_example',
+    'page_example' => 'examples/page_example',
+    'phpunit_example' => 'examples/phpunit_example',
+    'simpletest_example' => 'examples/simpletest_example',
+    'tour_example' => 'examples/tour_example',
+  );
+
+  // Build a list of links for the menu.
+  $links = array();
+  foreach ($examples as $name => $href) {
+    // Get the module info (title, description) from Drupal.
+    $info = system_get_info('module', $name);
+
+    // If there's no info, the example isn't enabled, so don't display it.
+    if (!empty($info)) {
+      $links[$name] = array(
+        'title' => t($info['name']),
+        'href' => $href,
+        'html' => TRUE,
+        'attributes' => array(
+          'title' => t($info['description']),
+        ),
+      );
+    }
+  }
+
+  // Add a link to enable all examples.
+  $links['enable_examples'] = array(
+    'title' => t('Enable Examples'),
+    'href' => 'admin/modules',
+    'html' => TRUE,
+    'attributes' => array(
+      'title' => t('Enable more examples in on the Extend page.'),
+    ),
+    'fragment' => 'edit-modules-example-modules',
+  );
+
+  // Create the examples toolbar render array.
+  $items['examples'] = array(
+    '#type' => 'toolbar_item',
+    'tab' => array(
+      '#type' => 'link',
+      '#title' => t('Examples'),
+      '#href' => 'examples',
+      '#attributes' => array(
+        'title' => t('Developer Examples'),
+        'class' => array('toolbar-icon', 'toolbar-icon-examples'),
+      ),
+    ),
+    'tray' => array(
+      '#heading' => t('Developer Examples'),
+      'shortcuts' => array(
+        '#theme' => 'links__toolbar_shortcuts',
+        '#links' => $links,
+        '#attributes' => array(
+          'class' => array('menu'),
+        ),
+      ),
+    ),
+    '#weight' => 99,
+    '#attached' => array(
+      'library' => array(
+        'examples/examples.icons',
+      ),
+    ),
+  );
+
+  return $items;
+}
