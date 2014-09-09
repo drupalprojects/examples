@@ -26,12 +26,12 @@ class ProtectedPrivates {
   /**
    * A simple addition method with validity checking.
    *
-   * @param $a
+   * @param numeric $a
    *   A number to add.
-   * @param $b
+   * @param numeric $b
    *   Another number to add.
    *
-   * @return
+   * @return numeric
    *   The sum of $a and $b.
    *
    * @throws \InvalidArgumentException
@@ -45,12 +45,12 @@ class ProtectedPrivates {
   /**
    * A simple addition method with validity checking.
    *
-   * @param $a
+   * @param numeric $a
    *   A number to add.
-   * @param $b
+   * @param numeric $b
    *   Another number to add.
    *
-   * @return
+   * @return numeric
    *   The sum of $a and $b.
    *
    * @throws \InvalidArgumentException

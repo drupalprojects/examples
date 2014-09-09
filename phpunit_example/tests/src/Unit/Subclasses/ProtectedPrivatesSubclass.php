@@ -2,10 +2,10 @@
 
 /**
  * @file
- * Contains Drupal\phpunit_example\Tests\Stubs\ProtectedPrivatesSubclass
+ * Contains Drupal\Tests\phpunit_example\Unit\Subclasses\ProtectedPrivatesSubclass
  */
 
-namespace Drupal\phpunit_example\Tests\Subclasses;
+namespace Drupal\Tests\phpunit_example\Unit\Subclasses;
 
 use Drupal\phpunit_example\ProtectedPrivates;
 

@@ -2,10 +2,10 @@
 
 /**
  * @file
- * Contains Drupal\phpunit_example\Tests\AddClassTest
+ * Contains Drupal\Tests\phpunit_example\Unit\AddClassTest
  */
 
-namespace Drupal\phpunit_example\Tests;
+namespace Drupal\Tests\phpunit_example\Unit;
 
 use Drupal\Tests\UnitTestCase;
 
@@ -131,11 +131,16 @@ class AddClassTest extends UnitTestCase {
    * begin with 'test'. Also, by convention, they should end with
    * 'DataProvider'.
    *
+   * @return array
+   *   Nested arrays of values to check:
+   *   - $a
+   *   - $b
+   *   - $expected
+   *
    * @see AddClassTest::testAddWithDataProvider()
    */
   public function addDataProvider() {
     return array(
-      // array($a, $b, $expected)
       array(5, 2, 3),
       array(50, 20, 30),
     );
@@ -154,25 +159,25 @@ class AddClassTest extends UnitTestCase {
    * @see AddClassTest::testAddWithBadDataProvider()
    */
   public function addBadDataProvider() {
-    $badData = array();
+    $bad_data = array();
     // Set up an array with data that should cause add()
     // to throw an exception.
-    $badDataTypes = array('string', FALSE, array('foo'), new \stdClass());
+    $bad_data_types = array('string', FALSE, array('foo'), new \stdClass());
     // Create some data where both $a and $b are bad types.
-    foreach ($badDataTypes as $badDatumA) {
-      foreach ($badDataTypes as $badDatumB) {
-        $badData[] = array($badDatumA, $badDatumB);
+    foreach ($bad_data_types as $bad_datum_a) {
+      foreach ($bad_data_types as $bad_datum_b) {
+        $bad_data[] = array($bad_datum_a, $bad_datum_b);
       }
     }
     // Create some data where $a is good and $b is bad.
-    foreach ($badDataTypes as $badDatumB) {
-      $badData[] = array(1, $badDatumB);
+    foreach ($bad_data_types as $bad_datum_b) {
+      $bad_data[] = array(1, $bad_datum_b);
     }
     // Create some data where $b is good and $a is bad.
-    foreach ($badDataTypes as $badDatumA) {
-      $badData[] = array($badDatumA, 1);
+    foreach ($bad_data_types as $bad_datum_a) {
+      $bad_data[] = array($bad_datum_a, 1);
     }
-    return $badData;
+    return $bad_data;
   }
 
 }

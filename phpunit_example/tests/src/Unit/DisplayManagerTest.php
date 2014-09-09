@@ -2,10 +2,10 @@
 
 /**
  * @file
- * Contains Drupal\phpunit_example\Tests\DisplayManagerTest
+ * Contains Drupal\Tests\phpunit_example\Unit\DisplayManagerTest
  */
 
-namespace Drupal\phpunit_example\Tests;
+namespace Drupal\Tests\phpunit_example\Unit;
 
 use Drupal\Tests\UnitTestCase;
 use Drupal\phpunit_example\DisplayManager;

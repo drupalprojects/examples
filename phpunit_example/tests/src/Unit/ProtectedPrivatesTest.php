@@ -2,16 +2,16 @@
 
 /**
  * @file
- * Contains Drupal\phpunit_example\Tests\ProtectedPrivatesTest
+ * Contains Drupal\Tests\phpunit_example\Unit\ProtectedPrivatesTest
  */
 
-namespace Drupal\phpunit_example\Tests;
+namespace Drupal\Tests\phpunit_example\Unit;
 
 use Drupal\Tests\UnitTestCase;
 
 use Drupal\phpunit_example\ProtectedPrivates;
 
-use Drupal\phpunit_example\Tests\Subclasses\ProtectedPrivatesSubclass;
+use Drupal\Tests\phpunit_example\Unit\Subclasses\ProtectedPrivatesSubclass;
 
 /**
  * ProtectedPrivates unit testing of restricted methods.
@@ -47,9 +47,9 @@ class ProtectedPrivatesTest extends UnitTestCase {
   /**
    * Get an accessible method using reflection.
    */
-  public function getAccessibleMethod($className, $methodName) {
-    $class = new \ReflectionClass($className);
-    $method = $class->getMethod($methodName);
+  public function getAccessibleMethod($class_name, $method_name) {
+    $class = new \ReflectionClass($class_name);
+    $method = $class->getMethod($method_name);
     $method->setAccessible(TRUE);
     return $method;
   }
@@ -75,14 +75,14 @@ class ProtectedPrivatesTest extends UnitTestCase {
    */
   public function testPrivateAdd($expected, $a, $b) {
     // Get a reflected, accessible version of the privateAdd() method.
-    $privateMethod = $this->getAccessibleMethod(
+    $private_method = $this->getAccessibleMethod(
       'Drupal\phpunit_example\ProtectedPrivates',
       'privateAdd'
     );
     // Create a new ProtectedPrivates object.
     $pp = new ProtectedPrivates();
     // Use the reflection to invoke on the object.
-    $sum = $privateMethod->invokeArgs($pp, array($a, $b));
+    $sum = $private_method->invokeArgs($pp, array($a, $b));
     // Make an assertion.
     $this->assertEquals($expected, $sum);
   }
@@ -108,14 +108,14 @@ class ProtectedPrivatesTest extends UnitTestCase {
    */
   public function testPrivateAddBadData($a, $b) {
     // Get a reflected, accessible version of the privateAdd() method.
-    $privateMethod = $this->getAccessibleMethod(
+    $private_method = $this->getAccessibleMethod(
       'Drupal\phpunit_example\ProtectedPrivates',
       'privateAdd');
     // Create a new ProtectedPrivates object.
     $pp = new ProtectedPrivates();
     // Use the reflection to invoke on the object.
     // This should throw an exception.
-    $privateMethod->invokeArgs($pp, array($a, $b));
+    $private_method->invokeArgs($pp, array($a, $b));
   }
 
   /**
