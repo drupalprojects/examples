@@ -1,7 +1,7 @@
 <?php
 /**
  * @file
- * Definition of Drupal\content_entity_example\Entity\Form\ContentEntityExampleFormController.
+ * Contains Drupal\content_entity_example\Form\ContactForm.
  */
 
 namespace Drupal\content_entity_example\Form;
@@ -18,7 +18,7 @@ use Drupal\Core\Form\FormStateInterface;
 class ContactForm extends ContentEntityForm {
 
   /**
-   * Overrides Drupal\Core\Entity\EntityFormController::buildForm().
+   * {@inheritdoc}
    */
   public function buildForm(array $form, FormStateInterface $form_state) {
     /* @var $entity \Drupal\content_entity_example\Entity\Contact */
@@ -31,26 +31,25 @@ class ContactForm extends ContentEntityForm {
       '#default_value' => $entity->getUntranslated()->language()->id,
       '#languages' => Language::STATE_ALL,
     );
-
     return $form;
   }
 
   /**
-   * Overrides \Drupal\Core\Entity\EntityFormController::submit().
+   * {@inheritdoc}
    */
-  public function submit(array $form, FormStateInterface $form_state) {
+  public function submitForm(array &$form, FormStateInterface $form_state) {
     // Build the entity object from the submitted values.
-    $entity = parent::submit($form, $form_state);
+    $entity = parent::submitForm($form, $form_state);
     $form_state->setRedirect('content_entity_example.contact_list');
 
     return $entity;
   }
 
   /**
-   * Overrides Drupal\Core\Entity\EntityFormController::save().
+   * {@inheritdoc}
    */
   public function save(array $form, FormStateInterface $form_state) {
-    $entity = $this->entity;
+    $entity = $this->getEntity();
     $entity->save();
   }
 }

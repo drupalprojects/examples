@@ -96,8 +96,12 @@ class SimpleTestExampleTest extends WebTestBase {
     $node = $this->drupalGetNodeByTitle($edit['title[0][value]']);
     $this->assertTrue($node, 'Node found in database.');
 
-    // Verify 'submitted by' information.
-    $submitted_by = t('Submitted by !username on !datetime', array('!username' => $this->loggedInUser->getUsername(), '!datetime' => format_date($node->getCreatedTime())));
+    // Verify 'submitted by' information. Drupal adds a newline in there, so
+    // we have to check for that.
+    $submitted_by = t("Submitted by !username\n on !datetime", array(
+      '!username' => $this->loggedInUser->getUsername(),
+      '!datetime' => format_date($node->getCreatedTime()),
+    ));
 
     $this->drupalGet('node/' . $node->id());
     $this->assertText($submitted_by);

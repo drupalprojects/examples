@@ -48,7 +48,7 @@ use Drupal\Core\Config\Entity\ConfigEntityBase;
  *   id = "robot",
  *   label = @Translation("Robot"),
  *   admin_permission = "administer robots",
- *   controllers = {
+ *   handlers = {
  *     "access" = "Drupal\config_entity_example\RobotAccessController",
  *     "list_builder" = "Drupal\config_entity_example\Controller\RobotListBuilder",
  *     "form" = {

@@ -80,7 +80,7 @@ class Text3Widget extends WidgetBase {
       }
       // If they gave us anything that's not hex, reject it.
       if ((strlen($values[$colorfield]) != 2) || !ctype_xdigit($values[$colorfield])) {
-        \Drupal::formBuilder()->setError($element[$colorfield], $form_state, t("Saturation value must be a 2-digit hexadecimal value between 00 and ff."));
+        $form_state->setError($element[$colorfield], $form_state, t("Saturation value must be a 2-digit hexadecimal value between 00 and ff."));
       }
     }
 

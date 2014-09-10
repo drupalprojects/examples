@@ -18,7 +18,6 @@ use Drupal\Core\Url;
  */
 class ContactDeleteForm extends ContentEntityConfirmFormBase {
 
-
   /**
    * {@inheritdoc}
    */
@@ -47,8 +46,9 @@ class ContactDeleteForm extends ContentEntityConfirmFormBase {
    *
    * Delete the entity and log the event. log() replaces the watchdog.
    */
-  public function submit(array $form, FormStateInterface $form_state) {
-    $this->entity->delete();
+  public function submitForm(array &$form, FormStateInterface $form_state) {
+    $entity = $this->getEntity();
+    $entity->delete();
 
     \Drupal::logger('content_entity_example')->log(WATCHDOG_INFO, '@type: deleted %title.',
       array(

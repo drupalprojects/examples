@@ -26,16 +26,16 @@ use Drupal\user\UserInterface;
  *
  * label: Human readable name of the entity type.
  *
- * controllers: Controller classes are used for different tasks. You can use
- * standard controllers provided by D8 or build your own controller, most
- * probably derived from the standard class. In detail:
+ * handlers: Handler classes are used for different tasks. You can use
+ * standard handlers provided by D8 or build your own, most probably derived
+ * from the standard class. In detail:
  *
  * - view_builder: we use the standard controller to view an instance. It is
  *   called when a route lists an '_entity_view' default for the entityType
  *   (see routing.yml for details. The view can be manipulated by using the
  *   standard drupal tools in the settings.
  *
- * - list-builder: We derive our own list builder class from the
+ * - list_builder: We derive our own list builder class from the
  *   entityListBuilder to control the presentation.
  *   If there is a view available for this entity from the views module, it
  *   overrides the list builder. @todo: any view? naming convention?
@@ -47,6 +47,8 @@ use Drupal\user\UserInterface;
  *
  * - access: Our own accessController where we determine access rights based on
  *   permissions.
+ *
+ * More properties:
  *
  *  - base_table: Define the name of the table used to store the data. Make sure
  *    it is unique. The schema is automatically determined from the
@@ -68,15 +70,14 @@ use Drupal\user\UserInterface;
  * class definition.
  *
  * The following construct is the actual definition of the entity type which
- * ist read and cached. Don't forget to clear cache after changes.
+ * is read and cached. Don't forget to clear cache after changes.
  *
  * @ContentEntityType(
  *   id = "content_entity_example_contact",
  *   label = @Translation("Contact entity"),
- *   controllers = {
+ *   handlers = {
  *     "view_builder" = "Drupal\Core\Entity\EntityViewBuilder",
  *     "list_builder" = "Drupal\content_entity_example\Entity\Controller\ContactListBuilder",
- *
  *     "form" = {
  *       "add" = "Drupal\content_entity_example\Form\ContactForm",
  *       "edit" = "Drupal\content_entity_example\Form\ContactForm",

@@ -8,7 +8,7 @@
 namespace Drupal\block_example\Plugin\Block;
 
 use Drupal\block\Annotation\Block;
-use Drupal\block\BlockBase;
+use Drupal\Core\Block\BlockBase;
 use Drupal\Core\Annotation\Translation;
 
 /**
@@ -23,7 +23,7 @@ use Drupal\Core\Annotation\Translation;
 class ExampleEmptyBlock extends BlockBase {
 
   /**
-   * Implements \Drupal\block\BlockBase::blockBuild().
+   * {@inheritdoc}
    */
   public function build() {
     return array();

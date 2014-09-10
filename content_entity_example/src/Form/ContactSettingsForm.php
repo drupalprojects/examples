@@ -1,7 +1,7 @@
 <?php
 /**
  * @file
- * Defines Drupal\content_entity_example\Form\ContentEntityExampleSettingsForm.
+ * Contains Drupal\content_entity_example\Form\ContactSettingsForm.
  */
 
 namespace Drupal\content_entity_example\Form;

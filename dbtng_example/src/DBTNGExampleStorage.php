@@ -48,7 +48,7 @@ class DBTNGExampleStorage {
    *
    * @return int
    *   The number of updated rows.
-   * 
+   *
    * @see db_update()
    */
   public static function update($entry) {
@@ -108,7 +108,8 @@ class DBTNGExampleStorage {
    *
    * But for more dynamic queries, Drupal provides the db_select()
    * API method, so there are several ways to perform the same SQL query. See
-   * the @link http://drupal.org/node/310075 handbook page on dynamic queries. @endlink
+   * the
+   * @link http://drupal.org/node/310075 handbook page on dynamic queries. @endlink
    *
    * @code
    *   // SELECT * FROM {dbtng_example} WHERE uid = 0 AND name = 'John'
@@ -194,7 +195,7 @@ class DBTNGExampleStorage {
   public static function advancedLoad() {
     $select = db_select('dbtng_example', 'e');
     // Join the users table, so we can get the entry creator's username.
-    $select->join('users', 'u', 'e.uid = u.uid');
+    $select->join('users_field_data', 'u', 'e.uid = u.uid');
     // Select these specific fields for the output.
     $select->addField('e', 'pid');
     $select->addField('u', 'name', 'username');
