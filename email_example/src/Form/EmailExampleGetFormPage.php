@@ -53,8 +53,8 @@ class EmailExampleGetFormPage implements FormInterface {
    * {@inheritdoc}
    */
   public function validateForm(array &$form, FormStateInterface $form_state) {
-    if (!valid_email_address($form_state['values']['email'])) {
-      form_set_error('email', t('That e-mail address is not valid.'));
+    if (!valid_email_address($form_state->getValue('email'))) {
+      $form_state->setErrorByName('email', t('That e-mail address is not valid.'));
     }
   }
 
@@ -62,7 +62,7 @@ class EmailExampleGetFormPage implements FormInterface {
    * {@inheritdoc}
    */
   public function submitForm(array &$form, FormStateInterface $form_state) {
-    email_example_mail_send($form_state['values']);
+    email_example_mail_send($form_state->getValues());
   }
 
 }
