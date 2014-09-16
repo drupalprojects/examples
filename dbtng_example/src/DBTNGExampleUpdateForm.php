@@ -56,7 +56,11 @@ class DBTNGExampleUpdateForm extends FormBase {
       );
       $keyed_entries[$entry->pid] = $entry;
     }
-    $default_entry = !empty($form_state->getValue('pid')) ? $keyed_entries[$form_state->getValue('pid')] : $entries[0];
+
+    // Grab the pid.
+    $pid = $form_state->getValue('pid');
+    // Use the pid to set the default entry for updating.
+    $default_entry = !empty($pid) ? $keyed_entries[$pid] : $entries[0];
 
     // Save the entries into the $form_state. We do this so the AJAX callback
     // doesn't need to repeat the query.
