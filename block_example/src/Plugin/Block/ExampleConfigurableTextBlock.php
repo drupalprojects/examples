@@ -55,7 +55,7 @@ class ExampleConfigurableTextBlock extends BlockBase {
    */
   public function blockSubmit($form, FormStateInterface $form_state) {
     $this->configuration['block_example_string']
-      = $form_state['values']['block_example_string_text'];
+      = $form_state->getValue('block_example_string_text');
   }
 
   /**

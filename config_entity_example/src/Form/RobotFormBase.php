@@ -195,9 +195,8 @@ class RobotFormBase extends EntityForm {
    *   An associative array containing the current state of the form.
    */
   public function save(array $form, FormStateInterface $form_state) {
-    // Get the entity from the class variable. We don't need to do this, but
-    // it often makes the code easier to read.
-    $robot = $this->entity;
+    // EntityForm provides us with the entity we're working on.
+    $robot = $this->getEntity();
 
     // Drupal already populated the form values in the entity object. Each
     // form field was saved as a public variable in the entity class. PHP
@@ -219,8 +218,8 @@ class RobotFormBase extends EntityForm {
       watchdog('contact', 'Robot %label has been added.', array('%label' => $robot->label()), WATCHDOG_NOTICE, l($this->t('Edit'), $uri . '/edit'));
     }
 
-    // Redirect the user to the following path after the save optionation.
-    $form_state['route_redirect'] = new Url('robot.list');
+    // Redirect the user back to the listing route after the save operation.
+    $form_state->setRedirect('robot.list');
   }
 
 }

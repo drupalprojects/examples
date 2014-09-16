@@ -183,7 +183,7 @@ class CacheExampleForm extends FormBase {
       'cache_example' => array(1),
     );
 
-    $interval = $form_state['values']['expiration'];
+    $interval = $form_state->getValue('expiration');
     if ($interval == 'never_remove') {
       $expiration = CacheBackendInterface::CACHE_PERMANENT;
       $expiration_friendly = t('Never expires');
@@ -203,7 +203,7 @@ class CacheExampleForm extends FormBase {
    * Submit handler to demonstrate the various uses of cache_clear_all().
    */
   public function cacheClearing($form, &$form_state) {
-    switch ($form_state['values']['cache_clear_type']) {
+    switch ($form_state->getValue('cache_clear_type')) {
       case 'expire':
         // Here we'll remove all cache keys in the 'cache' bin that have
         // expired.
