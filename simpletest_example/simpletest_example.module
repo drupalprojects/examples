@@ -5,8 +5,9 @@
  * Module file for simpletest_example
  */
 
+use Drupal\Core\Access\AccessResult;
+use Drupal\Core\Session\AccountInterface;
 use Drupal\node\NodeInterface;
-use \Drupal\Core\Session\AccountInterface;
 
 /**
  * @defgroup simpletest_example Example: Simpletest
@@ -54,7 +55,7 @@ function simpletest_example_node_access(NodeInterface $node, $op, AccountInterfa
   // If it's not a simpletest_example node, or if it's not operations we care
   // about, then just ignore.
   if ($type != 'simpletest_example' || ($op != 'update' && $op != 'delete')) {
-    return NODE_ACCESS_IGNORE;
+    return AccessResult::create();
   }
 
   // This code has a BUG that we'll find in testing.
@@ -64,10 +65,10 @@ function simpletest_example_node_access(NodeInterface $node, $op, AccountInterfa
   // The author had mistakenly always tested with User 1 so it always
   // allowed access and the bug wasn't noticed!
   if (($op == 'delete')  && ($account->hasPermission('extra special edit any simpletest_example') && ($account->id() == $node->getAuthorId()))) {
-    return NODE_ACCESS_ALLOW;
+    return AccessResult::allowed();
   }
 
-  return NODE_ACCESS_DENY;
+  return AccessResult::forbidden();
 }
 
 /**

@@ -7,6 +7,7 @@
 
 namespace Drupal\content_entity_example;
 
+use Drupal\Core\Access\AccessResult;
 use Drupal\Core\Entity\EntityAccessControlHandler;
 use Drupal\Core\Entity\EntityInterface;
 use Drupal\Core\Session\AccountInterface;
@@ -27,15 +28,15 @@ class ContactAccessControlHandler extends EntityAccessControlHandler {
   protected function checkAccess(EntityInterface $entity, $operation, $langcode, AccountInterface $account) {
     switch ($operation) {
       case 'view':
-        return $account->hasPermission('view contact entity');
+        return AccessResult::allowedIfHasPermission($account, 'view contact entity');
 
       case 'edit':
-        return $account->hasPermission('edit contact entity');
+        return AccessResult::allowedIfHasPermission($account, 'edit contact entity');
 
       case 'delete':
-        return $account->hasPermission('delete contact entity');
+        return AccessResult::allowedIfHasPermission($account, 'delete contact entity');
     }
-    return TRUE;
+    return AccessResult::allowed();
   }
 
   /**
@@ -45,7 +46,7 @@ class ContactAccessControlHandler extends EntityAccessControlHandler {
    * will be created during the 'add' process.
    */
   protected function checkCreateAccess(AccountInterface $account, array $context, $entity_bundle = NULL) {
-    return $account->hasPermission('add contact entity');
+    return AccessResult::allowedIfHasPermission($account, 'add contact entity');
   }
 
 }
