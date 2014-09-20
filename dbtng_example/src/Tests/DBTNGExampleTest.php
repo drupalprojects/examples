@@ -58,9 +58,11 @@ class DBTNGExampleTest extends WebTestBase {
 
     // Verify and validate that default menu links were loaded for this module.
     $links = $this->providerMenuLinks();
-    foreach ($links as $page => $path) {
-      $this->drupalGet($page);
-      $this->assertLinkByHref($path);
+    foreach ($links as $page => $hrefs) {
+      foreach ($hrefs as $href) {
+        $this->drupalGet($page);
+        $this->assertLinkByHref($href);
+      }
     }
   }
 
@@ -70,15 +72,18 @@ class DBTNGExampleTest extends WebTestBase {
    * @return array
    *   Array of page -> link relationships to check for:
    *   - The key is the path to the page where our link should appear.
-   *   - The value is the link that should appear on that page.
+   *   - The value is an array of links that should appear on that page.
    */
   protected function providerMenuLinks() {
     return array(
-      '/' => 'examples/dbtng_example',
-      'examples/dbtng_example' => 'examples/dbtng_example/list',
-      'examples/dbtng_example' => 'examples/dbtng_example/add',
-      'examples/dbtng_example' => 'examples/dbtng_example/update',
-      'examples/dbtng_example' => 'examples/dbtng_example/advanced',
+      '/' => array(
+        'examples/dbtng_example'
+      ),
+      'examples/dbtng_example' => array(
+        'examples/dbtng_example/add',
+        'examples/dbtng_example/update',
+        'examples/dbtng_example/advanced',
+      ),
     );
   }
 
