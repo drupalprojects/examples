@@ -36,7 +36,7 @@ class TextWidgetTest extends FieldExampleWebTestBase {
   public function testSingleValueField() {
     // Add a single field as administrator user.
     $this->drupalLogin($this->administratorAccount);
-    $this->fieldName = $this->createField('field_example_rgb', 'field_example_text', 'number');
+    $this->fieldName = $this->createField('field_example_rgb', 'field_example_text', '1');
 
     // Now that we have a content type with the desired field, switch to the
     // author user to create content with it.

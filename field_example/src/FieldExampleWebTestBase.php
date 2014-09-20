@@ -11,6 +11,7 @@ use Drupal\Core\Session\AccountInterface;
 use Drupal\simpletest\WebTestBase;
 
 class FieldExampleWebTestBase extends WebTestBase {
+
   /**
    * @var string
    */
@@ -25,10 +26,12 @@ class FieldExampleWebTestBase extends WebTestBase {
    * @var AccountInterface
    */
   protected $authorAccount;
+
   /**
    * @var string
    */
   protected $fieldName;
+
   /**
    * Modules to enable.
    *
@@ -81,12 +84,12 @@ class FieldExampleWebTestBase extends WebTestBase {
    * @param string $widget_type
    *   The widget to use when editing this field
    * @param int|string $cardinality
-   *   Cardinality of the field.
+   *   Cardinality of the field. Use -1 to signify 'unlimited.'
    *
    * @return string
    *   Name of the field, like field_something
    */
-  protected function createField($type = 'field_example_rgb', $widget_type = 'field_example_text', $cardinality = 'number') {
+  protected function createField($type = 'field_example_rgb', $widget_type = 'field_example_text', $cardinality = '1') {
     $this->drupalGet('admin/structure/types/manage/' . $this->contentTypeName . '/fields');
 
     $field_name = strtolower($this->randomMachineName(10));
@@ -98,17 +101,31 @@ class FieldExampleWebTestBase extends WebTestBase {
     );
     $this->drupalPostForm(NULL, $edit, t('Save'));
 
-    $edit = array('field[cardinality]' => (string) $cardinality);
+    // If we get -1 for $cardinality, we should change the drop-down from
+    // 'Number' to 'Unlimited.'
+    if (-1 == $cardinality) {
+      $edit = array(
+        'field_storage[cardinality]' => '-1',
+      );
+    }
+    // Otherwise set the cardinality number.
+    else {
+      $edit = array(
+        'field_storage[cardinality_number]' => (string) $cardinality,
+      );
+    }
 
     // Using all the default settings, so press the button.
     $this->drupalPostForm(NULL, $edit, t('Save field settings'));
-    debug(t('Saved settings for field %field_name with widget %widget_type and cardinality %cardinality',
+    debug(
+      t('Saved settings for field %field_name with widget %widget_type and cardinality %cardinality',
         array(
           '%field_name' => $field_name,
           '%widget_type' => $widget_type,
           '%cardinality' => $cardinality,
         )
-      ));
+      )
+    );
     $this->assertText(t('Updated field @name field settings.', array('@name' => $field_name)));
 
     // Set the widget type for the newly created field.
@@ -120,4 +137,5 @@ class FieldExampleWebTestBase extends WebTestBase {
 
     return $field_name;
   }
+
 }
