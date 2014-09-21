@@ -66,7 +66,7 @@ class DBTNGExampleAddForm extends FormBase {
   public function validateForm(array &$form, FormStateInterface $form_state) {
     // Confirm that age is numeric.
     if (!intval($form_state->getValue('age'))) {
-      form_set_error('age', t('Age needs to be a number'));
+      $form_state->setErrorByName('age', $this->t('Age needs to be a number'));
     }
   }
 
