@@ -31,26 +31,3 @@
  * Where ever possible, we use the amazing tools built into D8 natively.
  * }
  */
-
-/**
- * Implements hook_permission().
- */
-function content_entity_example_permission() {
-  return array(
-    'delete contact entity' => array(
-      'title' => t('Delete entity content.'),
-    ),
-    'add contact entity' => array(
-      'title' => t('Add entity content'),
-    ),
-    'view contact entity' => array(
-      'title' => t('View entity content'),
-    ),
-    'edit contact entity' => array(
-      'title' => t('Edit entity content'),
-    ),
-    'administer contact entity' => array(
-      'title' => t('Administer settings'),
-    ),
-  );
-}

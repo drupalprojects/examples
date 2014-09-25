@@ -51,26 +51,5 @@ function page_example_help($route_name, RouteMatchInterface $route_match) {
 }
 
 /**
- * Implements hook_permission().
- *
- * Since the access to our new custom pages will be granted based on
- * special permissions, we need to define what those permissions are here.
- * This ensures that they are available to enable on the permissions
- * administration pages.
- */
-function page_example_permission() {
-  return array(
-    'access simple page' => array(
-      'title' => t('Access simple page'),
-      'description' => t('Allow users to access simple page'),
-    ),
-    'access arguments page' => array(
-      'title' => t('Access page with arguments'),
-      'description' => t('Allow users to access page with arguments'),
-    ),
-  );
-}
-
-/**
  * @} End of "defgroup page_example".
  */

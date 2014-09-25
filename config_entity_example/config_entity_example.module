@@ -35,20 +35,5 @@
  */
 
 /**
- * Implements hook_permission().
- */
-function config_entity_example_permission() {
-  // Define the administer permission for the robot config entity.
-  $permissions = array(
-    'administer robots' => array(
-      'title' => t('Administer robots'),
-      'description' => t('Create and edit robots.'),
-    ),
-  );
-
-  return $permissions;
-}
-
-/**
  * @} End of "defgroup config_entity_example".
  */

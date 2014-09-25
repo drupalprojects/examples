@@ -26,22 +26,6 @@ use Drupal\node\NodeInterface;
  */
 
 /**
- * Implements hook_permission().
- *
- * In this case we're adding an addition permission that does the same
- * as the one the node module offers, just to demonstrate this error.
- */
-function simpletest_example_permission() {
-  $perms = array();
-  $perms['extra special edit any simpletest_example'] = array(
-    'title' => t('Extra special edit any SimpleTest Example'),
-    'description' => t('Allow user to edit any any SimpleTest Example content authored by any user.'),
-    'restrict access' => TRUE,
-  );
-  return $perms;
-}
-
-/**
  * Implements hook_node_access().
  *
  * Demonstrates a bug that we'll find in our test.
