@@ -39,7 +39,7 @@ function simpletest_example_node_access(NodeInterface $node, $op, AccountInterfa
   // If it's not a simpletest_example node, or if it's not operations we care
   // about, then just ignore.
   if ($type != 'simpletest_example' || ($op != 'update' && $op != 'delete')) {
-    return AccessResult::create();
+    return AccessResult::neutral();
   }
 
   // This code has a BUG that we'll find in testing.

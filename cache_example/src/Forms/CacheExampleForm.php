@@ -180,7 +180,7 @@ class CacheExampleForm extends FormBase {
   public function createExpiringItem($form, &$form_state) {
 
     $tags = array(
-      'cache_example' => array(1),
+      'cache_example:1',
     );
 
     $interval = $form_state->getValue('expiration');
@@ -222,7 +222,7 @@ class CacheExampleForm extends FormBase {
         // This removes cache entries with the tag "cache_example" set to 1 in
         // the "cache".
         $tags = array(
-          'cache_example' => array(1),
+          'cache_example:1',
         );
         \Drupal::cache()->deleteTags($tags);
         drupal_set_message(t('Cache entries with the tag "cache_example" set to 1 in the "cache" bin were removed with \Drupal::cache()->deleteTags($tags).'));
