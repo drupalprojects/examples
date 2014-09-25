@@ -77,7 +77,7 @@ class RobotDeleteForm extends EntityConfirmFormBase {
    *
    * @param array $form
    *   An associative array containing the structure of the form.
-   * @param Drupal\Core\Form\FormStateInterface $form_state
+   * @param \Drupal\Core\Form\FormStateInterface $form_state
    *   An associative array containing the current state of the form.
    */
   public function submit(array $form, FormStateInterface $form_state) {

@@ -21,6 +21,11 @@ class DBTNGExampleStorage {
    *
    * @param array $entry
    *   An array containing all the fields of the database record.
+   * @return int
+   *   The number of updated rows.
+   *
+   * @throws \Exception
+   *   When the database insert fails.
    *
    * @see db_insert()
    */
@@ -31,7 +36,7 @@ class DBTNGExampleStorage {
           ->fields($entry)
           ->execute();
     }
-    catch (Exception $e) {
+    catch (\Exception $e) {
       drupal_set_message(t('db_insert failed. Message = %message, query= %query', array(
             '%message' => $e->getMessage(),
             '%query' => $e->query_string,
@@ -59,7 +64,7 @@ class DBTNGExampleStorage {
           ->condition('pid', $entry['pid'])
           ->execute();
     }
-    catch (Exception $e) {
+    catch (\Exception $e) {
       drupal_set_message(t('db_update failed. Message = %message, query= %query', array(
             '%message' => $e->getMessage(),
             '%query' => $e->query_string,
