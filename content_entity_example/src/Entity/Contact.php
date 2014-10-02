@@ -248,7 +248,7 @@ class Contact extends ContentEntityBase implements ContactInterface {
     // The values shown in the menu are 'male' and 'female'.
     // In the view the field content is shown as string.
     // In the form the choices are presented as options list.
-    $fields['gender'] = BaseFieldDefinition::create('list_text')
+    $fields['gender'] = BaseFieldDefinition::create('list_string')
       ->setLabel(t('Gender'))
       ->setDescription(t('The gender of the Contact entity.'))
       ->setSettings(array(

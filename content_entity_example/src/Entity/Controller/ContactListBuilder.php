@@ -9,6 +9,7 @@ namespace Drupal\content_entity_example\Entity\Controller;
 
 use Drupal\Core\Entity\EntityInterface;
 use Drupal\Core\Entity\EntityListBuilder;
+use Drupal\Core\Url;
 
 /**
  * Provides a list controller for content_entity_example entity.
@@ -56,9 +57,14 @@ class ContactListBuilder extends EntityListBuilder {
   public function buildRow(EntityInterface $entity) {
     /* @var $entity \Drupal\content_entity_example\Entity\Contact */
     $row['id'] = $entity->id();
-    $row['name'] = \Drupal::l($this->getLabel($entity), 'content_entity_example.contact_view', array(
+    $row['name'] = \Drupal::l(
+      $this->getLabel($entity),
+      Url::fromRoute('content_entity_example.contact_view',
+      array(
         'content_entity_example_contact' => $entity->id(),
-    ));
+      )
+        )
+    );
     $row['first_name'] = $entity->first_name->value;
     $row['gender'] = $entity->gender->value;
     return $row + parent::buildRow($entity);

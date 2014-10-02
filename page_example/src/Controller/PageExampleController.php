@@ -7,6 +7,7 @@
 
 namespace Drupal\page_example\Controller;
 
+use Drupal\Core\Url;
 use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
 
 /**
@@ -20,11 +21,20 @@ class PageExampleController {
    * Our router maps this method to the path 'examples/page_example'.
    */
   public function description() {
+    // Make our links. First the simple page.
+    $simple_url = Url::fromRoute('page_example_simple');
+    $page_example_simple_link = \Drupal::l(t('simple page'), $simple_url);
+    // Now the arguments page.
+    $arguments_url = Url::fromRoute('page_example_arguments', array('first' => '23', 'second' => '56'));
+    $page_example_arguments_link = \Drupal::l(t('arguments page'), $arguments_url);
+
+    // Assemble the markup.
     $build = array(
-      '#markup' => t('<p>The Page example module provides two pages, "simple" and "arguments".</p><p>The <a href="@simple_link">simple page</a> just returns a renderable array for display.</p><p>The <a href="@arguments_link">arguments page</a> takes two arguments and displays them, as in @arguments_link</p>',
+      '#markup' => t('<p>The Page example module provides two pages, "simple" and "arguments".</p><p>The !simple_link just returns a renderable array for display.</p><p>The !arguments_link takes two arguments and displays them, as in @arguments_url</p>',
         array(
-          '@simple_link' => url('examples/page_example/simple', array('absolute' => TRUE)),
-          '@arguments_link' => url('examples/page_example/arguments/23/56', array('absolute' => TRUE)),
+          '!simple_link' => $page_example_simple_link,
+          '!arguments_link' => $page_example_arguments_link,
+          '@arguments_url' => $arguments_url->toString(),
         )
       ),
     );

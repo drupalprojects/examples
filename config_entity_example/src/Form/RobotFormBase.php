@@ -205,17 +205,17 @@ class RobotFormBase extends EntityForm {
     $status = $robot->save();
 
     // Grab the URL of the new entity. We'll use it in the message.
-    $uri = $robot->url();
+    $url = $robot->urlInfo();
 
     if ($status == SAVED_UPDATED) {
       // If we edited an existing entity...
       drupal_set_message($this->t('Robot %label has been updated.', array('%label' => $robot->label())));
-      watchdog('contact', 'Robot %label has been updated.', array('%label' => $robot->label()), WATCHDOG_NOTICE, l($this->t('Edit'), $uri . '/edit'));
+      watchdog('contact', 'Robot %label has been updated.', array('%label' => $robot->label()), WATCHDOG_NOTICE, $this->l($this->t('Edit'), $url));
     }
     else {
       // If we created a new entity...
       drupal_set_message($this->t('Robot %label has been added.', array('%label' => $robot->label())));
-      watchdog('contact', 'Robot %label has been added.', array('%label' => $robot->label()), WATCHDOG_NOTICE, l($this->t('Edit'), $uri . '/edit'));
+      watchdog('contact', 'Robot %label has been added.', array('%label' => $robot->label()), WATCHDOG_NOTICE, $this->l($this->t('Edit'), $url));
     }
 
     // Redirect the user back to the listing route after the save operation.
