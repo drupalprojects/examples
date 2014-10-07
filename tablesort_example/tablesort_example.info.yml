@@ -1,0 +1,5 @@
+name: Table Sort example
+type: module
+description: 'Demonstrates how to create sortable output in a table.'
+package: Example modules
+core: 8.x

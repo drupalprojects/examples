@@ -1,0 +1,6 @@
+tablesort_example_description:
+  path: 'examples/tablesort_example'
+  defaults:
+    _content: '\Drupal\tablesort_example\Controller\TableSortExampleController::description'
+  requirements:
+    _access: 'TRUE'
