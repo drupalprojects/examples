@@ -77,7 +77,7 @@ class EmailExampleTest extends WebTestBase {
 
     // Verifiy correct email recieved.
     $from = \Drupal::config('system.site')->get('mail');
-    $t_options = array('langcode' => \Drupal::languageManager()->getDefaultLanguage()->id);
+    $t_options = array('langcode' => \Drupal::languageManager()->getDefaultLanguage()->getId());
     $this->assertMailString('subject', t('E-mail sent from @site-name', array('@site-name' => $from), $t_options), 1);
     $this->assertMailString('body', $edit['message'], 1);
     $this->assertMailString('body', t("\n--\nMail altered by email_example module.", array(), $t_options), 1);

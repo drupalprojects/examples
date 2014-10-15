@@ -104,7 +104,7 @@ function email_example_mail_send($form_values) {
   // Since in our case, we are sending a message to a random e-mail address that
   // is not necessarily tied to a user account, we will use the site's default
   // language.
-  $language_code = \Drupal::languageManager()->getDefaultLanguage()->id;
+  $language_code = \Drupal::languageManager()->getDefaultLanguage()->getId();
 
   // Whether or not to automatically send the mail when drupal_mail() is
   // called. This defaults to TRUE, and is normally what you want unless you
