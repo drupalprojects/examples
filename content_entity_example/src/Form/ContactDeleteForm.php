@@ -50,7 +50,7 @@ class ContactDeleteForm extends ContentEntityConfirmFormBase {
     $entity = $this->getEntity();
     $entity->delete();
 
-    \Drupal::logger('content_entity_example')->log(WATCHDOG_INFO, '@type: deleted %title.',
+    \Drupal::logger('content_entity_example')->notice('@type: deleted %title.',
       array(
         '@type' => $this->entity->bundle(),
         '%title' => $this->entity->label(),

@@ -22,7 +22,7 @@ use Drupal\simpletest\WebTestBase;
  */
 class ContentEntityExampleTest extends WebTestBase {
 
-  public static $modules = array('content_entity_example', 'block');
+  public static $modules = array('content_entity_example', 'block', 'field_ui');
 
   /**
    * Basic tests for Content Entity Example.
@@ -33,7 +33,11 @@ class ContentEntityExampleTest extends WebTestBase {
       'edit contact entity',
       'view contact entity',
       'delete contact entity',
-      'administer contact entity'));
+      'administer contact entity',
+      'administer content_entity_example_contact display',
+      'administer content_entity_example_contact fields',
+      'administer content_entity_example_contact form display'));
+
     $this->drupalPlaceBlock('system_menu_block:tools', array());
 
     // Anonymous User should not see the link to the listing.
@@ -93,6 +97,12 @@ class ContentEntityExampleTest extends WebTestBase {
     // Settings page.
     $this->drupalGet('admin/structure/content_entity_example_contact_settings');
     $this->assertText(t('Contact Settings'));
+
+    // Make sure the field manipulation links are available.
+    $this->assertLink(t('Settings'));
+    $this->assertLink(t('Manage fields'));
+    $this->assertLink(t('Manage form display'));
+    $this->assertLink(t('Manage display'));
   }
 
   /**

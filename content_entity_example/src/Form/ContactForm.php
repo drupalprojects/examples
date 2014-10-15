@@ -28,7 +28,7 @@ class ContactForm extends ContentEntityForm {
     $form['langcode'] = array(
       '#title' => $this->t('Language'),
       '#type' => 'language_select',
-      '#default_value' => $entity->getUntranslated()->language()->id,
+      '#default_value' => $entity->getUntranslated()->language()->getId(),
       '#languages' => Language::STATE_ALL,
     );
     return $form;
@@ -37,18 +37,8 @@ class ContactForm extends ContentEntityForm {
   /**
    * {@inheritdoc}
    */
-  public function submitForm(array &$form, FormStateInterface $form_state) {
-    // Build the entity object from the submitted values.
-    $entity = parent::submitForm($form, $form_state);
-    $form_state->setRedirect('content_entity_example.contact_list');
-
-    return $entity;
-  }
-
-  /**
-   * {@inheritdoc}
-   */
   public function save(array $form, FormStateInterface $form_state) {
+    $form_state->setRedirect('content_entity_example.contact_list');
     $entity = $this->getEntity();
     $entity->save();
   }

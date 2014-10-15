@@ -95,9 +95,9 @@ use Drupal\user\UserInterface;
  *   },
  *   links = {
  *     "edit-form" = "content_entity_example.contact_edit",
- *     "admin-form" = "content_entity_example.contact_settings",
  *     "delete-form" = "content_entity_example.contact_delete"
- *   }
+ *   },
+ *   field_ui_base_route = "content_entity_example.contact_settings",
  * )
  *
  * The 'Contact' class defines methods and fields for the contact entity.
