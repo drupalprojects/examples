@@ -77,7 +77,7 @@ class DBTNGExampleTest extends WebTestBase {
   protected function providerMenuLinks() {
     return array(
       '/' => array(
-        'examples/dbtng_example'
+        'examples/dbtng_example',
       ),
       'examples/dbtng_example' => array(
         'examples/dbtng_example/add',

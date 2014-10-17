@@ -21,6 +21,7 @@ class DBTNGExampleStorage {
    *
    * @param array $entry
    *   An array containing all the fields of the database record.
+   *
    * @return int
    *   The number of updated rows.
    *
