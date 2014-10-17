@@ -80,7 +80,7 @@ class RobotDeleteForm extends EntityConfirmFormBase {
    * @param \Drupal\Core\Form\FormStateInterface $form_state
    *   An associative array containing the current state of the form.
    */
-  public function submit(array $form, FormStateInterface $form_state) {
+  public function submitForm(array &$form, FormStateInterface $form_state) {
     // Delete the entity.
     $this->entity->delete();
 
@@ -90,7 +90,7 @@ class RobotDeleteForm extends EntityConfirmFormBase {
     )));
 
     // Redirect the user to the list controller when complete.
-    $form_state['redirect_route']['route_name'] = 'robot.list';
+    $form_state->setRedirectUrl($this->getCancelUrl());
   }
 
 }
