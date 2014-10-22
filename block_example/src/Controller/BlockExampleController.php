@@ -2,7 +2,7 @@
 
 /**
  * @file
- * Contains \Drupal\page_example\Controller\BlockExampleController.
+ * Contains \Drupal\block_example\Controller\BlockExampleController.
  */
 
 namespace Drupal\block_example\Controller;
