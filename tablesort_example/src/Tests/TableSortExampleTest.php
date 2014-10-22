@@ -38,18 +38,17 @@ class TableSortExampleTest extends WebTestBase {
    */
   public function testTableSortExampleBasic() {
     // No need to login for this test.
-
     $this->drupalGet('examples/tablesort_example', array('query' => array('sort' => 'desc', 'order' => 'Numbers')));
-    $this->assertRaw(' <tbody>
-              <tr class="odd">
+    $this->assertRaw('<tbody>
+                      <tr class="odd">
                       <td>7</td>
                       <td>e</td>
                       <td>t982hkv</td>
                   </tr>', 'Ordered by Number decending');
 
     $this->drupalGet('examples/tablesort_example', array('query' => array('sort' => 'asc', 'order' => 'Numbers')));
-    $this->assertRaw(' <tbody>
-              <tr class="odd">
+    $this->assertRaw('<tbody>
+                      <tr class="odd">
                       <td>1</td>
                       <td>e</td>
                       <td>912cv21</td>
@@ -58,7 +57,7 @@ class TableSortExampleTest extends WebTestBase {
     // Sort by Letters.
     $this->drupalGet('examples/tablesort_example', array('query' => array('sort' => 'desc', 'order' => 'Letters')));
     $this->assertRaw('<tbody>
-              <tr class="odd">
+                      <tr class="odd">
                       <td>4</td>
                       <td>w</td>
                       <td>80jsv772</td>
@@ -66,7 +65,7 @@ class TableSortExampleTest extends WebTestBase {
 
     $this->drupalGet('examples/tablesort_example', array('query' => array('sort' => 'asc', 'order' => 'Letters')));
     $this->assertRaw('<tbody>
-              <tr class="odd">
+                      <tr class="odd">
                       <td>2</td>
                       <td>a</td>
                       <td>0kuykuh</td>
@@ -75,7 +74,7 @@ class TableSortExampleTest extends WebTestBase {
     // Sort by Mixture.
     $this->drupalGet('examples/tablesort_example', array('query' => array('sort' => 'desc', 'order' => 'Mixture')));
     $this->assertRaw('<tbody>
-              <tr class="odd">
+                      <tr class="odd">
                       <td>7</td>
                       <td>e</td>
                       <td>t982hkv</td>
@@ -83,7 +82,7 @@ class TableSortExampleTest extends WebTestBase {
 
     $this->drupalGet('examples/tablesort_example', array('query' => array('sort' => 'asc', 'order' => 'Mixture')));
     $this->assertRaw('<tbody>
-              <tr class="odd">
+                      <tr class="odd">
                       <td>2</td>
                       <td>a</td>
                       <td>0kuykuh</td>
