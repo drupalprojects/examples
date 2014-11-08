@@ -7,6 +7,7 @@
 
 namespace Drupal\block_example\Tests;
 
+use Drupal\Component\Utility\Unicode;
 use Drupal\simpletest\WebTestBase;
 
 /**
@@ -77,7 +78,7 @@ class BlockExampleTest extends WebTestBase {
     $this->drupalGet('/');
     $this->assertRaw($settings_configurable['label'], 'Block configurable test not found.');
     $this->assertNoRaw($settings_uppercase['label'], 'Block uppercase with normal label not found.');
-    $this->assertRaw(drupal_strtoupper($settings_uppercase['label']), 'Block uppercase with uppercased label found.');
+    $this->assertRaw(Unicode::strtoupper($settings_uppercase['label']), 'Block uppercase with uppercased label found.');
     $this->assertNoRaw($settings_empty['label'], 'Block empty not found.');
 
     // Change content of configurable text block.

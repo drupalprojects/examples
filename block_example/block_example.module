@@ -5,6 +5,8 @@
  * Module file for block_example.
  */
 
+use Drupal\Component\Utility\Unicode;
+
 /**
  * @defgroup block_example Example: Block
  * @ingroup examples
@@ -41,7 +43,7 @@ function block_example_block_view_alter(array &$build, \Drupal\Core\Block\BlockP
   $definition = $block->getPluginDefinition();
   if ((!empty($build['#configuration']['label']) && stristr($build['#configuration']['label'], 'uppercase')) || (!empty($definition['subject']) && stristr($definition['subject'], 'uppercase'))) {
     // This will uppercase the block title.
-    $build['#configuration']['label'] = drupal_strtoupper($build['#configuration']['label']);
+    $build['#configuration']['label'] = Unicode::strtoupper($build['#configuration']['label']);
   }
 }
 
