@@ -8,26 +8,27 @@
 
 # If the user accesses http://example.com/?q=examples/page_example, the routing
 # system will look for a route with that path. In this case it will find a
-# match, and execute the _content callback. In this case the callback is defined
-# as a classname ("\Drupal\page_example\Controller\PageExampleController")
-# and a method ("description").
+# match, and execute the _controller callback. In this case the callback is
+# defined as a classname
+# ("\Drupal\page_example\Controller\PageExampleController") and a method
+# ("description").
 
 # Access to this path is not restricted. This is notated as _access: 'TRUE'.
 page_example_description:
   path: 'examples/page_example'
   defaults:
-    _content: '\Drupal\page_example\Controller\PageExampleController::description'
+    _controller: '\Drupal\page_example\Controller\PageExampleController::description'
   requirements:
     _access: 'TRUE'
 
 # If the user accesses http://example.com/?q=examples/page_example/simple,
 # the routing system will look for a route with that path. In this case it will
-# find a match, and execute the _content callback. Access to this path requires
-# "access simple page" permission.
+# find a match, and execute the _controller callback. Access to this path
+# requires "access simple page" permission.
 page_example_simple:
   path: 'examples/page_example/simple'
   defaults:
-    _content: '\Drupal\page_example\Controller\PageExampleController::simple'
+    _controller: '\Drupal\page_example\Controller\PageExampleController::simple'
   requirements:
     _permission: 'access simple page'
 
@@ -37,8 +38,8 @@ page_example_simple:
 # it will look for examples/page_example/arguments/1/{*}. Again not finding a
 # match, it will look for examples/page_example/arguments/{*}/2. Yet again not
 # finding a match, it will look for examples/page_example/arguments/{*}/{*}.
-# This time it finds a match, and so it will execute the _content callback. In
-# this case, it's PageExampleController::arguments().
+# This time it finds a match, and so it will execute the _controller callback.
+# In this case, it's PageExampleController::arguments().
 
 # Since the parameters are passed to the function after the match, the function
 # can do additional checking or make use of them before executing the callback
@@ -47,6 +48,6 @@ page_example_simple:
 page_example_arguments:
   path: 'examples/page_example/arguments/{first}/{second}'
   defaults:
-    _content: '\Drupal\page_example\Controller\PageExampleController::arguments'
+    _controller: '\Drupal\page_example\Controller\PageExampleController::arguments'
   requirements:
     _permission: 'access arguments page'
