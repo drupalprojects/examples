@@ -3,6 +3,6 @@
 simpletest_example_description:
   path: 'examples/simpletest_example'
   defaults:
-    _content: '\Drupal\simpletest_example\Controller\SimpleTestExampleController::description'
+    _controller: '\Drupal\simpletest_example\Controller\SimpleTestExampleController::description'
   requirements:
     _access: 'TRUE'

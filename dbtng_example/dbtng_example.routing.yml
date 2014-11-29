@@ -2,7 +2,7 @@ dbtng_example:
   path: 'examples/dbtng_example'
   defaults:
     _title: 'DBTNG Example'
-    _content: '\Drupal\dbtng_example\DBTNGExampleController::entryList'
+    _controller: '\Drupal\dbtng_example\DBTNGExampleController::entryList'
   requirements:
     _access: 'TRUE'
 
@@ -10,7 +10,7 @@ dbtng_list:
   path: 'examples/dbtng_example/list'
   defaults:
     _title: 'List'
-    _content: '\Drupal\dbtng_example\DBTNGExampleController::entryList'
+    _controller: '\Drupal\dbtng_example\DBTNGExampleController::entryList'
   requirements:
     _access: 'TRUE'
 
@@ -34,6 +34,6 @@ dbtng_advanced:
   path: 'examples/dbtng_example/advanced'
   defaults:
     _title: 'Advanced List'
-    _content: '\Drupal\dbtng_example\DBTNGExampleController::entryAdvancedList'
+    _controller: '\Drupal\dbtng_example\DBTNGExampleController::entryAdvancedList'
   requirements:
     _access: 'TRUE'

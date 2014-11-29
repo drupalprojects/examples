@@ -2,6 +2,6 @@
 field_example.description:
   path: 'examples/field_example'
   defaults:
-    _content: '\Drupal\field_example\Controller\FieldExampleController::description'
+    _controller: '\Drupal\field_example\Controller\FieldExampleController::description'
   requirements:
     _access: 'TRUE'

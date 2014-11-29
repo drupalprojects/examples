@@ -41,8 +41,7 @@ class ExamplesTest extends WebTestBase {
 
     // Install phpunit_example and see if it appears in the toolbar. We use
     // phpunit_example because it's very light-weight.
-    $module_handler = $this->container->get('module_handler');
-    $module_handler->install(array('phpunit_example'));
+    $this->container->get('module_installer')->install(array('phpunit_example'), TRUE);
     // SimpleTest needs for us to reset all the caches.
     $this->resetAll();
 

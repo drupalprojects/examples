@@ -3,6 +3,6 @@
 phpunit_example_description:
   path: 'examples/phpunit_example'
   defaults:
-    _content: '\Drupal\phpunit_example\Controller\PHPUnitExampleController::description'
+    _controller: '\Drupal\phpunit_example\Controller\PHPUnitExampleController::description'
   requirements:
     _access: 'TRUE'
