@@ -1,18 +1,12 @@
-type: basic_content_type
 uuid: a3da2ef6-8c63-43ec-bf00-f7aa3bfa5b5e
+langcode: en
+status: true
+dependencies: {  }
 name: 'Example: Basic Content Type'
+type: basic_content_type
 description: 'This is a very basic content type.'
 help: ''
-has_title: true
-title_label: Title
-settings:
-  node:
-    preview: 1
-    options:
-      status: true
-      promote: true
-      sticky: false
-      revision: false
-    submitted: true
-status: true
-langcode: en
+new_revision: false
+preview_mode: 1
+display_submitted: true
+third_party_settings: {  }
