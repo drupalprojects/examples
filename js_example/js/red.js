@@ -5,7 +5,7 @@
      */
     Drupal.behaviors.jsTestRedWeight = {
         attach: function(context, settings) {
-            var weight = drupalSettings.js_weights.red;
+            var weight = drupalSettings.js_example.js_weights.red;
             var newDiv = $('<div></div>').css('color', 'red').html('I have a weight of ' + weight);
             $('#js-weights').append(newDiv);
         }

@@ -5,7 +5,7 @@
      */
     Drupal.behaviors.jsTestBlackWeight = {
         attach: function(context, settings) {
-            var weight = drupalSettings.js_weights.black;
+            var weight = drupalSettings.js_example.js_weights.black;
             var newDiv = $('<div></div>').css('color', 'black').html('I have a weight of ' + weight);
             $('#js-weights').append(newDiv);
         }

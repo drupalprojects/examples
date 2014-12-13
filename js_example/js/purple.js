@@ -5,7 +5,7 @@
      */
     Drupal.behaviors.jsTestPurpleWeight = {
         attach: function(context, settings) {
-            var weight = drupalSettings.js_weights.purple;
+            var weight = drupalSettings.js_example.js_weights.purple;
             var newDiv = $('<div></div>').css('color', 'purple').html('I have a weight of ' + weight);
             $('#js-weights').append(newDiv);
         }
