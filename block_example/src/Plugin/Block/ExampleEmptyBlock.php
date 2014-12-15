@@ -7,9 +7,7 @@
 
 namespace Drupal\block_example\Plugin\Block;
 
-use Drupal\block\Annotation\Block;
 use Drupal\Core\Block\BlockBase;
-use Drupal\Core\Annotation\Translation;
 
 /**
  * Provides a 'Example: empty block' block.
