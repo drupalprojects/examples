@@ -92,30 +92,36 @@ class FieldExampleWebTestBase extends WebTestBase {
   protected function createField($type = 'field_example_rgb', $widget_type = 'field_example_text', $cardinality = '1') {
     $this->drupalGet('admin/structure/types/manage/' . $this->contentTypeName . '/fields');
 
-    $field_name = strtolower($this->randomMachineName(10));
-    // Add a singleton field_example_text field.
-    $edit = array(
-      'fields[_add_new_field][label]' => $field_name,
-      'fields[_add_new_field][field_name]' => $field_name,
-      'fields[_add_new_field][type]' => $type,
-    );
-    $this->drupalPostForm(NULL, $edit, t('Save'));
+    // Go to the 'Add field' page.
+    $this->clickLink('Add field');
 
-    // If we get -1 for $cardinality, we should change the drop-down from
-    // 'Number' to 'Unlimited.'
+    // Make a name for this field.
+    $field_name = strtolower($this->randomMachineName(10));
+
+    // Fill out the field form.
+    $edit = array(
+      'new_storage_type' => $type,
+      'field_name' => $field_name,
+      'label' => $field_name,
+    );
+    $this->drupalPostForm(NULL, $edit, t('Save and continue'));
+
+    // Fill out the $cardinality form as if we're not using an unlimited number
+    // of values.
+    $edit = array(
+      'field_storage[cardinality]' => 'number',
+      'field_storage[cardinality_number]' => (string) $cardinality,
+    );
+    // If we have -1 for $cardinality, we should change the form's drop-down
+    // from 'Number' to 'Unlimited.'
     if (-1 == $cardinality) {
       $edit = array(
         'field_storage[cardinality]' => '-1',
-      );
-    }
-    // Otherwise set the cardinality number.
-    else {
-      $edit = array(
-        'field_storage[cardinality_number]' => (string) $cardinality,
+        'field_storage[cardinality_number]' => '1',
       );
     }
 
-    // Using all the default settings, so press the button.
+    // And now we save the cardinality settings.
     $this->drupalPostForm(NULL, $edit, t('Save field settings'));
     debug(
       t('Saved settings for field %field_name with widget %widget_type and cardinality %cardinality',
