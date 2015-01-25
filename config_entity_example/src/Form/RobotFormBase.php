@@ -78,7 +78,7 @@ class RobotFormBase extends EntityForm {
    *   An associative array containing the robot add/edit form.
    */
   public function buildForm(array $form, FormStateInterface $form_state) {
-    // Get anything we need form the base class.
+    // Get anything we need from the base class.
     $form = parent::buildForm($form, $form_state);
 
     // Drupal provides the entity to us as a class variable. If this is an
