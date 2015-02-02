@@ -23,7 +23,7 @@ class NodeTypeExampleController extends ControllerBase {
   public function description() {
     // Construct our links.
     $content_admin_link = $this->l(
-      $this->t('the content type admin page'), Url::fromRoute('node.overview_types')
+      $this->t('the content type admin page'), Url::fromRoute('entity.node_type.collection')
     );
 
     // We can generate a URL fragment for an admin route. If the path is changed
