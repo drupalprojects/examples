@@ -9,7 +9,9 @@ namespace Drupal\cache_example\Forms;
 
 use Drupal\Core\Form\FormBase;
 use Drupal\Core\Form\FormStateInterface;
+use Drupal\Core\Cache\Cache;
 use Drupal\Core\Cache\CacheBackendInterface;
+
 
 /**
  * Form with examples on how to use cache.
@@ -102,10 +104,15 @@ class CacheExampleForm extends FormBase {
       '#markup' => t('A cache item can be set as CACHE_PERMANENT, meaning that it will only be removed when explicitly cleared, or it can have an expiration time (a Unix timestamp).'),
     );
 
-    $expiring_item = \Drupal::cache()->get('cache_example_expiring_item', TRUE);
-    $item_status = $expiring_item ?
-      t('Cache item exists and is set to expire at %time', array('%time' => $expiring_item->data)) :
-      t('Cache item does not exist');
+    $item = \Drupal::cache()->get('cache_example_expiring_item', TRUE);
+    if ($item == FALSE) {
+      $item_status = t('Cache item does not exist');
+    }
+    else {
+      $item_status = $item->valid ? t('Cache item exists and is set to expire at %time', array('%time' => $item->data)) :
+      t('Cache_item is invalid');
+    }
+
     $form['expiration_demo']['current_status'] = array(
       '#type' => 'item',
       '#title' => t('Current status of cache item "cache_example_expiring_item"'),
@@ -224,8 +231,8 @@ class CacheExampleForm extends FormBase {
         $tags = array(
           'cache_example:1',
         );
-        \Drupal::cache()->deleteTags($tags);
-        drupal_set_message(t('Cache entries with the tag "cache_example" set to 1 in the "cache" bin were removed with \Drupal::cache()->deleteTags($tags).'));
+        Cache::invalidateTags($tags);
+        drupal_set_message(t('Cache entries with the tag "cache_example" set to 1 in the "cache" bin were invalidated with \Drupal\Core\Cache\Cache::invalidateTags($tags).'));
         break;
     }
   }

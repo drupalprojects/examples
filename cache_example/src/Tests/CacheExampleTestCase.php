@@ -82,8 +82,8 @@ class CacheExampleTestCase extends WebTestBase {
     // Create a cached item. First make sure it doesn't already exist.
     $this->assertText('Cache item does not exist');
     $this->drupalPostForm('examples/cache_example', array('expiration' => -10), t('Create a cache item with this expiration'));
-    // We should now have an already-expired item.
-    $this->assertText('Cache item exists and is set to expire');
+    // We should now have an already-expired item. Automatically invalid.
+    $this->assertText('Cache_item is invalid');
     // Now do the expiration operation.
     $this->drupalPostForm('examples/cache_example', array('cache_clear_type' => 'expire'), t('Clear or expire cache'));
     // And verify that it was removed.
@@ -97,8 +97,12 @@ class CacheExampleTestCase extends WebTestBase {
     $this->drupalPostForm('examples/cache_example', array('cache_clear_type' => 'expire'), t('Clear or expire cache'));
     // And verify that it was not removed.
     $this->assertText('Cache item exists and is set to expire at Never expires');
-    // Now do full removal.
+    // Now do tag invalidation.
     $this->drupalPostForm('examples/cache_example', array('cache_clear_type' => 'remove_tag'), t('Clear or expire cache'));
+    // And verify that it was invalidated.
+    $this->assertText('Cache_item is invalid');
+    // Do the hard delete
+    $this->drupalPostForm('examples/cache_example', array('cache_clear_type' => 'remove_all'), t('Clear or expire cache'));
     // And verify that it was removed.
     $this->assertText('Cache item does not exist');
   }
