@@ -66,7 +66,7 @@ class RobotDeleteForm extends EntityConfirmFormBase {
    *   The URL to go to if the user cancels the deletion.
    */
   public function getCancelUrl() {
-    return new Url('robot.list');
+    return new Url('entity.robot.list');
   }
 
   /**

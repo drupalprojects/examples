@@ -25,18 +25,17 @@ use Drupal\Core\Config\Entity\ConfigEntityBase;
  *  - label: The human-readable label of the entity type. We pass this through
  *    the "@Translation" wrapper so that the multilingual system may
  *    translate it in the user interface.
- *  - controllers: An array specifying controller classes that handle various
- *    aspects of the entity type's functionality. Below, we've specified
- *    controllers which can list, add, edit, and delete our robot entity, and
- *    which control user access to these capabilities.
- *  - config_prefix: This tells the config system the prefix to use for
- *    filenames when storing entities. This means that the default entity we
- *    include in our module has the filename
- *    'config_entity_example.robot.marvin.yml'.
+ *  - handlers: An array of entity handler classes, keyed by handler type.
+ *    - access: The class that is used for access checks.
+ *    - list_builder: The class that provides listings of the entity.
+ *    - form: An array of entity form classes keyed by their operation.
  *  - entity_keys: Specifies the class properties in which unique keys are
  *    stored for this entity type. Unique keys are properties which you know
  *    will be unique, and which the entity manager can use as unique in database
  *    queries.
+ *  - links: entity URL definitions. These are mostly used for Field UI.
+ *    Arbitrary keys can set here. For example, User sets cancel-form, while
+ *    Node uses delete-form.
  *
  * @see http://previousnext.com.au/blog/understanding-drupal-8s-config-entities
  * @see annotation
@@ -62,8 +61,8 @@ use Drupal\Core\Config\Entity\ConfigEntityBase;
  *     "label" = "label"
  *   },
  *   links = {
- *     "edit-form" = "robot.edit",
- *     "delete-form" = "robot.delete"
+ *     "edit-form" = "/examples/config_entity_example/manage/{robot}",
+ *     "delete-form" = "/examples/config_entity_example/manage/{robot}/delete"
  *   }
  * )
  */

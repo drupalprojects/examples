@@ -2,7 +2,7 @@
 # Here we define the paths for our entity type's admin UI.
 
 # This is the router item for listing all entities.
-robot.list:
+entity.robot.list:
   path: '/examples/config_entity_example'
   defaults:
     # '_entity_list' tells Drupal to use an entity list controller.
@@ -15,7 +15,7 @@ robot.list:
     _permission: 'administer robots'
 
 # This is the router item for adding our entity.
-robot.add:
+entity.robot.add_form:
   path: '/examples/config_entity_example/add'
   defaults:
     _title: 'Add robot'
@@ -29,7 +29,7 @@ robot.add:
     _entity_create_access: robot
 
 # This is the router item for editing our entity.
-robot.edit:
+entity.robot.edit_form:
   # Parameters may be passed to the form via the URL path. We name the
   # parameter in the path by enclosing it in curly braces. For entity forms,
   # we include the entity ID in the path by including a parameter with the
@@ -47,7 +47,7 @@ robot.edit:
     _entity_access: robot.update
 
 # This is the router item for deleting an instance of our entity.
-robot.delete:
+entity.robot.delete_form:
   path: '/examples/config_entity_example/manage/{robot}/delete'
   defaults:
     _title: 'Delete robot'

@@ -221,7 +221,7 @@ class RobotFormBase extends EntityForm {
     }
 
     // Redirect the user back to the listing route after the save operation.
-    $form_state->setRedirect('robot.list');
+    $form_state->setRedirect('entity.robot.list');
   }
 
 }
