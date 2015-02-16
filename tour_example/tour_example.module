@@ -43,5 +43,5 @@ function tour_example_admin_paths() {
 }
 
 /**
- * @} End of "defgroup phpunit_example".
+ * @} End of "defgroup tour_example".
  */
