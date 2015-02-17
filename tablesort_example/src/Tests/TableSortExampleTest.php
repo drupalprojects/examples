@@ -39,54 +39,24 @@ class TableSortExampleTest extends WebTestBase {
   public function testTableSortExampleBasic() {
     // No need to login for this test.
     $this->drupalGet('examples/tablesort_example', array('query' => array('sort' => 'desc', 'order' => 'Numbers')));
-    $this->assertRaw('<tbody>
-                      <tr class="odd">
-                      <td>7</td>
-                      <td>e</td>
-                      <td>t982hkv</td>
-                  </tr>', 'Ordered by Number decending');
+    $this->assertFieldByXPath('//tbody/tr/td[1]', 7, 'Ordered by Number decending.');
 
     $this->drupalGet('examples/tablesort_example', array('query' => array('sort' => 'asc', 'order' => 'Numbers')));
-    $this->assertRaw('<tbody>
-                      <tr class="odd">
-                      <td>1</td>
-                      <td>e</td>
-                      <td>912cv21</td>
-                  </tr>', 'Ordered by Number ascending');
+    $this->assertFieldByXPath('//tbody/tr/td[1]', 1, 'Ordered by Number ascending.');
 
     // Sort by Letters.
     $this->drupalGet('examples/tablesort_example', array('query' => array('sort' => 'desc', 'order' => 'Letters')));
-    $this->assertRaw('<tbody>
-                      <tr class="odd">
-                      <td>4</td>
-                      <td>w</td>
-                      <td>80jsv772</td>
-                  </tr>', 'Ordered by Letters decending');
+    $this->assertFieldByXPath('//tbody/tr/td[2]', 'w', 'Ordered by Letters decending.');
 
     $this->drupalGet('examples/tablesort_example', array('query' => array('sort' => 'asc', 'order' => 'Letters')));
-    $this->assertRaw('<tbody>
-                      <tr class="odd">
-                      <td>2</td>
-                      <td>a</td>
-                      <td>0kuykuh</td>
-                  </tr>', 'Ordered by Letters ascending');
+    $this->assertFieldByXPath('//tbody/tr/td[2]', 'a', 'Ordered by Letters ascending.');
 
     // Sort by Mixture.
     $this->drupalGet('examples/tablesort_example', array('query' => array('sort' => 'desc', 'order' => 'Mixture')));
-    $this->assertRaw('<tbody>
-                      <tr class="odd">
-                      <td>7</td>
-                      <td>e</td>
-                      <td>t982hkv</td>
-                  </tr>', 'Ordered by Mixture decending');
+    $this->assertFieldByXPath('//tbody/tr/td[3]', 't982hkv', 'Ordered by Mixture decending.');
 
     $this->drupalGet('examples/tablesort_example', array('query' => array('sort' => 'asc', 'order' => 'Mixture')));
-    $this->assertRaw('<tbody>
-                      <tr class="odd">
-                      <td>2</td>
-                      <td>a</td>
-                      <td>0kuykuh</td>
-                  </tr>', 'Ordered by Mixture ascending');
+    $this->assertFieldByXPath('//tbody/tr/td[3]', '0kuykuh', 'Ordered by Mixture ascending.');
   }
 
   /**
