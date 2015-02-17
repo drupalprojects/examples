@@ -298,7 +298,6 @@ class Contact extends ContentEntityBase implements ContactInterface {
         'settings' => array(
           'match_operator' => 'CONTAINS',
           'size' => 60,
-          'autocomplete_type' => 'tags',
           'placeholder' => '',
         ),
         'weight' => -3,
