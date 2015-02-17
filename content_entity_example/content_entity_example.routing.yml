@@ -1,7 +1,7 @@
 # This file brings everything together. Very nifty!
 
 # Route name can be used in sevaral place (links, redirects, local actions etc.)
-content_entity_example.contact_view:
+entity.content_entity_example_contact.canonical:
   path: '/content_entity_example_contact/{content_entity_example_contact}'
   defaults:
   # Calls the view controller, defined in the annotation of the contact entity
@@ -11,7 +11,7 @@ content_entity_example.contact_view:
   # Calls the access controller of the entity, $operation 'view'
     _entity_access: 'content_entity_example_contact.view'
 
-content_entity_example.contact_list:
+entity.content_entity_example_contact.collection:
   path: '/content_entity_example_contact/list'
   defaults:
   # Calls the list controller, defined in the annotation of the contact entity.
@@ -30,7 +30,7 @@ content_entity_example.contact_add:
   requirements:
     _entity_create_access: 'content_entity_example_contact'
 
-content_entity_example.contact_edit:
+entity.content_entity_example_contact.edit_form:
   path: '/content_entity_example_contact/{content_entity_example_contact}/edit'
   defaults:
   # Calls the form.edit controller, defined in the contact entity.
@@ -39,7 +39,7 @@ content_entity_example.contact_edit:
   requirements:
     _entity_access: 'content_entity_example_contact.edit'
 
-content_entity_example.contact_delete:
+entity.content_entity_example_contact.delete_form:
   path: '/contact/{content_entity_example_contact}/delete'
   defaults:
     # Calls the form.delete controller, defined in the contact entity.

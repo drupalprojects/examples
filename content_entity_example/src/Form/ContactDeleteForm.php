@@ -31,7 +31,7 @@ class ContactDeleteForm extends ContentEntityConfirmFormBase {
    * If the delete command is canceled, return to the contact list.
    */
   public function getCancelURL() {
-    return new Url('content_entity_example.contact_list');
+    return new Url('entity.content_entity_example_contact.collection');
   }
 
   /**
@@ -55,7 +55,7 @@ class ContactDeleteForm extends ContentEntityConfirmFormBase {
         '@type' => $this->entity->bundle(),
         '%title' => $this->entity->label(),
       ));
-    $form_state->setRedirect('content_entity_example.contact_list');
+    $form_state->setRedirect('entity.content_entity_example_contact.collection');
   }
 
 }

@@ -2,21 +2,21 @@
 
 contact.settings_tab:
   route_name: content_entity_example.contact_settings
-  title: 'Settings'
+  title: Settings
   base_route: content_entity_example.contact_settings
 
-content_entity_example.contact_view:
-  route_name: content_entity_example.contact_view
-  base_route: content_entity_example.contact_view
-  title: 'View'
+contact.view:
+  route_name: entity.content_entity_example_contact.canonical
+  base_route: entity.content_entity_example_contact.canonical
+  title: View
 
 contact.page_edit:
-  route_name: content_entity_example.contact_edit
-  base_route: content_entity_example.contact_view
+  route_name: entity.content_entity_example_contact.edit_form
+  base_route: entity.content_entity_example_contact.canonical
   title: Edit
 
 contact.delete_confirm:
-  route_name:  content_entity_example.contact_delete
-  base_route:  content_entity_example.contact_view
+  route_name:  entity.content_entity_example_contact.delete_form
+  base_route:  entity.content_entity_example_contact.canonical
   title: Delete
   weight: 10

@@ -63,7 +63,7 @@ use Drupal\user\UserInterface;
  *  - links: Provide links to do standard tasks. The 'edit-form' and
  *    'delete-form' links are added to the list built by the
  *    entityListController. They will show up as action buttons in an additional
- *    column. @todo: understand and explain the admin-link thing
+ *    column.
  *
  * There are many more properties to be used in an entity type definition. For
  * a complete overview, please refer to the '\Drupal\Core\Entity\EntityType'
@@ -94,13 +94,23 @@ use Drupal\user\UserInterface;
  *     "uuid" = "uuid"
  *   },
  *   links = {
- *     "edit-form" = "content_entity_example.contact_edit",
- *     "delete-form" = "content_entity_example.contact_delete"
+ *     "canonical" = "content_entity_example_contact/{content_entity_example_contact}",
+ *     "edit-form" = "/content_entity_example_contact/{content_entity_example_contact}/edit",
+ *     "delete-form" = "/contact/{content_entity_example_contact}/delete",
+ *     "collection" = "/content_entity_example_contact/list"
  *   },
  *   field_ui_base_route = "content_entity_example.contact_settings",
  * )
  *
- * The 'Contact' class defines methods and fields for the contact entity.
+ * The 'links' above are defined by their path. For core to find the corresponding
+ * route, the route name must follow the correct pattern:
+ *
+ * entity.<entity-name>.<link-name> (replace dashes with underscores)
+ * Example: 'entity.content_entity_example_contact.canonical'
+ *
+ * See routing file above for the corresponding implementation
+ *
+ * * The 'Contact' class defines methods and fields for the contact entity.
  *
  * Being derived from the ContentEntityBase class, we can override the methods
  * we want. In our case we want to provide access to the standard fields about
