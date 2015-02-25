@@ -2,7 +2,7 @@
 
 /**
  * @file
- * Contains \Drupal\content_entity_example\Entity\Form\ContactDeleteForm.
+ * Contains \Drupal\content_entity_example\Form\ContactDeleteForm.
  */
 
 namespace Drupal\content_entity_example\Form;
