@@ -14,7 +14,6 @@ use Drupal\Core\Block\BlockBase;
  *
  * @Block(
  *   id = "example_empty",
- *   subject = @Translation("Example: empty block"),
  *   admin_label = @Translation("Example: empty block")
  * )
  */

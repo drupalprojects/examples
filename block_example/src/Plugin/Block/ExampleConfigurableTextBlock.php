@@ -21,7 +21,6 @@ use Drupal\Core\Form\FormStateInterface;
  *
  * @Block(
  *   id = "example_configurable_text",
- *   subject = @Translation("Title of first block (example_configurable_text)"),
  *   admin_label = @Translation("Title of first block (example_configurable_text)")
  * )
  */

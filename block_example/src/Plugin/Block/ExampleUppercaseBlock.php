@@ -16,7 +16,6 @@ use Drupal\Core\Annotation\Translation;
  *
  * @Block(
  *   id = "example_uppercase",
- *   subject = @Translation("uppercase this please"),
  *   admin_label = @Translation("Example: uppercase this please")
  * )
  */
