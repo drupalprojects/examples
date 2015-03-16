@@ -34,14 +34,5 @@
  */
 
 /**
- * Implements hook_admin_paths().
- *
- * Ensures that our path loads in the admin theme.
- */
-function tour_example_admin_paths() {
-  return array('examples/tour_example' => TRUE);
-}
-
-/**
  * @} End of "defgroup tour_example".
  */
