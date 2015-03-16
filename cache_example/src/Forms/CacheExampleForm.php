@@ -65,7 +65,7 @@ class CacheExampleForm extends FormBase {
     $intro_message = '<p>' . t('This example will search the entire drupal folder and display a count of the files in it.') . ' ';
     $intro_message .= t('This can take a while, since there are a lot of files to be searched.') . ' ';
     $intro_message .= t('We will search filesystem just once and save output to the cache. We will use cached data for later requests.') . '</p>';
-    $intro_message .= '<p>' . t('<a href="@url">Reload this page</a> to see cache in action.', array('@url' => request_uri())) . ' ';
+    $intro_message .= '<p>' . t('<a href="@url">Reload this page</a> to see cache in action.', array('@url' => \Drupal::request()->getRequestUri())) . ' ';
     $intro_message .= t('You can use the button below to remove cached data.') . '</p>';
 
     $form['file_search'] = array(
