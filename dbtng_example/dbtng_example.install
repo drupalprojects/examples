@@ -14,9 +14,6 @@
  * @ingroup dbtng_example
  */
 function dbtng_example_install() {
-  // Outside of the .install file we would use drupal_write_record() to
-  // populate the database, but it cannot be used here, so we'll use
-  // db_insert().
   // Add a default entry.
   $fields = array(
     'name' => 'John',

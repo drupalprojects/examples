@@ -59,7 +59,6 @@ use Drupal\Core\Routing\RouteMatchInterface;
  * @see db_insert()
  * @see db_update()
  * @see db_delete()
- * @see drupal_write_record()
  */
 
 /**
