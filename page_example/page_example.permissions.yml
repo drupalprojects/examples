@@ -1,7 +1,6 @@
-# Since the access to our new custom pages will be granted based on
-# special permissions, we need to define what those permissions are here.
-# This ensures that they are available to enable on the permissions
-# administration pages.
+# Since the access to our new custom pages will be granted based on special
+# permissions, we need to define what those permissions are here. This ensures
+# that they are available to enable on the permissions administration pages.
 
 'access simple page':
   title: Access simple page
