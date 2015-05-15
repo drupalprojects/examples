@@ -2,7 +2,7 @@
 
 /**
  * @file
- * Contains \Drupal\email_example\Tests\EmailExampleTest.
+ * Contains Drupal\email_example\Tests\EmailExampleTest.
  *
  * This file contains the test cases to check if module is performing as
  * expected.
@@ -16,6 +16,8 @@ use Drupal\simpletest\WebTestBase;
  * Tests for the email_example module.
  *
  * @ingroup email_example
+ * @group email_example
+ * @group examples
  */
 class EmailExampleTest extends WebTestBase {
 
