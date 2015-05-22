@@ -4,8 +4,14 @@ hidden: false
 description: 'Some demonstrations of SimpleTest-based testing in Drupal 8.'
 package: Example modules
 core: 8.x
+# We have to be as explicit as possible about the dependencies for this module.
+# If you look at the config info in the config/install/ directory, you'll see
+# that they depend on some of these modules.
 dependencies:
   - simpletest
   - node
   - field
+  - entity_reference
+  - path
+  - text
   - examples

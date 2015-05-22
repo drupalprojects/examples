@@ -29,7 +29,7 @@ class DBTNGExampleController extends ControllerBase {
 
     foreach ($entries = DBTNGExampleStorage::load() as $entry) {
       // Sanitize each entry.
-      $rows[] = array_map('Drupal\Component\Utility\String::checkPlain', (array) $entry);
+      $rows[] = array_map('Drupal\Component\Utility\SafeMarkup::checkPlain', (array) $entry);
     }
     $content['table'] = array(
       '#type' => 'table',
@@ -63,7 +63,7 @@ class DBTNGExampleController extends ControllerBase {
     $rows = array();
     foreach ($entries = DBTNGExampleStorage::advancedLoad() as $entry) {
       // Sanitize each entry.
-      $rows[] = array_map('Drupal\Component\Utility\String::checkPlain', $entry);
+      $rows[] = array_map('Drupal\Component\Utility\SafeMarkup::checkPlain', $entry);
     }
     $content['table'] = array(
       '#type' => 'table',

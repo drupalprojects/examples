@@ -91,6 +91,8 @@ class DBTNGExampleTest extends WebTestBase {
    * Test the UI.
    */
   public function testUI() {
+    // @todo: remove the need to have a logged-in user.
+    $this->drupalLogin($this->createUser());
     // Test the basic list.
     $this->drupalGet('examples/dbtng_example');
     $this->assertPattern("/John[td\/<>\w\s]+Doe/", "Text 'John Doe' found in table");

@@ -31,6 +31,7 @@ use Drupal\simpletest\WebTestBase;
  * @ingroup simpletest_example
  *
  * SimpleTest uses group annotations to help you organize your tests.
+ *
  * @group simpletest_example
  * @group examples
  */

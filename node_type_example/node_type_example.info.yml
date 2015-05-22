@@ -6,3 +6,6 @@ core: 8.x
 dependencies:
   - node
   - examples
+  - entity_reference
+  - path
+  - text
