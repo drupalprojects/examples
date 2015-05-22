@@ -7,13 +7,14 @@
 
 namespace Drupal\page_example\Controller;
 
+use Drupal\Core\Controller\ControllerBase;
 use Drupal\Core\Url;
 use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
 
 /**
  * Controller routines for page example routes.
  */
-class PageExampleController {
+class PageExampleController extends ControllerBase {
 
   /**
    * Constructs a page with descriptive content.
@@ -23,14 +24,14 @@ class PageExampleController {
   public function description() {
     // Make our links. First the simple page.
     $simple_url = Url::fromRoute('page_example_simple');
-    $page_example_simple_link = \Drupal::l(t('simple page'), $simple_url);
+    $page_example_simple_link = $this->l($this->t('simple page'), $simple_url);
     // Now the arguments page.
     $arguments_url = Url::fromRoute('page_example_arguments', array('first' => '23', 'second' => '56'));
-    $page_example_arguments_link = \Drupal::l(t('arguments page'), $arguments_url);
+    $page_example_arguments_link = $this->l($this->t('arguments page'), $arguments_url);
 
     // Assemble the markup.
     $build = array(
-      '#markup' => t('<p>The Page example module provides two pages, "simple" and "arguments".</p><p>The !simple_link just returns a renderable array for display.</p><p>The !arguments_link takes two arguments and displays them, as in @arguments_url</p>',
+      '#markup' => $this->t('<p>The Page example module provides two pages, "simple" and "arguments".</p><p>The !simple_link just returns a renderable array for display.</p><p>The !arguments_link takes two arguments and displays them, as in @arguments_url</p>',
         array(
           '!simple_link' => $page_example_simple_link,
           '!arguments_link' => $page_example_arguments_link,
@@ -54,7 +55,7 @@ class PageExampleController {
    */
   public function simple() {
     return array(
-      '#markup' => '<p>' . t('Simple page: The quick brown fox jumps over the lazy dog.') . '</p>',
+      '#markup' => '<p>' . $this->t('Simple page: The quick brown fox jumps over the lazy dog.') . '</p>',
     );
   }
 
@@ -92,16 +93,16 @@ class PageExampleController {
       throw new AccessDeniedHttpException();
     }
 
-    $list[] = t("First number was @number.", array('@number' => $first));
-    $list[] = t("Second number was @number.", array('@number' => $second));
-    $list[] = t('The total was @number.', array('@number' => $first + $second));
+    $list[] = $this->t("First number was @number.", array('@number' => $first));
+    $list[] = $this->t("Second number was @number.", array('@number' => $second));
+    $list[] = $this->t('The total was @number.', array('@number' => $first + $second));
 
     $render_array['page_example_arguments'] = array(
       // The theme function to apply to the #items
       '#theme' => 'item_list',
       // The list itself.
       '#items' => $list,
-      '#title' => t('Argument Information'),
+      '#title' => $this->t('Argument Information'),
     );
     return $render_array;
   }
