@@ -109,15 +109,15 @@ class FieldExampleWebTestBase extends WebTestBase {
     // Fill out the $cardinality form as if we're not using an unlimited number
     // of values.
     $edit = array(
-      'field_storage[cardinality]' => 'number',
-      'field_storage[cardinality_number]' => (string) $cardinality,
+      'cardinality' => 'number',
+      'cardinality_number' => (string) $cardinality,
     );
     // If we have -1 for $cardinality, we should change the form's drop-down
     // from 'Number' to 'Unlimited.'
     if (-1 == $cardinality) {
       $edit = array(
-        'field_storage[cardinality]' => '-1',
-        'field_storage[cardinality_number]' => '1',
+        'cardinality' => '-1',
+        'cardinality_number' => '1',
       );
     }
 
