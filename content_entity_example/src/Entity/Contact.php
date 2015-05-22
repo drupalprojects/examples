@@ -94,7 +94,7 @@ use Drupal\user\UserInterface;
  *     "uuid" = "uuid"
  *   },
  *   links = {
- *     "canonical" = "content_entity_example_contact/{content_entity_example_contact}",
+ *     "canonical" = "/content_entity_example_contact/{content_entity_example_contact}",
  *     "edit-form" = "/content_entity_example_contact/{content_entity_example_contact}/edit",
  *     "delete-form" = "/contact/{content_entity_example_contact}/delete",
  *     "collection" = "/content_entity_example_contact/list"
