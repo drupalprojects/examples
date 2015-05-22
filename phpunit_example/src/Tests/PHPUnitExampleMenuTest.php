@@ -16,6 +16,9 @@ use Drupal\simpletest\WebTestBase;
  * test of whether this module can be enabled properly.
  *
  * @ingroup phpunit_example
+ *
+ * @group phpunit_example
+ * @group examples
  */
 class PHPUnitExampleMenuTest extends WebTestBase {
 
