@@ -35,8 +35,17 @@ class ExamplesTest extends WebTestBase {
 
     // Check for the 'Examples' tab.
     $this->drupalGet('/');
+
+    // Assert that the tab registered by example is present.
+    $this->assertLink('Examples');
+    $this->assertRaw('id="toolbar-item-examples"');
+
+    // Assert that the tray registered by example is present.
+    $this->assertRaw('id="toolbar-item-examples-tray"');
     $this->assertRaw('<nav class="toolbar-lining clearfix" role="navigation" aria-label="Developer Examples">');
-    $this->assertText('Examples');
+
+    // Assert that PHPUnit link does not appears in the tray.
+    $this->assertNoLink('PHPUnit example');
     $this->assertNoRaw('<li class="phpunit-example">');
 
     // Install phpunit_example and see if it appears in the toolbar. We use
@@ -47,6 +56,7 @@ class ExamplesTest extends WebTestBase {
 
     // Verify that PHPUnit appears in the tray.
     $this->drupalGet('/');
+    $this->assertLink('PHPUnit example');
     $this->assertRaw('<li class="phpunit-example">');
   }
 
