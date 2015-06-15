@@ -1,6 +1,7 @@
 page_example.description:
   title: Page Example
   route_name: page_example_description
+  expanded: TRUE
 
 page_example.simple:
   title: Simple - no arguments

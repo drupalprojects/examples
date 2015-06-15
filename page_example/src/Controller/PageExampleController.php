@@ -46,10 +46,10 @@ class PageExampleController extends ControllerBase {
   /**
    * Constructs a simple page.
    *
-   * The router _content callback, maps the path 'examples/page_example/simple'
-   * to this method.
+   * The router _controller callback, maps the path
+   * 'examples/page_example/simple' to this method.
    *
-   * _content callbacks return a renderable array for the content area of the
+   * _controller callbacks return a renderable array for the content area of the
    * page. The theme system will later render and surround the content with the
    * appropriate blocks, navigation, and styling.
    */
@@ -60,7 +60,7 @@ class PageExampleController extends ControllerBase {
   }
 
   /**
-   * A more complex _content callback that takes arguments.
+   * A more complex _controller callback that takes arguments.
    *
    * This callback is mapped to the path
    * 'examples/page_example/arguments/{first}/{second}'.

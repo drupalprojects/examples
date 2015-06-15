@@ -18,6 +18,7 @@ page_example_description:
   path: 'examples/page_example'
   defaults:
     _controller: '\Drupal\page_example\Controller\PageExampleController::description'
+    _title: 'Page Example'
   requirements:
     _access: 'TRUE'
 
@@ -29,6 +30,7 @@ page_example_simple:
   path: 'examples/page_example/simple'
   defaults:
     _controller: '\Drupal\page_example\Controller\PageExampleController::simple'
+    _title: 'Simple - no arguments'
   requirements:
     _permission: 'access simple page'
 
