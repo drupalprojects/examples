@@ -60,7 +60,7 @@ class PHPUnitExampleMenuTest extends WebTestBase {
    */
   protected function providerMenuLinks() {
     return array(
-      '/' => 'examples/phpunit_example',
+      '' => '/examples/phpunit_example',
     );
   }
 
@@ -79,7 +79,7 @@ class PHPUnitExampleMenuTest extends WebTestBase {
    * Tests phpunit_example menus.
    */
   public function testPHPUnitExampleMenu() {
-    $this->drupalGet('examples/phpunit_example');
+    $this->drupalGet('/examples/phpunit_example');
     $this->assertResponse(200, 'Description page exists.');
   }
 

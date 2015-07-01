@@ -38,24 +38,24 @@ class TableSortExampleTest extends WebTestBase {
    */
   public function testTableSortExampleBasic() {
     // No need to login for this test.
-    $this->drupalGet('examples/tablesort_example', array('query' => array('sort' => 'desc', 'order' => 'Numbers')));
+    $this->drupalGet('/examples/tablesort_example', array('query' => array('sort' => 'desc', 'order' => 'Numbers')));
     $this->assertFieldByXPath('//tbody/tr/td[1]', 7, 'Ordered by Number decending.');
 
-    $this->drupalGet('examples/tablesort_example', array('query' => array('sort' => 'asc', 'order' => 'Numbers')));
+    $this->drupalGet('/examples/tablesort_example', array('query' => array('sort' => 'asc', 'order' => 'Numbers')));
     $this->assertFieldByXPath('//tbody/tr/td[1]', 1, 'Ordered by Number ascending.');
 
     // Sort by Letters.
-    $this->drupalGet('examples/tablesort_example', array('query' => array('sort' => 'desc', 'order' => 'Letters')));
+    $this->drupalGet('/examples/tablesort_example', array('query' => array('sort' => 'desc', 'order' => 'Letters')));
     $this->assertFieldByXPath('//tbody/tr/td[2]', 'w', 'Ordered by Letters decending.');
 
-    $this->drupalGet('examples/tablesort_example', array('query' => array('sort' => 'asc', 'order' => 'Letters')));
+    $this->drupalGet('/examples/tablesort_example', array('query' => array('sort' => 'asc', 'order' => 'Letters')));
     $this->assertFieldByXPath('//tbody/tr/td[2]', 'a', 'Ordered by Letters ascending.');
 
     // Sort by Mixture.
-    $this->drupalGet('examples/tablesort_example', array('query' => array('sort' => 'desc', 'order' => 'Mixture')));
+    $this->drupalGet('/examples/tablesort_example', array('query' => array('sort' => 'desc', 'order' => 'Mixture')));
     $this->assertFieldByXPath('//tbody/tr/td[3]', 't982hkv', 'Ordered by Mixture decending.');
 
-    $this->drupalGet('examples/tablesort_example', array('query' => array('sort' => 'asc', 'order' => 'Mixture')));
+    $this->drupalGet('/examples/tablesort_example', array('query' => array('sort' => 'asc', 'order' => 'Mixture')));
     $this->assertFieldByXPath('//tbody/tr/td[3]', '0kuykuh', 'Ordered by Mixture ascending.');
   }
 
@@ -69,7 +69,7 @@ class TableSortExampleTest extends WebTestBase {
    */
   protected function providerMenuLinks() {
     return array(
-      '/' => 'examples/tablesort_example',
+      '' => '/examples/tablesort_example',
     );
   }
 
@@ -88,7 +88,7 @@ class TableSortExampleTest extends WebTestBase {
    * Tests tablesort_example menus.
    */
   public function testTableSortExampleMenu() {
-    $this->drupalGet('examples/tablesort_example');
+    $this->drupalGet('/examples/tablesort_example');
     $this->assertResponse(200, 'Description page exists.');
   }
 

@@ -86,10 +86,10 @@ class PageExampleTest extends WebTestBase {
   protected function providerMenuLinks() {
     return array(
       '' => array(
-        '/' => 'examples/page_example',
+        '' => '/examples/page_example',
       ),
       'access simple page' => array(
-        'examples/page_example' => 'examples/page_example/simple',
+        '/examples/page_example' => '/examples/page_example/simple',
       ),
     );
   }
@@ -140,7 +140,7 @@ class PageExampleTest extends WebTestBase {
     $this->drupalLogin($this->webUser);
 
     // Verify that user can access simple content.
-    $this->drupalGet('examples/page_example/simple');
+    $this->drupalGet('/examples/page_example/simple');
     $this->assertResponse(200, 'Simple content successfully accessed.');
     $this->assertText(t('The quick brown fox jumps over the lazy dog.'), 'Simple content successfully verified.');
 
@@ -154,7 +154,7 @@ class PageExampleTest extends WebTestBase {
     // Verify that user can access arguments content.
     $first = self::randomNumber(3);
     $second = self::randomNumber(3);
-    $this->drupalGet('examples/page_example/arguments/' . $first . '/' . $second);
+    $this->drupalGet('/examples/page_example/arguments/' . $first . '/' . $second);
     $this->assertResponse(200, 'Arguments content successfully accessed.');
     // Verify argument usage.
     $this->assertRaw(t('First number was @number.', array('@number' => $first)), 'First argument successfully verified.');
@@ -162,15 +162,15 @@ class PageExampleTest extends WebTestBase {
     $this->assertRaw(t('The total was @number.', array('@number' => $first + $second)), 'arguments content successfully verified.');
 
     // Verify incomplete argument call to arguments content.
-    $this->drupalGet('examples/page_example/arguments/' . $first . '/');
+    $this->drupalGet('/examples/page_example/arguments/' . $first . '/');
     $this->assertResponse(404, 'User got 404 on incomplete arguments request.');
 
     // Verify 403 for invalid second argument.
-    $this->drupalGet('examples/page_example/arguments/' . $first . '/non-numeric-argument');
+    $this->drupalGet('/examples/page_example/arguments/' . $first . '/non-numeric-argument');
     $this->assertResponse(403, 'User got 403 for string argument in second position.');
 
     // Verify 403 for invalid first argument.
-    $this->drupalGet('examples/page_example/arguments/non-numeric-argument/' . $second);
+    $this->drupalGet('/examples/page_example/arguments/non-numeric-argument/' . $second);
     $this->assertResponse(403, 'User got 403 for string argument in first position.');
 
     // Check if user can't access simple page.

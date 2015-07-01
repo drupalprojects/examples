@@ -34,7 +34,7 @@ class ExamplesTest extends WebTestBase {
     $this->drupalLogin($user);
 
     // Check for the 'Examples' tab.
-    $this->drupalGet('/');
+    $this->drupalGet('');
 
     // Assert that the tab registered by example is present.
     $this->assertLink('Examples');
@@ -55,7 +55,7 @@ class ExamplesTest extends WebTestBase {
     $this->resetAll();
 
     // Verify that PHPUnit appears in the tray.
-    $this->drupalGet('/');
+    $this->drupalGet('');
     $this->assertLink('PHPUnit example');
     $this->assertRaw('<li class="phpunit-example">');
   }

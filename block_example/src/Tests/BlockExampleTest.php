@@ -46,7 +46,7 @@ class BlockExampleTest extends WebTestBase {
     $theme_name = \Drupal::config('system.theme')->get('default');
 
     // Verify the blocks are listed to be added.
-    $this->drupalGet('admin/structure/block/list/' . $theme_name);
+    $this->drupalGet('/admin/structure/block/list/' . $theme_name);
     $this->assertRaw(t('Title of first block (example_configurable_text)'), 'Block configurable-string found.');
     $this->assertRaw(t('Example: empty block'), 'Block empty-block found.');
     $this->assertRaw(t('Example: uppercase this please'), 'Block uppercase found.');
@@ -75,7 +75,7 @@ class BlockExampleTest extends WebTestBase {
 
     // Verify that blocks are there. Empty block will not be shown, because it
     // is empty.
-    $this->drupalGet('/');
+    $this->drupalGet('');
     $this->assertRaw($settings_configurable['label'], 'Block configurable test not found.');
     $this->assertNoRaw($settings_uppercase['label'], 'Block uppercase with normal label not found.');
     $this->assertRaw(Unicode::strtoupper($settings_uppercase['label']), 'Block uppercase with uppercased label found.');
@@ -85,10 +85,10 @@ class BlockExampleTest extends WebTestBase {
     $edit = array(
       'settings[block_example_string_text]' => $this->randomMachineName(),
     );
-    $this->drupalPostForm('admin/structure/block/manage/' . $settings_configurable['id'], $edit, t('Save block'));
+    $this->drupalPostForm('/admin/structure/block/manage/' . $settings_configurable['id'], $edit, t('Save block'));
 
     // Verify that new content is shown.
-    $this->drupalGet('/');
+    $this->drupalGet('');
     $this->assertRaw($edit['settings[block_example_string_text]'], 'Content of configurable text block successfully verified.');
   }
 

@@ -47,7 +47,7 @@ class NodeTypeExampleTest extends WebTestBase {
    */
   protected function providerMenuLinks() {
     return array(
-      '/' => 'examples/node_type_example',
+      '' => '/examples/node_type_example',
     );
   }
 
@@ -56,7 +56,7 @@ class NodeTypeExampleTest extends WebTestBase {
    */
   public function testNodeTypeExample() {
     // Test that our page loads.
-    $this->drupalGet('examples/node_type_example');
+    $this->drupalGet('/examples/node_type_example');
     $this->assertResponse(200, 'Description page exists.');
 
     // Test that our menu links were created.
@@ -84,7 +84,7 @@ class NodeTypeExampleTest extends WebTestBase {
     $this->drupalLogin($admin_user);
 
     // Get a list of content types.
-    $this->drupalGet('admin/structure/types');
+    $this->drupalGet('/admin/structure/types');
     // Verify that these content types show up in the user interface.
     $this->assertRaw('Example: Basic Content Type', 'Basic content type found.');
     $this->assertRaw('Example: Locked Content Type', 'Locked content type found.');
@@ -110,7 +110,7 @@ class NodeTypeExampleTest extends WebTestBase {
     $edit = array();
     $edit['title[0][value]'] = $this->randomMachineName(8);
     $edit['body[0][value]'] = $this->randomMachineName(16);
-    $this->drupalPostForm('node/add/basic_content_type', $edit, t('Save'));
+    $this->drupalPostForm('/node/add/basic_content_type', $edit, t('Save'));
 
     // Check that the Basic page has been created.
     $this->assertRaw(t('!post %title has been created.', array('!post' => 'Example: Basic Content Type', '%title' => $edit['title[0][value]'])), 'Basic page created.');
