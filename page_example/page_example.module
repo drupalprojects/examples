@@ -122,7 +122,7 @@ function page_example_menu() {
   //
   // Notice that 'page arguments' is an array of numbers. These will be
   // replaced with the corresponding parts of the menu path. In this case a 0
-  // would be replaced by 'example', a 1 by 'page_example', and a 2 by
+  // would be replaced by 'examples', a 1 by 'page_example', and a 2 by
   // 'arguments.' 3 and 4 will be replaced by whatever the user provides.
   // These will be passed as arguments to the page_example_arguments() function.
   $items['examples/page_example/arguments/%/%'] = array(
