@@ -33,8 +33,8 @@ class RdfExampleRdfaMarkupTestCase extends DrupalWebTestCase {
   /**
    * Test whether RDF mapping is define in markup.
    *
-   * Create a recipe node of type blog and test whether the RDF mapping defined 
-   * for this bundle is reflected in the markup.
+   * Create a recipe node and test whether the RDF mapping defined for this
+   * bundle is reflected in the markup.
    */
   public function testAttributesInMarkup() {
     $node = $this->drupalCreateNode(array('type' => 'recipe'));
@@ -44,7 +44,7 @@ class RdfExampleRdfaMarkupTestCase extends DrupalWebTestCase {
 
     // The title is mapped to dc:title and v:name and is exposed in a meta tag
     // in the header.
-    $recipe_title = $this->xpath("//meta[contains(@property, 'dc:title') and contains(@property, 'v:name') and @content='$node->title']");
+    $recipe_title = $this->xpath("//span[contains(@property, 'dc:title') and contains(@property, 'v:name') and @content='$node->title']");
     $this->assertTrue(!empty($recipe_title), 'Title is exposed with dc:title and v:name in meta element.');
 
     // Test that the type is applied and that the default mapping for date is
