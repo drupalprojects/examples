@@ -46,7 +46,7 @@ class BlockExampleTest extends WebTestBase {
     $theme_name = \Drupal::config('system.theme')->get('default');
 
     // Verify the blocks are listed to be added.
-    $this->drupalGet('/admin/structure/block/list/' . $theme_name);
+    $this->drupalGet('/admin/structure/block/library/' . $theme_name, ['query' => ['region' => 'content']]);
     $this->assertRaw(t('Title of first block (example_configurable_text)'), 'Block configurable-string found.');
     $this->assertRaw(t('Example: empty block'), 'Block empty-block found.');
     $this->assertRaw(t('Example: uppercase this please'), 'Block uppercase found.');
