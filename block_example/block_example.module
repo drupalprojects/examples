@@ -6,6 +6,7 @@
  */
 
 use Drupal\Component\Utility\Unicode;
+use Drupal\Core\Block\BlockPluginInterface;
 
 /**
  * @defgroup block_example Example: Block
@@ -38,7 +39,7 @@ use Drupal\Component\Utility\Unicode;
  * hook by creating a new block whose title has the string 'uppercase' in it
  * (set as title through the UI).
  */
-function block_example_block_view_alter(array &$build, \Drupal\Core\Block\BlockPluginInterface $block) {
+function block_example_block_view_alter(array &$build, BlockPluginInterface $block) {
   // We'll search for the string 'uppercase'.
   $definition = $block->getPluginDefinition();
   if ((!empty($build['#configuration']['label']) && stristr($build['#configuration']['label'], 'uppercase')) || (!empty($definition['subject']) && stristr($definition['subject'], 'uppercase'))) {

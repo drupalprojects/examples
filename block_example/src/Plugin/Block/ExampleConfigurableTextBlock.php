@@ -7,9 +7,7 @@
 
 namespace Drupal\block_example\Plugin\Block;
 
-use Drupal\block\Annotation\Block;
 use Drupal\Core\Block\BlockBase;
-use Drupal\Core\Annotation\Translation;
 use Drupal\Core\Form\FormStateInterface;
 
 /**
@@ -31,7 +29,7 @@ class ExampleConfigurableTextBlock extends BlockBase {
    */
   public function defaultConfiguration() {
     return array(
-      'block_example_string' => t('A default value. This block was created at %time', array('%time' => date('c'))),
+      'block_example_string' => $this->t('A default value. This block was created at %time', array('%time' => date('c'))),
     );
   }
 
@@ -40,10 +38,9 @@ class ExampleConfigurableTextBlock extends BlockBase {
    */
   public function blockForm($form, FormStateInterface $form_state) {
     $form['block_example_string_text'] = array(
-      '#type' => 'textfield',
-      '#title' => t('Block contents'),
-      '#size' => 60,
-      '#description' => t('This text will appear in the example block.'),
+      '#type' => 'textarea',
+      '#title' => $this->t('Block contents'),
+      '#description' => $this->t('This text will appear in the example block.'),
       '#default_value' => $this->configuration['block_example_string'],
     );
     return $form;

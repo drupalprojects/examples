@@ -26,23 +26,15 @@ class BlockExampleTest extends WebTestBase {
    */
   public static $modules = array('block', 'block_example');
 
-  protected $webUser;
-
-  /**
-   * Enable modules and create user with specific permissions.
-   */
-  public function setUp() {
-    parent::setUp();
-    // Create user.
-    $this->webUser = $this->drupalCreateUser(array('administer blocks'));
-  }
-
   /**
    * Tests block_example functionality.
    */
   public function testBlockExampleBasic() {
+    // Create user.
+    $web_user = $this->drupalCreateUser(array('administer blocks'));
     // Login the admin user.
-    $this->drupalLogin($this->webUser);
+    $this->drupalLogin($web_user);
+
     $theme_name = \Drupal::config('system.theme')->get('default');
 
     // Verify the blocks are listed to be added.
