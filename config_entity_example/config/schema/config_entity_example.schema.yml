@@ -23,3 +23,6 @@ config_entity_example.robot.*:
     floopy:
       type: boolean
       label: 'Floopy'
+    langcode:
+      type: string
+      label: 'Default language'
