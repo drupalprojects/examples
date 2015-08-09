@@ -49,6 +49,10 @@ Note also that in the future, many modules from the Examples project will be
 moved into Drupal 8 core. This means some examples will come with Drupal
 itself. As of this writing, none have been migrated to Drupal 8 yet.
 
+This collection of modules ship with a composer.json file outlining the name,
+description, type and license of the package. Although not used by Drupal itself
+it allows the module to be installed via composer, therfore all contrib modules
+should ship with one.
 
 How To Install The Modules
 --------------------------

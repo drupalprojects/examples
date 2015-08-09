@@ -1,0 +1,6 @@
+{
+    "name": "drupal/examples",
+    "description": "The Examples for Developers project aims to provide high-quality, well-documented API examples for a broad range of Drupal core functionality.",
+    "type": "drupal-module",
+    "license": "GPL-2.0+"
+}
