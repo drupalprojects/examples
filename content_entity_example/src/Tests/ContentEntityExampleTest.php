@@ -8,7 +8,7 @@
 namespace Drupal\content_entity_example\Tests;
 
 use Drupal\content_entity_example\Entity\Contact;
-use Drupal\simpletest\WebTestBase;
+use Drupal\examples\Tests\ExamplesTestBase;
 
 /**
  * Tests the basic functions of the Content Entity Example module.
@@ -20,7 +20,7 @@ use Drupal\simpletest\WebTestBase;
  * @group content_entity_example
  * @group examples
  */
-class ContentEntityExampleTest extends WebTestBase {
+class ContentEntityExampleTest extends ExamplesTestBase {
 
   public static $modules = array('content_entity_example', 'block', 'field_ui');
 
@@ -37,8 +37,6 @@ class ContentEntityExampleTest extends WebTestBase {
       'administer content_entity_example_contact display',
       'administer content_entity_example_contact fields',
       'administer content_entity_example_contact form display'));
-
-    $this->drupalPlaceBlock('system_menu_block:tools', array());
 
     // Anonymous User should not see the link to the listing.
     $this->assertNoText(t('Content Entity Example: Contacts Listing'));

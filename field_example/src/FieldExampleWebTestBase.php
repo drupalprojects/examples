@@ -8,9 +8,9 @@
 namespace Drupal\field_example;
 
 use Drupal\Core\Session\AccountInterface;
-use Drupal\simpletest\WebTestBase;
+use Drupal\examples\Tests\ExamplesTestBase;
 
-class FieldExampleWebTestBase extends WebTestBase {
+class FieldExampleWebTestBase extends ExamplesTestBase {
 
   /**
    * @var string
@@ -37,7 +37,7 @@ class FieldExampleWebTestBase extends WebTestBase {
    *
    * @var array
    */
-  public static $modules = array('node', 'field_ui', 'field_example');
+  public static $modules = array('block', 'node', 'field_ui', 'field_example');
 
   /**
    * {@inheritdoc}
