@@ -15,7 +15,7 @@ use Drupal\simpletest\WebTestBase;
  * Use this base class if the Examples module being tested requires menus, local
  * tasks, and actions.
  */
-class ExamplesTestBase extends WebTestBase {
+abstract class ExamplesTestBase extends WebTestBase {
 
   /**
    * {@inheritdoc}
