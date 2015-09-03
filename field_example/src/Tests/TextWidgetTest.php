@@ -55,8 +55,8 @@ class TextWidgetTest extends FieldExampleWebTestBase {
     $this->assertText(t('@type @title has been created', array('@type' => $this->contentTypeName, '@title' => $title)));
 
     // Verify the value is shown when viewing this node.
-    $output_strings = $this->xpath("//div[contains(@class,'field-type-field-example-rgb')]/div/div/p/text()");
-    $this->assertEqual((string) $output_strings[0], "The color code in this field is #000001");
+    $field_p = $this->xpath("//div[contains(@class,'field--type-field-example-rgb')]/div/p");
+    $this->assertEqual((string) $field_p[0], "The color code in this field is #000001");
   }
 
   /**
@@ -99,9 +99,9 @@ class TextWidgetTest extends FieldExampleWebTestBase {
     $this->assertText(t('@type @title has been created', array('@type' => $this->contentTypeName, '@title' => $title)));
 
     // Verify the value is shown when viewing this node.
-    $output_strings = $this->xpath("//div[contains(@class,'field-type-field-example-rgb')]/div/div/p/text()");
-    $this->assertEqual((string) $output_strings[0], "The color code in this field is #00ff00");
-    $this->assertEqual((string) $output_strings[1], "The color code in this field is #ffffff");
+    $field_p = $this->xpath("//div[contains(@class,'field--type-field-example-rgb')]/div/div/p");
+    $this->assertEqual((string) $field_p[0], "The color code in this field is #00ff00");
+    $this->assertEqual((string) $field_p[1], "The color code in this field is #ffffff");
   }
 
 }
