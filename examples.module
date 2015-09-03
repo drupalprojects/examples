@@ -37,6 +37,7 @@ function examples_toolbar() {
     'cache_example' => 'cache_example.description',
     'config_entity_example' => 'entity.robot.list',
     'content_entity_example' => 'entity.content_entity_example_contact.collection',
+    'cron_example' => 'cron_example',
     'dbtng_example' => 'dbtng_example',
     'email_example' => 'email_example.description',
     'field_example' => 'field_example.description',
