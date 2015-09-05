@@ -12,6 +12,7 @@ use Drupal\Core\Entity\ContentEntityBase;
 use Drupal\Core\Entity\EntityTypeInterface;
 use Drupal\content_entity_example\ContactInterface;
 use Drupal\user\UserInterface;
+use Drupal\Core\Entity\EntityChangedTrait;
 
 /**
  * Defines the ContentEntityExample entity.
@@ -102,15 +103,15 @@ use Drupal\user\UserInterface;
  *   field_ui_base_route = "content_entity_example.contact_settings",
  * )
  *
- * The 'links' above are defined by their path. For core to find the corresponding
- * route, the route name must follow the correct pattern:
+ * The 'links' above are defined by their path. For core to find the
+ * corresponding route, the route name must follow the correct pattern:
  *
  * entity.<entity-name>.<link-name> (replace dashes with underscores)
  * Example: 'entity.content_entity_example_contact.canonical'
  *
  * See routing file above for the corresponding implementation
  *
- * * The 'Contact' class defines methods and fields for the contact entity.
+ * The Contact class defines methods and fields for the contact entity.
  *
  * Being derived from the ContentEntityBase class, we can override the methods
  * we want. In our case we want to provide access to the standard fields about
@@ -125,8 +126,13 @@ use Drupal\user\UserInterface;
  * they can by changed in code. In the definition we can define if the user with
  * the rights privileges can influence the presentation (view, edit) of each
  * field.
+ *
+ * The class also uses the EntityChangedTrait trait which allows it to record
+ * timestamps of save operations.
  */
 class Contact extends ContentEntityBase implements ContactInterface {
+
+  use EntityChangedTrait;
 
   /**
    * {@inheritdoc}
@@ -212,7 +218,6 @@ class Contact extends ContentEntityBase implements ContactInterface {
     // Name field for the contact.
     // We set display options for the view as well as the form.
     // Users with correct privileges can change the view and edit configuration.
-
     $fields['name'] = BaseFieldDefinition::create('string')
       ->setLabel(t('Name'))
       ->setDescription(t('The name of the Contact entity.'))
@@ -318,4 +323,5 @@ class Contact extends ContentEntityBase implements ContactInterface {
 
     return $fields;
   }
+
 }
