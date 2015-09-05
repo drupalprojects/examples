@@ -36,14 +36,22 @@ class ExamplesTest extends WebTestBase {
     // Check for the 'Examples' tab.
     $this->drupalGet('');
 
-    // Assert that the tab registered by example is present.
+    // Assert that the toolbar tab registered by examples is present.
     $this->assertLink('Examples');
-    $this->assertRaw('id="toolbar-item-examples"');
 
-    // Assert that the tray registered by example is present.
-    $this->assertRaw('id="toolbar-item-examples-tray"');
-    $this->assertRaw('<nav class="toolbar-lining clearfix" role="navigation" aria-label="Developer Examples">');
+    // Assert that the toolbar tab registered by examples is present.
+    $this->assertEqual(
+      \count($this->xpath('//nav/div/a[@data-toolbar-tray="toolbar-item-examples-tray"]')),
+      1,
+      'Found the Examples toolbar tab.'
+    );
 
+    // Assert that the toolbar tray registered by examples is present.
+    $this->assertEqual(
+      \count($this->xpath('//nav/div/div[@data-toolbar-tray="toolbar-item-examples-tray"]')),
+      1,
+      'Found the Examples toolbar tray.'
+    );
     // Assert that PHPUnit link does not appears in the tray.
     $this->assertNoLink('PHPUnit example');
     $this->assertNoRaw('<li class="phpunit-example">');
@@ -57,7 +65,13 @@ class ExamplesTest extends WebTestBase {
     // Verify that PHPUnit appears in the tray.
     $this->drupalGet('');
     $this->assertLink('PHPUnit example');
-    $this->assertRaw('<li class="phpunit-example">');
-  }
+    // Assert that the PHPUnit tray item is present.
+    $this->assertEqual(
+      \count($this->xpath('//nav/div/div/nav/ul/li[@class="phpunit-example"]')),
+      1,
+      'Found the PHPUnit Example tray item.'
+    );
+
+    }
 
 }
