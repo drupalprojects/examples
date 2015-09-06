@@ -66,7 +66,7 @@ class BlockExampleTest extends WebTestBase {
     $this->drupalPlaceBlock('example_empty', $settings_empty);
 
     // Verify that blocks are there. Empty block will not be shown, because it
-    // is empty.
+    // holds an empty array.
     $this->drupalGet('');
     $this->assertRaw($settings_configurable['label'], 'Block configurable test not found.');
     $this->assertNoRaw($settings_uppercase['label'], 'Block uppercase with normal label not found.');
