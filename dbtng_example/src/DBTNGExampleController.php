@@ -37,6 +37,8 @@ class DBTNGExampleController extends ControllerBase {
       '#rows' => $rows,
       '#empty' => t('No entries available.'),
     );
+    // Don't cache this page.
+    $content['#cache']['max-age'] = 0;
 
     return $content;
   }
@@ -72,6 +74,8 @@ class DBTNGExampleController extends ControllerBase {
       '#attributes' => array('id' => 'dbtng-example-advanced-list'),
       '#empty' => t('No entries available.'),
     );
+    // Don't cache this page.
+    $content['#cache']['max-age'] = 0;
     return $content;
   }
 

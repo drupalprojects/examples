@@ -86,6 +86,7 @@ use Drupal\Core\Entity\EntityChangedTrait;
  *     },
  *     "access" = "Drupal\content_entity_example\ContactAccessControlHandler",
  *   },
+ *   list_cache_contexts = { "user" },
  *   base_table = "contact",
  *   admin_permission = "administer content_entity_example entity",
  *   fieldable = TRUE,
