@@ -113,9 +113,9 @@ class NodeTypeExampleTest extends WebTestBase {
     $this->drupalPostForm('/node/add/basic_content_type', $edit, t('Save'));
 
     // Check that the Basic page has been created.
-    $this->assertText(t('@post %title has been created.', array(
+    $this->assertText(t('@post @title has been created.', array(
       '@post' => 'Example: Basic Content Type',
-      '%title' => $edit['title[0][value]'],
+      '@title' => $edit['title[0][value]'],
     )), 'Basic page created.');
 
     // Check that the node exists in the database.
