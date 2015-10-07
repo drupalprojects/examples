@@ -91,17 +91,19 @@ class SimpleTestExampleTest extends WebTestBase {
     $this->drupalPostForm('node/add/simpletest_example', $edit, t('Save'));
 
     // Check that our simpletest_example node has been created.
-    $this->assertRaw(t('!post %title has been created.', array('!post' => 'SimpleTest Example Node Type', '%title' => $edit['title[0][value]'])), 'SimpleTest Example content created.');
-
+    $this->assertText(t('@post @title has been created.', array(
+      '@post' => 'SimpleTest Example Node Type',
+      '@title' => $edit['title[0][value]'],
+    )));
     // Check that the node exists in the database.
     $node = $this->drupalGetNodeByTitle($edit['title[0][value]']);
     $this->assertTrue($node, 'Node found in database.');
 
     // Verify 'submitted by' information. Drupal adds a newline in there, so
     // we have to check for that.
-    $submitted_by = t("Submitted by !username\n on !datetime", array(
-      '!username' => $this->loggedInUser->getUsername(),
-      '!datetime' => format_date($node->getCreatedTime()),
+    $submitted_by = t("Submitted by @username\n on @datetime", array(
+      '@username' => $this->loggedInUser->getUsername(),
+      '@datetime' => format_date($node->getCreatedTime()),
     ));
 
     $this->drupalGet('node/' . $node->id());

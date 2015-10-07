@@ -27,7 +27,7 @@ class SimpleTextFormatter extends FormatterBase {
   /**
    * {@inheritdoc}
    */
-  public function viewElements(FieldItemListInterface $items) {
+  public function viewElements(FieldItemListInterface $items, $langcode) {
     $elements = array();
 
     foreach ($items as $delta => $item) {
@@ -40,7 +40,7 @@ class SimpleTextFormatter extends FormatterBase {
         '#attributes' => array(
           'style' => 'color: ' . $item->value,
         ),
-        '#value' => t('The color code in this field is @code', array('@code' => $item->value)),
+        '#value' => $this->t('The color code in this field is @code', array('@code' => $item->value)),
       );
     }
 

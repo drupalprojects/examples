@@ -15,7 +15,7 @@
  */
 
 /**
- * Implements hook_node_view().
+ * Implements hook_ENTITY_TYPE_view().
  *
  * We'll just add some content to nodes of the type we like.
  *
@@ -25,8 +25,7 @@ function simpletest_example_test_node_view(
   array &$build,
   \Drupal\Core\Entity\EntityInterface $node,
   \Drupal\Core\Entity\Display\EntityViewDisplayInterface $display,
-  $view_mode,
-  $langcode) {
+  $view_mode) {
   if ($node->getType() == 'simpletest_example') {
     $build['simpletest_example_test_section'] = array(
       '#markup' => t('The test module did its thing.'),
