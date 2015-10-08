@@ -40,6 +40,7 @@ abstract class ExamplesTestBase extends WebTestBase {
     $this->drupalPlaceBlock('system_menu_block:tools', ['region' => 'primary_menu']);
     $this->drupalPlaceBlock('local_tasks_block', ['region' => 'secondary_menu']);
     $this->drupalPlaceBlock('local_actions_block', ['region' => 'content']);
+    $this->drupalPlaceBlock('page_title_block', ['region' => 'content']);
   }
 
 }
