@@ -165,7 +165,10 @@ class SimpleTestExampleTest extends WebTestBase {
    *   TRUE if running on testbot.
    */
   public function runningOnTestbot() {
-    return (file_exists("../checkout") || file_exists("../site_under_test"));
+    // @todo: Add this line back once the testbot variable is available.
+    // https://www.drupal.org/node/2565181
+    // return env('DRUPALCI');
+    return TRUE;
   }
 
 }
