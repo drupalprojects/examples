@@ -106,8 +106,8 @@ class CacheExampleForm extends FormBase {
     }
     else {
       // If there was no cached data available we have to search filesystem.
-      // Recursively get all files from Drupal's folder.
-      $files_count = count(file_scan_directory('.', '/.*/'));
+      // Recursively get all .PHP files from Drupal's core folder.
+      $files_count = count(file_scan_directory('core', '/.php/'));
 
       // Since we have recalculated, we now need to store the new data into
       // cache. Complex data types will be automatically serialized before
@@ -121,7 +121,7 @@ class CacheExampleForm extends FormBase {
     $duration = $end_time - $start_time;
 
     // Format intro message.
-    $intro_message = '<p>' . $this->t('This example will search the entire drupal folder and display a count of the files in it.') . ' ';
+    $intro_message = '<p>' . $this->t("This example will search Drupal's core folder and display a count of the PHP files in it.") . ' ';
     $intro_message .= $this->t('This can take a while, since there are a lot of files to be searched.') . ' ';
     $intro_message .= $this->t('We will search filesystem just once and save output to the cache. We will use cached data for later requests.') . '</p>';
     $intro_message .= '<p>'
