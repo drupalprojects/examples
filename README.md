@@ -58,9 +58,7 @@ How To Install The Modules
 --------------------------
 
 1. The Examples project installs like any other Drupal module. There is extensive
-documentation on how to do this here:
-
-https://drupal.org/documentation/install/modules-themes/modules-8
+documentation on how to do this here: https://drupal.org/documentation/install/modules-themes/modules-8
 
 2. Enable any Example sub-module you wish to explore in Admin menu > Extend.
 
