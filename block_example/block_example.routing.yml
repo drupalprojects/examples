@@ -4,4 +4,4 @@ block_example.description:
     _controller: '\Drupal\block_example\Controller\BlockExampleController::description'
     _title: 'Block Example'
   requirements:
-    _access: 'TRUE'
+    _permission: 'access content'
