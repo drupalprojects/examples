@@ -20,7 +20,7 @@ page_example_description:
     _controller: '\Drupal\page_example\Controller\PageExampleController::description'
     _title: 'Page Example'
   requirements:
-    _access: 'TRUE'
+    _permission: 'access content'
 
 # If the user accesses http://example.com/?q=examples/page_example/simple,
 # the routing system will look for a route with that path. In this case it will
