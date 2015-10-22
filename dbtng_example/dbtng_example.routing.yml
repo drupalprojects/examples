@@ -4,7 +4,7 @@ dbtng_example:
     _title: 'DBTNG Example'
     _controller: '\Drupal\dbtng_example\DBTNGExampleController::entryList'
   requirements:
-    _access: 'TRUE'
+    _permission: 'access content'
 
 dbtng_list:
   path: 'examples/dbtng_example/list'
@@ -12,7 +12,7 @@ dbtng_list:
     _title: 'List'
     _controller: '\Drupal\dbtng_example\DBTNGExampleController::entryList'
   requirements:
-    _access: 'TRUE'
+    _permission: 'access content'
 
 dbtng_add:
   path: 'examples/dbtng_example/add'
@@ -20,7 +20,7 @@ dbtng_add:
     _title: 'Add Entry'
     _form: '\Drupal\dbtng_example\DBTNGExampleAddForm'
   requirements:
-    _access: 'TRUE'
+    _permission: 'access content'
 
 dbtng_update:
   path: 'examples/dbtng_example/update'
@@ -28,7 +28,7 @@ dbtng_update:
     _title: 'Update Entry'
     _form: '\Drupal\dbtng_example\DBTNGExampleUpdateForm'
   requirements:
-    _access: 'TRUE'
+    _permission: 'access content'
 
 dbtng_advanced:
   path: 'examples/dbtng_example/advanced'
@@ -36,4 +36,4 @@ dbtng_advanced:
     _title: 'Advanced List'
     _controller: '\Drupal\dbtng_example\DBTNGExampleController::entryAdvancedList'
   requirements:
-    _access: 'TRUE'
+    _permission: 'access content'
