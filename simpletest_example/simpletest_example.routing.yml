@@ -5,4 +5,4 @@ simpletest_example_description:
   defaults:
     _controller: '\Drupal\simpletest_example\Controller\SimpleTestExampleController::description'
   requirements:
-    _access: 'TRUE'
+    _permission: 'access content'
