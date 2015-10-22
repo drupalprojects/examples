@@ -4,4 +4,4 @@ field_example.description:
   defaults:
     _controller: '\Drupal\field_example\Controller\FieldExampleController::description'
   requirements:
-    _access: 'TRUE'
+    _permission: 'access content'
