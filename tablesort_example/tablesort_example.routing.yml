@@ -3,4 +3,4 @@ tablesort_example_description:
   defaults:
     _controller: '\Drupal\tablesort_example\Controller\TableSortExampleController::description'
   requirements:
-    _access: 'TRUE'
+    _permission: 'access content'
