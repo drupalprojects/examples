@@ -3,4 +3,4 @@ cache_example.description:
   defaults:
     _form: '\Drupal\cache_example\Forms\CacheExampleForm'
   requirements:
-    _access: 'TRUE'
+    _permission: 'access content'
