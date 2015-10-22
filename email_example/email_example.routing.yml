@@ -3,4 +3,4 @@ email_example.description:
   defaults:
     _form: '\Drupal\email_example\Form\EmailExampleGetFormPage'
   requirements:
-    _access: 'TRUE'
+    _permission: 'access content'
