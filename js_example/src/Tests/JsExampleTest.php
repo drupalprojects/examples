@@ -23,17 +23,17 @@ class JsExampleTest extends WebTestBase {
    *
    * @var array
    */
-  public static $modules = array('js_example');
+  public static $modules = array('js_example', 'node');
 
   /**
    * Test all the paths defined by our module.
    */
   public function testJsExample() {
-    $paths = array(
+    $paths = [
       'examples/js_example',
       'examples/js_example/weights',
       'examples/js_example/accordion',
-    );
+    ];
     foreach ($paths as $path) {
       $this->drupalGet($path);
       $this->assertResponse(200, 'Visited ' . $path);
