@@ -3,4 +3,4 @@ config_node_type_example.description:
   defaults:
     _controller: '\Drupal\node_type_example\Controller\NodeTypeExampleController::description'
   requirements:
-    _access: 'TRUE'
+    _permission: 'access content'
