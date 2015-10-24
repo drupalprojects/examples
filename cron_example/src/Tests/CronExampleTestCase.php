@@ -37,7 +37,7 @@ class CronExampleTestCase extends WebTestBase {
    *
    * @var array
    */
-  public static $modules = ['cron_example'];
+  public static $modules = ['cron_example', 'node'];
 
   /**
    * {@inheritdoc}
@@ -46,7 +46,7 @@ class CronExampleTestCase extends WebTestBase {
     parent::setUp();
     // Create user. Search content permission granted for the search block to
     // be shown.
-    $this->drupalLogin($this->drupalCreateUser(['administer site configuration']));
+    $this->drupalLogin($this->drupalCreateUser(['administer site configuration', 'access content']));
 
     $this->cronConfig = \Drupal::configFactory()->getEditable('examples.cron');
   }

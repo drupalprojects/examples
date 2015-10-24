@@ -4,4 +4,4 @@ cron_example:
     _form: '\Drupal\cron_example\Form\CronExampleForm'
     _title: 'Cron Example'
   requirements:
-    _access: 'TRUE'
+    _permission: 'access content'
