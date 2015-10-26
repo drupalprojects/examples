@@ -45,6 +45,7 @@ function examples_toolbar() {
     'node_type_example' => 'config_node_type_example.description',
     'page_example' => 'page_example_description',
     'phpunit_example' => 'phpunit_example_description',
+    'plugin_type_example' => 'plugin_type_example.description',
     'simpletest_example' => 'simpletest_example_description',
     'tour_example' => 'tour_example_description',
   );
