@@ -275,7 +275,8 @@ function batch_example_finished($success, $results, $operations) {
           '@operation' => $error_operation[0],
           '@args' => print_r($error_operation[0], TRUE),
         )
-      )
+      ),
+      'error'
     );
   }
 }
