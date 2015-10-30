@@ -57,6 +57,8 @@ class ConfigEntityExampleTest extends WebTestBase {
    * 3) Verify that we can manage entities through the user interface.
    *
    * 4) Verify that the entity we add can be re-edited.
+   *
+   * 5) Verify that the label is shown in the list.
    */
   public function testConfigEntityExample() {
     // 1) Verify that the Marvin entity was created when the module was
@@ -124,6 +126,24 @@ class ConfigEntityExampleTest extends WebTestBase {
     $this->drupalGet('/examples/config_entity_example/manage/' . $robot_machine_name);
     $this->assertField('label');
     $this->assertFieldChecked('edit-floopy');
+
+    // 5) Verify that the label and machine name are shown in the list.
+    $this->drupalGet('/examples/config_entity_example');
+    $this->clickLink('Add robot');
+    $robby_machine_name = 'robby_machine_name';
+    $robby_label = 'Robby label';
+    $this->drupalPostForm(
+      NULL,
+      array(
+        'label' => $robby_label,
+        'id' => $robby_machine_name,
+        'floopy' => TRUE,
+      ),
+      t('Create Robot')
+    );
+    $this->drupalGet('/examples/config_entity_example');
+    $this->assertText($robby_label);
+    $this->assertText($robby_machine_name);
   }
 
 }

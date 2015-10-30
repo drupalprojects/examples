@@ -59,7 +59,7 @@ class RobotListBuilder extends ConfigEntityListBuilder {
    * @see Drupal\Core\Entity\EntityListController::render()
    */
   public function buildRow(EntityInterface $entity) {
-    $row['label'] = $this->getLabel($entity);
+    $row['label'] = $entity->label();
     $row['machine_name'] = $entity->id();
     $row['floopy'] = $entity->floopy;
 
