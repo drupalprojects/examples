@@ -35,8 +35,12 @@ class MenuExampleTestCase extends DrupalWebTestCase {
    */
   public function testMenuExample() {
     $this->drupalGet('');
+    $this->assertText(t('Menu Example: Menu in alternate menu'));
     $this->clickLink(t('Menu Example'));
     $this->assertText(t('This is the base page of the Menu Example'));
+
+    $this->drupalGet('examples/menu_example_alternate_menu');
+    $this->assertResponse(200);
 
     $this->clickLink(t('Custom Access Example'));
     $this->assertText(t('Custom Access Example'));

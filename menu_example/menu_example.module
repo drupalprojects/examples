@@ -74,10 +74,10 @@ function menu_example_menu() {
     'title' => 'Menu Example: Menu in alternate menu',
 
     // Machine name of the menu in which the link should appear.
-    'menu_name' => 'primary-links',
+    'menu_name' => 'main-menu',
 
     'page callback' => '_menu_example_menu_page',
-    'page arguments' => array(t('This will be in the Primary Links menu instead of the default Navigation menu')),
+    'page arguments' => array(t('This will be in the Main menu instead of the default Navigation menu')),
     'access callback' => TRUE,
   );
 
