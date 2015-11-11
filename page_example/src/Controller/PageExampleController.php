@@ -31,10 +31,10 @@ class PageExampleController extends ControllerBase {
 
     // Assemble the markup.
     $build = array(
-      '#markup' => $this->t('<p>The Page example module provides two pages, "simple" and "arguments".</p><p>The !simple_link just returns a renderable array for display.</p><p>The !arguments_link takes two arguments and displays them, as in @arguments_url</p>',
+      '#markup' => $this->t('<p>The Page example module provides two pages, "simple" and "arguments".</p><p>The @simple_link just returns a renderable array for display.</p><p>The @arguments_link takes two arguments and displays them, as in @arguments_url</p>',
         array(
-          '!simple_link' => $page_example_simple_link,
-          '!arguments_link' => $page_example_arguments_link,
+          '@simple_link' => $page_example_simple_link,
+          '@arguments_link' => $page_example_arguments_link,
           '@arguments_url' => $arguments_url->toString(),
         )
       ),

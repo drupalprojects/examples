@@ -36,7 +36,7 @@ class NodeTypeExampleController extends ControllerBase {
       '#markup' => t(
           '<p>Config Node Type Example is a basic example of defining a content type through configuration YAML files.</p>
 <p>In this example we create two content types for Drupal 8, using only YAML files. Well, mostly only YAML files... One of our content types is locked, so the user can&#39;t delete it while the module is installed. For this we need a very tiny amount of support code.</p>
-<p>You can observe these content types on !content_type_admin.</p>
+<p>You can observe these content types on @content_type_admin.</p>
 <p>The simplest way to author the per-type YAML files is to create the content types within Drupal and then take the YAML files from the configuration
 directory. Like this:</p>
 <ul>
@@ -50,7 +50,7 @@ directory. Like this:</p>
 <p>Content types created in this way will remain available after the user has uninstalled the module. If you were to fail to set the content type as unlocked, the user would not be able to delete it.</p>
 <p>This example is based on this change notification: <a href="https://drupal.org/node/2029519">https://drupal.org/node/2029519</a></p>',
         array(
-          '!content_type_admin' => $content_admin_link,
+          '@content_type_admin' => $content_admin_link,
           '@add_types_url' => $add_types_url,
         )
       ),

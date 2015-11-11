@@ -64,10 +64,10 @@ class PluginTypeExampleController extends ControllerBase {
       // Here we use various properties from the plugin definition. These values
       // are defined in the annotation at the top of the plugin class: see
       // ExampleHamSandwich.
-      $items[] = t("!id (calories: !calories, foobar: !foobar )", array(
-        '!id'       => $sandwich_plugin_definition['id'],
-        '!calories' => $sandwich_plugin_definition['calories'],
-        '!foobar'   => $sandwich_plugin_definition['foobar'],
+      $items[] = t("@id (calories: @calories, foobar: @foobar )", array(
+        '@id'       => $sandwich_plugin_definition['id'],
+        '@calories' => $sandwich_plugin_definition['calories'],
+        '@foobar'   => $sandwich_plugin_definition['foobar'],
       ));
     }
 
