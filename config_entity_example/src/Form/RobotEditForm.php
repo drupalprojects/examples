@@ -33,9 +33,9 @@ class RobotEditForm extends RobotFormBase {
    * @return array
    *   An array of supported actions for the current entity form.
    */
-  public function actions(array $form, FormStateInterface $form_state) {
+  protected function actions(array $form, FormStateInterface $form_state) {
     $actions = parent::actions($form, $form_state);
-    $actions['submit']['#value'] = t('Update Robot');
+    $actions['submit']['#value'] = $this->t('Update Robot');
     return $actions;
   }
 
