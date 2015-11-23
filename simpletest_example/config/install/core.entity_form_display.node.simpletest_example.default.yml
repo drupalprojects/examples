@@ -6,7 +6,6 @@ dependencies:
     - field.field.node.simpletest_example.body
     - node.type.simpletest_example
   module:
-    - entity_reference
     - path
     - text
 id: node.simpletest_example.default

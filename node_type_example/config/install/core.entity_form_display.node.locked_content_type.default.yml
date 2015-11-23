@@ -6,7 +6,6 @@ dependencies:
     - field.field.node.locked_content_type.body
     - node.type.locked_content_type
   module:
-    - entity_reference
     - path
     - text
 id: node.locked_content_type.default
