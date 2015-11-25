@@ -436,7 +436,6 @@ function file_example_create_directory_submit($form, &$form_state) {
     drupal_set_message(t('Failed to create %directory.', array('%directory' => $directory)), 'error');
   }
   else {
-    $result = is_dir($directory);
     drupal_set_message(t('Directory %directory is ready for use.', array('%directory' => $directory)));
     $_SESSION['file_example_default_directory'] = $directory;
   }

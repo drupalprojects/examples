@@ -329,8 +329,6 @@ function render_example_demo_form($form, &$form_state) {
  */
 function render_example_page_alter(&$page) {
 
-  $original_page = $page;
-
   // Re-sort the sidebar in reverse order.
   if (variable_get('render_example_reverse_sidebar', FALSE) && !empty($page['sidebar_first'])) {
     $page['sidebar_first'] = array_reverse($page['sidebar_first']);
@@ -443,7 +441,6 @@ function render_example_page_alter(&$page) {
       }
     }
   }
-  $altered_page = $page;
 
 }
 

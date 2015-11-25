@@ -143,7 +143,6 @@ function ajax_example_unique_autocomplete($form, &$form_state) {
 function ajax_example_unique_autocomplete_validate($form, &$form_state) {
   $title = $form_state['values']['node'];
   $matches = array();
-  $nid = 0;
 
   // This preg_match() looks for the last pattern like [33334] and if found
   // extracts the numeric portion.
@@ -350,7 +349,6 @@ function ajax_example_node_by_author_autocomplete_validate($form, &$form_state) 
   $title = $form_state['values']['node'];
   $author = $form_state['values']['author'];
   $matches = array();
-  $nid = 0;
 
   // We must have a valid user.
   $account = user_load_by_name($author);

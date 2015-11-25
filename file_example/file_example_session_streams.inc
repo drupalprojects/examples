@@ -446,7 +446,6 @@ class FileExampleSessionStreamWrapper implements DrupalStreamWrapperInterface {
   public function unlink($uri) {
     $path = $this->getLocalPath($uri);
     $path_components = preg_split('/\//', $path);
-    $fail = FALSE;
     $unset = '$_SESSION[\'file_example\']';
     foreach ($path_components as $component) {
       $unset .= '[\'' . $component . '\']';
@@ -551,7 +550,6 @@ class FileExampleSessionStreamWrapper implements DrupalStreamWrapperInterface {
   public function rmdir($uri, $options) {
     $path = $this->getLocalPath($uri);
     $path_components = preg_split('/\//', $path);
-    $fail = FALSE;
     $unset = '$_SESSION[\'file_example\']';
     foreach ($path_components as $component) {
       $unset .= '[\'' . $component . '\']';
