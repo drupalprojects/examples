@@ -85,7 +85,7 @@ class RobotDeleteForm extends EntityConfirmFormBase {
     $this->entity->delete();
 
     // Set a message that the entity was deleted.
-    drupal_set_message(t('Robot %label was deleted.', array(
+    drupal_set_message($this->t('Robot %label was deleted.', array(
       '%label' => $this->entity->label(),
     )));
 

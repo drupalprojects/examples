@@ -207,7 +207,7 @@ class RobotFormBase extends EntityForm {
     $url = $robot->urlInfo();
 
     // Create an edit link.
-    $edit_link = $this->l(t('Edit'), $url);
+    $edit_link = $this->l($this->t('Edit'), $url);
 
     if ($status == SAVED_UPDATED) {
       // If we edited an existing entity...
