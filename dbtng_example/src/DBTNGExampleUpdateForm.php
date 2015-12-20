@@ -18,7 +18,7 @@ class DBTNGExampleUpdateForm extends FormBase {
   /**
    * {@inheritdoc}
    */
-  public function getFormID() {
+  public function getFormId() {
     return 'dbtng_update_form';
   }
 

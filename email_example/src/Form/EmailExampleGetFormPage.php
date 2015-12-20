@@ -44,12 +44,9 @@ class EmailExampleGetFormPage extends FormBase {
   }
 
   /**
-   * Returns a unique string identifying the form.
-   *
-   * @return string
-   *   The unique string identifying the form.
+   * {@inheritdoc}
    */
-  public function getFormID() {
+  public function getFormId() {
     return 'email_example';
   }
 
