@@ -8,12 +8,38 @@
 namespace Drupal\tablesort_example\Controller;
 
 use Drupal\Core\Controller\ControllerBase;
-use Drupal\Core\Database\Query;
+use Drupal\Core\Database\Connection;
+use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
  * Controller routines for tablesort example routes.
  */
 class TableSortExampleController extends ControllerBase {
+
+  /**
+   * The Database Connection
+   *
+   * @var \Drupal\Core\Database\Connection
+   */
+  protected $database;
+
+  /**
+   * {@inheritdoc}
+   */
+  public static function create(ContainerInterface $container) {
+    return new static(
+      $container->get('database')
+    );
+  }
+
+  /**
+   * TableSortExampleController constructor.
+   *
+   * @param \Drupal\Core\Database\Connection $database
+   */
+  public function __construct(Connection $database) {
+    $this->database = $database;
+  }
 
   /**
    * A simple controller method to explain what the tablesort example is about.
@@ -31,7 +57,7 @@ class TableSortExampleController extends ControllerBase {
 
     // Using the TableSort Extender is what tells  the query object that we
     // are sorting.
-    $query = db_select('tablesort_example', 't')
+    $query = $this->database->select('tablesort_example', 't')
       ->extend('Drupal\Core\Database\Query\TableSortExtender');
     $query->fields('t');
 
