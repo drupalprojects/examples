@@ -233,7 +233,7 @@ class Contact extends ContentEntityBase implements ContactInterface {
         'weight' => -6,
       ))
       ->setDisplayOptions('form', array(
-        'type' => 'string',
+        'type' => 'string_textfield',
         'weight' => -6,
       ))
       ->setDisplayConfigurable('form', TRUE)
@@ -253,7 +253,7 @@ class Contact extends ContentEntityBase implements ContactInterface {
         'weight' => -5,
       ))
       ->setDisplayOptions('form', array(
-        'type' => 'string',
+        'type' => 'string_textfield',
         'weight' => -5,
       ))
       ->setDisplayConfigurable('form', TRUE)
@@ -296,7 +296,7 @@ class Contact extends ContentEntityBase implements ContactInterface {
       ->setSetting('handler', 'default')
       ->setDisplayOptions('view', array(
         'label' => 'above',
-        'type' => 'entity_reference',
+        'type' => 'author',
         'weight' => -3,
       ))
       ->setDisplayOptions('form', array(

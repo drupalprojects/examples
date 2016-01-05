@@ -214,4 +214,30 @@ class ContentEntityExampleTest extends ExamplesTestBase {
     );
   }
 
+  public function testAddFields() {
+    $web_user = $this->drupalCreateUser(array(
+      'administer contact entity',
+      'administer content_entity_example_contact display',
+      'administer content_entity_example_contact fields',
+      'administer content_entity_example_contact form display'));
+
+    $this->drupalLogin($web_user);
+    $entity_name = 'content_entity_example_contact';
+    $add_field_url = 'admin/structure/'. $entity_name .'_settings/fields/add-field';
+    $this->drupalGet($add_field_url);
+    $field_name = 'test_name';
+    $edit = array(
+      'new_storage_type' => 'list_string',
+      'label' => 'test name',
+      'field_name' => $field_name,
+    );
+
+    $this->drupalPostForm(NULL, $edit, t('Save and continue'));
+    $expected_path = $this->buildUrl('admin/structure/'. $entity_name .'_settings/fields/'. $entity_name .'.'. $entity_name .'.field_'. $field_name .'/storage');
+
+    // Fetch url without query parameters
+    $current_path = strtok($this->getUrl(), '?');
+    $this->assertEqual($expected_path, $current_path, 'It should redirect to field storage settings page.');
+
+  }
 }
