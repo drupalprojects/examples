@@ -44,13 +44,13 @@ class ContactDeleteForm extends ContentEntityConfirmFormBase {
   /**
    * {@inheritdoc}
    *
-   * Delete the entity and log the event. log() replaces the watchdog.
+   * Delete the entity and log the event. logger() replaces the watchdog.
    */
   public function submitForm(array &$form, FormStateInterface $form_state) {
     $entity = $this->getEntity();
     $entity->delete();
 
-    \Drupal::logger('content_entity_example')->notice('@type: deleted %title.',
+    $this->logger('content_entity_example')->notice('@type: deleted %title.',
       array(
         '@type' => $this->entity->bundle(),
         '%title' => $this->entity->label(),
