@@ -135,4 +135,5 @@ class EmailExampleGetFormPage extends FormBase {
       drupal_set_message(t('There was a problem sending your message and it was not sent.'), 'error');
     }
   }
+
 }

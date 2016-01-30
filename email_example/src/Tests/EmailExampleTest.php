@@ -16,6 +16,7 @@ use Drupal\simpletest\WebTestBase;
  * Tests for the email_example module.
  *
  * @ingroup email_example
+ *
  * @group email_example
  * @group examples
  */
