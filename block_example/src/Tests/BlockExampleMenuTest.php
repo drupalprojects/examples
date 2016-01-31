@@ -13,6 +13,7 @@ use Drupal\simpletest\WebTestBase;
  * Test the user-facing menus in Block Example.
  *
  * @ingroup block_example
+ *
  * @group block_example
  * @group examples
  */

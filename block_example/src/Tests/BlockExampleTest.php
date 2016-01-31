@@ -14,6 +14,7 @@ use Drupal\simpletest\WebTestBase;
  * Test the configuration options and block created by Block Example module.
  *
  * @ingroup block_example
+ *
  * @group block_example
  * @group examples
  */
