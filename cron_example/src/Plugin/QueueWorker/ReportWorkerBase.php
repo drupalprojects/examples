@@ -30,19 +30,17 @@ abstract class ReportWorkerBase extends QueueWorkerBase {
     if (\Drupal::state()->get('cron_example_show_status_message')) {
       drupal_set_message(
         $this->t('Queue @worker worker processed item with sequence @sequence created at @time', [
-        '@worker' => $worker,
-        '@sequence' => $item->sequence,
-        '@time' => date_iso8601($item->created),
-          ]
-        )
+          '@worker' => $worker,
+          '@sequence' => $item->sequence,
+          '@time' => date_iso8601($item->created),
+        ])
       );
     }
     \Drupal::logger('cron_example')->info('Queue @worker worker processed item with sequence @sequence created at @time', [
       '@worker' => $worker,
       '@sequence' => $item->sequence,
       '@time' => date_iso8601($item->created),
-      ]
-    );
+    ]);
   }
 
 }

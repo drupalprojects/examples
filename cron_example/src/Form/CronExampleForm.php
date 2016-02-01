@@ -117,7 +117,7 @@ class CronExampleForm extends ConfigFormBase {
       ];
       $form['cron_run']['cron_reset'] = [
         '#type' => 'checkbox',
-        '#title' => $this->t('Run cron_example\'s cron regardless of whether interval has expired.'),
+        '#title' => $this->t("Run cron_example's cron regardless of whether interval has expired."),
         '#default_value' => FALSE,
       ];
       $form['cron_run']['cron_trigger']['actions'] = ['#type' => 'actions'];

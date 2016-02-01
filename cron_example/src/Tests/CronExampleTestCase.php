@@ -12,7 +12,6 @@
 
 namespace Drupal\cron_example\Tests;
 
-use Drupal\Core\StringTranslation\StringTranslationTrait;
 use Drupal\simpletest\WebTestBase;
 
 /**
@@ -56,7 +55,7 @@ class CronExampleTestCase extends WebTestBase {
    */
   public function testCronExampleBasic() {
     // Pretend that cron has never been run (even though simpletest seems to
-    // run it once...)
+    // run it once...).
     $this->cronConfig->set('cron_example_next_execution', 0);
     $this->drupalGet('examples/cron_example');
 
