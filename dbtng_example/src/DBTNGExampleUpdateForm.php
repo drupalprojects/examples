@@ -139,7 +139,7 @@ class DBTNGExampleUpdateForm extends FormBase {
    */
   public function submitForm(array &$form, FormStateInterface $form_state) {
     // Gather the current user so the new record has ownership.
-    $account = \Drupal::currentUser();
+    $account = $this->currentUser();
     // Save the submitted entry.
     $entry = array(
       'pid' => $form_state->getValue('pid'),

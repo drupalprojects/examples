@@ -11,6 +11,7 @@ use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Form\FormBase;
 use Drupal\Core\Mail\MailManagerInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
+use Drupal\Core\Language\LanguageManagerInterface;
 
 /**
  * File test form class.
@@ -27,20 +28,34 @@ class EmailExampleGetFormPage extends FormBase {
   protected $mailManager;
 
   /**
+   * The language manager.
+   *
+   * @var \Drupal\Core\Language\LanguageManagerInterface
+   */
+  protected $languageManager;
+
+  /**
    * Constructs a new EmailExampleGetFormPage.
    *
    * @param \Drupal\Core\Mail\MailManagerInterface $mail_manager
    *   The mail manager.
+   *
+   * @param \Drupal\Core\Language\LanguageManagerInterface $language_manager
+   *   The language manager.
    */
-  public function __construct(MailManagerInterface $mail_manager) {
+  public function __construct(MailManagerInterface $mail_manager, LanguageManagerInterface $language_manager) {
     $this->mailManager = $mail_manager;
+    $this->languageManager = $language_manager;
   }
 
   /**
    * {@inheritdoc}
    */
   public static function create(ContainerInterface $container) {
-    return new static($container->get('plugin.manager.mail'));
+    return new static(
+      $container->get('plugin.manager.mail'),
+      $container->get('language_manager')
+    );
   }
 
   /**
@@ -96,7 +111,7 @@ class EmailExampleGetFormPage extends FormBase {
 
     // Specify 'to' and 'from' addresses.
     $to = $form_values['email'];
-    $from = \Drupal::config('system.site')->get('mail');
+    $from = $this->config('system.site')->get('mail');
 
     // "params" loads in additional context for email content completion in
     // hook_mail(). In this case, we want to pass in the values the user entered
@@ -117,7 +132,7 @@ class EmailExampleGetFormPage extends FormBase {
     // Since in our case, we are sending a message to a random e-mail address
     // that is not necessarily tied to a user account, we will use the site's
     // default language.
-    $language_code = \Drupal::languageManager()->getDefaultLanguage()->getId();
+    $language_code = $this->languageManager->getDefaultLanguage()->getId();
 
     // Whether or not to automatically send the mail when we call mail() on the
     // mail manager. This defaults to TRUE, and is normally what you want unless
