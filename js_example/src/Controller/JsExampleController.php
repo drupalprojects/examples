@@ -23,16 +23,27 @@ class JsExampleController extends ControllerBase {
    *   A renderable array.
    */
   public function info() {
-    $build['content'] = array(
-      '#markup' => <<<INFOMARKUP
-<p>Drupal includes jQuery and jQuery UI.</p>
-<p>We have two examples of using these:</p>
-<ol>
-<li>An accordion-style section reveal effect. This demonstrates calling a jQuery UI function using Drupal&#39;s rendering system.</li>
-<li>Sorting according to numeric &#39;weight.&#39; This demonstrates attaching your own JavaScript code to individual page elements using Drupal&#39;s rendering system.</li>
-</ol>
-INFOMARKUP
-    );
+    $build['content'] = [
+      'first_line' => [
+        '#prefix' => '<p>',
+        '#markup' => 'Drupal includes jQuery and jQuery UI.',
+        '#suffix' => '</p>',
+      ],
+      'second_line' => [
+        '#prefix' => '<p>',
+        '#markup' => 'We have two examples of using these:',
+        '#suffix' => '</p>',
+      ],
+      'examples_list' => [
+        '#theme' => 'item_list',
+        '#items' => [
+          'An accordion-style section reveal effect. This demonstrates calling a jQuery UI function using Drupal&#39;s rendering system.',
+          'Sorting according to numeric &#39;weight.&#39; This demonstrates attaching your own JavaScript code to individual page elements using Drupal&#39;s rendering system.',
+        ],
+        '#type' => 'ol',
+      ],
+    ];
+
     return $build;
   }
 

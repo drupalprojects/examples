@@ -13,6 +13,7 @@ use Drupal\simpletest\WebTestBase;
  * Functional tests for the js_example module.
  *
  * @ingroup js_example
+ *
  * @group js_example
  * @group examples
  */
