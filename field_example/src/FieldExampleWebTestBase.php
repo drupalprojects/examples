@@ -7,27 +7,37 @@
 
 namespace Drupal\field_example;
 
-use Drupal\Core\Session\AccountInterface;
 use Drupal\examples\Tests\ExamplesTestBase;
 
+/**
+ * Class FieldExampleWebTestBase.
+ */
 class FieldExampleWebTestBase extends ExamplesTestBase {
 
   /**
+   * The content type name.
+   *
    * @var string
    */
   protected $contentTypeName;
 
   /**
-   * @var AccountInterface
+   * The administrator account.
+   *
+   * @var \Drupal\Core\Session\AccountInterface
    */
   protected $administratorAccount;
 
   /**
-   * @var AccountInterface
+   * The author account.
+   *
+   * @var \Drupal\Core\Session\AccountInterface
    */
   protected $authorAccount;
 
   /**
+   * The field name.
+   *
    * @var string
    */
   protected $fieldName;
@@ -42,7 +52,7 @@ class FieldExampleWebTestBase extends ExamplesTestBase {
   /**
    * {@inheritdoc}
    *
-   * Once installed, a content type with the desired field is created
+   * Once installed, a content type with the desired field is created.
    */
   protected function setUp() {
     // Install Drupal.
@@ -80,11 +90,11 @@ class FieldExampleWebTestBase extends ExamplesTestBase {
    * Create a field on the content type created during setUp().
    *
    * @param string $type
-   *   The storage field type to create
+   *   The storage field type to create.
    * @param string $widget_type
-   *   The widget to use when editing this field
+   *   The widget to use when editing this field.
    * @param int|string $cardinality
-   *   Cardinality of the field. Use -1 to signify 'unlimited.'
+   *   Cardinality of the field. Use -1 to signify 'unlimited'.
    *
    * @return string
    *   Name of the field, like field_something
@@ -113,7 +123,7 @@ class FieldExampleWebTestBase extends ExamplesTestBase {
       'cardinality_number' => (string) $cardinality,
     );
     // If we have -1 for $cardinality, we should change the form's drop-down
-    // from 'Number' to 'Unlimited.'
+    // from 'Number' to 'Unlimited'.
     if (-1 == $cardinality) {
       $edit = array(
         'cardinality' => '-1',
