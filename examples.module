@@ -41,6 +41,7 @@ function examples_toolbar() {
     'dbtng_example' => 'dbtng_example',
     'email_example' => 'email_example.description',
     'field_example' => 'field_example.description',
+    'field_permission_example' => 'field_permission_example.description',
     'js_example' => 'js_example.info',
     'node_type_example' => 'config_node_type_example.description',
     'page_example' => 'page_example_description',
