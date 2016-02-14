@@ -36,7 +36,8 @@ class ContentEntityExampleTest extends ExamplesTestBase {
       'administer contact entity',
       'administer content_entity_example_contact display',
       'administer content_entity_example_contact fields',
-      'administer content_entity_example_contact form display'));
+      'administer content_entity_example_contact form display',
+    ));
 
     // Anonymous User should not see the link to the listing.
     $this->assertNoText(t('Content Entity Example: Contacts Listing'));
@@ -214,16 +215,20 @@ class ContentEntityExampleTest extends ExamplesTestBase {
     );
   }
 
+  /**
+   * Test add new fields to the contact entity.
+   */
   public function testAddFields() {
     $web_user = $this->drupalCreateUser(array(
       'administer contact entity',
       'administer content_entity_example_contact display',
       'administer content_entity_example_contact fields',
-      'administer content_entity_example_contact form display'));
+      'administer content_entity_example_contact form display',
+    ));
 
     $this->drupalLogin($web_user);
     $entity_name = 'content_entity_example_contact';
-    $add_field_url = 'admin/structure/'. $entity_name .'_settings/fields/add-field';
+    $add_field_url = 'admin/structure/' . $entity_name . '_settings/fields/add-field';
     $this->drupalGet($add_field_url);
     $field_name = 'test_name';
     $edit = array(
@@ -233,11 +238,12 @@ class ContentEntityExampleTest extends ExamplesTestBase {
     );
 
     $this->drupalPostForm(NULL, $edit, t('Save and continue'));
-    $expected_path = $this->buildUrl('admin/structure/'. $entity_name .'_settings/fields/'. $entity_name .'.'. $entity_name .'.field_'. $field_name .'/storage');
+    $expected_path = $this->buildUrl('admin/structure/' . $entity_name . '_settings/fields/' . $entity_name . '.' . $entity_name . '.field_' . $field_name . '/storage');
 
-    // Fetch url without query parameters
+    // Fetch url without query parameters.
     $current_path = strtok($this->getUrl(), '?');
     $this->assertEqual($expected_path, $current_path, 'It should redirect to field storage settings page.');
 
   }
+
 }

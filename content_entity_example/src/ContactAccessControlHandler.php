@@ -2,7 +2,7 @@
 
 /**
  * @file
- * Contains \Drupal\content_entity_example\ContactAccessControlHandler
+ * Contains \Drupal\content_entity_example\ContactAccessControlHandler.
  */
 
 namespace Drupal\content_entity_example;

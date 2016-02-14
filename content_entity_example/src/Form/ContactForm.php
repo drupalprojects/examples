@@ -42,4 +42,5 @@ class ContactForm extends ContentEntityForm {
     $entity = $this->getEntity();
     $entity->save();
   }
+
 }
