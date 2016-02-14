@@ -2,7 +2,7 @@
 
 /**
  * @file
- * Contains \Drupal\dbtng_example\DBTNGExampleUpdateForm
+ * Contains \Drupal\dbtng_example\DBTNGExampleUpdateForm.
  */
 
 namespace Drupal\dbtng_example;
@@ -52,8 +52,7 @@ class DBTNGExampleUpdateForm extends FormBase {
         '@name' => $entry->name,
         '@surname' => $entry->surname,
         '@age' => $entry->age,
-        )
-      );
+      ));
       $keyed_entries[$entry->pid] = $entry;
     }
 
@@ -152,8 +151,7 @@ class DBTNGExampleUpdateForm extends FormBase {
     drupal_set_message(t('Updated entry @entry (@count row updated)', array(
       '@count' => $count,
       '@entry' => print_r($entry, TRUE),
-        )
-    ));
+    )));
   }
 
 }

@@ -2,7 +2,7 @@
 
 /**
  * @file
- * Contains \Drupal\dbtng_example\Tests\DBTNGExampleTest
+ * Contains \Drupal\dbtng_example\Tests\DBTNGExampleTest.
  */
 
 namespace Drupal\dbtng_example\Tests;

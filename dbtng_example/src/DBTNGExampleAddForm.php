@@ -2,7 +2,7 @@
 
 /**
  * @file
- * Contains \Drupal\dbtng_example\DBTNExampleAddForm
+ * Contains \Drupal\dbtng_example\DBTNExampleAddForm.
  */
 
 namespace Drupal\dbtng_example;

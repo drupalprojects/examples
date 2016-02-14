@@ -11,6 +11,7 @@
  * Creates some default entries on this module custom table.
  *
  * @see hook_install()
+ *
  * @ingroup dbtng_example
  */
 function dbtng_example_install() {
@@ -42,6 +43,7 @@ function dbtng_example_install() {
  * Defines the database tables used by this module.
  *
  * @see hook_schema()
+ *
  * @ingroup dbtng_example
  */
 function dbtng_example_schema() {

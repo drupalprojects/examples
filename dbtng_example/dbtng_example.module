@@ -2,8 +2,7 @@
 
 /**
  * @file
- * This is an example outlining how a module can make use of the new DBTNG
- * database API.
+ * This is an example outlining how a module can use the DBTNG database API.
  *
  * @todo Demonstrate transaction usage.
  *
@@ -11,8 +10,6 @@
  * @link database Database abstraction layer documentation @endlink and
  * at @link http://drupal.org/node/310069 @endlink.
  */
-
-use Drupal\Core\Routing\RouteMatchInterface;
 
 /**
  * @defgroup dbtng_example Example: Database (DBTNG)

@@ -2,11 +2,14 @@
 
 /**
  * @file
- * Contains \Drupal\dbtng_example\DBTNGExampleStorage
+ * Contains \Drupal\dbtng_example\DBTNGExampleStorage.
  */
 
 namespace Drupal\dbtng_example;
 
+/**
+ * Class DBTNGExampleStorage.
+ */
 class DBTNGExampleStorage {
 
   /**
@@ -34,14 +37,15 @@ class DBTNGExampleStorage {
     $return_value = NULL;
     try {
       $return_value = db_insert('dbtng_example')
-          ->fields($entry)
-          ->execute();
+        ->fields($entry)
+        ->execute();
     }
     catch (\Exception $e) {
       drupal_set_message(t('db_insert failed. Message = %message, query= %query', array(
-            '%message' => $e->getMessage(),
-            '%query' => $e->query_string,
-          )), 'error');
+        '%message' => $e->getMessage(),
+        '%query' => $e->query_string,
+      )
+      ), 'error');
     }
     return $return_value;
   }
@@ -67,9 +71,10 @@ class DBTNGExampleStorage {
     }
     catch (\Exception $e) {
       drupal_set_message(t('db_update failed. Message = %message, query= %query', array(
-            '%message' => $e->getMessage(),
-            '%query' => $e->query_string,
-          )), 'error');
+        '%message' => $e->getMessage(),
+        '%query' => $e->query_string,
+      )
+      ), 'error');
     }
     return $count;
   }
@@ -116,7 +121,6 @@ class DBTNGExampleStorage {
    * API method, so there are several ways to perform the same SQL query. See
    * the
    * @link http://drupal.org/node/310075 handbook page on dynamic queries. @endlink
-   *
    * @code
    *   // SELECT * FROM {dbtng_example} WHERE uid = 0 AND name = 'John'
    *   db_select('dbtng_example')
