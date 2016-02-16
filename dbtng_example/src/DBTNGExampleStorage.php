@@ -2,15 +2,15 @@
 
 /**
  * @file
- * Contains \Drupal\dbtng_example\DBTNGExampleStorage.
+ * Contains \Drupal\dbtng_example\DbtngExampleStorage.
  */
 
 namespace Drupal\dbtng_example;
 
 /**
- * Class DBTNGExampleStorage.
+ * Class DbtngExampleStorage.
  */
-class DBTNGExampleStorage {
+class DbtngExampleStorage {
 
   /**
    * Save an entry in the database.

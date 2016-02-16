@@ -2,17 +2,18 @@
 
 /**
  * @file
- * Contains \Drupal\dbtng_example\DBTNGExampleController.
+ * Contains \Drupal\dbtng_example\Controller\DbtngExampleController.
  */
 
-namespace Drupal\dbtng_example;
+namespace Drupal\dbtng_example\Controller;
 
 use Drupal\Core\Controller\ControllerBase;
+use Drupal\dbtng_example\DbtngExampleStorage;
 
 /**
  * Controller for DBTNG Example.
  */
-class DBTNGExampleController extends ControllerBase {
+class DbtngExampleController extends ControllerBase {
 
   /**
    * Render a list of entries in the database.
@@ -27,7 +28,7 @@ class DBTNGExampleController extends ControllerBase {
     $rows = array();
     $headers = array(t('Id'), t('uid'), t('Name'), t('Surname'), t('Age'));
 
-    foreach ($entries = DBTNGExampleStorage::load() as $entry) {
+    foreach ($entries = DbtngExampleStorage::load() as $entry) {
       // Sanitize each entry.
       $rows[] = array_map('Drupal\Component\Utility\SafeMarkup::checkPlain', (array) $entry);
     }
@@ -63,7 +64,7 @@ class DBTNGExampleController extends ControllerBase {
     );
 
     $rows = array();
-    foreach ($entries = DBTNGExampleStorage::advancedLoad() as $entry) {
+    foreach ($entries = DbtngExampleStorage::advancedLoad() as $entry) {
       // Sanitize each entry.
       $rows[] = array_map('Drupal\Component\Utility\SafeMarkup::checkPlain', $entry);
     }

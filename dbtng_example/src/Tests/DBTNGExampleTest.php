@@ -2,12 +2,12 @@
 
 /**
  * @file
- * Contains \Drupal\dbtng_example\Tests\DBTNGExampleTest.
+ * Contains \Drupal\dbtng_example\Tests\DbtngExampleTest.
  */
 
 namespace Drupal\dbtng_example\Tests;
 
-use Drupal\dbtng_example\DBTNGExampleStorage;
+use Drupal\dbtng_example\DbtngExampleStorage;
 use Drupal\simpletest\WebTestBase;
 
 /**
@@ -18,7 +18,7 @@ use Drupal\simpletest\WebTestBase;
  *
  * @ingroup dbtng_example
  */
-class DBTNGExampleTest extends WebTestBase {
+class DbtngExampleTest extends WebTestBase {
 
   /**
    * Modules to enable.
@@ -45,9 +45,9 @@ class DBTNGExampleTest extends WebTestBase {
    * - Test the example description page.
    * - Verify that the example pages have links in the Tools menu.
    */
-  public function testDBTNGExample() {
+  public function testDbtngExample() {
     // Assert that two entries were inserted at install.
-    $result = DBTNGExampleStorage::load();
+    $result = DbtngExampleStorage::load();
     $this->assertEqual(
       count($result), 2, 'Found two entries in the table after installing the module.'
     );
@@ -113,7 +113,7 @@ class DBTNGExampleTest extends WebTestBase {
     $this->assertPattern("/Some[td\/<>\w\s]+Anonymous/", "Text 'Some Anonymous' found in table");
     // Try the update tab.
     // Find out the pid of our "anonymous" guy.
-    $result = DBTNGExampleStorage::load(array('surname' => 'Anonymous'));
+    $result = DbtngExampleStorage::load(array('surname' => 'Anonymous'));
     $this->drupalGet('/examples/dbtng_example');
     $this->assertEqual(
       count($result), 1, 'Found one entry in the table with surname = "Anonymous".'
@@ -136,14 +136,14 @@ class DBTNGExampleTest extends WebTestBase {
   /**
    * Tests several combinations, adding entries, updating and deleting.
    */
-  public function testDBTNGExampleStorage() {
+  public function testDbtngExampleStorage() {
     // Create a new entry.
     $entry = array(
       'name' => 'James',
       'surname' => 'Doe',
       'age' => 23,
     );
-    DBTNGExampleStorage::insert($entry);
+    DbtngExampleStorage::insert($entry);
 
     // Save another entry.
     $entry = array(
@@ -151,22 +151,22 @@ class DBTNGExampleTest extends WebTestBase {
       'surname' => 'NotDoe',
       'age' => 19,
     );
-    DBTNGExampleStorage::insert($entry);
+    DbtngExampleStorage::insert($entry);
 
     // Verify that 4 records are found in the database.
-    $result = DBTNGExampleStorage::load();
+    $result = DbtngExampleStorage::load();
     $this->assertEqual(
       count($result), 4, 'Found a total of four entries in the table after creating two additional entries.'
     );
 
     // Verify 2 of these records have 'Doe' as surname.
-    $result = DBTNGExampleStorage::load(array('surname' => 'Doe'));
+    $result = DbtngExampleStorage::load(array('surname' => 'Doe'));
     $this->assertEqual(
       count($result), 2, 'Found two entries in the table with surname = "Doe".'
     );
 
     // Now find our not-Doe entry.
-    $result = DBTNGExampleStorage::load(array('surname' => 'NotDoe'));
+    $result = DbtngExampleStorage::load(array('surname' => 'NotDoe'));
     $this->assertEqual(
       count($result), 1, 'Found one entry in the table with surname "NotDoe'
     );
@@ -174,14 +174,14 @@ class DBTNGExampleTest extends WebTestBase {
     $entry = $result[0];
     $entry->surname = "NowDoe";
     // update() returns the number of entries updated.
-    $this->assertNotEqual(DBTNGExampleStorage::update((array) $entry), 0, "NotDoe updated to NowDoe.");
+    $this->assertNotEqual(DbtngExampleStorage::update((array) $entry), 0, "NotDoe updated to NowDoe.");
 
-    $result = DBTNGExampleStorage::load(array('surname' => 'NowDoe'));
+    $result = DbtngExampleStorage::load(array('surname' => 'NowDoe'));
     $this->assertEqual(
       count($result), 1, "Found renamed 'NowDoe' surname");
 
     // Read only John Doe entry.
-    $result = DBTNGExampleStorage::load(array('name' => 'John', 'surname' => 'Doe'));
+    $result = DbtngExampleStorage::load(array('name' => 'John', 'surname' => 'Doe'));
     $this->assertEqual(
       count($result), 1, 'Found one entry for John Doe.'
     );
@@ -190,11 +190,11 @@ class DBTNGExampleTest extends WebTestBase {
     // Change age to 45.
     $entry['age'] = 45;
     // Update entry in database.
-    DBTNGExampleStorage::update((array) $entry);
+    DbtngExampleStorage::update((array) $entry);
 
     // Find entries with age = 45.
     // Read only John Doe entry.
-    $result = DBTNGExampleStorage::load(array('surname' => 'NowDoe'));
+    $result = DbtngExampleStorage::load(array('surname' => 'NowDoe'));
     $this->assertEqual(
       count($result), 1, 'Found one entry with surname = Nowdoe.'
     );
@@ -209,10 +209,10 @@ class DBTNGExampleTest extends WebTestBase {
     );
 
     // Delete the entry.
-    DBTNGExampleStorage::delete($entry);
+    DbtngExampleStorage::delete($entry);
 
     // Verify that now there are only 3 records.
-    $result = DBTNGExampleStorage::load();
+    $result = DbtngExampleStorage::load();
     $this->assertEqual(
       count($result), 3, 'Found only three records, a record was deleted.'
     );

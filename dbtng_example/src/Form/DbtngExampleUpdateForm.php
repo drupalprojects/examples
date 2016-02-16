@@ -2,18 +2,19 @@
 
 /**
  * @file
- * Contains \Drupal\dbtng_example\DBTNGExampleUpdateForm.
+ * Contains \Drupal\dbtng_example\DbtngExampleUpdateForm.
  */
 
-namespace Drupal\dbtng_example;
+namespace Drupal\dbtng_example\Form;
 
 use Drupal\Core\Form\FormBase;
 use Drupal\Core\Form\FormStateInterface;
+use Drupal\dbtng_example\DbtngExampleStorage;
 
 /**
  * Sample UI to update a record.
  */
-class DBTNGExampleUpdateForm extends FormBase {
+class DbtngExampleUpdateForm extends FormBase {
 
   /**
    * {@inheritdoc}
@@ -36,7 +37,7 @@ class DBTNGExampleUpdateForm extends FormBase {
       '#markup' => $this->t('Demonstrates a database update operation.'),
     );
     // Query for items to display.
-    $entries = DBTNGExampleStorage::load();
+    $entries = DbtngExampleStorage::load();
     // Tell the user if there is nothing to display.
     if (empty($entries)) {
       $form['no_values'] = array(
@@ -147,7 +148,7 @@ class DBTNGExampleUpdateForm extends FormBase {
       'age' => $form_state->getValue('age'),
       'uid' => $account->id(),
     );
-    $count = DBTNGExampleStorage::update($entry);
+    $count = DbtngExampleStorage::update($entry);
     drupal_set_message(t('Updated entry @entry (@count row updated)', array(
       '@count' => $count,
       '@entry' => print_r($entry, TRUE),

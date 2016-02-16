@@ -23,8 +23,8 @@
  * @link database.inc database abstraction layer documentation @endlink and
  * at @link http://drupal.org/node/310069 Database API @endlink.
  *
- * The several examples in DBTNGExampleController (see
- * /lib/Drupal/dbtng_example/DBTNGExampleController.php) demonstrate
+ * The several examples in DbtngExampleController (see
+ * /src/Drupal/dbtng_example/Controller/DbtngExampleController.php) demonstrate
  * basic database usage.
  *
  * db_insert() example:

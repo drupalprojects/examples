@@ -2,18 +2,19 @@
 
 /**
  * @file
- * Contains \Drupal\dbtng_example\DBTNExampleAddForm.
+ * Contains \Drupal\dbtng_example\DbtngExampleAddForm.
  */
 
-namespace Drupal\dbtng_example;
+namespace Drupal\dbtng_example\Form;
 
 use Drupal\Core\Form\FormBase;
 use Drupal\Core\Form\FormStateInterface;
+use Drupal\dbtng_example\DbtngExampleStorage;
 
 /**
  * Simple form to add an entry, with all the interesting fields.
  */
-class DBTNGExampleAddForm extends FormBase {
+class DbtngExampleAddForm extends FormBase {
 
   /**
    * {@inheritdoc}
@@ -83,7 +84,7 @@ class DBTNGExampleAddForm extends FormBase {
       'age' => $form_state->getValue('age'),
       'uid' => $account->id(),
     );
-    $return = DBTNGExampleStorage::insert($entry);
+    $return = DbtngExampleStorage::insert($entry);
     if ($return) {
       drupal_set_message(t('Created entry @entry', array('@entry' => print_r($entry, TRUE))));
     }
