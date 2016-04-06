@@ -56,7 +56,7 @@ class CronExampleTestCase extends WebTestBase {
   public function testCronExampleBasic() {
     // Pretend that cron has never been run (even though simpletest seems to
     // run it once...).
-    $this->cronConfig->set('cron_example_next_execution', 0);
+    \Drupal::state()->set('cron_example.next_execution', 0);
     $this->drupalGet('examples/cron_example');
 
     // Initial run should cause cron_example_cron() to fire.
