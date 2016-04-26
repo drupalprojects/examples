@@ -1,27 +1,41 @@
 <?php
 
-/**
- * @file
- * Contains \Drupal\field_permission_example\tests\FieldNoteItemTest.
- *
- * This is based off the tests used in Core for field plugins.
- */
-
-namespace Drupal\field_permission_example\Tests;
+namespace Drupal\Tests\field_permission_example\Kernel;
 
 use Drupal\Core\Field\FieldItemListInterface;
 use Drupal\Core\Field\FieldItemInterface;
-use Drupal\field\Tests\FieldUnitTestBase;
+use Drupal\Tests\field\Kernel\FieldKernelTestBase;
+
+// We can use UserCreationTrait in Kernel tests as well as with Simpletests.
 use Drupal\simpletest\UserCreationTrait;
 
 /**
- * Tests the new entity API for the email field type.
+ * Tests our sticky-note field type.
  *
- * @group field
+ * This class is based off the tests used in Drupal core for field plugins,
+ * since we need to use some of the same convenience methods for testing
+ * our custom field type. This base class also brings in the new
+ * PHPUnit-based kernel test system that replaces the older Simpletest-
+ * based classes.
+ *
+ * @see \Drupal\KernelTests\KernelTestBase
+ *
+ * @group field_permission_example
  */
-class FieldNoteItemTest extends FieldUnitTestBase {
+class FieldNoteItemTest extends FieldKernelTestBase {
 
   use UserCreationTrait;
+
+  /**
+   * We add the additional modules we need loaded here.
+   *
+   * The test runner will merge the $modules lists from this class, the class
+   * it extends, and so on up the class hierarchy. So, it is not necessary to
+   * include modules in your list that a parent class has already declared.
+   *
+   * @var array
+   */
+  public static $modules = ['field_permission_example'];
 
   /**
    * {@inheritdoc}
@@ -30,12 +44,7 @@ class FieldNoteItemTest extends FieldUnitTestBase {
    * field plugins.
    */
   protected function setUp() {
-    array_unshift(self::$modules, 'field_permission_example');
     parent::setUp();
-    // Tests for SimpleTest cannot usefully implement
-    // ContainerInjectionInterface the way PHPUnit tests do.
-    // We instead use KernelTest class' supplied container
-    // to get services we require.
     $type_manager = $this->container->get('entity_type.manager');
 
     // Set up our entity_type and user type for our new field:
@@ -87,8 +96,8 @@ class FieldNoteItemTest extends FieldUnitTestBase {
         'bundle' => 'user',
       ])->save();
 
-    // Fetch a form display for a user. Most likely, this will already
-    // exist, so check as Core does.
+    // Fetch a form display for a user. This may already exist, so check as
+    // Core does.
     // @see https://api.drupal.org/api/drupal/core%21includes%21entity.inc/function/entity_get_form_display/8
     $entity_form_display
       = $type_manager
