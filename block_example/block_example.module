@@ -25,10 +25,10 @@ use Drupal\Core\Block\BlockPluginInterface;
  * This hook allows you to modify the output of any block in the system.
  *
  * In addition, instead of hook_block_view_alter(), which is called for all
- * blocks, you can also use hook_block_view_MODULE_DELTA_alter() to alter a
+ * blocks, you can also use hook_block_view_BASE_BLOCK_ID_alter() to alter a
  * specific block. To change only our block using
- * hook_block_view_MODULE_DELTA_alter, we would use the function:
- * block_example_block_view_block_example_example_configurable_text_alter()
+ * hook_block_view_BASE_BLOCK_ID_alter, we would use the function:
+ * block_example_block_view_example_uppercase_alter()
  *
  * We are going to uppercase the subject (the title of the block as shown to the
  * user) of any block if the string "uppercase" appears in the block title or
