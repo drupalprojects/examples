@@ -34,17 +34,11 @@ class ColorBackgroudFormatter extends FormatterBase {
         '#type' => 'html_tag',
         '#tag' => 'p',
         '#value' => t('The content area color has been changed to @code', array('@code' => $item->value)),
-        '#attached' => array(
-          'css' => array(
-            array(
-              'data' => 'main { background-color:' . $item->value . ';}',
-              'type' => 'inline',
-            ),
-          ),
+        '#attributes' => array(
+          'style' => 'background-color: ' . $item->value,
         ),
       );
     }
-
     return $elements;
   }
 
