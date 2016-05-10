@@ -1,6 +1,7 @@
 # This file brings everything together. Very nifty!
 
-# Route name can be used in sevaral place (links, redirects, local actions etc.)
+# Route name can be used in several places; e.g. links, redirects, and local
+# actions.
 entity.content_entity_example_contact.canonical:
   path: '/content_entity_example_contact/{content_entity_example_contact}'
   defaults:
