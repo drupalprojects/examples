@@ -1,5 +1,5 @@
 block_example.description:
-  path: '/examples/block_example'
+  path: '/examples/block-example'
   defaults:
     _controller: '\Drupal\block_example\Controller\BlockExampleController::description'
     _title: 'Block Example'

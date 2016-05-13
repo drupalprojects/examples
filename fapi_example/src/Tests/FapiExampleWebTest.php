@@ -37,18 +37,18 @@ class FapiExampleWebTest extends WebTestBase {
   public function testAjaxDemoForm() {
 
     // Test for a link to the ajax_demo example on the fapi_example page.
-    $this->drupalGet('examples/fapi_example');
-    $this->assertLinkByHref('examples/fapi_example/ajax_demo');
+    $this->drupalGet('examples/fapi-example');
+    $this->assertLinkByHref('examples/fapi-example/ajax-demo');
 
     // Verify that anonymous can access the page.
-    $this->drupalGet('examples/fapi_example/ajax_demo');
+    $this->drupalGet('examples/fapi-example/ajax-demo');
     $this->assertResponse(200, 'The Demo of Ajax page is available.');
 
     // Post the form.
     $edit = [
       'temperature' => 'warm',
     ];
-    $this->drupalPostForm('/examples/fapi_example/ajax_demo', $edit, t('Submit'));
+    $this->drupalPostForm('/examples/fapi-example/ajax-demo', $edit, t('Submit'));
     $this->assertText('Value for Temperature: warm');
   }
 
@@ -58,18 +58,18 @@ class FapiExampleWebTest extends WebTestBase {
   public function testBuildDemo() {
 
     // Test for a link to the build_demo example on the fapi_example page.
-    $this->drupalGet('examples/fapi_example');
-    $this->assertLinkByHref('examples/fapi_example/build_demo');
+    $this->drupalGet('examples/fapi-example');
+    $this->assertLinkByHref('examples/fapi-example/build-demo');
 
     // Verify that anonymous can access the page.
-    $this->drupalGet('examples/fapi_example/build_demo');
+    $this->drupalGet('examples/fapi-example/build-demo');
     $this->assertResponse(200, 'The Build Demo Form is available.');
 
     // Post the form.
     $edit = [
       'change' => '1',
     ];
-    $this->drupalPostForm('/examples/fapi_example/build_demo', $edit, t('Submit'));
+    $this->drupalPostForm('/examples/fapi-example/build-demo', $edit, t('Submit'));
     $this->assertText('1. __construct');
     $this->assertText('2. getFormId');
     $this->assertText('3. validateForm');
@@ -82,11 +82,11 @@ class FapiExampleWebTest extends WebTestBase {
   public function testContainerDemoForm() {
 
     // Test for a link to the container_demo example on the fapi_example page.
-    $this->drupalGet('examples/fapi_example');
-    $this->assertLinkByHref('examples/fapi_example/container_demo');
+    $this->drupalGet('examples/fapi-example');
+    $this->assertLinkByHref('examples/fapi-example/container-demo');
 
     // Verify that anonymous can access the container_demo example page.
-    $this->drupalGet('examples/fapi_example/container_demo');
+    $this->drupalGet('examples/fapi-example/container-demo');
     $this->assertResponse(200, 'The Demo of Container page is available.');
 
     // Post the form.
@@ -97,7 +97,7 @@ class FapiExampleWebTest extends WebTestBase {
       'publisher' => 'me',
       'diet' => 'vegan'
     ];
-    $this->drupalPostForm('/examples/fapi_example/container_demo', $edit, t('Submit'));
+    $this->drupalPostForm('/examples/fapi-example/container-demo', $edit, t('Submit'));
     $this->assertText('Value for name: Dave');
     $this->assertText('Value for pen_name: DMan');
     $this->assertText('Value for title: My Book');
@@ -110,11 +110,11 @@ class FapiExampleWebTest extends WebTestBase {
    */
   public function testInputDemoForm() {
     // Test for a link to the input_demo example on the fapi_example page.
-    $this->drupalGet('examples/fapi_example');
-    $this->assertLinkByHref('examples/fapi_example/input_demo');
+    $this->drupalGet('examples/fapi-example');
+    $this->assertLinkByHref('examples/fapi-example/input-demo');
 
     // Verify that anonymous can access the input_demo page.
-    $this->drupalGet('examples/fapi_example/input_demo');
+    $this->drupalGet('examples/fapi-example/input-demo');
     $this->assertResponse(200, 'The Demo of Common Input Elements page is available.');
 
     // Post the form.
@@ -138,7 +138,7 @@ class FapiExampleWebTest extends WebTestBase {
       'subject' => 'Form test',
       'weight' => '3',
     ];
-    $this->drupalPostForm('/examples/fapi_example/input_demo', $edit, t('Submit'));
+    $this->drupalPostForm('/examples/fapi-example/input-demo', $edit, t('Submit'));
     $this->assertText('Value for What standardized tests did you take?: Array ( [SAT] =&gt; SAT )');
     $this->assertText('Value for Color: #ff6bf1');
     $this->assertText('Value for Content expiration: 2015-10-21');
@@ -163,18 +163,18 @@ class FapiExampleWebTest extends WebTestBase {
   public function testModalForm() {
 
     // Test for a link to the modal_form example on the fapi_example page.
-    $this->drupalGet('examples/fapi_example');
-    $this->assertLinkByHref('examples/fapi_example/modal_form');
+    $this->drupalGet('examples/fapi-example');
+    $this->assertLinkByHref('examples/fapi-example/modal-form');
 
     // Verify that anonymous can access the page.
-    $this->drupalGet('examples/fapi_example/modal_form');
+    $this->drupalGet('examples/fapi-example/modal-form');
     $this->assertResponse(200, 'The Demo of Modal Form is available.');
 
     // Post the form.
     $edit = [
       'title' => 'My Book',
     ];
-    $this->drupalPostForm('/examples/fapi_example/modal_form', $edit, t('Submit'));
+    $this->drupalPostForm('/examples/fapi-example/modal-form', $edit, t('Submit'));
     $this->assertText('Submit handler: You specified a title of My Book.');
   }
 
@@ -186,19 +186,19 @@ class FapiExampleWebTest extends WebTestBase {
     // Test for a link to the fapi_example in the Tools menu.
     $this->drupalGet('');
     $this->assertResponse(200, 'The Home page is available.');
-    $this->assertLinkByHref('examples/fapi_example');
+    $this->assertLinkByHref('examples/fapi-example');
 
     // Test for a link to the simple_form example on the fapi_example page.
-    $this->drupalGet('examples/fapi_example');
-    $this->assertLinkByHref('examples/fapi_example/simple_form');
+    $this->drupalGet('examples/fapi-example');
+    $this->assertLinkByHref('examples/fapi-example/simple-form');
 
     // Verify that anonymous can access the simple_form page.
-    $this->drupalGet('examples/fapi_example/simple_form');
+    $this->drupalGet('examples/fapi-example/simple-form');
     $this->assertResponse(200, 'The Simple Form Example page is available.');
 
     // Post a title.
     $edit = ['title' => 'My Custom Title'];
-    $this->drupalPostForm('/examples/fapi_example/simple_form', $edit, t('Submit'));
+    $this->drupalPostForm('/examples/fapi-example/simple-form', $edit, t('Submit'));
     $this->assertText('You specified a title of My Custom Title.');
   }
 
@@ -207,11 +207,11 @@ class FapiExampleWebTest extends WebTestBase {
    */
   public function testStateDemoForm() {
     // Test for a link to the state_demo example on the fapi_example page.
-    $this->drupalGet('examples/fapi_example');
-    $this->assertLinkByHref('examples/fapi_example/state_demo');
+    $this->drupalGet('examples/fapi-example');
+    $this->assertLinkByHref('examples/fapi-example/state-demo');
 
     // Verify that anonymous can access the state_demo page.
-    $this->drupalGet('examples/fapi_example/state_demo');
+    $this->drupalGet('examples/fapi-example/state-demo');
     $this->assertResponse(200, 'The Demo of Form State Binding page is available.');
 
     // Post the form.
@@ -219,7 +219,7 @@ class FapiExampleWebTest extends WebTestBase {
       'needs_accommodation' => TRUE,
       'diet' => 'vegan',
     ];
-    $this->drupalPostForm('/examples/fapi_example/state_demo', $edit, t('Submit'));
+    $this->drupalPostForm('/examples/fapi-example/state-demo', $edit, t('Submit'));
     $this->assertText('Dietary Restriction Requested: vegan');
   }
 
@@ -229,11 +229,11 @@ class FapiExampleWebTest extends WebTestBase {
   public function testVerticalTabsDemoForm() {
 
     // Test for a link to the vertical_tabs_demo example on the fapi_example page.
-    $this->drupalGet('examples/fapi_example');
-    $this->assertLinkByHref('examples/fapi_example/vertical_tabs_demo');
+    $this->drupalGet('examples/fapi-example');
+    $this->assertLinkByHref('examples/fapi-example/vertical-tabs-demo');
 
     // Verify that anonymous can access the vertical_tabs_demo page.
-    $this->drupalGet('examples/fapi_example/vertical_tabs_demo');
+    $this->drupalGet('examples/fapi-example/vertical-tabs-demo');
     $this->assertResponse(200, 'The Demo of Container page is available.');
 
     // Post the form.
@@ -241,7 +241,7 @@ class FapiExampleWebTest extends WebTestBase {
       'name' => 'Dave',
       'publisher' => 'me',
     ];
-    $this->drupalPostForm('/examples/fapi_example/container_demo', $edit, t('Submit'));
+    $this->drupalPostForm('/examples/fapi-example/container-demo', $edit, t('Submit'));
     $this->assertText('Value for name: Dave');
     $this->assertText('Value for publisher: me');
   }

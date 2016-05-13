@@ -48,10 +48,10 @@ class TourExampleTest extends TourTestBasic {
     // Test for a link to the tour_example in the Tools menu.
     $this->drupalGet('');
     $this->assertResponse(200, 'The Home page is available.');
-    $this->assertLinkByHref('examples/tour_example');
+    $this->assertLinkByHref('examples/tour-example');
 
     // Verify if the can successfully access the tour_examples page.
-    $this->drupalGet('examples/tour_example');
+    $this->drupalGet('examples/tour-example');
     $this->assertResponse(200, 'The Tour Example description page is available.');
 
     // Verify that the tour tips exist on this page.

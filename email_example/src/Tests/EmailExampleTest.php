@@ -59,10 +59,10 @@ class EmailExampleTest extends WebTestBase {
     // Test for a link to the email_example in the Tools menu.
     $this->drupalGet('');
     $this->assertResponse(200, 'The Home page is available.');
-    $this->assertLinkByHref('examples/email_example');
+    $this->assertLinkByHref('examples/email-example');
 
     // Verify if we can successfully access the email_example page.
-    $this->drupalGet('examples/email_example');
+    $this->drupalGet('examples/email-example');
     $this->assertResponse(200, 'The Email Example description page is available.');
 
     // Verifiy email form has email & message fields.
@@ -71,7 +71,7 @@ class EmailExampleTest extends WebTestBase {
 
     // Verifiy email form is submitted.
     $edit = array('email' => 'example@example.com', 'message' => 'test');
-    $this->drupalPostForm('examples/email_example', $edit, t('Submit'));
+    $this->drupalPostForm('examples/email-example', $edit, t('Submit'));
     $this->assertResponse(200);
 
     // Verifiy comfirmation page.

@@ -1,5 +1,5 @@
 js_example.info:
-  path: '/examples/js_example'
+  path: '/examples/js-example'
   defaults:
     _title: 'JavaScript Example Information'
     _controller: '\Drupal\js_example\Controller\JsExampleController::info'
@@ -7,7 +7,7 @@ js_example.info:
     _permission: 'access content'
 
 js_example.weights:
-  path: '/examples/js_example/weights'
+  path: '/examples/js-example/weights'
   defaults:
     _title: 'JS Example: see weighting in action'
     _controller: '\Drupal\js_example\Controller\JsExampleController::getJsWeightImplementation'
@@ -15,7 +15,7 @@ js_example.weights:
     _permission: 'access content'
 
 js_example.accordion:
-  path: '/examples/js_example/accordion'
+  path: '/examples/js-example/accordion'
   defaults:
     _title: 'JS Example: jQuery UI accordion'
     _controller: '\Drupal\js_example\Controller\JsExampleController::getJsAccordionImplementation'

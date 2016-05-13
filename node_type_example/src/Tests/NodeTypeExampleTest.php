@@ -47,7 +47,7 @@ class NodeTypeExampleTest extends WebTestBase {
    */
   protected function providerMenuLinks() {
     return array(
-      '' => '/examples/node_type_example',
+      '' => '/examples/node-type-example',
     );
   }
 
@@ -56,7 +56,7 @@ class NodeTypeExampleTest extends WebTestBase {
    */
   public function testNodeTypeExample() {
     // Test that our page loads.
-    $this->drupalGet('/examples/node_type_example');
+    $this->drupalGet('/examples/node-type-example');
     $this->assertResponse(200, 'Description page exists.');
 
     // Test that our menu links were created.

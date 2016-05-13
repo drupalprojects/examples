@@ -70,10 +70,10 @@ class ConfigEntityExampleTest extends WebTestBase {
     // Define some paths. Since the Marvin entity is defined, we can use it
     // in our management paths.
     $forbidden_paths = array(
-      '/examples/config_entity_example',
-      '/examples/config_entity_example/add',
-      '/examples/config_entity_example/manage/marvin',
-      '/examples/config_entity_example/manage/marvin/delete',
+      '/examples/config-entity-example',
+      '/examples/config-entity-example/add',
+      '/examples/config-entity-example/manage/marvin',
+      '/examples/config-entity-example/manage/marvin/delete',
     );
     // Check each of the paths to make sure we don't have access. At this point
     // we haven't logged in any users, so the client is anonymous.
@@ -103,13 +103,13 @@ class ConfigEntityExampleTest extends WebTestBase {
 
     // Now that we have the admin user logged in, check the menu links.
     $this->drupalGet('');
-    $this->assertLinkByHref('examples/config_entity_example');
+    $this->assertLinkByHref('examples/config-entity-example');
 
     // 3) Verify that we can manage entities through the user interface.
     // We still have the admin user logged in, so we'll create, update, and
     // delete an entity.
     // Go to the list page.
-    $this->drupalGet('/examples/config_entity_example');
+    $this->drupalGet('/examples/config-entity-example');
     $this->clickLink('Add robot');
     $robot_machine_name = 'roboname';
     $this->drupalPostForm(
@@ -123,12 +123,12 @@ class ConfigEntityExampleTest extends WebTestBase {
     );
 
     // 4) Verify that our robot appears when we edit it.
-    $this->drupalGet('/examples/config_entity_example/manage/' . $robot_machine_name);
+    $this->drupalGet('/examples/config-entity-example/manage/' . $robot_machine_name);
     $this->assertField('label');
     $this->assertFieldChecked('edit-floopy');
 
     // 5) Verify that the label and machine name are shown in the list.
-    $this->drupalGet('/examples/config_entity_example');
+    $this->drupalGet('/examples/config-entity-example');
     $this->clickLink('Add robot');
     $robby_machine_name = 'robby_machine_name';
     $robby_label = 'Robby label';
@@ -141,7 +141,7 @@ class ConfigEntityExampleTest extends WebTestBase {
       ),
       t('Create Robot')
     );
-    $this->drupalGet('/examples/config_entity_example');
+    $this->drupalGet('/examples/config-entity-example');
     $this->assertText($robby_label);
     $this->assertText($robby_machine_name);
   }

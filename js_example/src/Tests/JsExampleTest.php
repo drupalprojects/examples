@@ -31,9 +31,9 @@ class JsExampleTest extends WebTestBase {
    */
   public function testJsExample() {
     $paths = [
-      'examples/js_example',
-      'examples/js_example/weights',
-      'examples/js_example/accordion',
+      'examples/js-example',
+      'examples/js-example/weights',
+      'examples/js-example/accordion',
     ];
     foreach ($paths as $path) {
       $this->drupalGet($path);

@@ -64,10 +64,10 @@ class SimpleTestExampleTest extends WebTestBase {
     // Test for a link to the simpletest_example in the Tools menu.
     $this->drupalGet('');
     $this->assertResponse(200, 'The Home page is available.');
-    $this->assertLinkByHref('examples/simpletest_example');
+    $this->assertLinkByHref('examples/simpletest-example');
 
     // Verify that anonymous can access the simpletest_examples page.
-    $this->drupalGet('examples/simpletest_example');
+    $this->drupalGet('examples/simpletest-example');
     $this->assertResponse(200, 'The SimpleTest Example description page is available.');
   }
 

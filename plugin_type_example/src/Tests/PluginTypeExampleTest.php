@@ -64,7 +64,7 @@ class PluginTypeExampleTest extends WebTestBase {
    * Test the output of the example page.
    */
   public function testPluginExamplePage() {
-    $this->drupalGet('examples/plugin_type_example');
+    $this->drupalGet('examples/plugin-type-example');
     $this->assertResponse(200, 'Example page successfully accessed.');
 
     // Check we see the plugin id.

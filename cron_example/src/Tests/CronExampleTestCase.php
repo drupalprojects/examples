@@ -57,11 +57,11 @@ class CronExampleTestCase extends WebTestBase {
     // Pretend that cron has never been run (even though simpletest seems to
     // run it once...).
     \Drupal::state()->set('cron_example.next_execution', 0);
-    $this->drupalGet('examples/cron_example');
+    $this->drupalGet('examples/cron-example');
 
     // Initial run should cause cron_example_cron() to fire.
     $post = [];
-    $this->drupalPostForm('examples/cron_example', $post, t('Run cron now'));
+    $this->drupalPostForm('examples/cron-example', $post, t('Run cron now'));
     $this->assertText(t('cron_example executed at'));
 
     // Forcing should also cause cron_example_cron() to fire.
@@ -90,7 +90,7 @@ class CronExampleTestCase extends WebTestBase {
     $this->assertText('There are currently 5 items in queue 1 and 100 items in queue 2');
 
     $post = [];
-    $this->drupalPostForm('examples/cron_example', $post, t('Run cron now'));
+    $this->drupalPostForm('examples/cron-example', $post, t('Run cron now'));
     $this->assertPattern('/Queue 1 worker processed item with sequence 5 /');
     $this->assertPattern('/Queue 2 worker processed item with sequence 100 /');
   }

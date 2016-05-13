@@ -40,14 +40,14 @@ class BlockExampleMenuTest extends WebTestBase {
    */
   public function testBlockExampleLink() {
     $this->drupalGet('');
-    $this->assertLinkByHref('examples/block_example');
+    $this->assertLinkByHref('examples/block-example');
   }
 
   /**
    * Tests block_example menus.
    */
   public function testBlockExampleMenu() {
-    $this->drupalGet('examples/block_example');
+    $this->drupalGet('examples/block-example');
     $this->assertResponse(200, 'Description page exists.');
   }
 

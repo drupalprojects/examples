@@ -40,14 +40,14 @@ class FieldExampleMenuTest extends WebTestBase {
    */
   public function testFieldExampleLink() {
     $this->drupalGet('');
-    $this->assertLinkByHref('examples/field_example');
+    $this->assertLinkByHref('examples/field-example');
   }
 
   /**
    * Tests field_example menus.
    */
   public function testBlockExampleMenu() {
-    $this->drupalGet('examples/field_example');
+    $this->drupalGet('examples/field-example');
     $this->assertResponse(200, 'Description page exists.');
   }
 

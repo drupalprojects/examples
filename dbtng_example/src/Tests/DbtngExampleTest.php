@@ -53,7 +53,7 @@ class DbtngExampleTest extends WebTestBase {
     );
 
     // Test the example description page.
-    $this->drupalGet('/examples/dbtng_example');
+    $this->drupalGet('/examples/dbtng-example');
     $this->assertResponse(200, 'Description page exists.');
 
     // Verify and validate that default menu links were loaded for this module.
@@ -77,12 +77,12 @@ class DbtngExampleTest extends WebTestBase {
   protected function providerMenuLinks() {
     return array(
       '' => array(
-        '/examples/dbtng_example',
+        '/examples/dbtng-example',
       ),
-      '/examples/dbtng_example' => array(
-        '/examples/dbtng_example/add',
-        '/examples/dbtng_example/update',
-        '/examples/dbtng_example/advanced',
+      '/examples/dbtng-example' => array(
+        '/examples/dbtng-example/add',
+        '/examples/dbtng-example/update',
+        '/examples/dbtng-example/advanced',
       ),
     );
   }
@@ -94,13 +94,13 @@ class DbtngExampleTest extends WebTestBase {
     // @todo: remove the need to have a logged-in user.
     $this->drupalLogin($this->createUser());
     // Test the basic list.
-    $this->drupalGet('/examples/dbtng_example');
+    $this->drupalGet('/examples/dbtng-example');
     $this->assertPattern("/John[td\/<>\w\s]+Doe/", "Text 'John Doe' found in table");
 
     // Test the add tab.
     // Add the new entry.
     $this->drupalPostForm(
-      '/examples/dbtng_example/add',
+      '/examples/dbtng-example/add',
       array(
         'name' => 'Some',
         'surname' => 'Anonymous',
@@ -109,25 +109,25 @@ class DbtngExampleTest extends WebTestBase {
       t('Add')
     );
     // Now find the new entry.
-    $this->drupalGet('/examples/dbtng_example');
+    $this->drupalGet('/examples/dbtng-example');
     $this->assertPattern("/Some[td\/<>\w\s]+Anonymous/", "Text 'Some Anonymous' found in table");
     // Try the update tab.
     // Find out the pid of our "anonymous" guy.
     $result = DbtngExampleStorage::load(array('surname' => 'Anonymous'));
-    $this->drupalGet('/examples/dbtng_example');
+    $this->drupalGet('/examples/dbtng-example');
     $this->assertEqual(
       count($result), 1, 'Found one entry in the table with surname = "Anonymous".'
     );
     $entry = $result[0];
     unset($entry->uid);
     $entry->name = 'NewFirstName';
-    $this->drupalPostForm('/examples/dbtng_example/update', (array) $entry, t('Update'));
+    $this->drupalPostForm('/examples/dbtng-example/update', (array) $entry, t('Update'));
     // Now find the new entry.
-    $this->drupalGet('/examples/dbtng_example');
+    $this->drupalGet('/examples/dbtng-example');
     $this->assertPattern("/NewFirstName[td\/<>\w\s]+Anonymous/", "Text 'NewFirstName Anonymous' found in table");
 
     // Try the advanced tab.
-    $this->drupalGet('/examples/dbtng_example/advanced');
+    $this->drupalGet('/examples/dbtng-example/advanced');
     $rows = $this->xpath("//*[@id='dbtng-example-advanced-list'][1]/tbody/tr");
     $this->assertEqual(count($rows), 1, 'One row found in advanced view');
     $this->assertFieldByXPath("//*[@id='dbtng-example-advanced-list'][1]/tbody/tr/td[4]", "Roe", "Name 'Roe' Exists in advanced list");
