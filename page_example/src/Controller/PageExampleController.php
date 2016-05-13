@@ -8,6 +8,7 @@
 namespace Drupal\page_example\Controller;
 
 use Drupal\Core\Controller\ControllerBase;
+use Drupal\Core\Link;
 use Drupal\Core\Url;
 use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
 
@@ -23,11 +24,10 @@ class PageExampleController extends ControllerBase {
    */
   public function description() {
     // Make our links. First the simple page.
-    $simple_url = Url::fromRoute('page_example_simple');
-    $page_example_simple_link = $this->l($this->t('simple page'), $simple_url);
+    $page_example_simple_link = Link::createFromRoute($this->t('simple page'), 'page_example_simple')->toString();
     // Now the arguments page.
     $arguments_url = Url::fromRoute('page_example_arguments', array('first' => '23', 'second' => '56'));
-    $page_example_arguments_link = $this->l($this->t('arguments page'), $arguments_url);
+    $page_example_arguments_link = Link::fromTextAndUrl($this->t('arguments page'), $arguments_url)->toString();
 
     // Assemble the markup.
     $build = array(

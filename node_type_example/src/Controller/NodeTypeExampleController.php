@@ -8,6 +8,7 @@
 namespace Drupal\node_type_example\Controller;
 
 use Drupal\Core\Controller\ControllerBase;
+use Drupal\Core\Link;
 use Drupal\Core\Url;
 
 /**
@@ -22,9 +23,7 @@ class NodeTypeExampleController extends ControllerBase {
    */
   public function description() {
     // Construct our links.
-    $content_admin_link = $this->l(
-      $this->t('the content type admin page'), Url::fromRoute('entity.node_type.collection')
-    );
+    $content_admin_link = Link::createFromRoute($this->t('the content type admin page'), 'entity.node_type.collection')->toString();
 
     // We can generate a URL fragment for an admin route. If the path is changed
     // for this route, this code will change it in the content displayed to the

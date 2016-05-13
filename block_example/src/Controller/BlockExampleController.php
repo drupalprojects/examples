@@ -8,8 +8,7 @@
 namespace Drupal\block_example\Controller;
 
 use Drupal\Core\Controller\ControllerBase;
-use Drupal\Core\Url;
-
+use Drupal\Core\Link;
 /**
  * Controller routines for block example routes.
  */
@@ -20,8 +19,7 @@ class BlockExampleController extends ControllerBase {
    */
   public function description() {
     // Make a link from a route to the block admin page.
-    $url = Url::fromRoute('block.admin_display');
-    $block_admin_link = $this->l($this->t('the block admin page'), $url);
+    $block_admin_link = Link::createFromRoute($this->t('the block admin page'), 'block.admin_display')->toString();
 
     // Put the link into the content.
     $build = array(

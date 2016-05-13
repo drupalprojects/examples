@@ -10,6 +10,7 @@ namespace Drupal\config_entity_example\Form;
 use Drupal\Core\Entity\EntityForm;
 use Drupal\Core\Entity\Query\QueryFactory;
 use Drupal\Core\Form\FormStateInterface;
+use Drupal\Core\Link;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
@@ -207,7 +208,7 @@ class RobotFormBase extends EntityForm {
     $url = $robot->urlInfo();
 
     // Create an edit link.
-    $edit_link = $this->l($this->t('Edit'), $url);
+    $edit_link = Link::fromTextAndUrl($this->t('Edit'), $url)->toString();
 
     if ($status == SAVED_UPDATED) {
       // If we edited an existing entity...

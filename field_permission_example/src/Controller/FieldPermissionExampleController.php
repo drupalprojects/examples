@@ -8,8 +8,7 @@
 namespace Drupal\field_permission_example\Controller;
 
 use Drupal\Core\Controller\ControllerBase;
-use Drupal\Core\Url;
-
+use Drupal\Core\Link;
 /**
  * Controller routines for field permission example routes.
  */
@@ -20,8 +19,7 @@ class FieldPermissionExampleController extends ControllerBase {
    */
   public function description() {
     // Make a link from a route to the permissions admin page.
-    $url = Url::fromRoute('user.admin_permissions');
-    $permissions_admin_link = $this->l($this->t('the permissions admin page'), $url);
+    $permissions_admin_link = Link::createFromRoute($this->t('the permissions admin page'), 'user.admin_permissions')->toString();
 
     $build = [
       'description' => [
