@@ -63,6 +63,7 @@ class FieldExampleWebTestBase extends ExamplesTestBase {
       'administer content types',
       'administer node fields',
       'administer node form display',
+      'administer node display',
     );
     $this->administratorAccount = $this->drupalCreateUser($permissions);
     parent::drupalLogin($this->administratorAccount);
@@ -95,11 +96,13 @@ class FieldExampleWebTestBase extends ExamplesTestBase {
    *   The widget to use when editing this field.
    * @param int|string $cardinality
    *   Cardinality of the field. Use -1 to signify 'unlimited'.
+   * @param string $fieldFormatter
+   *   The formatter to use when editing this field.
    *
    * @return string
    *   Name of the field, like field_something
    */
-  protected function createField($type = 'field_example_rgb', $widget_type = 'field_example_text', $cardinality = '1') {
+  protected function createField($type = 'field_example_rgb', $widget_type = 'field_example_text', $cardinality = '1', $fieldFormatter = 'field_example_simple_text') {
     $this->drupalGet('admin/structure/types/manage/' . $this->contentTypeName . '/fields');
 
     // Go to the 'Add field' page.
@@ -150,6 +153,13 @@ class FieldExampleWebTestBase extends ExamplesTestBase {
       'fields[field_' . $field_name . '][type]' => $widget_type,
     );
     $this->drupalPostForm(NULL, $edit, t('Save'));
+
+    // Set the field formatter for the newly created field.
+    $this->drupalGet('admin/structure/types/manage/' . $this->contentTypeName . '/display');
+    $edit1 = array(
+      'fields[field_' . $field_name . '][type]' => $fieldFormatter,
+    );
+    $this->drupalPostForm(NULL, $edit1, t('Save'));
 
     return $field_name;
   }
