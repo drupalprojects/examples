@@ -354,7 +354,7 @@ function node_access_example_node_access_records($node) {
 
     // For the node_access_example_author realm, the grant ID (gid) is
     // equivalent to the node author's user ID (UID).
-    // We check the node UID so that we don't grant author priviledges for
+    // We check the node UID so that we don't grant author privileges for
     // anonymous nodes to anonymous users.
     if ($node->uid) {
       $grants[] = array(

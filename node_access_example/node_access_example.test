@@ -150,7 +150,7 @@ class NodeAccessExampleTestCase extends DrupalWebTestCase {
       }
     }
 
-    // Test cases for anonymus user.
+    // Test cases for anonymous user.
     $this->drupalLogout();
 
     // Test that private nodes with authors are not accessible.
@@ -168,7 +168,7 @@ class NodeAccessExampleTestCase extends DrupalWebTestCase {
       }
       $original_uid = $node->uid;
 
-      // Change node author to anonymus.
+      // Change node author to anonymous.
       $node->uid = 0;
       node_save($node);
       $node = node_load($nid);
@@ -288,7 +288,7 @@ class NodeAccessExampleTestCase extends DrupalWebTestCase {
    *   Node that will be checked.
    *
    * @return bool
-   *   Checker ran succesfully
+   *   Checker ran successfully
    */
   protected function checkNodeAccess($nid, $grant_view, $grant_update, $grant_delete) {
     // Test if node can be viewed.

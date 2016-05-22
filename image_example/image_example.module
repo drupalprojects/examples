@@ -113,7 +113,7 @@ function image_example_image_default_styles() {
       'weight' => 0,
     ),
     // Add a second effect to this image style. Effects are executed in order
-    // and are cummulative. When applying an image style to an image the result
+    // and are cumulative. When applying an image style to an image the result
     // will be the combination of all effects associated with that style.
     array(
       'name' => 'image_example_colorize',
@@ -135,13 +135,13 @@ function image_example_image_default_styles() {
  */
 function image_example_image_style_save($style) {
   // The $style parameter is an image style array with one notable exception.
-  // When a user has choosen to replace a deleted style with another style the
+  // When a user has chosen to replace a deleted style with another style the
   // $style['name'] property contains the name of the replacement style and
   // $style['old_name'] contains the name of the style being deleted.
   //
   // Here we update a variable that contains the name of the image style that
-  // the block provided by this module uses when formating images to use the
-  // new user choosen style name.
+  // the block provided by this module uses when formatting images to use the
+  // new user chosen style name.
   if (isset($style['old_name']) && $style['old_name'] == variable_get('image_example_style_name', '')) {
     variable_set('image_example_style_name', $style['name']);
   }

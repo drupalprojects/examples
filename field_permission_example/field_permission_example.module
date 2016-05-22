@@ -54,7 +54,7 @@
  * With our permissions defined in hook_permission(), we can now
  * handle requests for access. Those come in through
  * hook_field_access(), which we've implemented as
- * field_permission_example_field_acces(). This function determines
+ * field_permission_example_field_access(). This function determines
  * whether the user has the ability to view or edit the field
  * in question by calling user_access(). We also give special edit
  * access to users with the 'bypass node access' and
@@ -87,12 +87,12 @@
  * be able to view, edit, and administer our field.
  *
  * Field permission operations can only be view or edit, in the
- * context of one's own content or that of others. Constrast
+ * context of one's own content or that of others. Contrast
  * with content types where we also have to worry about who can
  * create or delete content.
  */
 function field_permission_example_permission() {
-  // Note: This would be very easy to generate programatically,
+  // Note: This would be very easy to generate programmatically,
   // but it's all typed out here for clarity.
   // The key text is the machine name of the permission.
   $perms['view own fieldnote'] = array('title' => t('View own fieldnote'));
@@ -187,7 +187,7 @@ function field_permission_example_field_info() {
 /**
  * Implements hook_field_is_empty().
  *
- * hook_field_is_emtpy() is where Drupal asks us if this field is empty.
+ * hook_field_is_empty() is where Drupal asks us if this field is empty.
  * Return TRUE if it does not contain data, FALSE if it does. This lets
  * the form API flag an error when required fields are empty.
  */

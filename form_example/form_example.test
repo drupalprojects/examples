@@ -209,7 +209,7 @@ class FormExampleTestCase extends DrupalWebTestCase {
     );
     $this->drupalPost('examples/form_example/wizard', $options, t('Next'));
 
-    // A label city is created, and two buttons appear, Preivous and Next.
+    // A label city is created, and two buttons appear, Previous and Next.
     $this->assertText(t('Hint: Do not enter "San Francisco", and do not leave this out.'));
 
     // Go back to the beginning and verify that the value is there.

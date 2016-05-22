@@ -181,7 +181,7 @@ function xmlrpc_example_xmlrpc() {
       'int',
       // First operand is an integer.
       'int',
-      // Second operatnd is an integer.
+      // Second operand is an integer.
       'int',
     ),
     // Include a little description that is shown when XML-RPC server is

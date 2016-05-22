@@ -200,7 +200,7 @@ function _trigger_example_first_time_login($hook, &$edit, $account, $category = 
     'form_values' => &$edit,
   );
   // Instead of making a call to actions_do for all triggers, doing this loop
-  // we provide the oportunity for actions to alter the account object, and
+  // we provide the opportunity for actions to alter the account object, and
   // the next action should have this altered account object as argument.
   foreach ($aids as $aid => $info) {
     $type = $info['type'];

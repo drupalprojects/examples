@@ -96,7 +96,7 @@ function field_example_field_validate($entity_type, $entity, $field, $instance, 
 /**
  * Implements hook_field_is_empty().
  *
- * hook_field_is_emtpy() is where Drupal asks us if this field is empty.
+ * hook_field_is_empty() is where Drupal asks us if this field is empty.
  * Return TRUE if it does not contain data, FALSE if it does. This lets
  * the form API flag an error when required fields are empty.
  */

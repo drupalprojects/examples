@@ -38,7 +38,7 @@ class TableSortExampleTestCase extends DrupalWebTestCase {
     // No need to login for this test.
     $this->drupalGet('examples/tablesort_example', array('query' => array('sort' => 'desc', 'order' => 'Numbers')));
     $this->assertRaw('<tbody>
- <tr class="odd"><td class="active">7</td><td>e</td><td>t982hkv</td> </tr>', 'Ordered by Number decending');
+ <tr class="odd"><td class="active">7</td><td>e</td><td>t982hkv</td> </tr>', 'Ordered by Number descending');
 
     $this->drupalGet('examples/tablesort_example', array('query' => array('sort' => 'asc', 'order' => 'Numbers')));
     $this->assertRaw('<tbody>
@@ -47,7 +47,7 @@ class TableSortExampleTestCase extends DrupalWebTestCase {
     // Sort by Letters.
     $this->drupalGet('examples/tablesort_example', array('query' => array('sort' => 'desc', 'order' => 'Letters')));
     $this->assertRaw('<tbody>
- <tr class="odd"><td>4</td><td class="active">w</td><td>80jsv772</td> </tr>', 'Ordered by Letters decending');
+ <tr class="odd"><td>4</td><td class="active">w</td><td>80jsv772</td> </tr>', 'Ordered by Letters descending');
 
     $this->drupalGet('examples/tablesort_example', array('query' => array('sort' => 'asc', 'order' => 'Letters')));
     $this->assertRaw('<tbody>
@@ -56,7 +56,7 @@ class TableSortExampleTestCase extends DrupalWebTestCase {
     // Sort by Mixture.
     $this->drupalGet('examples/tablesort_example', array('query' => array('sort' => 'desc', 'order' => 'Mixture')));
     $this->assertRaw('<tbody>
- <tr class="odd"><td>7</td><td>e</td><td class="active">t982hkv</td> </tr>', 'Ordered by Mixture decending');
+ <tr class="odd"><td>7</td><td>e</td><td class="active">t982hkv</td> </tr>', 'Ordered by Mixture descending');
 
     $this->drupalGet('examples/tablesort_example', array('query' => array('sort' => 'asc', 'order' => 'Mixture')));
     $this->assertRaw('<tbody>

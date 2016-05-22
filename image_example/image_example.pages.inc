@@ -32,7 +32,7 @@ function image_example_style_form($form, &$form_state) {
   $form['image_example_image_fid'] = array(
     '#title' => t('Image'),
     '#type' => 'managed_file',
-    '#description' => t('The uploaded image will be displayed on this page using the image style choosen below.'),
+    '#description' => t('The uploaded image will be displayed on this page using the image style chosen below.'),
     '#default_value' => variable_get('image_example_image_fid', ''),
     '#upload_location' => 'public://image_example_images/',
   );
@@ -45,8 +45,8 @@ function image_example_style_form($form, &$form_state) {
     '#description' => t('Choose an image style to use when displaying this image.'),
     // The image_style_options() function returns an array of all available
     // image styles both the key and the value of the array are the image
-    // style's name. The fucntion takes on paramater, a boolean flag
-    // signifying wether or not the array should include a <none> option.
+    // style's name. The function takes on paramater, a boolean flag
+    // signifying whether or not the array should include a <none> option.
     '#options' => image_style_options(TRUE),
     '#default_value' => variable_get('image_example_style_name', ''),
   );
@@ -128,7 +128,7 @@ function image_example_style_form_submit($form, &$form_state) {
     drupal_set_message(t('The image @image_name was removed.', array('@image_name' => $file->filename)));
   }
 
-  // Save the name of the image style choosen by the user.
+  // Save the name of the image style chosen by the user.
   variable_set('image_example_style_name', $form_state['values']['image_example_style_name']);
 }
 
