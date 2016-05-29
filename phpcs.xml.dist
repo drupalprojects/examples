@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- This file contains coding standards directives for the Drupal Examples for
+     Developers project. It uses the PHP Code Sniffer and Drupal Coder projects
+     to enforce standard Drupal coding standards on this project. See
+     https://www.drupal.org/node/2176147 for instructions on how to add a sniff
+     here.-->
+<ruleset name="drupal_examples">
+  <description>Default PHP CodeSniffer configuration for Examples for Developers.</description>
+  <file>.</file>
+  <arg name="extensions" value="inc,install,module,php,profile,test,theme"/>
+  <rule ref="Drupal.WhiteSpace.Comma"/>
+</ruleset>
