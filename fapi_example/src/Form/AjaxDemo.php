@@ -60,7 +60,7 @@ class AjaxDemo extends DemoBase {
         // Could also use [ $this, 'colorCallback'].
         'callback' => '::colorCallback',
         'wrapper' => 'color-wrapper',
-      ]
+      ],
     ];
 
     // Disable caching on this form.
@@ -78,7 +78,7 @@ class AjaxDemo extends DemoBase {
 
     $form['color_wrapper'] = [
       '#type' => 'container',
-      '#attributes' => ['id' => 'color-wrapper']
+      '#attributes' => ['id' => 'color-wrapper'],
     ];
 
     return $form;

@@ -84,7 +84,7 @@ class BuildDemo extends FormBase {
     $form['actions']['rebuild'] = [
       '#type' => 'button',
       '#value' => 'Submit Rebuild',
-      '#submit' => ['::rebuildFormSubmit']
+      '#submit' => ['::rebuildFormSubmit'],
     ];
 
     $form['actions']['ajaxsubmit'] = [
@@ -93,12 +93,12 @@ class BuildDemo extends FormBase {
       '#ajax' => [
         'callback' => '::ajaxSubmit',
         'wrapper' => 'message-wrapper',
-      ]
+      ],
     ];
 
     $form['messages'] = [
       '#type' => 'container',
-      '#attributes' => ['id' => 'message-wrapper']
+      '#attributes' => ['id' => 'message-wrapper'],
     ];
 
     return $form;

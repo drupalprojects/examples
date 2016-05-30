@@ -53,7 +53,7 @@ class ModalForm extends FormBase {
       '#ajax' => [
         'callback' => '::ajaxSubmitForm',
         'event' => 'click',
-      ]
+      ],
     ];
 
     return $form;

@@ -73,7 +73,7 @@ class InputDemo extends FormBase {
     $form['password_confirm'] = [
       '#type' => 'password_confirm',
       '#title' => $this->t('New Password'),
-      '#description' => $this->t('PasswordConfirm, #type = password_confirm')
+      '#description' => $this->t('PasswordConfirm, #type = password_confirm'),
     ];
 
     // Range.
@@ -107,7 +107,7 @@ class InputDemo extends FormBase {
       '#options' => [
         'red' => $this->t('Red'),
         'blue' => $this->t('Blue'),
-        'green' => $this->t('Green')
+        'green' => $this->t('Green'),
       ],
       '#empty_option' => $this->t('-select-'),
       '#description' => $this->t('Select, #type = select'),
@@ -144,7 +144,7 @@ class InputDemo extends FormBase {
     $form['text'] = [
       '#type' => 'textarea',
       '#title' => $this->t('Text'),
-      '#description' => $this->t('Textarea, #type = textarea')
+      '#description' => $this->t('Textarea, #type = textarea'),
     ];
 
     // Textfield.
@@ -161,7 +161,7 @@ class InputDemo extends FormBase {
       '#type' => 'weight',
       '#title' => t('Weight'),
       '#delta' => 10,
-      '#description' => $this->t('Weight, #type = weight')
+      '#description' => $this->t('Weight, #type = weight'),
     ];
 
     // Group submit handlers in an actions element with a key of "actions" so
@@ -190,7 +190,7 @@ class InputDemo extends FormBase {
     $form['actions']['submit'] = [
       '#type' => 'submit',
       '#value' => $this->t('Submit'),
-      '#description' => $this->t('Submit, #type = submit')
+      '#description' => $this->t('Submit, #type = submit'),
     ];
 
     return $form;

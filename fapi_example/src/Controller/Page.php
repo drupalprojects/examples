@@ -45,7 +45,7 @@ class Page extends ControllerBase {
              'attributes' => [
                'class' => ['use-ajax'],
                'data-dialog-type' => 'modal',
-             ]
+             ],
            ]
         ),
 

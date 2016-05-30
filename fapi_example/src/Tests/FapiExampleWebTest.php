@@ -95,7 +95,7 @@ class FapiExampleWebTest extends WebTestBase {
       'pen_name' => 'DMan',
       'title' => 'My Book',
       'publisher' => 'me',
-      'diet' => 'vegan'
+      'diet' => 'vegan',
     ];
     $this->drupalPostForm('/examples/fapi-example/container-demo', $edit, t('Submit'));
     $this->assertText('Value for name: Dave');

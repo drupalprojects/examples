@@ -8,5 +8,6 @@
   <description>Default PHP CodeSniffer configuration for Examples for Developers.</description>
   <file>.</file>
   <arg name="extensions" value="inc,install,module,php,profile,test,theme"/>
+  <rule ref="Drupal.Array.Array.CommaLastItem"/>
   <rule ref="Drupal.WhiteSpace.Comma"/>
 </ruleset>

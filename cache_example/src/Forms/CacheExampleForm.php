@@ -151,7 +151,7 @@ class CacheExampleForm extends FormBase {
         '@time' => number_format($duration * 1000, 2),
         '@color' => $color,
         '@source' => empty($cache) ? $this->t('actual file search') : $this->t('cached'),
-        )
+      )
       ),
     );
     $form['file_search']['remove_file_count'] = array(

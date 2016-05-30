@@ -38,7 +38,7 @@ class RobotDeleteForm extends EntityConfirmFormBase {
    */
   public function getQuestion() {
     return $this->t('Are you sure you want to delete robot %label?', array(
-        '%label' => $this->entity->label(),
+      '%label' => $this->entity->label(),
     ));
   }
 
