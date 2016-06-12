@@ -1,10 +1,5 @@
 <?php
 
-/**
- * @file
- * Contains \Drupal\content_entity_example\Form\ContactDeleteForm.
- */
-
 namespace Drupal\content_entity_example\Form;
 
 use Drupal\Core\Entity\ContentEntityConfirmFormBase;

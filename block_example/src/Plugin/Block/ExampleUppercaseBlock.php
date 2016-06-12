@@ -1,10 +1,5 @@
 <?php
 
-/**
- * @file
- * Contains \Drupal\block_example\Plugin\Block\ExampleUppercaseBlock.
- */
-
 namespace Drupal\block_example\Plugin\Block;
 
 use Drupal\Core\Block\BlockBase;

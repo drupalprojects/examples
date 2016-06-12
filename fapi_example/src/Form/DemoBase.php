@@ -1,10 +1,5 @@
 <?php
 
-/**
- * @file
- * Contains Drupal\fapi_example\Form\DemoBase.
- */
-
 namespace Drupal\fapi_example\Form;
 
 use Drupal\Core\Form\FormBase;

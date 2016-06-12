@@ -1,10 +1,5 @@
 <?php
 
-/**
- * @file
- * Contains Drupal\config_entity_example\Form\RobotAddForm.
- */
-
 namespace Drupal\config_entity_example\Form;
 
 use Drupal\Core\Form\FormStateInterface;

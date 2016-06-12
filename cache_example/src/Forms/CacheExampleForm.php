@@ -1,10 +1,5 @@
 <?php
 
-/**
- * @file
- * Contains \Drupal\cron_example\Form\CronExampleForm.
- */
-
 namespace Drupal\cache_example\Forms;
 
 use Drupal\Core\Form\FormBase;

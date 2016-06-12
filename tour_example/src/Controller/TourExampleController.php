@@ -1,8 +1,4 @@
 <?php
-/**
- * @file
- * Contains \Drupal\tour_example\Controller\TourExampleController.
- */
 
 namespace Drupal\tour_example\Controller;
 

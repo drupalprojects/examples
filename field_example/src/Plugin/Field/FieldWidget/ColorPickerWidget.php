@@ -1,10 +1,5 @@
 <?php
 
-/**
- * @file
- * Contains \Drupal\field_example\Plugin\Field\FieldWidget\ColorPickerWidget.
- */
-
 namespace Drupal\field_example\Plugin\Field\FieldWidget;
 
 use Drupal\Core\Field\FieldItemListInterface;

@@ -1,10 +1,5 @@
 <?php
 
-/**
- * @file
- * Contains Drupal\phpunit_example\DisplayManager
- */
-
 namespace Drupal\phpunit_example;
 
 use Drupal\phpunit_example\DisplayInfoInterface;

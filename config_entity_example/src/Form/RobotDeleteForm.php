@@ -1,10 +1,5 @@
 <?php
 
-/**
- * @file
- * Contains Drupal\config_entity_example\Form\RobotDeleteForm.
- */
-
 namespace Drupal\config_entity_example\Form;
 
 use Drupal\Core\Entity\EntityConfirmFormBase;

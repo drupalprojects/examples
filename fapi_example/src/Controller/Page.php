@@ -1,10 +1,5 @@
 <?php
 
-/**
- * @file
- * Contains Drupal\fapi_example\Controller\Page.
- */
-
 namespace Drupal\fapi_example\Controller;
 use Drupal\Core\Controller\ControllerBase;
 use Drupal\Core\Link;

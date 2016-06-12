@@ -1,10 +1,5 @@
 <?php
 
-/**
- * @file
- * Contains \Drupal\cron_example\Form\CronExampleForm.
- */
-
 namespace Drupal\cron_example\Form;
 
 use Drupal\Core\Config\ConfigFactoryInterface;

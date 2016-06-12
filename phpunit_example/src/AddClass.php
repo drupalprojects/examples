@@ -1,10 +1,5 @@
 <?php
 
-/**
- * @file
- * Contains Drupal\phpunit_example\AddClass
- */
-
 namespace Drupal\phpunit_example;
 
 /**

@@ -1,10 +1,5 @@
 <?php
 
-/**
- * @file
- * Contains \Drupal\plugin_type_example\Plugin\Sandwich\ExampleMeatballSandwich.
- */
-
 namespace Drupal\plugin_type_example\Plugin\Sandwich;
 
 use Drupal\Core\Plugin\PluginBase;

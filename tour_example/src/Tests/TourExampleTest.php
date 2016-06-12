@@ -1,13 +1,5 @@
 <?php
 
-/**
- * @file
- * Contains \Drupal\tour_example\Tests\TourExampleTest.
- *
- * This file contains the test cases to check if tour_example is performing as
- * expected.
- */
-
 namespace Drupal\tour_example\Tests;
 
 use Drupal\tour\Tests\TourTestBasic;

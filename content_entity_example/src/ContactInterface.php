@@ -1,8 +1,4 @@
 <?php
-/**
- * @file
- * Contains \Drupal\content_entity_example\ContactInterface.
- */
 
 namespace Drupal\content_entity_example;
 

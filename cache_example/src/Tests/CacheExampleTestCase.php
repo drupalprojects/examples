@@ -1,10 +1,5 @@
 <?php
 
-/**
- * @file
- * Test case for testing the cache example module.
- */
-
 namespace Drupal\cache_example\Tests;
 
 use Drupal\simpletest\WebTestBase;

@@ -1,11 +1,5 @@
 <?php
 
-/**
- * @file
- * An example of simpletest tests to accompany the tutorial at
- * http://drupal.org/node/890654.
- */
-
 namespace Drupal\simpletest_example\Tests;
 
 use Drupal\simpletest\WebTestBase;

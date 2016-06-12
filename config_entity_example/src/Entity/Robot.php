@@ -1,15 +1,5 @@
 <?php
 
-/**
- * @file
- * Contains Drupal\config_entity_example\Entity\Robot.
- *
- * This contains our entity class.
- *
- * Originally based on code from blog post at
- * http://previousnext.com.au/blog/understanding-drupal-8s-config-entities
- */
-
 namespace Drupal\config_entity_example\Entity;
 
 use Drupal\Core\Config\Entity\ConfigEntityBase;

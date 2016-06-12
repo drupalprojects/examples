@@ -1,10 +1,5 @@
 <?php
 
-/**
- * @file
- * Contains \Drupal\page_example\Controller\TableSortExampleController.
- */
-
 namespace Drupal\tablesort_example\Controller;
 
 use Drupal\Core\Controller\ControllerBase;

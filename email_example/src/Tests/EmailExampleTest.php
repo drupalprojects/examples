@@ -1,13 +1,5 @@
 <?php
 
-/**
- * @file
- * Contains Drupal\email_example\Tests\EmailExampleTest.
- *
- * This file contains the test cases to check if module is performing as
- * expected.
- */
-
 namespace Drupal\email_example\Tests;
 
 use Drupal\simpletest\WebTestBase;

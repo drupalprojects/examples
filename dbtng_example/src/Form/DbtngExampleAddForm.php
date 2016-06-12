@@ -1,10 +1,5 @@
 <?php
 
-/**
- * @file
- * Contains \Drupal\dbtng_example\DbtngExampleAddForm.
- */
-
 namespace Drupal\dbtng_example\Form;
 
 use Drupal\Core\Form\FormBase;

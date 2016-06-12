@@ -1,10 +1,5 @@
 <?php
 
-/**
- * @file
- * Test case for testing the Config Entity Example module.
- */
-
 namespace Drupal\config_entity_example\Tests;
 
 use Drupal\simpletest\WebTestBase;

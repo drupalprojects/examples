@@ -1,10 +1,5 @@
 <?php
 
-/**
- * @file
- * Contains \Drupal\cron_example\Plugin\QueueWorker\ReportWorkerBase.
- */
-
 namespace Drupal\cron_example\Plugin\QueueWorker;
 
 use Drupal\Core\State\StateInterface;

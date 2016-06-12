@@ -1,10 +1,5 @@
 <?php
 
-/**
- * @file
- * An example of a SimpleTest-based functional test.
- */
-
 namespace Drupal\simpletest_example\Tests;
 
 use Drupal\simpletest\WebTestBase;

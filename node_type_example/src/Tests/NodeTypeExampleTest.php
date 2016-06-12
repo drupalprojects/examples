@@ -1,12 +1,5 @@
 <?php
 
-/**
- * @file
- * Contains Drupal\node_type_example\Tests\NodeTypeExampleTest.
- *
- * Test cases for testing the node_type_example module.
- */
-
 namespace Drupal\node_type_example\Tests;
 
 use Drupal\simpletest\WebTestBase;

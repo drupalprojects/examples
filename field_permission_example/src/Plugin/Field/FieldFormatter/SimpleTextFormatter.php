@@ -1,10 +1,5 @@
 <?php
 
-/**
- * @file
- * Contains Drupal\field_permission_example\Plugin\Field\FieldFormatter\SimpleTextFormatter.
- */
-
 namespace Drupal\field_permission_example\Plugin\Field\FieldFormatter;
 
 use Drupal\Core\Field\FormatterBase;

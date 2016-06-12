@@ -1,10 +1,5 @@
 <?php
 
-/**
- * @file
- * SimpleTests for examples module.
- */
-
 namespace Drupal\examples\Tests;
 
 use Drupal\simpletest\WebTestBase;

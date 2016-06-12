@@ -1,10 +1,5 @@
 <?php
 
-/**
- * @file
- * Contains \Drupal\field_permission_example\Controller\FieldPermissionExampleController.
- */
-
 namespace Drupal\field_permission_example\Controller;
 
 use Drupal\Core\Controller\ControllerBase;

@@ -1,10 +1,5 @@
 <?php
 
-/**
- * @file
- * Definition of Drupal\block_example\Tests\BlockExampleTest.
- */
-
 namespace Drupal\block_example\Tests;
 
 use Drupal\Component\Utility\Unicode;

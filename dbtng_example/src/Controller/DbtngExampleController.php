@@ -1,10 +1,5 @@
 <?php
 
-/**
- * @file
- * Contains \Drupal\dbtng_example\Controller\DbtngExampleController.
- */
-
 namespace Drupal\dbtng_example\Controller;
 
 use Drupal\Core\Controller\ControllerBase;

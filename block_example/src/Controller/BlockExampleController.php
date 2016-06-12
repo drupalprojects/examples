@@ -1,10 +1,5 @@
 <?php
 
-/**
- * @file
- * Contains \Drupal\block_example\Controller\BlockExampleController.
- */
-
 namespace Drupal\block_example\Controller;
 
 use Drupal\Core\Controller\ControllerBase;

@@ -1,8 +1,4 @@
 <?php
-/**
- * @file
- * Contains Drupal\content_entity_example\Form\ContactForm.
- */
 
 namespace Drupal\content_entity_example\Form;
 

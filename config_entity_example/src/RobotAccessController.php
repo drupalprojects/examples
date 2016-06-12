@@ -1,10 +1,5 @@
 <?php
 
-/**
- * @file
- * Contains \Drupal\config_entity_example\RobotAccessController.
- */
-
 namespace Drupal\config_entity_example;
 
 use Drupal\Core\Entity\EntityAccessControlHandler;

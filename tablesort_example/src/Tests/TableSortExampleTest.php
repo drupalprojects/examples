@@ -1,10 +1,5 @@
 <?php
 
-/**
- * @file
- * Simpletest case for tablesort_example module.
- */
-
 namespace Drupal\tablesort_example\Tests;
 
 use Drupal\simpletest\WebTestBase;

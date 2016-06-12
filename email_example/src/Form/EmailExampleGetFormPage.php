@@ -1,10 +1,5 @@
 <?php
 
-/**
- * @file
- * Contains \Drupal\email_example\Form\EmailExampleGetFormPage.
- */
-
 namespace Drupal\email_example\Form;
 
 use Drupal\Core\Form\FormStateInterface;

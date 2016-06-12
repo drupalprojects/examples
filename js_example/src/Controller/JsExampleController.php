@@ -1,10 +1,5 @@
 <?php
 
-/**
- * @file
- * Contains \Drupal\js_example\Controller\JsExampleController.
- */
-
 namespace Drupal\js_example\Controller;
 
 use Drupal\Core\Controller\ControllerBase;

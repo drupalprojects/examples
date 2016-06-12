@@ -1,10 +1,5 @@
 <?php
 
-/**
- * @file
- * Contains \Drupal\field_example\Controller\FieldExampleController.
- */
-
 namespace Drupal\field_example\Controller;
 
 use Drupal\Core\Controller\ControllerBase;

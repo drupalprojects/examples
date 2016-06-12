@@ -1,13 +1,5 @@
 <?php
 
-/**
- * @file
- * Test case for testing the page_example module.
- *
- * This file contains the test cases to check if module is performing as
- * expected.
- */
-
 namespace Drupal\page_example\Tests;
 
 use Drupal\simpletest\WebTestBase;

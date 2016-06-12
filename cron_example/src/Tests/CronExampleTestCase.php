@@ -1,15 +1,5 @@
 <?php
 
-/**
- * @file
- * Test case for testing the cron example module.
- */
-
-/**
- * @addtogroup cron_example
- * @{
- */
-
 namespace Drupal\cron_example\Tests;
 
 use Drupal\simpletest\WebTestBase;
@@ -96,7 +86,3 @@ class CronExampleTestCase extends WebTestBase {
   }
 
 }
-
-/**
- * @} End of "addtogroup cron_example".
- */

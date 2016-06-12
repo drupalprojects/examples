@@ -1,10 +1,5 @@
 <?php
 
-/**
- * @file
- * Contains \Drupal\content_entity_example\Entity\Controller\ContentEntityExampleController.
- */
-
 namespace Drupal\content_entity_example\Entity\Controller;
 
 use Drupal\Core\Entity\EntityInterface;

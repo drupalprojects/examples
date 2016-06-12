@@ -1,10 +1,5 @@
 <?php
 
-/**
- * @file
- * Contains \Drupal\dbtng_example\Tests\DbtngExampleTest.
- */
-
 namespace Drupal\dbtng_example\Tests;
 
 use Drupal\dbtng_example\DbtngExampleStorage;

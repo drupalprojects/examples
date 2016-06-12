@@ -1,10 +1,5 @@
 <?php
 
-/**
- * @file
- * Contains Drupal\field_example\Plugin\Field\FieldFormatter\ColorBackgroudFormatter.
- */
-
 namespace Drupal\field_example\Plugin\Field\FieldFormatter;
 
 use Drupal\Core\Field\FormatterBase;

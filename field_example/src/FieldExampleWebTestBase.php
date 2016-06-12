@@ -1,10 +1,5 @@
 <?php
 
-/**
- * @file
- * Definition of Drupal\field_example\Tests\FieldWebTestBase.
- */
-
 namespace Drupal\field_example;
 
 use Drupal\examples\Tests\ExamplesTestBase;

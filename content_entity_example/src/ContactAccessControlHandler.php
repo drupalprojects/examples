@@ -1,10 +1,5 @@
 <?php
 
-/**
- * @file
- * Contains \Drupal\content_entity_example\ContactAccessControlHandler.
- */
-
 namespace Drupal\content_entity_example;
 
 use Drupal\Core\Access\AccessResult;

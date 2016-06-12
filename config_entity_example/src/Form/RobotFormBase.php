@@ -1,10 +1,5 @@
 <?php
 
-/**
- * @file
- * Contains Drupal\config_entity_example\Form\RobotFormBase.
- */
-
 namespace Drupal\config_entity_example\Form;
 
 use Drupal\Core\Entity\EntityForm;

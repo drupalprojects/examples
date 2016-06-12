@@ -1,10 +1,5 @@
 <?php
 
-/**
- * @file
- * Contains Drupal\Tests\phpunit_example\Unit\Subclasses\ProtectedPrivatesSubclass
- */
-
 namespace Drupal\Tests\phpunit_example\Unit\Subclasses;
 
 use Drupal\phpunit_example\ProtectedPrivates;

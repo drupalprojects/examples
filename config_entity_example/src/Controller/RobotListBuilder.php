@@ -1,8 +1,4 @@
 <?php
-/**
- * @file
- * Contains Drupal\config_entity_example\Controller\RobotListBuilder.
- */
 
 namespace Drupal\config_entity_example\Controller;
 

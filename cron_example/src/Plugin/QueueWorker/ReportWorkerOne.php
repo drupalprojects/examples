@@ -1,10 +1,5 @@
 <?php
 
-/**
- * @file
- * Contains \Drupal\cron_example\Plugin\QueueWorker\ReportWorkerOne.
- */
-
 namespace Drupal\cron_example\Plugin\QueueWorker;
 
 /**

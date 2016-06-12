@@ -1,10 +1,5 @@
 <?php
 
-/**
- * @file
- * Definition of Drupal\field_example\Tests\TextWidgetTest.
- */
-
 namespace Drupal\field_example\Tests;
 
 use Drupal\field_example\FieldExampleWebTestBase;

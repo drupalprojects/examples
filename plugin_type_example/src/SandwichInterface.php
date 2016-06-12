@@ -1,8 +1,4 @@
 <?php
-/**
- * @file
- * Provides Drupal\plugin_type_example\SandwichInterface.
- */
 
 namespace Drupal\plugin_type_example;
 

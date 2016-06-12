@@ -1,10 +1,5 @@
 <?php
 
-/**
- * @file
- * Contains \Drupal\plugin_type_example\Controller\PluginTypeExampleController.
- */
-
 namespace Drupal\plugin_type_example\Controller;
 
 use Drupal\Core\Controller\ControllerBase;

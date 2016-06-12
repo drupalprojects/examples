@@ -1,10 +1,5 @@
 <?php
 
-/**
- * @file
- * Contains Drupal\Tests\phpunit_example\Unit\ProtectedPrivatesTest
- */
-
 namespace Drupal\Tests\phpunit_example\Unit;
 
 use Drupal\Tests\UnitTestCase;

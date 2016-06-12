@@ -1,10 +1,5 @@
 <?php
 
-/**
- * @file
- * Contains \Drupal\plugin_type_example\SandwichPluginManager.
- */
-
 namespace Drupal\plugin_type_example;
 
 use Drupal\Core\Cache\CacheBackendInterface;

@@ -1,10 +1,5 @@
 <?php
 
-/**
- * @file
- * Definition of Drupal\field_example\Tests\FieldExampleMenuTest.
- */
-
 namespace Drupal\field_example\Tests;
 
 use Drupal\simpletest\WebTestBase;

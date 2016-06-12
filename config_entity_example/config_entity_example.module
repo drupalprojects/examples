@@ -32,6 +32,9 @@
  * Another key difference with configuration entities is the expectation they
  * are created by administrators, and not end users. As files, configuration
  * entities can be added to a version control system.
+ *
+ * Originally based on code from blog post at
+ * http://previousnext.com.au/blog/understanding-drupal-8s-config-entities
  */
 
 /**

@@ -1,10 +1,5 @@
 <?php
 
-/**
- * @file
- * Contains \Drupal\phpunit_example\Controller\PHPUnitExampleController.
- */
-
 namespace Drupal\phpunit_example\Controller;
 
 /**

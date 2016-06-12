@@ -1,10 +1,5 @@
 <?php
 
-/**
- * @file
- * Contains Drupal\field_example\Plugin\Field\FieldType\RgbItem.
- */
-
 namespace Drupal\field_example\Plugin\Field\FieldType;
 
 use Drupal\Core\Field\FieldItemBase;
