@@ -31,6 +31,7 @@ class TableSortExampleController extends ControllerBase {
    * TableSortExampleController constructor.
    *
    * @param \Drupal\Core\Database\Connection $database
+   *   The database connection.
    */
   public function __construct(Connection $database) {
     $this->database = $database;

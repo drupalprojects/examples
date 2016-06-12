@@ -36,9 +36,9 @@ abstract class ReportWorkerBase extends QueueWorkerBase implements ContainerFact
    *
    * @param array $configuration
    *   The configuration of the instance.
-   * @param $plugin_id
+   * @param string $plugin_id
    *   The plugin id.
-   * @param $plugin_definition
+   * @param mixed $plugin_definition
    *   The plugin definition.
    * @param \Drupal\Core\State\StateInterface $state
    *   The state service the instance should use.

@@ -21,9 +21,9 @@ class ProtectedPrivates {
   /**
    * A simple addition method with validity checking.
    *
-   * @param numeric $a
+   * @param int|float $a
    *   A number to add.
-   * @param numeric $b
+   * @param int|float $b
    *   Another number to add.
    *
    * @return numeric
@@ -40,9 +40,9 @@ class ProtectedPrivates {
   /**
    * A simple addition method with validity checking.
    *
-   * @param numeric $a
+   * @param int|float $a
    *   A number to add.
-   * @param numeric $b
+   * @param int|float $b
    *   Another number to add.
    *
    * @return numeric

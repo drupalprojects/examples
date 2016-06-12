@@ -11,5 +11,6 @@
   <rule ref="Drupal.Array.Array.CommaLastItem"/>
   <rule ref="Drupal.Commenting.InlineComment"/>
   <rule ref="Drupal.Commenting.FileComment.NamespaceNoFileDoc"/>
+  <rule ref="Drupal.Commenting.FunctionComment"/>
   <rule ref="Drupal.WhiteSpace.Comma"/>
 </ruleset>

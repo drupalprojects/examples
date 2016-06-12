@@ -67,7 +67,7 @@ class RobotFormBase extends EntityForm {
    *
    * @param array $form
    *   An associative array containing the structure of the form.
-   * @param array $form_state
+   * @param \Drupal\Core\Form\FormStateInterface $form_state
    *   An associative array containing the current state of the form.
    *
    * @return array
