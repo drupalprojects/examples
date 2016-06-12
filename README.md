@@ -17,7 +17,9 @@ workings.
 
 These examples are meant to teach you about code-level development for Drupal
 8. Some solutions might be better served using a contributed module, so that
-you don't end up having to re-invent the wheel in PHP.
+you don't end up having to re-invent the wheel in PHP. When in doubt, look for
+an existing contrib project that already does what you want, and contribute to
+that project.
 
 
 How To Use The Examples
@@ -45,22 +47,21 @@ parsed and made browseable here.
 * http://drupalcode.org/project/examples.git allows you to browse the git
 repository for the Examples project.
 
-Note also that in the future, many modules from the Examples project will be
-moved into Drupal 8 core. This means some examples will come with Drupal
-itself. As of this writing, none have been migrated to Drupal 8 yet.
-
-This collection of modules ship with a composer.json file outlining the name,
-description, type and license of the package. Although not used by Drupal itself
-it allows the module to be installed via composer, therfore all contrib modules
-should ship with one.
+This project ships with a composer.json file. This is meant to illustrate how
+to provide a composer.json file for a Drupal contrib project. You can read more
+about how to use Composer with Drupal here: https://www.drupal.org/node/2718229
 
 How To Install The Modules
 --------------------------
 
 1. The Examples project installs like any other Drupal module. There is extensive
-documentation on how to do this here: https://drupal.org/documentation/install/modules-themes/modules-8
+documentation on how to do this here:
+https://drupal.org/documentation/install/modules-themes/modules-8 But essentially:
+Download the tarball and expand it into the modules/ directory in your Drupal 8
+installation.
 
-2. Enable any Example sub-module you wish to explore in Admin menu > Extend.
+2. Within Drupal, enable any Example sub-module you wish to explore in Admin
+menu > Extend.
 
 3. Rebuild access permissions if you are prompted to.
 
