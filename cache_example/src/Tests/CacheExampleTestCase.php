@@ -101,7 +101,7 @@ class CacheExampleTestCase extends WebTestBase {
     $this->drupalPostForm('examples/cache-example', array('cache_clear_type' => 'remove_tag'), t('Clear or expire cache'));
     // And verify that it was invalidated.
     $this->assertText('Cache_item is invalid');
-    // Do the hard delete
+    // Do the hard delete.
     $this->drupalPostForm('examples/cache-example', array('cache_clear_type' => 'remove_all'), t('Clear or expire cache'));
     // And verify that it was removed.
     $this->assertText('Cache item does not exist');

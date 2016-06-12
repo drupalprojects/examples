@@ -98,7 +98,7 @@ class PageExampleController extends ControllerBase {
     $list[] = $this->t('The total was @number.', array('@number' => $first + $second));
 
     $render_array['page_example_arguments'] = array(
-      // The theme function to apply to the #items
+      // The theme function to apply to the #items.
       '#theme' => 'item_list',
       // The list itself.
       '#items' => $list,

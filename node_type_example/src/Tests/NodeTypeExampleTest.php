@@ -90,7 +90,7 @@ class NodeTypeExampleTest extends WebTestBase {
     $this->assertRaw('Example: Locked Content Type', 'Locked content type found.');
 
     // Check for the locked status of our content types.
-    // $nodeType will be of type Drupal\node\NodeTypeInterface
+    // $nodeType will be of type Drupal\node\NodeTypeInterface.
     $node_type = node_type_load('basic_content_type');
     $this->assertTrue($node_type, 'basic_content_type exists.');
     if ($node_type) {

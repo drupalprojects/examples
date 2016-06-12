@@ -50,6 +50,6 @@ function plugin_type_example_sandwich_info_alter(&$sandwich_plugin_info) {
   // The ham sandwich is more calorific in our system.  Note that the string
   // 'ham_sandwich' is the id name of the Ham Sandwich plugin, which is set
   // in the annotation in
-  // \Drupal\plugin_type_example\Plugin\Sandwich\ExampleHamSandwich
+  // \Drupal\plugin_type_example\Plugin\Sandwich\ExampleHamSandwich.
   $sandwich_plugin_info['ham_sandwich']['calories'] = 500;
 }
