@@ -43,8 +43,8 @@ class AjaxDemo extends DemoBase {
      * The #ajax attribute used in the temperature input element defines an ajax
      * callback that will invoke the colorCallback method on this form object.
      * Whenever the temperature element changes, it will invoke this callback
-     * and replace the contents of the color_wrapper container with the results of this
-     * method call.
+     * and replace the contents of the color_wrapper container with the results
+     * of this method call.
      */
     $form['temperature'] = [
       '#title' => $this->t('Temperature'),

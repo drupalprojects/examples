@@ -228,7 +228,8 @@ class FapiExampleWebTest extends WebTestBase {
    */
   public function testVerticalTabsDemoForm() {
 
-    // Test for a link to the vertical_tabs_demo example on the fapi_example page.
+    // Test for a link to the vertical_tabs_demo example on the fapi_example
+    // page.
     $this->drupalGet('examples/fapi-example');
     $this->assertLinkByHref('examples/fapi-example/vertical-tabs-demo');
 

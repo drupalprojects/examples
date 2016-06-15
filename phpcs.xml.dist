@@ -12,5 +12,6 @@
   <rule ref="Drupal.Commenting.InlineComment"/>
   <rule ref="Drupal.Commenting.FileComment.NamespaceNoFileDoc"/>
   <rule ref="Drupal.Commenting.FunctionComment"/>
+  <rule ref="Drupal.Files"/>
   <rule ref="Drupal.WhiteSpace"/>
 </ruleset>
