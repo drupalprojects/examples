@@ -67,6 +67,6 @@ class ExamplesTest extends WebTestBase {
       'Found the PHPUnit Example tray item.'
     );
 
-    }
+  }
 
 }
