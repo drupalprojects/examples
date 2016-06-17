@@ -789,7 +789,11 @@ class FileExampleReadWriteForm extends FormBase {
     $form_values = $form_state->getValues();
     // If the devel module is installed, use it's nicer message format.
     if ($this->moduleHandler->moduleExists('devel')) {
+      // @codingStandardsIgnoreStart
+      // We wrap this in the coding standards ignore tags because the use of
+      // function dsm() is discouraged.
       dsm($this->getStoredData(), $this->t('Entire $_SESSION["file_example"]'));
+      // @codingStandardsIgnoreEnd
     }
     else {
       drupal_set_message('<pre>' . print_r($this->getStoredData(), TRUE) . '</pre>');
