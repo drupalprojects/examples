@@ -2,7 +2,6 @@
 
 namespace Drupal\phpunit_example;
 
-use Drupal\phpunit_example\DisplayInfoInterface;
 
 /**
  * An example class to demonstrate unit testing.

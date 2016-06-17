@@ -85,4 +85,5 @@ class Robot extends ConfigEntityBase {
    * @var string
    */
   public $floopy;
+
 }

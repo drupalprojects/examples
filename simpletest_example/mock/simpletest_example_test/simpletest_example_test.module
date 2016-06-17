@@ -5,6 +5,9 @@
  * Implements simpletest_example_test module.
  */
 
+use Drupal\Core\Entity\Display\EntityViewDisplayInterface;
+use Drupal\Core\Entity\EntityInterface;
+
 /**
  * The mock module for SimpleTest Example.
  *
@@ -23,8 +26,8 @@
  */
 function simpletest_example_test_node_view(
   array &$build,
-  \Drupal\Core\Entity\EntityInterface $node,
-  \Drupal\Core\Entity\Display\EntityViewDisplayInterface $display,
+  EntityInterface $node,
+  EntityViewDisplayInterface $display,
   $view_mode) {
   if ($node->getType() == 'simpletest_example') {
     $build['simpletest_example_test_section'] = array(

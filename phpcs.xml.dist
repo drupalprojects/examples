@@ -9,6 +9,7 @@
   <file>.</file>
   <arg name="extensions" value="inc,install,module,php,profile,test,theme"/>
   <rule ref="Drupal.Array.Array.CommaLastItem"/>
+  <rule ref="Drupal.Classes"/>
   <rule ref="Drupal.Commenting.InlineComment"/>
   <rule ref="Drupal.Commenting.FileComment.NamespaceNoFileDoc"/>
   <rule ref="Drupal.Commenting.FunctionComment"/>
