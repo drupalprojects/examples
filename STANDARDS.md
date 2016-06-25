@@ -28,32 +28,32 @@ Then tell `phpcs' where our Drupal-specific rules are.
 
 Like this:
 
-  $ cd my/drupal/root/
-  $ composer require drupal/coder
-  // Composer installs Coder, which requires PHP_CodeSniffer as well.
-  // Configure phpcs to use the Drupal standard rules...
-  $ ./vendor/bin/phpcs --config-set installed_paths /path/to/drupal/vendor/drupal/coder/coder_sniffer/
-  // phpcs now knows how to find the Drupal standard. You can test it:
-  $ cd core
-  $ ../vendor/bin/phpcs -e --standard=Drupal
-  // Shows you a bunch of Drupal-related sniffs.
+    $ cd my/drupal/root/
+    $ composer require drupal/coder
+    // Composer installs Coder, which requires PHP_CodeSniffer as well.
+    // Configure phpcs to use the Drupal standard rules...
+    $ ./vendor/bin/phpcs --config-set installed_paths /path/to/drupal/vendor/drupal/coder/coder_sniffer/
+    // phpcs now knows how to find the Drupal standard. You can test it:
+    $ cd core
+    $ ../vendor/bin/phpcs -e --standard=Drupal
+    // Shows you a bunch of Drupal-related sniffs.
 
 Running phpcs
 -------------
 
 Now you can run phpcs:
 
-  $ cd modules/examples
-  $ ../../vendor/bin/phpcs -p -s
-  // phpcs uses Exampes' phpcs.xml.dist to verify coding standards.
-  // -p shows you progress dots.
-  // -s shows you sniff errors in the report.
+    $ cd modules/examples
+    $ ../../vendor/bin/phpcs -p -s
+    // phpcs uses Exampes' phpcs.xml.dist to verify coding standards.
+    // -p shows you progress dots.
+    // -s shows you sniff errors in the report.
 
 If there are errors, they can sometimes be fixed with `phpcbf`, which is
 part of the `phpcs` package.
 
-  $ ../../vendor/bin/phpcbf
-  // phpcbf now performs automated fixes.
+    $ ../../vendor/bin/phpcbf
+    // phpcbf now performs automated fixes.
 
 Always look at the changes to see what `phpcbf` did.
 
