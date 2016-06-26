@@ -34,6 +34,7 @@ use Drupal\Tests\phpunit_example\Unit\Subclasses\ProtectedPrivatesSubclass;
  * demonstrate that here in testProtectedAdd().
  *
  * @ingroup phpunit_example
+ *
  * @group phpunit_example
  * @group examples
  */
@@ -99,6 +100,7 @@ class ProtectedPrivatesTest extends UnitTestCase {
    * of this private method.
    *
    * @expectedException \InvalidArgumentException
+   *
    * @dataProvider addBadDataProvider
    */
   public function testPrivateAddBadData($a, $b) {
@@ -136,6 +138,7 @@ class ProtectedPrivatesTest extends UnitTestCase {
    * This test is similar to testProtectedAdd(), but expects an exception.
    *
    * @expectedException \InvalidArgumentException
+   *
    * @dataProvider addBadDataProvider
    */
   public function testProtectedAddBadData($a, $b) {

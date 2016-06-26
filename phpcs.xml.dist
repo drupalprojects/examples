@@ -11,6 +11,12 @@
   <rule ref="Drupal.Array.Array.CommaLastItem"/>
   <rule ref="Drupal.CSS"/>
   <rule ref="Drupal.Classes"/>
+  <rule ref="Drupal.Commenting.DocComment">
+      <exclude name="Drupal.Commenting.DocComment.LongFullStop"/>
+      <exclude name="Drupal.Commenting.DocComment.MissingShort"/>
+      <exclude name="Drupal.Commenting.DocComment.ShortSingleLine"/>
+      <exclude name="Drupal.Commenting.DocComment.TagsNotGrouped"/>
+  </rule>
   <rule ref="Drupal.Commenting.InlineComment"/>
   <rule ref="Drupal.Commenting.FileComment.NamespaceNoFileDoc"/>
   <rule ref="Drupal.Commenting.FunctionComment"/>

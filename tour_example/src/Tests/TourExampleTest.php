@@ -10,6 +10,7 @@ use Drupal\tour\Tests\TourTestBasic;
  * We use TourTestBasic to get some built-in tour tip testing assertions.
  *
  * @ingroup tour_example
+ *
  * @group tour_example
  * @group examples
  */

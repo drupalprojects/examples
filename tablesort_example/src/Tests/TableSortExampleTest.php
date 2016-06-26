@@ -9,6 +9,7 @@ use Drupal\simpletest\WebTestBase;
  *
  * @group tablesort_example
  * @group examples
+ *
  * @ingroup tablesort_example
  */
 class TableSortExampleTest extends WebTestBase {

@@ -35,7 +35,7 @@ function tablesort_example_install() {
 /**
  * Implements hook_uninstall().
  *
- * It's good to clean up after ourselves
+ * It's good to clean up after ourselves.
  *
  * @ingroup tablesort_example
  */

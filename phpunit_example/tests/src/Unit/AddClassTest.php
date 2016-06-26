@@ -11,7 +11,7 @@ use Drupal\phpunit_example\AddClass;
  *
  * This test case demonstrates the following PHPUnit annotations:
  * - dataProvider
- * - expectedException
+ * - expectedException.
  *
  * PHPUnit looks for classes with names ending in 'Test'. Then it
  * looks to see whether that class is a subclass of
@@ -29,6 +29,7 @@ use Drupal\phpunit_example\AddClass;
  * we only want an instance of AddClass so we can test its add() method.
  *
  * @ingroup phpunit_example
+ *
  * @group phpunit_example
  * @group examples
  */
@@ -105,6 +106,7 @@ class AddClassTest extends UnitTestCase {
    * idea to test your exceptions with @expectedException.
    *
    * @dataProvider addBadDataProvider
+   *
    * @expectedException \InvalidArgumentException
    *
    * @see AddClassTest::addBadDataProvider()

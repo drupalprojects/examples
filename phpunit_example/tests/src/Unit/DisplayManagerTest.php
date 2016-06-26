@@ -12,6 +12,7 @@ use Drupal\phpunit_example\DisplayInfoInterface;
  * @todo: More documentation.
  *
  * @ingroup phpunit_example
+ *
  * @group phpunit_example
  * @group examples
  */

@@ -12,7 +12,7 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
 class TableSortExampleController extends ControllerBase {
 
   /**
-   * The Database Connection
+   * The Database Connection.
    *
    * @var \Drupal\Core\Database\Connection
    */

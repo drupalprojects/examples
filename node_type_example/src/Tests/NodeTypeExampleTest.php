@@ -8,6 +8,7 @@ use Drupal\simpletest\WebTestBase;
  * Test that our content types are successfully created.
  *
  * @ingroup node_type_example
+ *
  * @group node_type_example
  * @group examples
  */

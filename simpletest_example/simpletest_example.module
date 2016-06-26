@@ -2,7 +2,7 @@
 
 /**
  * @file
- * Module file for simpletest_example
+ * Module file for simpletest_example.
  */
 
 use Drupal\Core\Access\AccessResult;

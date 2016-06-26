@@ -8,6 +8,7 @@ use Drupal\simpletest\WebTestBase;
  * Tests for the cache_example module.
  *
  * @ingroup cache_example
+ *
  * @group cache_example
  * @group examples
  */

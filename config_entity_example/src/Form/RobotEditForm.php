@@ -5,7 +5,7 @@ namespace Drupal\config_entity_example\Form;
 use Drupal\Core\Form\FormStateInterface;
 
 /**
- * Class RobotEditForm
+ * Class RobotEditForm.
  *
  * Provides the edit form for our Robot entity.
  *

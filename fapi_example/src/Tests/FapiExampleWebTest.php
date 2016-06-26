@@ -179,8 +179,8 @@ class FapiExampleWebTest extends WebTestBase {
   }
 
   /**
-   * Check if SimpleTest Example can successfully return its main page,
-   * if there is a link to the simpletest_example in the Tools menu.
+   * Check if SimpleTest Example can successfully return its main page and if
+   * there is a link to the simpletest_example in the Tools menu.
    */
   public function testSimpleFormExample() {
     // Test for a link to the fapi_example in the Tools menu.
