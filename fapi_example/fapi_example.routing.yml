@@ -81,3 +81,11 @@ fapi_example.build_demo:
     _title: 'Build Form Demo'
   requirements:
     _permission: 'access content'
+
+fapi_example.ajax_addmore:
+  path: 'examples/fapi_example/ajax_addmore'
+  defaults:
+    _form:  '\Drupal\fapi_example\Form\AjaxAddMore'
+    _title: 'Add-more button'
+  requirements:
+    _permission: 'access content'

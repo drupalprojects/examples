@@ -45,3 +45,9 @@ fapi_example.build_demo:
   description: Demostrates the order of firing of from controller methods.
   route_name: fapi_example.build_demo
   parent: fapi_example.description
+
+fapi_example.ajax_addmore:
+  title: Ajax Add more button
+  description: Form with 'add more' and 'remove' buttons.
+  route_name: fapi_example.ajax_addmore
+  parent: fapi_example.description
