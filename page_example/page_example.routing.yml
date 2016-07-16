@@ -6,7 +6,7 @@
 # Menu items corresponding to these URLs are defined separately in the
 # page_example.menu_links.yml file.
 
-# If the user accesses http://example.com/?q=examples/page_example, the routing
+# If the user accesses http://example.com/?q=examples/page-example, the routing
 # system will look for a route with that path. In this case it will find a
 # match, and execute the _controller callback. In this case the callback is
 # defined as a classname
@@ -22,7 +22,7 @@ page_example_description:
   requirements:
     _permission: 'access content'
 
-# If the user accesses http://example.com/?q=examples/page_example/simple,
+# If the user accesses http://example.com/?q=examples/page-example/simple,
 # the routing system will look for a route with that path. In this case it will
 # find a match, and execute the _controller callback. Access to this path
 # requires "access simple page" permission.
@@ -35,11 +35,11 @@ page_example_simple:
     _permission: 'access simple page'
 
 # If the user accesses
-# http://example.com/?q=examples/page_example/arguments/1/2, the routing system
-# will first look for examples/page_example/arguments/1/2. Not finding a match,
-# it will look for examples/page_example/arguments/1/{*}. Again not finding a
-# match, it will look for examples/page_example/arguments/{*}/2. Yet again not
-# finding a match, it will look for examples/page_example/arguments/{*}/{*}.
+# http://example.com/?q=examples/page-example/arguments/1/2, the routing system
+# will first look for examples/page-example/arguments/1/2. Not finding a match,
+# it will look for examples/page-example/arguments/1/{*}. Again not finding a
+# match, it will look for examples/page-example/arguments/{*}/2. Yet again not
+# finding a match, it will look for examples/page-example/arguments/{*}/{*}.
 # This time it finds a match, and so it will execute the _controller callback.
 # In this case, it's PageExampleController::arguments().
 

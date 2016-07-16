@@ -15,7 +15,7 @@ class PageExampleController extends ControllerBase {
   /**
    * Constructs a page with descriptive content.
    *
-   * Our router maps this method to the path 'examples/page_example'.
+   * Our router maps this method to the path 'examples/page-example'.
    */
   public function description() {
     // Make our links. First the simple page.
@@ -42,7 +42,7 @@ class PageExampleController extends ControllerBase {
    * Constructs a simple page.
    *
    * The router _controller callback, maps the path
-   * 'examples/page_example/simple' to this method.
+   * 'examples/page-example/simple' to this method.
    *
    * _controller callbacks return a renderable array for the content area of the
    * page. The theme system will later render and surround the content with the
@@ -58,7 +58,7 @@ class PageExampleController extends ControllerBase {
    * A more complex _controller callback that takes arguments.
    *
    * This callback is mapped to the path
-   * 'examples/page_example/arguments/{first}/{second}'.
+   * 'examples/page-example/arguments/{first}/{second}'.
    *
    * The arguments in brackets are passed to this callback from the page URL.
    * The placeholder names "first" and "second" can have any value but should

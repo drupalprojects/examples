@@ -29,7 +29,7 @@ use Drupal\Core\Routing\RouteMatchInterface;
  * this is the 'Help' region which can be found at admin/structure/block.
  *
  * The help text in the first example below, will appear on the simple page at
- * examples/page_example/simple.
+ * examples/page-example/simple.
  *
  * The second example text will be available on the admin help page (admin/help)
  * in the list of help topics using the name of the module. To specify help in
