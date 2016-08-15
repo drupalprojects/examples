@@ -49,6 +49,7 @@ function examples_toolbar() {
     'js_example' => 'js_example.info',
     'node_type_example' => 'config_node_type_example.description',
     'page_example' => 'page_example_description',
+    'pager_example' => 'pager_example.page',
     'phpunit_example' => 'phpunit_example_description',
     'plugin_type_example' => 'plugin_type_example.description',
     'simpletest_example' => 'simpletest_example_description',

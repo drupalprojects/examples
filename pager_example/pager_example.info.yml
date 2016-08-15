@@ -1,0 +1,8 @@
+name: Pager Example
+type: module
+description: 'The example output nodes with pager.'
+package: Example modules
+core: 8.x
+dependencies:
+  - examples
+  - node
