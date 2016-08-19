@@ -9,7 +9,7 @@ use Drupal\Core\Form\FormStateInterface;
  *
  * This example demonstrates using the #state property to bind the visibility of
  * a form element to the value of another element in the form. In the example,
- * when the user checks the "Need Special Accomodation" checkbox, additional
+ * when the user checks the "Need Special Accommodation" checkbox, additional
  * form elements are made visible.
  *
  * The submit handler for this form is implemented by the

@@ -71,7 +71,7 @@ class ModalForm extends FormBase {
   }
 
   /**
-   * Implements the sumbit handler for the ajax call.
+   * Implements the submit handler for the ajax call.
    *
    * @param array $form
    *   Render array representing from.
