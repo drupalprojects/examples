@@ -42,7 +42,7 @@ fapi_example.ajax_demo:
 
 fapi_example.build_demo:
   title: Build Form Demo
-  description: Demostrates the order of firing of from controller methods.
+  description: Demonstrates the order of firing of from controller methods.
   route_name: fapi_example.build_demo
   parent: fapi_example.description
 
