@@ -10,9 +10,6 @@ use Drupal\Core\Form\FormStateInterface;
  * This example demonstrates the use of \Drupal\Core\Render\Element\VerticalTabs
  * to group input elements according category.
  *
- * @TODO: Verify this form works after https://www.drupal.org/node/2541252 is
- * fixed
- *
  * @see \Drupal\Core\Form\FormBase
  * @see \Drupal\Core\Form\ConfigFormBase
  */
