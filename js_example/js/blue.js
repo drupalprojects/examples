@@ -4,7 +4,9 @@
  */
 
 (function ($, Drupal, drupalSettings) {
-  "use strict";
+
+  'use strict';
+
   /**
    * Attaches the JS test behavior to weight div.
    */

@@ -1,7 +1,10 @@
 HOWTO: Drupal Examples For Developers Coding Standards
 =======================================================
 
-Examples uses the same coding standards as Drupal core.
+Examples uses mostly the same coding standards as Drupal core.
+
+Examples uses the phpcs tool to allow for checking PHP coding standards. We also
+use eslint for JavaScript coding standards.
 
 Examples has a `phpcs.xml.dist` file at the root of the project. This file
 specifies the current coding standards 'sniffs' which code in the project must
@@ -59,3 +62,21 @@ Always look at the changes to see what `phpcbf` did.
 
 And always re-run `phpcs` in order to discover whether `phpcbf` handled all the
 errors.
+
+Installing eslint
+-----------------
+
+`eslint` is a node.js tool. You can and probably should install it globally,
+since installing it locally would add files to the examples project.
+Instructions available here: https://www.npmjs.com/package/eslint
+
+Examples has an `.eslintrc` file which defines the JavaScript coding standard.
+This file should be identical to the current Drupal core standard.
+
+Running eslint
+--------------
+
+You can run eslint this way:
+
+    $ cd /path/to/examples
+    $ eslint .
