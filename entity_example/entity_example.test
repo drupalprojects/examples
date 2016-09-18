@@ -40,6 +40,7 @@ class EntityExampleTestCase extends DrupalWebTestCase {
       'create entity_example_basic entities',
       'administer entity_example_basic entities',
       'administer site configuration',
+      'administer fields',
     );
     $account = $this->drupalCreateUser($permissions);
     $this->drupalLogin($account);

@@ -46,7 +46,7 @@ class FieldExampleTest extends DrupalWebTestCase {
     $title = $this->randomName(20);
 
     // Create and login user.
-    $account = $this->drupalCreateUser(array('administer content types'));
+    $account = $this->drupalCreateUser(array('administer content types', 'administer fields'));
     $this->drupalLogin($account);
 
     $this->drupalGet('admin/structure/types');

@@ -205,6 +205,7 @@ class GenericFieldTest extends DrupalWebTestCase {
     // Create and login user.
     $account = $this->drupalCreateUser(array(
       'administer content types',
+      'administer fields',
       ));
     $this->drupalLogin($account);
 
