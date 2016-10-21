@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @file
  * Hooks specific to the plugin_type_example module.

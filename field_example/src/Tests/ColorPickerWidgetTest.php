@@ -1,6 +1,5 @@
 <?php
 
-
 namespace Drupal\field_example\Tests;
 
 use Drupal\field_example\FieldExampleWebTestBase;
