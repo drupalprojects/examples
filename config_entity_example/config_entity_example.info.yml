@@ -1,6 +1,6 @@
 name: 'Config entity example'
 type: module
-description: 'An example module showing how to create a config entity type.'
+description: 'Demonstrates how to create a config entity type.'
 package: Example modules
 core: 8.x
 dependencies:

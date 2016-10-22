@@ -1,6 +1,6 @@
 name: Field Example
 type: module
-description: An implementation of a field to show the Field API
+description: Demonstrates the Field API via some field plugin implementations.
 package: Example modules
 core: 8.x
 dependencies:

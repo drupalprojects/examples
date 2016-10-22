@@ -1,6 +1,6 @@
 name: File example
 type: module
-description: Examples of using the Drupal File API and Stream Wrappers.
+description: Demonstrates using the Drupal File API and stream wrappers.
 package: Example modules
 core: 8.x
 dependencies:

@@ -1,6 +1,6 @@
 name: PHPUnit example
 type: module
-description: 'How to use PHPUnit-based tests with Drupal 8.'
+description: Demontrates how to use PHPUnit-based tests.
 package: Example modules
 core: 8.x
 dependencies:

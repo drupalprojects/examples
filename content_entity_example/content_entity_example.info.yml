@@ -1,6 +1,6 @@
 name: Content Entity Example
 type: module
-description: 'Provides ContentEntityExampleContact entity.'
+description: Demonstrates how to create a content entity.
 package: Example modules
 core: 8.x
 # These modules are required by the tests, must be available at bootstrap time

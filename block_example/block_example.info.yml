@@ -1,6 +1,6 @@
 name: Block Example
 type: module
-description: An example outlining how a module can define blocks.
+description: Demonstrates how a module can define blocks.
 package: Example modules
 core: 8.x
 dependencies:

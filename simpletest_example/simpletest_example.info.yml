@@ -1,7 +1,7 @@
 name: SimpleTest Example
 type: module
 hidden: false
-description: 'Some demonstrations of SimpleTest-based testing in Drupal 8.'
+description: 'Demonstrates some SimpleTest-based tests in Drupal 8.'
 package: Example modules
 core: 8.x
 # We have to be as explicit as possible about the dependencies for this module.

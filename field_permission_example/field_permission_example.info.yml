@@ -1,6 +1,6 @@
 name: Field Permission Example
 type: module
-description: An example module that creates a field and puts access control over it.
+description: Demonstrates how to create a field and implement access control over it.
 package: Example modules
 version: 8.x-1.x
 core: 8.x

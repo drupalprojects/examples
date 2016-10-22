@@ -1,6 +1,6 @@
 name: Form API Example
 type: module
-description: Sample implementations that demonstrate the Drupal Forms API
+description: Demonstrates the Drupal Form API.
 package: Example modules
 core: 8.x
 dependencies:
