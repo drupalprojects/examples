@@ -1,6 +1,6 @@
 <?php
 
-namespace Drupal\cache_example\Forms;
+namespace Drupal\cache_example\Form;
 
 use Drupal\Core\Form\FormBase;
 use Drupal\Core\Form\FormStateInterface;
