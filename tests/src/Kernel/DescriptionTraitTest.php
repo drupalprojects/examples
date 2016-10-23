@@ -1,6 +1,6 @@
 <?php
 
-namespace Drupal\Tests\examples\KernelTests;
+namespace Drupal\Tests\examples\Kernel;
 
 use Drupal\KernelTests\KernelTestBase;
 use Drupal\examples_description_test\Controller\SampleExampleController;
