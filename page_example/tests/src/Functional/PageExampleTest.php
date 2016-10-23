@@ -1,8 +1,8 @@
 <?php
 
-namespace Drupal\page_example\Tests;
+namespace Drupal\Tests\page_example\Functional;
 
-use Drupal\simpletest\WebTestBase;
+use Drupal\Tests\BrowserTestBase;
 
 /**
  * Creates page and render the content based on the arguments passed in the URL.
@@ -10,7 +10,7 @@ use Drupal\simpletest\WebTestBase;
  * @group page_example
  * @group examples
  */
-class PageExampleTest extends WebTestBase {
+class PageExampleTest extends BrowserTestBase {
 
   /**
    * Modules to enable.
@@ -62,47 +62,50 @@ class PageExampleTest extends WebTestBase {
   public function pageExampleVerifyNoAccess($url) {
     // Test that page returns 403 Access Denied.
     $this->drupalGet($url);
-    $this->assertResponse(403);
+    $this->assertSession()->statusCodeEquals(403);
   }
 
   /**
    * Data provider for testing menu links.
    *
    * @return array
-   *   Array of page -> link relationships to check for, keyed by the
-   *   permissions required to access them:
+   *
+   *   Array of page -> link relationships to check for, with the permissions
+   *   required to access them:
    *   - Permission machine name. Empty string means no login.
+   *   - Array of link information:
    *     - Key is path to the page where the link should appear.
    *     - Value is the link that should appear on the page.
    */
-  protected function providerMenuLinks() {
-    return array(
-      '' => array(
-        '' => '/examples/page-example',
-      ),
-      'access simple page' => array(
-        '/examples/page-example' => '/examples/page-example/simple',
-      ),
-    );
+  public function providerMenuLinks() {
+    return [
+      [
+        '',
+        ['' => '/examples/page-example'],
+      ],
+      [
+        'access simple page',
+        ['/examples/page-example' => '/examples/page-example/simple'],
+      ],
+    ];
   }
 
   /**
    * Verify and validate that default menu links were loaded for this module.
+   *
+   * @dataProvider providerMenuLinks
    */
-  public function testPageExampleLinks() {
-    $data = $this->providerMenuLinks();
-    foreach ($data as $permission => $links) {
-      if ($permission) {
-        $user = $this->drupalCreateUser(array($permission));
-        $this->drupalLogin($user);
-      }
-      foreach ($links as $page => $path) {
-        $this->drupalGet($page);
-        $this->assertLinkByHref($path);
-      }
-      if ($permission) {
-        $this->drupalLogout();
-      }
+  public function testPageExampleLinks($permission, $links) {
+    if ($permission) {
+      $user = $this->drupalCreateUser(array($permission));
+      $this->drupalLogin($user);
+    }
+    foreach ($links as $page => $path) {
+      $this->drupalGet($page);
+      $this->assertSession()->linkByHrefExists($path);
+    }
+    if ($permission) {
+      $this->drupalLogout();
     }
   }
 
@@ -113,6 +116,7 @@ class PageExampleTest extends WebTestBase {
    * the admin and user interfaces.
    */
   public function testPageExample() {
+    $assert_session = $this->assertSession();
     // Verify that anonymous user can't access the pages created by
     // page_example module.
     $this->pageExampleVerifyNoAccess('examples/page-example/simple');
@@ -133,8 +137,8 @@ class PageExampleTest extends WebTestBase {
 
     // Verify that user can access simple content.
     $this->drupalGet('/examples/page-example/simple');
-    $this->assertResponse(200, 'Simple content successfully accessed.');
-    $this->assertText(t('The quick brown fox jumps over the lazy dog.'), 'Simple content successfully verified.');
+    $assert_session->statusCodeEquals(200);
+    $assert_session->pageTextContains('The quick brown fox jumps over the lazy dog.');
 
     // Check if user can't access arguments page.
     $this->pageExampleVerifyNoAccess('examples/page-example/arguments/1/2');
@@ -147,23 +151,23 @@ class PageExampleTest extends WebTestBase {
     $first = self::randomNumber(3);
     $second = self::randomNumber(3);
     $this->drupalGet('/examples/page-example/arguments/' . $first . '/' . $second);
-    $this->assertResponse(200, 'Arguments content successfully accessed.');
+    $assert_session->statusCodeEquals(200);
     // Verify argument usage.
-    $this->assertRaw(t('First number was @number.', array('@number' => $first)), 'First argument successfully verified.');
-    $this->assertRaw(t('Second number was @number.', array('@number' => $second)), 'Second argument successfully verified.');
-    $this->assertRaw(t('The total was @number.', array('@number' => $first + $second)), 'arguments content successfully verified.');
+    $assert_session->pageTextContains(t('First number was @number.', array('@number' => $first)));
+    $assert_session->pageTextContains(t('Second number was @number.', array('@number' => $second)));
+    $assert_session->pageTextContains(t('The total was @number.', array('@number' => $first + $second)));
 
     // Verify incomplete argument call to arguments content.
     $this->drupalGet('/examples/page-example/arguments/' . $first . '/');
-    $this->assertResponse(404, 'User got 404 on incomplete arguments request.');
+    $assert_session->statusCodeEquals(404);
 
     // Verify 403 for invalid second argument.
     $this->drupalGet('/examples/page-example/arguments/' . $first . '/non-numeric-argument');
-    $this->assertResponse(403, 'User got 403 for string argument in second position.');
+    $assert_session->statusCodeEquals(403);
 
     // Verify 403 for invalid first argument.
     $this->drupalGet('/examples/page-example/arguments/non-numeric-argument/' . $second);
-    $this->assertResponse(403, 'User got 403 for string argument in first position.');
+    $assert_session->statusCodeEquals(403);
 
     // Check if user can't access simple page.
     $this->pageExampleVerifyNoAccess('examples/page-example/simple');
