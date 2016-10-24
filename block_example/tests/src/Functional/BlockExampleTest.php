@@ -1,9 +1,9 @@
 <?php
 
-namespace Drupal\block_example\Tests;
+namespace Drupal\Tests\block_example\Functional;
 
 use Drupal\Component\Utility\Unicode;
-use Drupal\simpletest\WebTestBase;
+use Drupal\Tests\BrowserTestBase;
 
 /**
  * Test the configuration options and block created by Block Example module.
@@ -13,7 +13,7 @@ use Drupal\simpletest\WebTestBase;
  * @group block_example
  * @group examples
  */
-class BlockExampleTest extends WebTestBase {
+class BlockExampleTest extends BrowserTestBase  {
 
   /**
    * Modules to enable.
@@ -26,6 +26,8 @@ class BlockExampleTest extends WebTestBase {
    * Tests block_example functionality.
    */
   public function testBlockExampleBasic() {
+    $assert = $this->assertSession();
+
     // Create user.
     $web_user = $this->drupalCreateUser(array('administer blocks'));
     // Login the admin user.
@@ -35,9 +37,9 @@ class BlockExampleTest extends WebTestBase {
 
     // Verify the blocks are listed to be added.
     $this->drupalGet('/admin/structure/block/library/' . $theme_name, ['query' => ['region' => 'content']]);
-    $this->assertRaw(t('Title of first block (example_configurable_text)'), 'Block configurable-string found.');
-    $this->assertRaw(t('Example: empty block'), 'Block empty-block found.');
-    $this->assertRaw(t('Example: uppercase this please'), 'Block uppercase found.');
+    $assert->pageTextContains('Title of first block (example_configurable_text');
+    $assert->pageTextContains('Example: empty block');
+    $assert->pageTextContains('Example: uppercase this please');
 
     // Define and place blocks.
     $settings_configurable = array(
@@ -64,20 +66,23 @@ class BlockExampleTest extends WebTestBase {
     // Verify that blocks are there. Empty block will not be shown, because it
     // holds an empty array.
     $this->drupalGet('');
-    $this->assertRaw($settings_configurable['label'], 'Block configurable test not found.');
-    $this->assertNoRaw($settings_uppercase['label'], 'Block uppercase with normal label not found.');
-    $this->assertRaw(Unicode::strtoupper($settings_uppercase['label']), 'Block uppercase with uppercased label found.');
-    $this->assertNoRaw($settings_empty['label'], 'Block empty not found.');
+    $assert->pageTextContains($settings_configurable['label']);
+    $assert->pageTextContains($settings_uppercase['label']);
+    $assert->pageTextContains(Unicode::strtoupper($settings_uppercase['label']));
+    $assert->pageTextNotContains($settings_empty['label']);
 
     // Change content of configurable text block.
     $edit = array(
       'settings[block_example_string_text]' => $this->randomMachineName(),
     );
     $this->drupalPostForm('/admin/structure/block/manage/' . $settings_configurable['id'], $edit, t('Save block'));
+    $assert->statusCodeEquals(200);
 
     // Verify that new content is shown.
     $this->drupalGet('');
-    $this->assertRaw($edit['settings[block_example_string_text]'], 'Content of configurable text block successfully verified.');
+    $assert->statusCodeEquals(200);
+
+    $assert->pageTextContains($edit['settings[block_example_string_text]']);
   }
 
 }

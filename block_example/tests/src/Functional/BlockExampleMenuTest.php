@@ -1,8 +1,9 @@
 <?php
 
-namespace Drupal\block_example\Tests;
+namespace Drupal\Tests\block_example\Functional;
 
-use Drupal\simpletest\WebTestBase;
+use Drupal\Tests\BrowserTestBase;
+
 
 /**
  * Test the user-facing menus in Block Example.
@@ -12,7 +13,7 @@ use Drupal\simpletest\WebTestBase;
  * @group block_example
  * @group examples
  */
-class BlockExampleMenuTest extends WebTestBase {
+class BlockExampleMenuTest extends BrowserTestBase  {
 
   /**
    * Modules to enable.
@@ -35,7 +36,7 @@ class BlockExampleMenuTest extends WebTestBase {
    */
   public function testBlockExampleLink() {
     $this->drupalGet('');
-    $this->assertLinkByHref('examples/block-example');
+    $this->assertSession()->linkByHrefExists('examples/block-example');
   }
 
   /**
@@ -43,7 +44,7 @@ class BlockExampleMenuTest extends WebTestBase {
    */
   public function testBlockExampleMenu() {
     $this->drupalGet('examples/block-example');
-    $this->assertResponse(200, 'Description page exists.');
+    $this->assertSession()->statusCodeEquals(200);
   }
 
 }
