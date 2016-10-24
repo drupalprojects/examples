@@ -13,7 +13,7 @@ use Drupal\Tests\BrowserTestBase;
  * @group block_example
  * @group examples
  */
-class BlockExampleTest extends BrowserTestBase  {
+class BlockExampleTest extends BrowserTestBase {
 
   /**
    * Modules to enable.
