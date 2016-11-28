@@ -23,7 +23,7 @@
  * add tours to their modules. In most cases, adding a tour is as simple as
  * creating a YAML file in the config directory in their module, containing the
  * expected data. For a detailed example of such a file, see
- * config/tour.tour.tour-example.yml.
+ * config/install/tour.tour.tour-example.yml.
  *
  * If you are interested in building tours through a user interface, you may
  * want to look at the Tour UI module: https://drupal.org/project/tour_ui

@@ -52,7 +52,7 @@ visible when there is a tour available on the current page.</p>
 add tours to their modules. In most cases, adding a tour is as simple as
 creating a YAML file in the config directory in their module, containing the
 expected data. For a detailed example of such a file, see
-config/tour.tour.tour-example.yml.</p>
+config/install/tour.tour.tour-example.yml.</p>
 
 <p>If you are interested in building tours through a user interface, you may
 want to look at the Tour UI module: <a href="https://drupal.org/project/tour_ui">https://drupal.org/project/tour_ui</a></p>
