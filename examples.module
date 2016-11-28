@@ -43,9 +43,9 @@ function examples_toolbar() {
     'dbtng_example' => 'dbtng_example',
     'email_example' => 'email_example.description',
     'fapi_example' => 'fapi_example.description',
-    'file_example' => 'file_example.fileapi',
     'field_example' => 'field_example.description',
     'field_permission_example' => 'field_permission_example.description',
+    'file_example' => 'file_example.fileapi',
     'js_example' => 'js_example.info',
     'node_type_example' => 'config_node_type_example.description',
     'page_example' => 'page_example_description',
@@ -53,6 +53,7 @@ function examples_toolbar() {
     'phpunit_example' => 'phpunit_example_description',
     'plugin_type_example' => 'plugin_type_example.description',
     'simpletest_example' => 'simpletest_example_description',
+    'tablesort_example' => 'tablesort_example_description',
     'tour_example' => 'tour_example_description',
   );
 
