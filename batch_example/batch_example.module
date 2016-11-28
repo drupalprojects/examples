@@ -88,7 +88,8 @@ function batch_example_simple_form_submit($form, &$form_state) {
   // Reset counter for debug information.
   $_SESSION['http_request_count'] = 0;
 
-  // Execute the function named batch_example_1 or batch_example_2.
+  // Execute the function named batch_example_batch_1() or
+  // batch_example_batch_2().
   $batch = $function();
   batch_set($batch);
 }
@@ -306,7 +307,7 @@ function _batch_example_update_http_requests() {
 
 /**
  * Utility function to count the HTTP requests in a session variable.
- * 
+ *
  * @return int
  *   Number of requests.
  */
