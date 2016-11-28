@@ -232,9 +232,22 @@ class FormExampleTestCase extends DrupalWebTestCase {
     $this->drupalPost(NULL, array('aunts_name' => $aunts_name), t('Previous'));
     $this->assertFieldByName('city', $city);
 
-    // Now go forward and then press finish; check for correct values.
+    // Go to first step and re-check all fields.
+    $this->drupalPost(NULL, array(), t('Previous'));
+    $this->assertFieldByName('first_name', $first_name);
+    $this->assertFieldByName('last_name', $last_name);
+
+    // Re-check second step.
     $this->drupalPost(NULL, array(), t('Next'));
-    $this->drupalPost(NULL, array('aunts_name' => $aunts_name), t('Finish'));
+    $this->assertText(t('Hint: Do not enter "San Francisco", and do not leave this out.'));
+    $this->assertFieldByName('city', $city);
+
+    // Re-check third step.
+    $this->drupalPost(NULL, array(), t('Next'));
+    $this->assertFieldByName('aunts_name', $aunts_name);
+
+    // Press finish and check for correct values.
+    $this->drupalPost(NULL, array(), t('Finish'));
 
     $this->assertRaw(t('[first_name] =&gt; @first_name', array('@first_name' => $first_name)));
     $this->assertRaw(t('[last_name] =&gt; @last_name', array('@last_name' => $last_name)));

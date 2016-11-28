@@ -155,7 +155,7 @@ function form_example_wizard($form, &$form_state) {
  */
 function form_example_wizard_previous_submit($form, &$form_state) {
   $current_step = &$form_state['step'];
-  $form_state['step_information'][$current_step]['stored_values'] = $form_state['values'];
+  $form_state['step_information'][$current_step]['stored_values'] = $form_state['input'];
   if ($current_step > 1) {
     $current_step--;
     $form_state['values'] = $form_state['step_information'][$current_step]['stored_values'];
