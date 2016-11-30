@@ -2,7 +2,8 @@
 
 /**
  * @file
- * Example modules
+ * Example modules.
+ *
  * Add links here as they are ported to 8.x-1.x.
  *
  * - @link block_example.module Defining blocks @endlink

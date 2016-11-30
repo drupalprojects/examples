@@ -19,7 +19,8 @@ use Drupal\field_example\FieldExampleWebTestBase;
 class ColorPickerWidgetTest extends FieldExampleWebTestBase {
 
   /**
-   * Test the following scenarios in Field example:
+   * Test scenarios in Field example.
+   *
    * - Creates a content type.
    * - Adds a single-valued field_example_rgb to it.
    * - Creates a node of the new type.
@@ -52,7 +53,8 @@ class ColorPickerWidgetTest extends FieldExampleWebTestBase {
   }
 
   /**
-   * Test the following scenarios in Field example:
+   * Test scenarios in Field example.
+   *
    * - Creates a content type.
    * - Adds a multivalued field_example_rgb to it.
    * - Creates a node of the new type.

@@ -14,7 +14,6 @@
   <rule ref="Drupal.Commenting.DocComment">
       <exclude name="Drupal.Commenting.DocComment.LongFullStop"/>
       <exclude name="Drupal.Commenting.DocComment.MissingShort"/>
-      <exclude name="Drupal.Commenting.DocComment.ShortSingleLine"/>
       <exclude name="Drupal.Commenting.DocComment.TagsNotGrouped"/>
   </rule>
   <rule ref="Drupal.Commenting.InlineComment"/>
