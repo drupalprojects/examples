@@ -17,7 +17,7 @@ class Page extends ControllerBase {
     $content['#attached']['library'][] = 'core/drupal.dialog';
     $content['#attached']['library'][] = 'core/drupal.dialog.ajax';
     $content['intro'] = [
-      '#markup' => '<p>' . $this->t('Form examples to demonstrate comment UI solutions using the Drupal Form API.') . '</p>',
+      '#markup' => '<p>' . $this->t('Form examples to demonstrate common UI solutions using the Drupal Form API.') . '</p>',
     ];
 
     // Create a list of links to the form examples.
@@ -48,7 +48,7 @@ class Page extends ControllerBase {
       ],
     ];
 
-    // The message container is used by the modal form example it is an empty
+    // The message container is used by the modal form example. It is an empty
     // tag that will be replaced by content.
     $content['message'] = [
       '#type' => 'container',
