@@ -86,7 +86,7 @@ class PagerExamplePage extends ControllerBase {
       $build['no-nodes'] = [
         '#markup' => $this->t('No node for output. Please <a href="@url">create a node</a>.',
           array(
-            '@url' => Url::fromRoute('node.add_page'),
+            '@url' => Url::fromRoute('node.add_page')->toString(),
           )
         ),
       ];
