@@ -1,0 +1,30 @@
+{#
+
+Description text for the Hooks Example.
+
+#}
+
+{% trans %}
+<h2>Implementing, defining, and invoking hooks</h2>
+
+<p>The code in this module implements a couple of new features which you can see
+in action.</p>
+
+<p><strong>Implements hook_help():</strong> In hooks_example.module you'll find
+an implementation of the hook hook_help() which is used to add contents to this
+module's help overview. Visible at admin/help/hooks_example.</p>
+
+<p><strong>View counts:</strong> hooks_example_node_view() is an implementation
+of the hook hook_ENTITY_TYPE_view() that adds a basic page view counter. You can
+see this in action by navigating to any node on the site and looking for the the
+text telling you how many times you've viewed that page.</p>
+
+<p><strong>Implements hook_form_alter():</strong> In hookse_example.module
+you'll find an implementation of hook_form_alter() which demonstrates the use of
+one of the most commonly used alter hooks. You can view the altered form at
+user/login.</p>
+
+<p>To learn more about how to implement an existing hook, or how to define and
+invoke a new hook start by reading the @docblock comments in
+hooks_example.module</p>
+{% endtrans %}
