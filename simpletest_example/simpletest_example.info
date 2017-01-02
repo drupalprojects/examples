@@ -2,5 +2,7 @@ name = SimpleTest Example
 description = Provides simpletest_example page node type.
 package = Example modules
 core = 7.x
-dependencies[] = simpletest
+; Since the Drupal Composer facade gets a little confused about simpletest, we
+; namespace this requirement with drupal:.
+dependencies[] = drupal:simpletest
 files[] = simpletest_example.test
