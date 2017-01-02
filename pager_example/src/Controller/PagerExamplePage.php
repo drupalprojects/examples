@@ -3,9 +3,8 @@
 namespace Drupal\pager_example\Controller;
 
 use Drupal\Core\Controller\ControllerBase;
-use Drupal\Core\Database\Connection;
-use Drupal\Core\Database\Query\PagerSelectExtender;
 use Drupal\Core\Entity\EntityStorageInterface;
+use Drupal\Core\Session\AccountInterface;
 use Drupal\Core\Url;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
@@ -15,18 +14,8 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
  * This is an example describing how a module can implement a pager in order to
  * reduce the number of output rows to the screen and allow a user to scroll
  * through multiple screens of output.
- *
- * @see http://drupal.org/developing/api/database
- * @see http://drupal.org/node/508796
  */
 class PagerExamplePage extends ControllerBase {
-
-  /**
-   * The database object.
-   *
-   * @var \Drupal\Core\Database\Connection
-   */
-  protected $database;
 
   /**
    * Entity storage for node entities.
@@ -36,16 +25,23 @@ class PagerExamplePage extends ControllerBase {
   protected $nodeStorage;
 
   /**
+   * The current user.
+   *
+   * @var \Drupal\Core\Session\AccountInterface
+   */
+  protected $currentUser;
+
+  /**
    * PagerExamplePage constructor.
    *
-   * @param \Drupal\Core\Database\Connection $database
-   *   The database.
    * @param \Drupal\Core\Entity\EntityStorageInterface $node_storage
    *   Entity storage for node entities.
+   * @param \Drupal\Core\Session\AccountInterface $current_user
+   *   The current user.
    */
-  public function __construct(Connection $database, EntityStorageInterface $node_storage) {
-    $this->database = $database;
+  public function __construct(EntityStorageInterface $node_storage, AccountInterface $current_user) {
     $this->nodeStorage = $node_storage;
+    $this->currentUser = $current_user;
   }
 
   /**
@@ -53,8 +49,8 @@ class PagerExamplePage extends ControllerBase {
    */
   public static function create(ContainerInterface $container) {
     $controller = new static(
-      $container->get('database'),
-      $container->get('entity_type.manager')->getStorage('node')
+      $container->get('entity_type.manager')->getStorage('node'),
+      $container->get('current_user')
     );
     $controller->setStringTranslation($container->get('string_translation'));
     return $controller;
@@ -77,41 +73,82 @@ class PagerExamplePage extends ControllerBase {
 
     // We need to count the number of nodes so that we can tell the user to add
     // some if there aren't any.
-    $count_nodes = $this->database->select('node', 'n')
-      ->countQuery()
-      ->execute()
-      ->fetchField();
+    $query = $this->nodeStorage->getQuery()
+      ->addTag('node_access')
+      ->count();
+
+    // The node_access tag does not trigger a check on whether a user has the
+    // ability to view unpublished content. The 'bypass node access' permission
+    // is really more than we need. But, there is no separate permission for
+    // viewing unpublished content. There is a permission to 'view own
+    // unpublished content', but we don't have a good way of using that in this
+    // query. So, unfortunately this query will incorrectly eliminate even those
+    // unpublished nodes that the user may, in fact, be allowed to view.
+    if (!$this->currentUser->hasPermission('bypass node access')) {
+      $query->condition('status', 1);
+    }
+    $count_nodes = $query->execute();
 
     if ($count_nodes == 0) {
-      $build['no-nodes'] = [
-        '#markup' => $this->t('No node for output. Please <a href="@url">create a node</a>.',
-          array(
-            '@url' => Url::fromRoute('node.add_page')->toString(),
-          )
-        ),
-      ];
+      if ($this->currentUser->hasPermission('create page content')) {
+        $build['no-nodes'] = array(
+          '#markup' => $this->t('There are no nodes to display.
+            Please <a href=":url">create a node</a>.',
+            array(
+              ':url' => Url::fromRoute('node.add', array('node_type' => 'page'))->toString(),
+            )
+          ),
+        );
+      }
+      else {
+        $build['no-nodes'] = array(
+          '#markup' => $this->t('There are no nodes to display.'),
+        );
+      }
+
+      // Ensure that Drupal clears the cache when nodes have been published,
+      // unpublished, added or deleted; and when user permissions change.
+      $build['#cache']['tags'][] = 'node_list';
+      $build['#cache']['contexts'][] = 'user.permissions';
       return $build;
     }
 
-    // Now we want to get our tabular data. We select nodes from node table
-    // limited by 2 per page and orderby DESC because we want to show newest
-    // node first.
-    $pager_data = $this->database->select('node', 'n')
-      ->extend(PagerSelectExtender::class)
-      ->fields('n', array('nid'))
-      ->orderBy('n.nid', 'DESC')
-      ->limit(2)
-      ->execute()
-      ->fetchAllAssoc('nid');
+    // Now we want to get our tabular data. We select nodes from node storage
+    // limited by 2 per page and sort by nid DESC because we want to show newest
+    // node first. Additionally, we check that the user has permission to
+    // view the node.
+    $query = $this->nodeStorage->getQuery()
+      ->sort('nid', 'DESC')
+      ->addTag('node_access')
+      ->pager(2);
 
-    $nodes = $this->nodeStorage->loadMultiple(array_keys($pager_data));
+    // The node_access tag does not trigger a check on whether a user has the
+    // ability to view unpublished content. The 'bypass node access' permission
+    // is really more than we need. But, there is no separate permission for
+    // viewing unpublished content. There is a permission to 'view own
+    // unpublished content', but we don't have a good way of using that in this
+    // query. So, unfortunately this query will incorrectly eliminate even those
+    // unpublished nodes that the user may, in fact, be allowed to view.
+    if (!$this->currentUser->hasPermission('bypass node access')) {
+      $query->condition('status', 1);
+    }
+    $entity_ids = $query->execute();
+
+    $nodes = $this->nodeStorage->loadMultiple($entity_ids);
 
     // We are going to output the results in a table so we set up the rows.
     $rows = [];
     foreach ($nodes as $node) {
+      // There are certain things (besides unpublished nodes) that the
+      // node_access tag won't prevent from being seen. The only way to get at
+      // those is by explicitly checking for (view) access on a node-by-node
+      // basis. In order to prevent the pager from looking strange, we will
+      // "mask" these nodes that should not be accessible. If we don't do this
+      // masking, it's possible that we'd have lots of pages that don't show any
+      // content.
       $rows[] = array(
-        'nid' => $node->id(),
-        'title' => $node->getTitle(),
+        'nid' => $node->access('view') ? $node->id() : t('XXXXXX'),
+        'title' => $node->access('view') ? $node->getTitle() : t('Redacted'),
       );
     }
 
@@ -126,6 +163,11 @@ class PagerExamplePage extends ControllerBase {
       '#type' => 'pager',
       '#weight' => 10,
     );
+
+    // Ensure that Drupal clears the cache when nodes have been published,
+    // unpublished, added or deleted; and when user permissions change.
+    $build['#cache']['tags'][] = 'node_list';
+    $build['#cache']['contexts'][] = 'user.permissions';
 
     return $build;
   }

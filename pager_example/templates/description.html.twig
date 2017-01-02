@@ -7,9 +7,11 @@
 
 <div class='examples-description'>
 {% trans %}
-    <p>The Pager Example shows you how to use the table and pager render elements
-        along with the PagerSelectExtender provided by the database system. These
-        items together allow you to present paginated tables.</p>
+    <p>The Pager Example shows you how to create a paginated table. It uses
+        an Entity Query to retrieve nodes and the query checks that
+        the user has access to the nodes. You may test the access checking
+        feature by unpublishing some of your nodes and then viewing the
+        example as a user that is not allowed to see unpublished content.</p>
     <p>In order to see this in action, make sure there are some nodes present in
         your site. You can use the devel module to add some if needed, or just
         create them.</p>
