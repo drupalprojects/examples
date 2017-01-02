@@ -59,8 +59,8 @@ function tablesort_example_page() {
     array('data' => t('Mixture'), 'field' => 't.random'),
   );
 
-  // Using the TableSort Extender is what tells the the query object that we
-  // are sorting.
+  // Using the TableSort Extender is what tells the query object that we are
+  // sorting.
   $query = db_select('tablesort_example', 't')
       ->extend('TableSort');
   $query->fields('t');
