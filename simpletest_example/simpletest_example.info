@@ -2,7 +2,11 @@ name = SimpleTest Example
 description = Provides simpletest_example page node type.
 package = Example modules
 core = 7.x
-; Since the Drupal Composer facade gets a little confused about simpletest, we
-; namespace this requirement with drupal:.
+; Since someone might install our module through Composer, we want to be sure
+; that the Drupal Composer facade knows we're specifying a core module rather
+; than a project. We do this by namespacing the dependency name with drupal:.
 dependencies[] = drupal:simpletest
+; Since the namespacing feature is new as of Drupal 7.40, we have to require at
+; least that version of core.
+dependencies[] = drupal:system (>= 7.40)
 files[] = simpletest_example.test

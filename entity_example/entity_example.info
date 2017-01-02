@@ -2,6 +2,12 @@ name = Entity Example
 description = A simple entity example showing the main steps required to set up your own entity.
 core = 7.x
 package = Example modules
-dependencies[] = field
+; Since someone might install our module through Composer, we want to be sure
+; that the Drupal Composer facade knows we're specifying a core module rather
+; than a project. We do this by namespacing the dependency name with drupal:.
+dependencies[] = drupal:field
+; Since the namespacing feature is new as of Drupal 7.40, we have to require at
+; least that version of core.
+dependencies[] = drupal:system (>= 7.40)
 files[] = entity_example.test
 configure = admin/structure/entity_example_basic/manage
