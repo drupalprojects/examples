@@ -1,0 +1,7 @@
+queue_example:
+  path: 'examples/queue_example'
+  defaults:
+    _title: 'Queue Example'
+    _form: '\Drupal\queue_example\Forms\QueueExampleForm'
+  requirements:
+    _permission: 'access content'
