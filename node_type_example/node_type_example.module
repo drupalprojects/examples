@@ -26,6 +26,7 @@
  * - Look in sites/default/files/config_[some hex codes]/active/. You'll see
  *   a file called node.type.nifty_content_type.yml.
  * - Copy or move that file to your module's config/ directory.
+ * - Make sure to remove the uuid information from the YAML files.
  *
  * You can see two of these YAML files in this module's config/ directory.
  *
