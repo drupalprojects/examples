@@ -54,8 +54,9 @@ class FileExampleTest extends WebTestBase {
       'Unmanaged using PHP',
     );
     foreach ($buttons as $button) {
-      // For each scheme supported by Drupal + the session:// wrapper.
-      $schemes = array('public', 'private', 'temporary');
+      // For each scheme supported by Drupal + the session:// wrapper,
+      // which is defined in the stream_wrapper_exampnle.
+      $schemes = array('public', 'private', 'temporary', 'session');
       foreach ($schemes as $scheme) {
         // Create a directory for use.
         $dirname = $scheme . '://' . $this->randomMachineName(10);

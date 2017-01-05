@@ -140,11 +140,11 @@ class FileExampleReadWriteForm extends FormBase {
    * @return Drupal\stream_wrapper_example\StreamWrapper\SessionWrapper|bool
    *   Wrapper object to manipulate the SESSION storage or FALSE if the session
    *   wrapper is unavailable.
-   *
-   * @todo Update this to be meaningful when stream_wrapper_example is
-   *   completed. https://www.drupal.org/node/2638290
    */
   protected function getSessionWrapper() {
+    if ($this->sessionSchemeEnabled) {
+      return new \Drupal\stream_wrapper_example\StreamWrapper\SessionWrapper($this->requestStack);
+    }
     return FALSE;
   }
 

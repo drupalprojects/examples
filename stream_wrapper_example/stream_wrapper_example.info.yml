@@ -1,0 +1,7 @@
+name: Stream Wrapper example
+type: module
+description: Example of implementing Stream Wrappers in Drupal.
+package: Example modules
+core: 8.x
+dependencies:
+  - examples
