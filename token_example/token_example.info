@@ -3,9 +3,10 @@ description = An example module showing how to define and use tokens.
 package = Example modules
 core = 7.x
 ; Since someone might install our module through Composer, we want to be sure
-; that the Drupal Composer facade knows we're specifying a core module rather
-; than a project. We do this by namespacing the dependency name with drupal:.
-dependencies[] = drupal:token
+; that the Drupal Composer facade knows we're specifying a contrib module.
+; We do this by namespacing the dependency name with project name in format:
+; dependencies[] = {project}:{module}
+dependencies[] = token:token
 ; Since the namespacing feature is new as of Drupal 7.40, we have to require at
 ; least that version of core.
 dependencies[] = drupal:system (>= 7.40)
