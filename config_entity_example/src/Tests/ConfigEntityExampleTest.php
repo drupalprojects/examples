@@ -139,6 +139,43 @@ class ConfigEntityExampleTest extends WebTestBase {
     $this->drupalGet('/examples/config-entity-example');
     $this->assertText($robby_label);
     $this->assertText($robby_machine_name);
+
+    // 6) Verify that required links are present on respective paths.
+    $this->assertLinkByHref('/examples/config-entity-example/add');
+    $this->assertLinkByHref('/examples/config-entity-example/manage/robby_machine_name');
+    $this->assertLinkByHref('/examples/config-entity-example/manage/robby_machine_name/delete');
+
+    // Verify links on Add Robot.
+    $this->drupalGet('/examples/config-entity-example/add');
+    $this->assertActionButton('examples/config-entity-example');
+
+    // Verify links on Edit Robot.
+    $this->drupalGet('/examples/config-entity-example/manage/robby_machine_name');
+    $this->assertLinkByHref('/examples/config-entity-example/manage/robby_machine_name/delete');
+    $this->assertActionButton('examples/config-entity-example');
+
+    // Verify links on Delete Robot.
+    $this->drupalGet('/examples/config-entity-example/manage/robby_machine_name/delete');
+    // List page will be the destination of the cancel link.
+    $cancel_button = $this->xpath(
+      '//a[@id="edit-cancel" and contains(@href, :path)]',
+      [':path' => '/examples/config-entity-example']
+    );
+    $this->assertEqual(count($cancel_button), 1, 'Found cancel button linking to list page.');
+  }
+
+  /**
+   * Wrap an assertion for the action button.
+   *
+   * @param string $path
+   *   Drupal path to a page.
+   */
+  protected function assertActionButton($path) {
+    $button_element = $this->xpath(
+      '//a[contains(@class, "button-action") and contains(@data-drupal-link-system-path, :path)]',
+      [':path' => $path]
+    );
+    $this->assertEqual(count($button_element), 1, 'Found action button for path: ' . $path);
   }
 
 }
