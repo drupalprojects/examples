@@ -66,19 +66,22 @@
  *
  * In our example, the key files to look at are:
  *
- *  - src/StreamWrapper/FileExampleSessionStreamWrapper.php (the stream wrapper class).
- *  - src/PathProcessorSessions.php, which implements something called a "path processor".
- *    A path processor is a class that lets us hook the "files" in a scheme's file system
- *    into Drupal 8's routing system. This allows us to assign external URLs to the files
- *    served out of the stream wrapper class.  Like a stream wrapper class, Drupal 8
- *    implements this as a "tagged service".
- *  - stream_wrapper_example.services.yml, which defines the services we need to do all
- *    this magic. You should read the comments in that file to see how this fits together.
+ *  - src/StreamWrapper/FileExampleSessionStreamWrapper.php (the stream wrapper
+ *    class).
+ *  - src/PathProcessorSessions.php, which implements something called a "path
+ *    processor".
+ *    A path processor is a class that lets us hook the "files" in a scheme's
+ *    file system into Drupal 8's routing system. This allows us to assign
+ *    external URLs to the files served out of the stream wrapper class. Like a
+ *    stream wrapper class, Drupal 8 implements this as a "tagged service".
+ *  - stream_wrapper_example.services.yml, which defines the services we need to
+ *    do all this magic. You should read the comments in that file to see how
+ *    this fits together.
  *
- * We also include two PHPUnit tests. Because stream wrappers require quite a bit of code
- * that gets called "behind our back" by PHP itself, good test coverage is essential for
- * writing usable stream wrapper implementations. The tests should help get you started
- * on that.
+ * We also include two PHPUnit tests. Because stream wrappers require quite a
+ * bit of code that gets called "behind our back" by PHP itself, good test
+ * coverage is essential for writing usable stream wrapper implementations. The
+ * tests should help get you started on that.
  *
  * @see http://php.net/manual/en/intro.stream.php.
  * @see core/lib/Drupal/Core/StreamWrapper/StreamWrapperInterface.php
