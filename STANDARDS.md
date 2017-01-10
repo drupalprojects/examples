@@ -6,18 +6,18 @@ Examples uses mostly the same coding standards as Drupal core.
 If you see a discrepancy between the coding standards tools used by core and
 those used by Examples, please file an issue so that Examples can follow core.
 
-Examples uses the phpcs tool to allow for checking PHP coding standards. We also
-use eslint for JavaScript coding standards.
+Examples uses the `phpcs` tool to allow for checking PHP coding standards. We
+use the `drupal/coder` project for Drupal-specific coding standards.
 
-Examples has a `phpcs.xml.dist` file at the root of the project. This file
-specifies the current coding standards 'sniffs' which code in the project must
-pass.
+We also use `eslint` for JavaScript coding standards.
 
-The `phpcs.xml.dist` file is used by a tool called PHP_CodeSniffer (`phpcs`).
+Examples has a `phpcs.xml.dist` file at the root of the project. phpcs uses this
+file to specify the current coding standards 'sniffs' which code in the project
+must pass.
 
 Contributors should install `phpcs` in their local Drupal installation, and then
 use that to run `phpcs` against Examples as part of their development and review
-process.
+process. (See details below on how to install and run this tool.)
 
 Contributors can also patch the `phpcs.xml.dist` file itself, in order to fix
 the codebase to pass a given rule or sniff. Patches which do this should be
@@ -46,6 +46,10 @@ Like this:
     $ cd core
     $ ../vendor/bin/phpcs -e --standard=Drupal
     // Shows you a bunch of Drupal-related sniffs.
+
+Note that there is an issue to require Coder and phpcs as part of Drupal core:
+https://www.drupal.org/node/2744463 Once this issue is fixed, you shouldn't need
+to install phpcs before using it.
 
 Running phpcs
 -------------
