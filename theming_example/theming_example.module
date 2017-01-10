@@ -26,12 +26,12 @@
  *
  * Starting with the first example, function 'theming_example_page()':
  * the output is put into an array $content which is then fed to a theming
- * function 'theme_theming_example_page()' which loops over the content,
- * wrapping it in html in the process.
+ * function 'theme_theming_example_content_array()' which loops over the
+ * content, wrapping it in html in the process.
  *
- * In order to get function 'theme_theming_example_page()' recognized it needs
- * to be registered with the module theme register function of the
- * type 'hook_theme'.
+ * In order to get function 'theme_theming_example_content_array()' recognized
+ * it needs to be registered with the module theme register function of the type
+ * 'hook_theme'.
  *
  * function 'theming_example_theme()' does this for this module.
  * for details of what can be done in this hook see the link to api.drupal.org
@@ -49,11 +49,10 @@
  * and '#suffix'
  *
  * The theming functions can be copied to a theme's template.php, renaming
- * appropriately, so if you theme is called 'mytheme' you would copy
- * function 'theme_theming_example_page()'
- * to
- * function 'mytheme_theming_example_page()' in template.php and it will be
- * used instead of the original.
+ * appropriately, so if your theme is called 'mytheme' you would copy function
+ * 'theme_theming_example_content_array()' to function
+ * 'mytheme_theming_example_page()' in template.php and it will be used instead
+ * of the original.
  *
  * The fourth example shows the use of a template file
  * 'theming_example_text_form.tpl.php'
@@ -109,7 +108,7 @@ function theming_example_menu() {
  *
  * Defines the theming capabilities provided by this module.
  */
-function theming_example_theme() {
+function theming_example_theme($existing, $type, $theme, $path) {
   return array(
     'theming_example_content_array' => array(
       // We use 'render element' when the item to be passed is a self-describing
@@ -151,10 +150,10 @@ function theming_example_theme() {
  * @see form_example_elements.inc
  */
 function theming_example_page() {
-  $content[] = t('Some examples of pages and forms that are run through theme functions.');
-  $content[] = l(t('Simple page with a list'), 'examples/theming_example/theming_example_list_page');
-  $content[] = l(t('Simple form 1'), 'examples/theming_example/theming_example_select_form');
-  $content[] = l(t('Simple form 2'), 'examples/theming_example/theming_example_text_form');
+  $content[]['#markup']  = t('Some examples of pages and forms that are run through theme functions.');
+  $content[]['#markup']  = l(t('Simple page with a list'), 'examples/theming_example/theming_example_list_page');
+  $content[]['#markup']  = l(t('Simple form 1'), 'examples/theming_example/theming_example_select_form');
+  $content[]['#markup']  = l(t('Simple form 2'), 'examples/theming_example/theming_example_text_form');
   $content['#theme_wrappers'] = array('theming_example_content_array');
   return $content;
 }
@@ -286,11 +285,11 @@ function theme_theming_example_content_array($variables) {
   foreach (element_children($element) as $count) {
     if (!$count) {
       // The first paragraph is bolded.
-      $output .= '<p><strong>' . $element[$count] . '</strong></p>';
+      $output .= '<p><strong>' . $element[$count]['#children'] . '</strong></p>';
     }
     else {
       // Following paragraphs are just output as routine paragraphs.
-      $output .= '<p>' . $element[$count] . '</p>';
+      $output .= '<p>' . $element[$count]['#children'] . '</p>';
     }
   }
   return $output;
