@@ -1,0 +1,7 @@
+name: Events example
+type: module
+description: Provides an example of subscribing to and dispatching events.
+package: Example modules
+core: 8.x
+dependencies:
+  - examples
