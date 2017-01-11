@@ -2,7 +2,6 @@
 
 namespace Drupal\Tests\events_example\Kernel;
 
-use Drupal\events_example\Event\IncidentEvents;
 use Drupal\KernelTests\KernelTestBase;
 use Drupal\events_example\EventSubscriber\EventsExampleSubscriber;
 
