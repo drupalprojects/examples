@@ -89,3 +89,11 @@ fapi_example.ajax_addmore:
     _title: 'Add-more button'
   requirements:
     _permission: 'access content'
+
+fapi_example.multistep_form:
+  path: 'examples/fapi-example/multistep-form'
+  defaults:
+    _form: '\Drupal\fapi_example\Form\MultistepForm'
+    _title: 'Multistep Form Example'
+  requirements:
+    _permission: 'access content'

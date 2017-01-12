@@ -51,3 +51,9 @@ fapi_example.ajax_addmore:
   description: Form with 'add more' and 'remove' buttons.
   route_name: fapi_example.ajax_addmore
   parent: fapi_example.description
+
+fapi_example.multistep_form:
+  title: Multistep Form API Example
+  description: Multistep form example with submit processing.
+  route_name: fapi_example.multistep_form
+  parent: fapi_example.description

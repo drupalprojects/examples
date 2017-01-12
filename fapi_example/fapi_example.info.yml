@@ -3,6 +3,7 @@ type: module
 description: Demonstrates the Drupal Form API.
 package: Example modules
 core: 8.x
+configure: fapi_example.description
 dependencies:
   - examples
   - node

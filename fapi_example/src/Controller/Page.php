@@ -27,6 +27,7 @@ class Page extends ControllerBase {
       '#theme' => 'item_list',
       '#items' => [
         Link::createFromRoute($this->t('Simple Form'), 'fapi_example.simple_form'),
+        Link::createFromRoute($this->t('Multistep Form'), 'fapi_example.multistep_form'),
         Link::createFromRoute($this->t('Input Demo'), 'fapi_example.input_demo'),
         Link::createFromRoute($this->t('Form State Example'), 'fapi_example.state_demo'),
         Link::createFromRoute($this->t('Container Demo'), 'fapi_example.container_demo'),
