@@ -117,4 +117,36 @@ class NodeTypeExampleTest extends WebTestBase {
     $this->assertTrue($node, 'Node found in database.');
   }
 
+  /**
+   * Test that all fields are displayed when content is created.
+   */
+  public function testNodeCreation() {
+    // Login content creator.
+    $this->drupalLogin(
+      $this->drupalCreateUser([
+        'create basic_content_type content',
+        'create locked_content_type content',
+      ])
+    );
+
+    // Create random strings to insert data into fields.
+    $title = 'Test title.';
+    $body = 'Test body.';
+    $edit = [];
+    $edit['title[0][value]'] = $title;
+    $edit['body[0][value]'] = $body;
+
+    // Create a basic_content_type content.
+    $this->drupalPostForm('/node/add/basic_content_type', $edit, t('Save'));
+    // Verify all fields and data of created content is shown.
+    $this->assertText($title);
+    $this->assertText($body);
+
+    // Create a locked_content_type content.
+    $this->drupalPostForm('/node/add/locked_content_type', $edit, t('Save'));
+    // Verify all fields and data of created content is shown.
+    $this->assertText($title);
+    $this->assertText($body);
+  }
+
 }

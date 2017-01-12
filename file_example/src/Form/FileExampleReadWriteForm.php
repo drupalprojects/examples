@@ -12,6 +12,7 @@ use Drupal\Core\StreamWrapper\StreamWrapperManagerInterface;
 use Drupal\Core\Url;
 use Drupal\file\Entity\File;
 use Drupal\file\FileInterface;
+use Drupal\stream_wrapper_example\StreamWrapper\SessionWrapper;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\HttpFoundation\RequestStack;
 
@@ -143,7 +144,7 @@ class FileExampleReadWriteForm extends FormBase {
    */
   protected function getSessionWrapper() {
     if ($this->sessionSchemeEnabled) {
-      return new \Drupal\stream_wrapper_example\StreamWrapper\SessionWrapper($this->requestStack);
+      return new SessionWrapper($this->requestStack);
     }
     return FALSE;
   }

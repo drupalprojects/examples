@@ -42,6 +42,7 @@ function examples_toolbar() {
     'cron_example' => 'cron_example',
     'dbtng_example' => 'dbtng_example',
     'email_example' => 'email_example.description',
+    'events_example' => 'events_example.description',
     'fapi_example' => 'fapi_example.description',
     'field_example' => 'field_example.description',
     'field_permission_example' => 'field_permission_example.description',

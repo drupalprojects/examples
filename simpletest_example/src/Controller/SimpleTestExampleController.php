@@ -2,22 +2,20 @@
 
 namespace Drupal\simpletest_example\Controller;
 
+use Drupal\examples\Utility\DescriptionTemplateTrait;
+
 /**
- * Controller for PHPUnit description page.
+ * Controller for Simpletest description page.
  */
 class SimpleTestExampleController {
 
+  use DescriptionTemplateTrait;
+
   /**
-   * Displays a page with a descriptive page.
-   *
-   * Our router maps this method to the path 'examples/simpletest_example'.
+   * {@inheritdoc}
    */
-  public function description() {
-    $build = array(
-      '#markup' => t('This Simpletest Example is designed to give an introductory tutorial to writing
-    a simpletest test. Please see the <a href="http://drupal.org/node/890654">associated tutorial</a>.'),
-    );
-    return $build;
+  protected function getModuleName() {
+    return 'simpletest_example';
   }
 
 }
