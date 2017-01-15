@@ -4,4 +4,4 @@ description: Examples of using the Drupal Queue API.
 package: Example modules
 core: 8.x
 dependencies:
-  - examples
+  - examples:examples

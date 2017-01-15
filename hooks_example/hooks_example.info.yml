@@ -4,5 +4,5 @@ description: Provides examples of implementing, defining, and invoking hooks.
 package: Example modules
 core: 8.x
 dependencies:
-  - examples
-  - help
+  - drupal:help
+  - examples:examples

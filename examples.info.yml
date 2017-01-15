@@ -4,4 +4,4 @@ description: 'Provides example code for you to learn from.'
 package: Example modules
 core: 8.x
 dependencies:
-  - toolbar
+  - drupal:toolbar

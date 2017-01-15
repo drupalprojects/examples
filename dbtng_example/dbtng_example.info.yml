@@ -4,6 +4,6 @@ description: 'Demonstrates how to use the database API: DBTNG.'
 package: Example modules
 core: 8.x
 dependencies:
-  - examples
-  - node
-  - user
+  - drupal:node
+  - drupal:user
+  - examples:examples

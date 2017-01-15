@@ -4,5 +4,5 @@ description: Provides an example of defining a plugin type.
 package: Example modules
 core: 8.x
 dependencies:
-  - examples
-  - node
+  - drupal:node
+  - examples:examples

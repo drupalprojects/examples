@@ -4,4 +4,4 @@ description: Example of implementing Stream Wrappers in Drupal.
 package: Example modules
 core: 8.x
 dependencies:
-  - examples
+  - examples:examples

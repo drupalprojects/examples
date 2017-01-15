@@ -4,7 +4,7 @@ package: Example modules
 type: module
 core: 8.x
 dependencies:
-  - node
-  - examples
-  - path
-  - text
+  - drupal:node
+  - drupal:path
+  - drupal:text
+  - examples:examples

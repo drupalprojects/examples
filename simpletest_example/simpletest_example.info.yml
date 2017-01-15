@@ -8,9 +8,9 @@ core: 8.x
 # If you look at the config info in the config/install/ directory, you'll see
 # that they depend on some of these modules.
 dependencies:
-  - simpletest
-  - node
-  - field
-  - path
-  - text
-  - examples
+  - drupal:simpletest
+  - drupal:node
+  - drupal:field
+  - drupal:path
+  - drupal:text
+  - examples:examples

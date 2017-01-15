@@ -4,6 +4,6 @@ description: Demonstrates the Field API via some field plugin implementations.
 package: Example modules
 core: 8.x
 dependencies:
-  - examples
-  - color
-  - node
+  - drupal:color
+  - drupal:node
+  - examples:examples

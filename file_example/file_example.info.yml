@@ -4,6 +4,6 @@ description: Demonstrates using the Drupal File API and stream wrappers.
 package: Example modules
 core: 8.x
 dependencies:
-  - examples
-  - file
-  - stream_wrapper_example
+  - drupal:file
+  - examples:examples
+  - examples:stream_wrapper_example

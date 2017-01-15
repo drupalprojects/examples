@@ -4,4 +4,4 @@ description: 'Demonstrates how to create a config entity type.'
 package: Example modules
 core: 8.x
 dependencies:
-  - examples
+  - examples:examples
