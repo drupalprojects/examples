@@ -81,7 +81,6 @@ class BlockExampleTest extends BrowserTestBase {
     // Verify that new content is shown.
     $this->drupalGet('');
     $assert->statusCodeEquals(200);
-
     $assert->pageTextContains($edit['settings[block_example_string_text]']);
   }
 

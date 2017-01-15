@@ -4,7 +4,6 @@ namespace Drupal\Tests\block_example\Functional;
 
 use Drupal\Tests\BrowserTestBase;
 
-
 /**
  * Test the user-facing menus in Block Example.
  *
@@ -36,7 +35,7 @@ class BlockExampleMenuTest extends BrowserTestBase {
    */
   public function testBlockExampleLink() {
     $this->drupalGet('');
-    $this->assertSession()->linkByHrefExists('examples/block-example');
+    $this->assertLinkByHref('examples/block-example');
   }
 
   /**
@@ -44,7 +43,7 @@ class BlockExampleMenuTest extends BrowserTestBase {
    */
   public function testBlockExampleMenu() {
     $this->drupalGet('examples/block-example');
-    $this->assertSession()->statusCodeEquals(200);
+    $this->assertResponse(200, 'Description page exists.');
   }
 
 }
