@@ -4,5 +4,6 @@ tour_example_description:
     _admin_route: TRUE
   defaults:
     _controller: '\Drupal\tour_example\Controller\TourExampleController::description'
+    _title: 'Tour Example'
   requirements:
     _access: 'TRUE'
