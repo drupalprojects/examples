@@ -3,39 +3,21 @@
 namespace Drupal\page_example\Controller;
 
 use Drupal\Core\Controller\ControllerBase;
-use Drupal\Core\Link;
-use Drupal\Core\Url;
 use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
+use Drupal\examples\Utility\DescriptionTemplateTrait;
 
 /**
  * Controller routines for page example routes.
  */
 class PageExampleController extends ControllerBase {
 
+  use DescriptionTemplateTrait;
+
   /**
-   * Constructs a page with descriptive content.
-   *
-   * Our router maps this method to the path 'examples/page-example'.
+   * {@inheritdoc}
    */
-  public function description() {
-    // Make our links. First the simple page.
-    $page_example_simple_link = Link::createFromRoute($this->t('simple page'), 'page_example_simple')->toString();
-    // Now the arguments page.
-    $arguments_url = Url::fromRoute('page_example_arguments', array('first' => '23', 'second' => '56'));
-    $page_example_arguments_link = Link::fromTextAndUrl($this->t('arguments page'), $arguments_url)->toString();
-
-    // Assemble the markup.
-    $build = array(
-      '#markup' => $this->t('<p>The Page example module provides two pages, "simple" and "arguments".</p><p>The @simple_link just returns a renderable array for display.</p><p>The @arguments_link takes two arguments and displays them, as in @arguments_url</p>',
-        array(
-          '@simple_link' => $page_example_simple_link,
-          '@arguments_link' => $page_example_arguments_link,
-          '@arguments_url' => $arguments_url->toString(),
-        )
-      ),
-    );
-
-    return $build;
+  protected function getModuleName() {
+    return 'page_example';
   }
 
   /**
