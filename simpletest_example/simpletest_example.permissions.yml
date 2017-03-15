@@ -2,5 +2,5 @@
 # as the one the node module offers, just to demonstrate this error.
 'extra special edit any simpletest_example':
   title: Extra special edit any SimpleTest Example
-  description: Allow user to edit any any SimpleTest Example content authored by any user.
+  description: Allow user to edit any SimpleTest Example content authored by any user.
   'restrict access': TRUE
