@@ -9,6 +9,7 @@ use Drupal\Tests\examples\Functional\ExamplesBrowserTestBase;
  * SimpleTest uses group annotations to help you organize your tests.
  *
  * @group fapi_example
+ * @group examples
  *
  * @ingroup fapi_example
  */

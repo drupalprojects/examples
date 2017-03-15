@@ -8,6 +8,7 @@ use Drupal\Tests\examples\Functional\ExamplesBrowserTestBase;
  * Tests paging.
  *
  * @group pager_example
+ * @group examples
  */
 class PagerExampleTest extends ExamplesBrowserTestBase {
 

@@ -21,6 +21,7 @@ use Drupal\simpletest\UserCreationTrait;
  * @see \Drupal\KernelTests\KernelTestBase
  *
  * @group field_permission_example
+ * @group examples
  */
 class FieldNoteItemTest extends FieldKernelTestBase {
 
