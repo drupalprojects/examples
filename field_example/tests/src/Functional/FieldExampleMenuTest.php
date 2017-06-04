@@ -1,8 +1,7 @@
 <?php
 
-namespace Drupal\field_example\Tests;
+namespace Drupal\Tests\field_example\Functional;
 
-use Drupal\simpletest\WebTestBase;
 
 /**
  * Test the user-facing menus in Field Example.
@@ -12,7 +11,7 @@ use Drupal\simpletest\WebTestBase;
  *
  * @ingroup field_example
  */
-class FieldExampleMenuTest extends WebTestBase {
+class FieldExampleMenuTest extends FieldExampleBrowserTestBase {
 
   /**
    * Modules to enable.
@@ -34,16 +33,18 @@ class FieldExampleMenuTest extends WebTestBase {
    * Test for a link to the block example in the Tools menu.
    */
   public function testFieldExampleLink() {
+    $assert = $this->assertSession();
     $this->drupalGet('');
-    $this->assertLinkByHref('examples/field-example');
+    $assert->linkByHrefExists('examples/field-example');
   }
 
   /**
    * Tests field_example menus.
    */
   public function testBlockExampleMenu() {
+    $assert = $this->assertSession();
     $this->drupalGet('examples/field-example');
-    $this->assertResponse(200, 'Description page exists.');
+    $assert->statusCodeEquals(200);
   }
 
 }

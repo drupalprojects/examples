@@ -1,8 +1,6 @@
 <?php
 
-namespace Drupal\field_example\Tests;
-
-use Drupal\field_example\FieldExampleWebTestBase;
+namespace Drupal\Tests\field_example\Functional;
 
 /**
  * Functional tests of the 3text widget.
@@ -13,7 +11,7 @@ use Drupal\field_example\FieldExampleWebTestBase;
  * @group field_example
  * @group examples
  */
-class Text3WidgetTest extends FieldExampleWebTestBase {
+class Text3WidgetTest extends FieldExampleBrowserTestBase {
 
   /**
    * Test basic functionality of the example field.
@@ -27,6 +25,7 @@ class Text3WidgetTest extends FieldExampleWebTestBase {
    * - Tests the result.
    */
   public function testSingleValueField() {
+    $assert = $this->assertSession();
     // Add a single field as administrator user.
     $this->drupalLogin($this->administratorAccount);
     $this->fieldName = $this->createField('field_example_rgb', 'field_example_3text', '1');
@@ -46,11 +45,11 @@ class Text3WidgetTest extends FieldExampleWebTestBase {
 
     // Create the content.
     $this->drupalPostForm(NULL, $edit, t('Save'));
-    $this->assertText(t('@type @title has been created', array('@type' => $this->contentTypeName, '@title' => $title)));
+    $assert->pageTextContains(t('@type @title has been created', array('@type' => $this->contentTypeName, '@title' => $title)));
 
     // Verify the value is shown when viewing this node.
     $field_p = $this->xpath("//div[contains(@class,'field--type-field-example-rgb')]/div/p");
-    $this->assertEqual((string) $field_p[0], "The color code in this field is #000a01");
+    $this->assertEquals("The color code in this field is #000a01", (string) $field_p[0]->getText());
   }
 
   /**
@@ -65,6 +64,8 @@ class Text3WidgetTest extends FieldExampleWebTestBase {
    * - Tests the result.
    */
   public function testMultiValueField() {
+    $assert = $this->assertSession();
+
     // Add a single field as administrator user.
     $this->drupalLogin($this->administratorAccount);
     $this->fieldName = $this->createField('field_example_rgb', 'field_example_3text', '-1');
@@ -92,12 +93,12 @@ class Text3WidgetTest extends FieldExampleWebTestBase {
 
     // Create the content.
     $this->drupalPostForm(NULL, $edit, t('Save'));
-    $this->assertText(t('@type @title has been created', array('@type' => $this->contentTypeName, '@title' => $title)));
+    $assert->pageTextContains(t('@type @title has been created', array('@type' => $this->contentTypeName, '@title' => $title)));
 
     // Verify the values are shown when viewing this node.
     $field_p = $this->xpath("//div[contains(@class,'field--type-field-example-rgb')]/div/div/p");
-    $this->assertEqual((string) $field_p[0], "The color code in this field is #00ff00");
-    $this->assertEqual((string) $field_p[1], "The color code in this field is #ffffff");
+    $this->assertEquals('The color code in this field is #00ff00', (string) $field_p[0]->getText());
+    $this->assertEquals('The color code in this field is #ffffff', (string) $field_p[1]->getText());
   }
 
 }

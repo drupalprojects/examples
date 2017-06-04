@@ -1,37 +1,35 @@
 <?php
 
-namespace Drupal\field_example\Tests;
-
-use Drupal\field_example\FieldExampleWebTestBase;
+namespace Drupal\Tests\field_example\Functional;
 
 /**
- * Test the basic functionality of Color Picker Widget.
+ * Test the basic functionality of Color background  formatter.
  *
- * Create the content type with field_example_rgb field, and configure it
- * with field_example_colorpicker, then create a node of content type
- * and verify the values.
+ * Create a content type with a field_example_rgb field, configure it with the
+ * color_background_formatter, create a node and check for correct values.
  *
  * @group field_example
  * @group examples
  *
  * @ingroup field_example
  */
-class ColorPickerWidgetTest extends FieldExampleWebTestBase {
+class ColorBackgroundFormatterTest extends FieldExampleBrowserTestBase {
 
   /**
-   * Test scenarios in Field example.
+   * Field example scenario tests.
    *
+   * The following scenarios:
    * - Creates a content type.
-   * - Adds a single-valued field_example_rgb to it.
+   * - Adds a multivalued field_example_rgb to it.
    * - Creates a node of the new type.
-   * - Populates the single-valued field.
+   * - Populates the multivalued field with two items.
    * - Tests the result.
    */
   public function testSingleValueField() {
-
+    $assert = $this->assertSession();
     // Login with Admin and create a field.
     $this->drupalLogin($this->administratorAccount);
-    $this->fieldName = $this->createField('field_example_rgb', 'field_example_colorpicker', '1');
+    $this->fieldName = $this->createField('field_example_rgb', 'field_example_colorpicker', '1', 'field_example_color_background');
 
     // Login with Author user for content creation.
     $this->drupalLogin($this->authorAccount);
@@ -46,15 +44,14 @@ class ColorPickerWidgetTest extends FieldExampleWebTestBase {
 
     // Submit the content creation form.
     $this->drupalPostForm(NULL, $edit, t('Save'));
-    $this->assertText(t('@type @title has been created', array('@type' => $this->contentTypeName, '@title' => $title)));
+    $assert->pageTextContains(t('@type @title has been created', array('@type' => $this->contentTypeName, '@title' => $title)));
 
     // Verify color.
-    $this->assertText(t('The color code in this field is #00ff00'), 'Verify the color');
+    $assert->pageTextContains('The content area color has been changed to #00ff00');
   }
 
   /**
-   * Test scenarios in Field example.
-   *
+   * Test the following scenarios in Field example:
    * - Creates a content type.
    * - Adds a multivalued field_example_rgb to it.
    * - Creates a node of the new type.
@@ -62,10 +59,11 @@ class ColorPickerWidgetTest extends FieldExampleWebTestBase {
    * - Tests the result.
    */
   public function testMultiValueField() {
+    $assert = $this->assertSession();
 
     // Login with Admin and create a field.
     $this->drupalLogin($this->administratorAccount);
-    $this->fieldName = $this->createField('field_example_rgb', 'field_example_colorpicker', '-1');
+    $this->fieldName = $this->createField('field_example_rgb', 'field_example_colorpicker', '-1', 'field_example_color_background');
 
     // Login with Author user for content creation.
     $this->drupalLogin($this->authorAccount);
@@ -83,16 +81,16 @@ class ColorPickerWidgetTest extends FieldExampleWebTestBase {
 
     // Set value for newly added item.
     $edit = array(
-      'field_' . $this->fieldName . '[1][value]' => '#ffffff',
+      'field_' . $this->fieldName . '[1][value]' => '#ffff4f',
     );
 
     // Submit the content creation form.
     $this->drupalPostForm(NULL, $edit, t('Save'));
-    $this->assertText(t('@type @title has been created', array('@type' => $this->contentTypeName, '@title' => $title)));
+    $assert->pageTextContains(t('@type @title has been created', array('@type' => $this->contentTypeName, '@title' => $title)));
 
     // Verify color.
-    $this->assertText(t('The color code in this field is #00ff00'), 'Verify the color of field 1');
-    $this->assertText(t('The color code in this field is #ffffff'), 'Verify the color of field 2');
+    $assert->pageTextContains('The content area color has been changed to #00ff00');
+    $assert->pageTextContains('The content area color has been changed to #ffff4f');
   }
 
 }
