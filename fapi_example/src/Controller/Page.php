@@ -14,9 +14,7 @@ class Page extends ControllerBase {
    * Lists the examples provided by form_example.
    */
   public function description() {
-    // These libraries are required to facilitate the ajax modal form demo.
-    $content['#attached']['library'][] = 'core/drupal.ajax';
-    $content['#attached']['library'][] = 'core/drupal.dialog';
+    // This library is required to facilitate the ajax modal form demo.
     $content['#attached']['library'][] = 'core/drupal.dialog.ajax';
     $content['intro'] = [
       '#markup' => '<p>' . $this->t('Form examples to demonstrate common UI solutions using the Drupal Form API.') . '</p>',
