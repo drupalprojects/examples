@@ -19,23 +19,25 @@
  *   \Drupal::formBuilder()->getForm()
  *   - fapi_example.routing.yml
  *
- * In addition to the simple  example described above this module provides
+ * In addition to the simple example described above this module provides
  * examples that demonstrate:
+ * - Elements used for data input
+ *   -\Drupal\fapi_example\Form\InputDemo
  * - The order of execution of form controller methods
  *   - \Drupal\fapi_example\Form\BuildDemo
- * - Populating a portion on a form with Ajax callbacks
- *   - \Drupal\fapi_example\Form\AjaxDemo
  * - Container elements used to group items
  *   - \Drupal\fapi_example\Form\ContainerDemo
- * - Elements used for data input
- *   - \Drupal\fapi_example\Form\InputDemo
- * - Modal form creation
- *   - \Drupal\fapi_example\Controller\Page
- *   - \Drupal\fapi_example\Form\ModalForm
  * - Hiding elements based on the state of other elements
  *   - \Drupal\fapi_example\Form\StateDemo
  * - Vertical Tabs elements in forms
  *   - \Drupal\fapi_example\Form\VerticalTabsDemo
+ * - Populating a portion on a form with Ajax callbacks
+ *   - \Drupal\fapi_example\Form\AjaxDemo
+ * - Adding additional fields to a form with Ajax callbacks
+ *   - \Drupal\fapi_example\Form\AjaxAddMore
+ * - Modal form creation
+ *   - \Drupal\fapi_example\Controller\Page
+ *   - \Drupal\fapi_example\Form\ModalForm
  *
  * @} End of "defgroup field_example".
  */
