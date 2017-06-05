@@ -15,7 +15,7 @@ use Drupal\Tests\examples\Functional\ExamplesBrowserTestBase;
 class CronExampleTest extends ExamplesBrowserTestBase {
 
   /**
-   * An editable config object for access to 'examples.cron'.
+   * An editable config object for access to 'cron_example.settings'.
    *
    * @var \Drupal\Core\Config\Config
    */
@@ -37,7 +37,7 @@ class CronExampleTest extends ExamplesBrowserTestBase {
     // be shown.
     $this->drupalLogin($this->drupalCreateUser(['administer site configuration', 'access content']));
 
-    $this->cronConfig = \Drupal::configFactory()->getEditable('examples.cron');
+    $this->cronConfig = \Drupal::configFactory()->getEditable('cron_example.settings');
   }
 
   /**

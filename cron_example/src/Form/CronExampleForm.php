@@ -80,7 +80,7 @@ class CronExampleForm extends ConfigFormBase {
    * {@inheritdoc}
    */
   public function buildForm(array $form, FormStateInterface $form_state) {
-    $config = $this->configFactory->get('examples.cron');
+    $config = $this->configFactory->get('cron_example.settings');
 
     $form['status'] = [
       '#type' => 'details',
@@ -187,7 +187,7 @@ class CronExampleForm extends ConfigFormBase {
    * Allow user to directly execute cron, optionally forcing it.
    */
   public function cronRun(array &$form, FormStateInterface &$form_state) {
-    $config = $this->configFactory->getEditable('examples.cron');
+    $config = $this->configFactory->getEditable('cron_example.settings');
 
     $cron_reset = $form_state->getValue('cron_reset');
     if (!empty($cron_reset)) {
@@ -239,7 +239,7 @@ class CronExampleForm extends ConfigFormBase {
     // Update the interval as stored in configuration. This will be read when
     // this modules hook_cron function fires and will be used to ensure that
     // action is taken only after the appropiate time has elapsed.
-    $this->configFactory->getEditable('examples.cron')
+    $this->configFactory->getEditable('cron_example.settings')
       ->set('interval', $form_state->getValue('cron_example_interval'))
       ->save();
 
@@ -250,7 +250,7 @@ class CronExampleForm extends ConfigFormBase {
    * {@inheritdoc}
    */
   protected function getEditableConfigNames() {
-    return ['examples.cron'];
+    return ['cron_example.settings'];
   }
 
 }

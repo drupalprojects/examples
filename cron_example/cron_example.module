@@ -28,7 +28,7 @@
  */
 function cron_example_cron() {
   // We access our configuration.
-  $cron_config = \Drupal::configFactory()->getEditable('examples.cron');
+  $cron_config = \Drupal::configFactory()->getEditable('cron_example.settings');
   // Default to an hourly interval. Of course, cron has to be running at least
   // hourly for this to work.
   $interval = $cron_config->get('interval');
