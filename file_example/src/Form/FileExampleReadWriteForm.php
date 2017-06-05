@@ -400,6 +400,8 @@ class FileExampleReadWriteForm extends FormBase {
    *    * @param array $form
    *   An associative array containing the structure of the form.
    *
+   * @param array &$form
+   *   The form array.
    * @param \Drupal\Core\Form\FormStateInterface $form_state
    *   The current state of the form.
    */
@@ -463,6 +465,8 @@ class FileExampleReadWriteForm extends FormBase {
    *    * @param array $form
    *   An associative array containing the structure of the form.
    *
+   * @param array &$form
+   *   The form array.
    * @param \Drupal\Core\Form\FormStateInterface $form_state
    *   The current state of the form.
    */

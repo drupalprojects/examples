@@ -20,4 +20,5 @@ class TourExampleController {
   protected function getModuleName() {
     return 'tour_example';
   }
+
 }

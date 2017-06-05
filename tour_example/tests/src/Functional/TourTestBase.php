@@ -31,7 +31,7 @@ abstract class TourTestBase extends ExamplesBrowserTestBase {
    * $this->assertTourTips($tips);
    * @endcode
    */
-  public function assertTourTips($tips = array()) {
+  public function assertTourTips(array $tips = array()) {
     $assert = $this->assertSession();
     // Get the rendered tips and their data-id and data-class attributes.
     if (empty($tips)) {

@@ -42,7 +42,7 @@ class SessionWrapper {
   /**
    * Get a fresh session object.
    *
-   * @return SessionInterface
+   * @return \Symfony\Component\HttpFoundation\Session\SessionInterface
    *   A session object.
    */
   protected function getSession() {
@@ -72,7 +72,7 @@ class SessionWrapper {
    *   The content of the whole session data store, to replace all of the
    *   current data.
    */
-  protected function setStore($store) {
+  protected function setStore(array $store) {
     $session = $this->getSession();
     $session->set(static::SESSION_BASE_ATTRIBUTE, $store);
   }

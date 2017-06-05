@@ -51,6 +51,8 @@ class ColorBackgroundFormatterTest extends FieldExampleBrowserTestBase {
   }
 
   /**
+   * Tests a multi-value field.
+   *
    * Test the following scenarios in Field example:
    * - Creates a content type.
    * - Adds a multivalued field_example_rgb to it.

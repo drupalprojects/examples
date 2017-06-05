@@ -53,6 +53,10 @@ class QueueExampleForm extends FormBase {
    *   Queue factory service to get new/existing queues for use.
    * @param \Drupal\Core\Database\Connection $database
    *   The database connection to be used.
+   * @param Drupal\Core\CronInterface $cron
+   *   The cron service.
+   * @param Drupal\Core\Site\Settings $settings
+   *   The site settings.
    */
   public function __construct(QueueFactory $queue_factory, Connection $database, CronInterface $cron, Settings $settings) {
     $this->queueFactory = $queue_factory;

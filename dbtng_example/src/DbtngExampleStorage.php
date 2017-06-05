@@ -28,7 +28,7 @@ class DbtngExampleStorage {
    *
    * @see db_insert()
    */
-  public static function insert($entry) {
+  public static function insert(array $entry) {
     $return_value = NULL;
     try {
       $return_value = db_insert('dbtng_example')
@@ -56,13 +56,13 @@ class DbtngExampleStorage {
    *
    * @see db_update()
    */
-  public static function update($entry) {
+  public static function update(array $entry) {
     try {
       // db_update()...->execute() returns the number of rows updated.
       $count = db_update('dbtng_example')
-          ->fields($entry)
-          ->condition('pid', $entry['pid'])
-          ->execute();
+        ->fields($entry)
+        ->condition('pid', $entry['pid'])
+        ->execute();
     }
     catch (\Exception $e) {
       drupal_set_message(t('db_update failed. Message = %message, query= %query', array(
@@ -83,10 +83,10 @@ class DbtngExampleStorage {
    *
    * @see db_delete()
    */
-  public static function delete($entry) {
+  public static function delete(array $entry) {
     db_delete('dbtng_example')
-        ->condition('pid', $entry['pid'])
-        ->execute();
+      ->condition('pid', $entry['pid'])
+      ->execute();
   }
 
   /**
@@ -161,7 +161,7 @@ class DbtngExampleStorage {
    * @see http://drupal.org/node/310072
    * @see http://drupal.org/node/310075
    */
-  public static function load($entry = array()) {
+  public static function load(array $entry = array()) {
     // Read all fields from the dbtng_example table.
     $select = db_select('dbtng_example', 'example');
     $select->fields('example');

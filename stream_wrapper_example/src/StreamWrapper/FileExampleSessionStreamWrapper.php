@@ -265,7 +265,7 @@ class FileExampleSessionStreamWrapper implements StreamWrapperInterface {
       $uri = $this->uri;
     }
 
-    $path  = str_replace('session://', '', $uri);
+    $path = str_replace('session://', '', $uri);
     $path = trim($path, '/');
     return $path;
   }
@@ -657,7 +657,7 @@ class FileExampleSessionStreamWrapper implements StreamWrapperInterface {
    */
   public function dirname($uri = NULL) {
     list($scheme, $target) = explode('://', $uri, 2);
-    $target  = $this->getTarget($uri);
+    $target = $this->getTarget($uri);
     if (strpos($target, '/')) {
       $dirname = preg_replace('@/[^/]*$@', '', $target);
     }

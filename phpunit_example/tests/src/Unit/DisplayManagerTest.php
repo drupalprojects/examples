@@ -40,8 +40,8 @@ class DisplayManagerTest extends UnitTestCase {
     // expects($this->any()) tells the mock to return this value any time
     // the method is called.
     $mock->expects($this->any())
-        ->method('getDisplayName')
-        ->will($this->returnValue('the display name'));
+      ->method('getDisplayName')
+      ->will($this->returnValue('the display name'));
 
     // Create a DisplayManager, the class we're actually testing here.
     $dm = new DisplayManager();

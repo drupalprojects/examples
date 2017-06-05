@@ -22,8 +22,8 @@ function dbtng_example_install() {
     'age' => 0,
   );
   db_insert('dbtng_example')
-      ->fields($fields)
-      ->execute();
+    ->fields($fields)
+    ->execute();
 
   // Add another entry.
   $fields = array(
@@ -33,8 +33,8 @@ function dbtng_example_install() {
     'uid' => 1,
   );
   db_insert('dbtng_example')
-      ->fields($fields)
-      ->execute();
+    ->fields($fields)
+    ->execute();
 }
 
 /**
