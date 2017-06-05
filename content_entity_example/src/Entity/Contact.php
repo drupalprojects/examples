@@ -218,10 +218,11 @@ class Contact extends ContentEntityBase implements ContactInterface {
       ->setLabel(t('Name'))
       ->setDescription(t('The name of the Contact entity.'))
       ->setSettings(array(
-        'default_value' => '',
         'max_length' => 255,
         'text_processing' => 0,
       ))
+      // Set no default value.
+      ->setDefaultValue(NULL)
       ->setDisplayOptions('view', array(
         'label' => 'above',
         'type' => 'string',
@@ -238,10 +239,11 @@ class Contact extends ContentEntityBase implements ContactInterface {
       ->setLabel(t('First Name'))
       ->setDescription(t('The first name of the Contact entity.'))
       ->setSettings(array(
-        'default_value' => '',
         'max_length' => 255,
         'text_processing' => 0,
       ))
+      // Set no default value.
+      ->setDefaultValue(NULL)
       ->setDisplayOptions('view', array(
         'label' => 'above',
         'type' => 'string',
@@ -302,6 +304,31 @@ class Contact extends ContentEntityBase implements ContactInterface {
           'placeholder' => '',
         ),
         'weight' => -3,
+      ))
+      ->setDisplayConfigurable('form', TRUE)
+      ->setDisplayConfigurable('view', TRUE);
+
+    // Role field for the contact.
+    // The values shown in options are 'administrator' and 'user'.
+    $fields['role'] = BaseFieldDefinition::create('list_string')
+      ->setLabel(t('Role'))
+      ->setDescription(t('The role of the Contact entity.'))
+      ->setSettings(array(
+        'allowed_values' => array(
+          'administrator' => 'administrator',
+          'user' => 'user',
+        ),
+      ))
+      // Set the default value of this field to 'user'.
+      ->setDefaultValue('user')
+      ->setDisplayOptions('view', array(
+        'label' => 'above',
+        'type' => 'string',
+        'weight' => -2,
+      ))
+      ->setDisplayOptions('form', array(
+        'type' => 'options_select',
+        'weight' => -2,
       ))
       ->setDisplayConfigurable('form', TRUE)
       ->setDisplayConfigurable('view', TRUE);

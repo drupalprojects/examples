@@ -23,7 +23,6 @@ class ContactListBuilder extends EntityListBuilder {
    */
   protected $urlGenerator;
 
-
   /**
    * {@inheritdoc}
    */
@@ -49,7 +48,6 @@ class ContactListBuilder extends EntityListBuilder {
     parent::__construct($entity_type, $storage);
     $this->urlGenerator = $url_generator;
   }
-
 
   /**
    * {@inheritdoc}
@@ -81,6 +79,7 @@ class ContactListBuilder extends EntityListBuilder {
     $header['name'] = $this->t('Name');
     $header['first_name'] = $this->t('First Name');
     $header['gender'] = $this->t('Gender');
+    $header['role'] = $this->t('Role');
     return $header + parent::buildHeader();
   }
 
@@ -93,6 +92,7 @@ class ContactListBuilder extends EntityListBuilder {
     $row['name'] = $entity->link();
     $row['first_name'] = $entity->first_name->value;
     $row['gender'] = $entity->gender->value;
+    $row['role'] = $entity->role->value;
     return $row + parent::buildRow($entity);
   }
 
