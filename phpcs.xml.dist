@@ -7,7 +7,7 @@
 <ruleset name="drupal_examples">
   <description>Default PHP CodeSniffer configuration for Examples for Developers.</description>
   <file>.</file>
-  <arg name="extensions" value="css,inc,install,module,php,profile,test,theme"/>
+  <arg name="extensions" value="css,inc,install,module,php,profile,test,theme,yml"/>
   <rule ref="Drupal.Array.Array.CommaLastItem"/>
   <rule ref="Drupal.CSS"/>
   <rule ref="Drupal.Classes"/>
@@ -16,9 +16,10 @@
       <exclude name="Drupal.Commenting.DocComment.MissingShort"/>
       <exclude name="Drupal.Commenting.DocComment.TagsNotGrouped"/>
   </rule>
-  <rule ref="Drupal.Commenting.InlineComment"/>
+  <rule ref="Drupal.Commenting.DataTypeNamespace"/>
   <rule ref="Drupal.Commenting.FileComment.NamespaceNoFileDoc"/>
   <rule ref="Drupal.Commenting.FunctionComment"/>
+  <rule ref="Drupal.Commenting.InlineComment"/>
   <rule ref="Drupal.ControlStructures"/>
   <rule ref="Drupal.Files"/>
   <rule ref="Drupal.Formatting"/>

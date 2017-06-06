@@ -17,7 +17,7 @@ class SessionWrapper {
   /**
    * Representation of the current HTTP request.
    *
-   * @var RequestStack
+   * @var \Symfony\Component\HttpFoundation\RequestStack
    */
   protected $requestStack;
 
@@ -31,7 +31,7 @@ class SessionWrapper {
   /**
    * Construct our helper object.
    *
-   * @param RequestStack $request_stack
+   * @param \Symfony\Component\HttpFoundation\RequestStack $request_stack
    *   An object used to read data from the current HTTP request.
    */
   public function __construct(RequestStack $request_stack) {

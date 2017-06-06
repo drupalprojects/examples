@@ -46,7 +46,7 @@ class RobotListBuilder extends ConfigEntityListBuilder {
   /**
    * Builds a row for an entity in the entity listing.
    *
-   * @param EntityInterface $entity
+   * @param \Drupal\Core\Entity\EntityInterface $entity
    *   The entity for which to build the row.
    *
    * @return array

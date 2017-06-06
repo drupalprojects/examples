@@ -24,7 +24,7 @@ class SimpleForm extends FormBase {
    *
    * @param array $form
    *   Default form array structure.
-   * @param FormStateInterface $form_state
+   * @param \Drupal\Core\Form\FormStateInterface $form_state
    *   Object containing current form state.
    *
    * @return array
@@ -77,7 +77,7 @@ class SimpleForm extends FormBase {
    *
    * @param array $form
    *   The render array of the currently built form.
-   * @param FormStateInterface $form_state
+   * @param \Drupal\Core\Form\FormStateInterface $form_state
    *   Object describing the current state of the form.
    */
   public function validateForm(array &$form, FormStateInterface $form_state) {
@@ -95,7 +95,7 @@ class SimpleForm extends FormBase {
    *
    * @param array $form
    *   The render array of the currently built form.
-   * @param FormStateInterface $form_state
+   * @param \Drupal\Core\Form\FormStateInterface $form_state
    *   Object describing the current state of the form.
    */
   public function submitForm(array &$form, FormStateInterface $form_state) {

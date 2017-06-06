@@ -21,7 +21,7 @@ abstract class DemoBase extends FormBase {
    *
    * @param array $form
    *   The render array of the currently built form.
-   * @param FormStateInterface $form_state
+   * @param \Drupal\Core\Form\FormStateInterface $form_state
    *   Object describing the current state of the form.
    */
   public function submitForm(array &$form, FormStateInterface $form_state) {
