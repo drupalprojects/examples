@@ -91,7 +91,7 @@ class JsExampleController extends ControllerBase {
     // Main container DIV. We give it a unique ID so that the JavaScript can
     // find it using jQuery.
     $build['content'] = array(
-      '#markup' => '<div id="js-weights"></div>',
+      '#markup' => '<div id="js-weights" class="js-weights"></div>',
     );
     // Attach library containing css and js files.
     $build['#attached']['library'][] = 'js_example/js_example.weights';
