@@ -2,44 +2,22 @@
 
 namespace Drupal\js_example\Controller;
 
-use Drupal\Core\Controller\ControllerBase;
+use Drupal\examples\Utility\DescriptionTemplateTrait;
 
 /**
- * Controller for js_example pages.
+ * Controller for Hooks example description page.
  *
- * @ingroup js_example
+ * This class uses the DescriptionTemplateTrait to display text we put in the
+ * templates/description.html.twig file.
  */
-class JsExampleController extends ControllerBase {
+class JsExampleController {
+  use DescriptionTemplateTrait;
 
   /**
-   * Example info page.
-   *
-   * @return array
-   *   A renderable array.
+   * {@inheritdoc}
    */
-  public function info() {
-    $build['content'] = [
-      'first_line' => [
-        '#prefix' => '<p>',
-        '#markup' => 'Drupal includes jQuery and jQuery UI.',
-        '#suffix' => '</p>',
-      ],
-      'second_line' => [
-        '#prefix' => '<p>',
-        '#markup' => 'We have two examples of using these:',
-        '#suffix' => '</p>',
-      ],
-      'examples_list' => [
-        '#theme' => 'item_list',
-        '#items' => [
-          'An accordion-style section reveal effect. This demonstrates calling a jQuery UI function using Drupal&#39;s rendering system.',
-          'Sorting according to numeric &#39;weight.&#39; This demonstrates attaching your own JavaScript code to individual page elements using Drupal&#39;s rendering system.',
-        ],
-        '#type' => 'ol',
-      ],
-    ];
-
-    return $build;
+  protected function getModuleName() {
+    return 'js_example';
   }
 
   /**

@@ -2,7 +2,7 @@ js_example.info:
   path: '/examples/js-example'
   defaults:
     _title: 'JavaScript Example Information'
-    _controller: '\Drupal\js_example\Controller\JsExampleController::info'
+    _controller: '\Drupal\js_example\Controller\JsExampleController::description'
   requirements:
     _permission: 'access content'
 
