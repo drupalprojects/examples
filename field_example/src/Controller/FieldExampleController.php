@@ -2,21 +2,23 @@
 
 namespace Drupal\field_example\Controller;
 
-use Drupal\Core\Controller\ControllerBase;
+use Drupal\examples\Utility\DescriptionTemplateTrait;
 
 /**
- * Returns responses for dblog routes.
+ * Controller for field example description page.
+ *
+ * This class uses the DescriptionTemplateTrait to display text we put in the
+ * templates/description.html.twig file.
  */
-class FieldExampleController extends ControllerBase {
+class FieldExampleController {
+
+  use DescriptionTemplateTrait;
 
   /**
-   * A simple page to explain to the developer what to do.
+   * {@inheritdoc}
    */
-  public function description() {
-    return array(
-      '#markup' => t(
-        "The Field Example provides a field composed of an HTML RGB value, like #ff00ff. To use it, add the field to a content type."),
-    );
+  protected function getModuleName() {
+    return 'field_example';
   }
 
 }
