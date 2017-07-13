@@ -52,7 +52,7 @@ Now you can run phpcs:
 
     $ cd modules/examples
     $ ../../vendor/bin/phpcs -ps
-    // phpcs uses Exampes' phpcs.xml.dist to verify coding standards.
+    // phpcs uses Examples' phpcs.xml.dist to verify coding standards.
     // -p shows you progress dots.
     // -s shows you sniff errors in the report.
 
