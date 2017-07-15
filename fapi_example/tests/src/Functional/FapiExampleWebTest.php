@@ -265,4 +265,63 @@ class FapiExampleWebTest extends ExamplesBrowserTestBase {
     $assert->pageTextContains('Value for publisher: me');
   }
 
+  /**
+   * Test the Ajax Add More demo form.
+   */
+  public function testAjaxAddMore() {
+    // XPath for the remove button. We have to use contains() here because the
+    // ID will have a hash value at the end.
+    $button_xpath = '//input[contains(@id,"edit-names-fieldset-actions-remove-name")]';
+
+    // Test for a link to the ajax_add_more example on the fapi_example
+    // page.
+    $this->drupalGet('examples/fapi-example');
+    $this->assertLinkByHref('examples/fapi-example/ajax-addmore');
+
+    // Verify that anonymous can access the ajax_add_more page.
+    $this->drupalGet('examples/fapi-example/ajax-addmore');
+    $this->assertResponse(200, 'The Demo of Container page is available.');
+    // Verify that there is no remove button.
+    $this->assertFalse($this->xpath($button_xpath));
+
+    $name_one = 'John';
+    $name_two = 'Smith';
+
+    // Enter the value in field-1.
+    // and click on 'Add one more' button.
+    $edit = array();
+    $edit['names_fieldset[name][0]'] = $name_one;
+    $this->drupalPostForm('/examples/fapi-example/ajax-addmore', $edit, t('Add one more'));
+
+    // Verify field-2 gets added.
+    // and value of field-1 should retained.
+    $this->assertFieldsByValue($this->xpath('//input[@id = "edit-names-fieldset-name-0"]'), $name_one);
+    $this->assertTrue($this->xpath('//input[@id = "edit-names-fieldset-name-1"]'));
+    // Verify that the remove button was added.
+    $this->assertTrue($this->xpath($button_xpath));
+
+    // Enter the value in field-2
+    // and click on 'Add one more' button.
+    $edit['names_fieldset[name][1]'] = $name_two;
+    $this->drupalPostForm(NULL, $edit, t('Add one more'));
+
+    // Verify field-3 gets added.
+    // and value of field-1 and field-2 are retained.
+    $this->assertFieldsByValue($this->xpath('//input[@id = "edit-names-fieldset-name-0"]'), $name_one);
+    $this->assertFieldsByValue($this->xpath('//input[@id = "edit-names-fieldset-name-1"]'), $name_two);
+    $this->assertTrue($this->xpath('//input[@id = "edit-names-fieldset-name-2"]'));
+
+    // Click on "Remove one" button to test remove button works.
+    // and value of field-1 and field-2 are retained.
+    $this->drupalPostForm(NULL, NULL, t('Remove one'));
+    $this->assertFieldsByValue($this->xpath('//input[@id = "edit-names-fieldset-name-0"]'), $name_one);
+    $this->assertFieldsByValue($this->xpath('//input[@id = "edit-names-fieldset-name-1"]'), $name_two);
+    $this->assertFalse($this->xpath('//input[@id = "edit-names-fieldset-name-2"]'));
+
+    // Submit the form and verify the results.
+    $this->drupalPostForm(NULL, NULL, t('Submit'));
+    $this->assertText('These people are coming to the picnic: ' . $name_one . ', ' . $name_two);
+
+  }
+
 }
