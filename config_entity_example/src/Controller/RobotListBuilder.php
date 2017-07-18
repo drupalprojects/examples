@@ -4,6 +4,7 @@ namespace Drupal\config_entity_example\Controller;
 
 use Drupal\Core\Config\Entity\ConfigEntityListBuilder;
 use Drupal\Core\Entity\EntityInterface;
+use Drupal\examples\Utility\DescriptionTemplateTrait;
 
 /**
  * Provides a listing of robot entities.
@@ -27,6 +28,14 @@ use Drupal\Core\Entity\EntityInterface;
  * @ingroup config_entity_example
  */
 class RobotListBuilder extends ConfigEntityListBuilder {
+  use DescriptionTemplateTrait;
+
+  /**
+   * {@inheritdoc}
+   */
+  protected function getModuleName() {
+    return 'config_entity_example';
+  }
 
   /**
    * Builds the header row for the entity listing.
@@ -34,7 +43,7 @@ class RobotListBuilder extends ConfigEntityListBuilder {
    * @return array
    *   A render array structure of header strings.
    *
-   * @see Drupal\Core\Entity\EntityListController::render()
+   * @see \Drupal\Core\Entity\EntityListController::render()
    */
   public function buildHeader() {
     $header['label'] = $this->t('Robot');
@@ -52,7 +61,7 @@ class RobotListBuilder extends ConfigEntityListBuilder {
    * @return array
    *   A render array of the table row for displaying the entity.
    *
-   * @see Drupal\Core\Entity\EntityListController::render()
+   * @see \Drupal\Core\Entity\EntityListController::render()
    */
   public function buildRow(EntityInterface $entity) {
     $row['label'] = $entity->label();
@@ -72,16 +81,7 @@ class RobotListBuilder extends ConfigEntityListBuilder {
    *   Renderable array.
    */
   public function render() {
-    $build['description'] = array(
-      '#markup' => $this->t("<p>The Config Entity Example module defines a"
-        . " Robot entity type. This is a list of the Robot entities currently"
-        . " in your Drupal site.</p><p>By default, when you enable this"
-        . " module, one entity is created from configuration. This is why we"
-        . " call them Config Entities. Marvin, the paranoid android, is created"
-        . " in the database when the module is enabled.</p><p>You can view a"
-        . " list of Robots here. You can also use the 'Operations' column to"
-        . " edit and delete Robots.</p>"),
-    );
+    $build = $this->description();
     $build[] = parent::render();
     return $build;
   }
