@@ -37,13 +37,13 @@ class BlockExampleTest extends BrowserTestBase {
 
     // Verify the blocks are listed to be added.
     $this->drupalGet('/admin/structure/block/library/' . $theme_name, ['query' => ['region' => 'content']]);
-    $assert->pageTextContains('Title of first block (example_configurable_text');
+    $assert->pageTextContains('Example: configurable text');
     $assert->pageTextContains('Example: empty block');
     $assert->pageTextContains('Example: uppercase this please');
 
     // Define and place blocks.
     $settings_configurable = array(
-      'label' => t('Title of first block (example_configurable_text)'),
+      'label' => t('Configurable text'),
       'id' => 'block_example_example_configurable_text',
       'theme' => $theme_name,
     );
@@ -57,7 +57,7 @@ class BlockExampleTest extends BrowserTestBase {
     $this->drupalPlaceBlock('example_uppercase', $settings_uppercase);
 
     $settings_empty = array(
-      'label' => t('Example: empty block'),
+      'label' => t('Empty block'),
       'id' => 'block_example_example_empty',
       'theme' => $theme_name,
     );

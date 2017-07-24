@@ -14,8 +14,8 @@ use Drupal\Core\Block\BlockPluginInterface;
  * @{
  * Demonstrates code creation of blocks.
  *
- * This is an example outlining how a module can define blocks that can be
- * displayed on various pages of a site, or how to alter blocks provided by
+ * This example demonstrates how a module can define blocks that can be
+ * displayed on various pages of a site, and how to alter blocks provided by
  * other modules.
  */
 
@@ -24,20 +24,20 @@ use Drupal\Core\Block\BlockPluginInterface;
  *
  * This hook allows you to modify the output of any block in the system.
  *
- * In addition, instead of hook_block_view_alter(), which is called for all
- * blocks, you can also use hook_block_view_BASE_BLOCK_ID_alter() to alter a
- * specific block. To change only our block using
- * hook_block_view_BASE_BLOCK_ID_alter, we would use the function:
- * block_example_block_view_example_uppercase_alter()
+ * We are going to change the block label to uppercase if it contains the string
+ * "uppercase" or if the default block label contains this string. The default
+ * block label is set programmatically in the subject key of the block's plugin
+ * definition. The configurable block label, which can be overridden through the
+ * UI, is found in the "#configuration" key of the block's build definition.
+ * This module creates a block that demonstrates the uppercase effect in the
+ * "Example: uppercase this please" block. You can also demonstrate the effect
+ * of this hook by editing the title of an existing block or by creating a new
+ * block which where the default label has the string "uppercase" in it.
  *
- * We are going to uppercase the subject (the title of the block as shown to the
- * user) of any block if the string "uppercase" appears in the block title or
- * subject. Default block titles are set programmatically in the subject key;
- * titles created through the UI are saved in the title key. This module creates
- * an example block to demonstrate this effect (default title set
- * programmatically as subject).  You can also demonstrate the effect of this
- * hook by creating a new block whose title has the string 'uppercase' in it
- * (set as title through the UI).
+ * Instead of hook_block_view_alter(), which is called for all blocks, you can
+ * also use hook_block_view_BASE_BLOCK_ID_alter() to alter a specific block. To
+ * only change the "example_uppercase" block we would use the function:
+ * hook_block_view_example_uppercase_alter().
  */
 function block_example_block_view_alter(array &$build, BlockPluginInterface $block) {
   // We'll search for the string 'uppercase'.

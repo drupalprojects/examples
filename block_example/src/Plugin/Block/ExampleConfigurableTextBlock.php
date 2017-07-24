@@ -14,13 +14,21 @@ use Drupal\Core\Form\FormStateInterface;
  *
  * @Block(
  *   id = "example_configurable_text",
- *   admin_label = @Translation("Title of first block (example_configurable_text)")
+ *   admin_label = @Translation("Example: configurable text")
  * )
  */
 class ExampleConfigurableTextBlock extends BlockBase {
 
   /**
    * {@inheritdoc}
+   *
+   * This method sets the block default configuration. This configuration
+   * determines the block's behavior when a block is initially placed in a
+   * region. Default values for the block configuration form should be added to
+   * the configuration array. System default configurations are assembled in
+   * BlockBase::__construct() e.g. cache setting and block title visibility.
+   *
+   * @see \Drupal\block\BlockBase::__construct()
    */
   public function defaultConfiguration() {
     return array(
@@ -30,6 +38,14 @@ class ExampleConfigurableTextBlock extends BlockBase {
 
   /**
    * {@inheritdoc}
+   *
+   * This method defines form elements for custom block configuration. Standard
+   * block configuration fields are added by BlockBase::buildConfigurationForm()
+   * (block title and title visibility) and BlockFormController::form() (block
+   * visibility settings).
+   *
+   * @see \Drupal\block\BlockBase::buildConfigurationForm()
+   * @see \Drupal\block\BlockFormController::form()
    */
   public function blockForm($form, FormStateInterface $form_state) {
     $form['block_example_string_text'] = array(
@@ -43,6 +59,11 @@ class ExampleConfigurableTextBlock extends BlockBase {
 
   /**
    * {@inheritdoc}
+   *
+   * This method processes the blockForm() form fields when the block
+   * configuration form is submitted.
+   *
+   * The blockValidate() method can be used to validate the form submission.
    */
   public function blockSubmit($form, FormStateInterface $form_state) {
     $this->configuration['block_example_string']
@@ -54,7 +75,6 @@ class ExampleConfigurableTextBlock extends BlockBase {
    */
   public function build() {
     return array(
-      '#type' => 'markup',
       '#markup' => $this->configuration['block_example_string'],
     );
   }
