@@ -25,7 +25,8 @@ function tablesort_example_install() {
     array('numbers' => 7, 'alpha' => 'e', 'random' => 't982hkv'),
   );
 
-  if (db_table_exists('tablesort_example')) {
+  $db_connection = \Drupal::database();
+  if ($db_connection->schema()->tableExists('tablesort_example')) {
     foreach ($rows as $row) {
       db_insert('tablesort_example')->fields($row)->execute();
     }
@@ -40,7 +41,8 @@ function tablesort_example_install() {
  * @ingroup tablesort_example
  */
 function tablesort_example_uninstall() {
-  db_drop_table('tablesort_example');
+  $db_connection = \Drupal::database();
+  $db_connection->schema()->dropTable('tablesort_example');
 }
 
 /**
