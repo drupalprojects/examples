@@ -8,8 +8,6 @@ use Drupal\Core\Form\FormStateInterface;
 /**
  * Class ContentEntityExampleSettingsForm.
  *
- * @package Drupal\content_entity_example\Form
- *
  * @ingroup content_entity_example
  */
 class ContactSettingsForm extends FormBase {

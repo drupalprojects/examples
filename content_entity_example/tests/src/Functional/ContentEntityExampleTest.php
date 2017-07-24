@@ -8,8 +8,6 @@ use Drupal\Tests\examples\Functional\ExamplesBrowserTestBase;
 /**
  * Tests the basic functions of the Content Entity Example module.
  *
- * @package Drupal\content_entity_example\Tests
- *
  * @ingroup content_entity_example
  *
  * @group content_entity_example

@@ -9,8 +9,6 @@ use Drupal\Core\Form\FormStateInterface;
  *
  * Provides the edit form for our Robot entity.
  *
- * @package Drupal\config_entity_example\Form
- *
  * @ingroup config_entity_example
  */
 class RobotEditForm extends RobotFormBase {

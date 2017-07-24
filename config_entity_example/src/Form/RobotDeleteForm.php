@@ -15,8 +15,6 @@ use Drupal\Core\Form\FormStateInterface;
  * user with a simple yes/no question. For this reason, we derive from
  * EntityConfirmFormBase instead.
  *
- * @package Drupal\config_entity_example\Form
- *
  * @ingroup config_entity_example
  */
 class RobotDeleteForm extends EntityConfirmFormBase {

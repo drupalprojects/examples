@@ -23,8 +23,6 @@ use Drupal\examples\Utility\DescriptionTemplateTrait;
  * Drupal loads the annotation for that entity type. It looks for the "list"
  * entry under "controllers" for the class to load.
  *
- * @package Drupal\config_entity_example\Controller
- *
  * @ingroup config_entity_example
  */
 class RobotListBuilder extends ConfigEntityListBuilder {

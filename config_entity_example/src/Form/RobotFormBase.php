@@ -16,8 +16,6 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
  * we create a base class. Drupal never routes to this class directly,
  * but instead through the child classes of RobotAddForm and RobotEditForm.
  *
- * @package Drupal\config_entity_example\Form
- *
  * @ingroup config_entity_example
  */
 class RobotFormBase extends EntityForm {
