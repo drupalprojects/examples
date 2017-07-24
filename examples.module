@@ -95,7 +95,6 @@ function examples_toolbar() {
     'tab' => array(
       '#type' => 'link',
       '#title' => t('Examples'),
-      // @todo: Once it is created, use the example index page.
       '#url' => Url::fromRoute('<front>'),
       '#attributes' => array(
         'title' => t('Developer Examples'),
