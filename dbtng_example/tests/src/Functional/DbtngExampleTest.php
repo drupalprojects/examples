@@ -88,7 +88,6 @@ class DbtngExampleTest extends ExamplesBrowserTestBase {
   public function testUI() {
     $assert = $this->assertSession();
 
-    // @todo: remove the need to have a logged-in user.
     $this->drupalLogin($this->createUser());
     // Test the basic list.
     $this->drupalGet('/examples/dbtng-example');
@@ -104,7 +103,7 @@ class DbtngExampleTest extends ExamplesBrowserTestBase {
         'surname' => 'Anonymous',
         'age' => 33,
       ),
-      t('Add')
+      'Add'
     );
     // Now find the new entry.
     $this->drupalGet('/examples/dbtng-example');
@@ -130,6 +129,20 @@ class DbtngExampleTest extends ExamplesBrowserTestBase {
 
     $field = $this->xpath("//*[@id='dbtng-example-advanced-list'][1]/tbody/tr/td[4]");
     $this->assertEquals('Roe', $field[0]->getText());
+
+    // Try to add an entry while logged out.
+    $this->drupalLogout();
+    $this->drupalPostForm(
+      '/examples/dbtng-example/add',
+      array(
+        'name' => 'Anonymous',
+        'surname' => 'UserCannotPost',
+        'age' => 'not a number',
+      ),
+      'Add'
+    );
+    $assert->pageTextContains('You must be logged in to add values to the database.');
+    $assert->pageTextContains('Age needs to be a number');
   }
 
   /**
