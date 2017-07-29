@@ -7,6 +7,9 @@ dependencies:
   module:
     - path
     - text
+  enforced:
+    module:
+      - simpletest_example
 id: node.simpletest_example.default
 targetEntityType: node
 bundle: simpletest_example

@@ -1,6 +1,9 @@
 langcode: en
 status: true
-dependencies: {  }
+dependencies:
+  enforced:
+    module:
+      - simpletest_example
 name: 'SimpleTest Example Node Type'
 type: simpletest_example
 description: 'A content type that exists so we can test it.'

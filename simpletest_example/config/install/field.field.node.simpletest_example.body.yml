@@ -6,6 +6,9 @@ dependencies:
     - node.type.simpletest_example
   module:
     - text
+  enforced:
+    module:
+      - simpletest_example
 id: node.simpletest_example.body
 field_name: body
 entity_type: node
