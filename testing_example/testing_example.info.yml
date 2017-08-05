@@ -1,0 +1,7 @@
+name: Testing example
+type: module
+description: Demonstrates Drupal core testing frameworks
+package: Example modules
+core: 8.x
+dependencies:
+  - examples:examples

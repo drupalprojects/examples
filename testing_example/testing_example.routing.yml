@@ -1,0 +1,7 @@
+# testing_example only has one route. It is to a page explaining the module.
+testing_example.description:
+  path: 'examples/testing-example'
+  defaults:
+    _controller: '\Drupal\testing_example\Controller\TestingExampleController::description'
+  requirements:
+    _permission: 'access content'

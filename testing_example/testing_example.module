@@ -1,0 +1,17 @@
+<?php
+
+/**
+ * @file
+ * Module file for testing_example.
+ */
+
+/**
+ * @defgroup testing_example Example: Testing
+ * @ingroup examples
+ * @{
+ * This example demonstrates Drupal 8 testing frameworks.
+ */
+
+/**
+ * @} End of "defgroup testing_example".
+ */
