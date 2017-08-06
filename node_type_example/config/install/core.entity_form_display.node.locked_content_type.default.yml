@@ -7,6 +7,9 @@ dependencies:
   module:
     - path
     - text
+  enforced:
+    module:
+      - node_type_example
 id: node.locked_content_type.default
 targetEntityType: node
 bundle: locked_content_type

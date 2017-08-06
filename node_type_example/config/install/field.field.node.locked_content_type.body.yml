@@ -6,6 +6,9 @@ dependencies:
     - node.type.locked_content_type
   module:
     - text
+  enforced:
+    module:
+      - node_type_example
 id: node.locked_content_type.body
 field_name: body
 entity_type: node

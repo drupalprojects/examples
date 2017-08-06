@@ -153,4 +153,23 @@ class NodeTypeExampleTest extends ExamplesBrowserTestBase {
     $this->assertText($body);
   }
 
+
+  /**
+   * Verify that user can uninstall and then reinstall node_type_example.
+   */
+  public function testUninstallReinstall() {
+    $session = $this->assertSession();
+
+    // Uninstalling module.
+    $module_installer = $this->container->get('module_installer');
+    $module_installer->uninstall(['node_type_example']);
+    $this->drupalGet('examples/node-type-example');
+    $session->statusCodeEquals(404);
+
+    // Re-installing module.
+    $module_installer->install(['node_type_example']);
+    $this->drupalGet('examples/node-type-example');
+    $session->statusCodeEquals(200);
+  }
+
 }

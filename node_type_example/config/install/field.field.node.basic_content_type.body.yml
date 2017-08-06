@@ -6,6 +6,9 @@ dependencies:
     - node.type.basic_content_type
   module:
     - text
+  enforced:
+    module:
+      - node_type_example
 id: node.basic_content_type.body
 field_name: body
 entity_type: node

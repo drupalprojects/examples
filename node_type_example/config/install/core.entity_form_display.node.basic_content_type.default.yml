@@ -7,6 +7,9 @@ dependencies:
   module:
     - path
     - text
+  enforced:
+    module:
+      - node_type_example
 id: node.basic_content_type.default
 targetEntityType: node
 bundle: basic_content_type
