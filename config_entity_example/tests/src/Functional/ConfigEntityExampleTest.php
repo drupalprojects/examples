@@ -32,17 +32,6 @@ class ConfigEntityExampleTest extends BrowserTestBase {
   protected $profile = 'minimal';
 
   /**
-   * {@inheritdoc}
-   */
-  public static function getInfo() {
-    return array(
-      'name' => 'Config Entity Example functional test',
-      'description' => 'Test the Config Entity Example module.',
-      'group' => 'Examples',
-    );
-  }
-
-  /**
    * Various functional test of the Config Entity Example module.
    *
    * 1) Verify that the Marvin entity was created when the module was installed.

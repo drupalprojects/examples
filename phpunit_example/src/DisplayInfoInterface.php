@@ -9,7 +9,7 @@ namespace Drupal\phpunit_example;
  * demonstrate using an interface in testing.
  *
  * This interface as representing objects that can return some sort of display
- * information, such as getInfo() in Drupal tests, or an .info.yml file.
+ * information, such as .info.yml file.
  *
  * @ingroup phpunit_example
  */

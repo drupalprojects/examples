@@ -32,17 +32,6 @@ class EmailExampleTest extends ExamplesBrowserTestBase {
   protected $profile = 'minimal';
 
   /**
-   * {@inheritdoc}
-   */
-  public static function getInfo() {
-    return array(
-      'name' => 'Email example functionality',
-      'description' => 'Ensure the email example module is working.',
-      'group' => 'Examples',
-    );
-  }
-
-  /**
    * Test our new email form.
    *
    * Tests for the following:
