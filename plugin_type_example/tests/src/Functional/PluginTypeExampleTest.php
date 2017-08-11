@@ -20,7 +20,7 @@ class PluginTypeExampleTest extends ExamplesBrowserTestBase {
    *
    * @var array
    */
-  public static $modules = array('plugin_type_example');
+  public static $modules = ['plugin_type_example'];
 
   /**
    * The installation profile to use with this test.
@@ -47,7 +47,7 @@ class PluginTypeExampleTest extends ExamplesBrowserTestBase {
     $this->assertEquals(426, $sandwich_plugin_definition['calories'], 'The ham sandwich plugin definition\'s calories property is not set.');
 
     // Create an instance of the ham sandwich plugin to check it works.
-    $plugin = $manager->createInstance('ham_sandwich', array('of' => 'configuration values'));
+    $plugin = $manager->createInstance('ham_sandwich', ['of' => 'configuration values']);
 
     $this->assertInstanceOf(ExampleHamSandwich::class, $plugin);
 

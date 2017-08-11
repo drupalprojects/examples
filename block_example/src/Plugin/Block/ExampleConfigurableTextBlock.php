@@ -31,9 +31,9 @@ class ExampleConfigurableTextBlock extends BlockBase {
    * @see \Drupal\block\BlockBase::__construct()
    */
   public function defaultConfiguration() {
-    return array(
-      'block_example_string' => $this->t('A default value. This block was created at %time', array('%time' => date('c'))),
-    );
+    return [
+      'block_example_string' => $this->t('A default value. This block was created at %time', ['%time' => date('c')]),
+    ];
   }
 
   /**
@@ -48,12 +48,12 @@ class ExampleConfigurableTextBlock extends BlockBase {
    * @see \Drupal\block\BlockFormController::form()
    */
   public function blockForm($form, FormStateInterface $form_state) {
-    $form['block_example_string_text'] = array(
+    $form['block_example_string_text'] = [
       '#type' => 'textarea',
       '#title' => $this->t('Block contents'),
       '#description' => $this->t('This text will appear in the example block.'),
       '#default_value' => $this->configuration['block_example_string'],
-    );
+    ];
     return $form;
   }
 
@@ -74,9 +74,9 @@ class ExampleConfigurableTextBlock extends BlockBase {
    * {@inheritdoc}
    */
   public function build() {
-    return array(
+    return [
       '#markup' => $this->configuration['block_example_string'],
-    );
+    ];
   }
 
 }

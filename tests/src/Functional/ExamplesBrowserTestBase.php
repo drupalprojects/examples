@@ -17,7 +17,7 @@ abstract class ExamplesBrowserTestBase extends BrowserTestBase {
    *
    * @var array
    */
-  public static $modules = array('examples', 'block');
+  public static $modules = ['examples', 'block'];
 
   /**
    * {@inheritdoc}

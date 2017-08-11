@@ -54,12 +54,12 @@ class EventsExampleSubscriber implements EventSubscriberInterface {
     // For each event key define an array of arrays composed of the method names
     // to call and optional priorities. The method name here refers to a method
     // on this class to call whenever the event is triggered.
-    $events[IncidentEvents::NEW_REPORT][] = array('notifyMario');
+    $events[IncidentEvents::NEW_REPORT][] = ['notifyMario'];
 
     // Subscribers can optionally set a priority. If more than one subscriber is
     // listening to an event when it is triggered they will be executed in order
     // of priority. If no priority is set the default is 0.
-    $events[IncidentEvents::NEW_REPORT][] = array('notifyBatman', -100);
+    $events[IncidentEvents::NEW_REPORT][] = ['notifyBatman', -100];
 
     return $events;
   }

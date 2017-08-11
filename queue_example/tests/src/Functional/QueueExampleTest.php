@@ -12,7 +12,7 @@ use Drupal\Tests\BrowserTestBase;
  * @group examples
  */
 class QueueExampleTest extends BrowserTestBase {
-  public static $modules = array('queue_example');
+  public static $modules = ['queue_example'];
 
   /**
    * The installation profile to use with this test.
@@ -31,17 +31,17 @@ class QueueExampleTest extends BrowserTestBase {
     $this->drupalGet('examples/queue_example');
     // Load the queue with 5 items.
     for ($i = 1; $i <= 5; $i++) {
-      $edit = array('queue_name' => 'queue_example_first_queue', 'string_to_add' => 'boogie' . $i);
+      $edit = ['queue_name' => 'queue_example_first_queue', 'string_to_add' => 'boogie' . $i];
       $this->drupalPostForm(NULL, $edit, t('Insert into queue'));
-      $this->assertText(t('There are now @number items in the queue', array('@number' => $i)));
+      $this->assertText(t('There are now @number items in the queue', ['@number' => $i]));
     }
     // Claim each of the 5 items with a claim time of 0 seconds.
     for ($i = 1; $i <= 5; $i++) {
-      $edit = array('queue_name' => 'queue_example_first_queue', 'claim_time' => 0);
+      $edit = ['queue_name' => 'queue_example_first_queue', 'claim_time' => 0];
       $this->drupalPostForm(NULL, $edit, t('Claim the next item from the queue'));
-      $this->assertPattern(t('%Claimed item id=.*string=@string for 0 seconds.%', array('@string' => 'boogie' . $i)));
+      $this->assertPattern(t('%Claimed item id=.*string=@string for 0 seconds.%', ['@string' => 'boogie' . $i]));
     }
-    $edit = array('queue_name' => 'queue_example_first_queue', 'claim_time' => 0);
+    $edit = ['queue_name' => 'queue_example_first_queue', 'claim_time' => 0];
     $this->drupalPostForm(NULL, $edit, t('Claim the next item from the queue'));
     $this->assertText(t('There were no items in the queue available to claim'));
 
@@ -51,16 +51,16 @@ class QueueExampleTest extends BrowserTestBase {
     sleep(1);
 
     // Run cron to release expired items.
-    $this->drupalPostForm(NULL, array(), t('Run cron manually to expire claims'));
+    $this->drupalPostForm(NULL, [], t('Run cron manually to expire claims'));
 
     // Claim and delete each of the 5 items which should now be available.
     for ($i = 1; $i <= 5; $i++) {
-      $edit = array('queue_name' => 'queue_example_first_queue', 'claim_time' => 0);
+      $edit = ['queue_name' => 'queue_example_first_queue', 'claim_time' => 0];
       $this->drupalPostForm(NULL, $edit, t('Claim the next item and delete it'));
-      $this->assertPattern(t('%Claimed and deleted item id=.*string=@string for 0 seconds.%', array('@string' => 'boogie' . $i)));
+      $this->assertPattern(t('%Claimed and deleted item id=.*string=@string for 0 seconds.%', ['@string' => 'boogie' . $i]));
     }
     // Verify that nothing is left to claim.
-    $edit = array('queue_name' => 'queue_example_first_queue', 'claim_time' => 0);
+    $edit = ['queue_name' => 'queue_example_first_queue', 'claim_time' => 0];
     $this->drupalPostForm(NULL, $edit, t('Claim the next item from the queue'));
     $this->assertText(t('There were no items in the queue available to claim'));
   }

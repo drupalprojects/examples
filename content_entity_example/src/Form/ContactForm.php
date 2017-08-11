@@ -21,12 +21,12 @@ class ContactForm extends ContentEntityForm {
     $form = parent::buildForm($form, $form_state);
     $entity = $this->entity;
 
-    $form['langcode'] = array(
+    $form['langcode'] = [
       '#title' => $this->t('Language'),
       '#type' => 'language_select',
       '#default_value' => $entity->getUntranslated()->language()->getId(),
       '#languages' => Language::STATE_ALL,
-    );
+    ];
     return $form;
   }
 

@@ -16,22 +16,22 @@
  */
 function dbtng_example_install() {
   // Add a default entry.
-  $fields = array(
+  $fields = [
     'name' => 'John',
     'surname' => 'Doe',
     'age' => 0,
-  );
+  ];
   db_insert('dbtng_example')
     ->fields($fields)
     ->execute();
 
   // Add another entry.
-  $fields = array(
+  $fields = [
     'name' => 'John',
     'surname' => 'Roe',
     'age' => 100,
     'uid' => 1,
-  );
+  ];
   db_insert('dbtng_example')
     ->fields($fields)
     ->execute();
@@ -47,49 +47,49 @@ function dbtng_example_install() {
  * @ingroup dbtng_example
  */
 function dbtng_example_schema() {
-  $schema['dbtng_example'] = array(
+  $schema['dbtng_example'] = [
     'description' => 'Stores example person entries for demonstration purposes.',
-    'fields' => array(
-      'pid' => array(
+    'fields' => [
+      'pid' => [
         'type' => 'serial',
         'not null' => TRUE,
         'description' => 'Primary Key: Unique person ID.',
-      ),
-      'uid' => array(
+      ],
+      'uid' => [
         'type' => 'int',
         'not null' => TRUE,
         'default' => 0,
         'description' => "Creator user's {users}.uid",
-      ),
-      'name' => array(
+      ],
+      'name' => [
         'type' => 'varchar',
         'length' => 255,
         'not null' => TRUE,
         'default' => '',
         'description' => 'Name of the person.',
-      ),
-      'surname' => array(
+      ],
+      'surname' => [
         'type' => 'varchar',
         'length' => 255,
         'not null' => TRUE,
         'default' => '',
         'description' => 'Surname of the person.',
-      ),
-      'age' => array(
+      ],
+      'age' => [
         'type' => 'int',
         'not null' => TRUE,
         'default' => 0,
         'size' => 'tiny',
         'description' => 'The age of the person in years.',
-      ),
-    ),
-    'primary key' => array('pid'),
-    'indexes' => array(
-      'name' => array('name'),
-      'surname' => array('surname'),
-      'age' => array('age'),
-    ),
-  );
+      ],
+    ],
+    'primary key' => ['pid'],
+    'indexes' => [
+      'name' => ['name'],
+      'surname' => ['surname'],
+      'age' => ['age'],
+    ],
+  ];
 
   return $schema;
 }

@@ -94,114 +94,114 @@ class QueueExampleForm extends FormBase {
     $queue_name = $form_state->getValue('queue_name') ?: 'queue_example_first_queue';
     $items = $this->retrieveQueue($queue_name);
 
-    $form['help'] = array(
+    $form['help'] = [
       '#type' => 'markup',
       '#markup' => '<div>' . $this->t('This page is an interface on the Drupal queue API. You can add new items to the queue, "claim" one (retrieve the next item and keep a lock on it), and delete one (remove it from the queue). Note that claims are not expired until cron runs, so there is a special button to run cron to perform any necessary expirations.') . '</div>',
-    );
+    ];
 
-    $form['wrong_queue_warning'] = array(
+    $form['wrong_queue_warning'] = [
       '#type' => 'markup',
       '#markup' => '<div>' . $this->t('Note: the example works only with the default queue implementation, which is not currently configured!!') . '</div>',
       '#access' => (!$this->doesQueueUseDB()),
-    );
+    ];
 
-    $queue_names = array('queue_example_first_queue', 'queue_example_second_queue');
-    $form['queue_name'] = array(
+    $queue_names = ['queue_example_first_queue', 'queue_example_second_queue'];
+    $form['queue_name'] = [
       '#type' => 'select',
       '#title' => $this->t('Choose queue to examine'),
       '#options' => array_combine($queue_names, $queue_names),
       '#default_value' => $queue_name,
-    );
+    ];
 
-    $form['queue_show'] = array(
+    $form['queue_show'] = [
       '#type' => 'submit',
       '#value' => $this->t('Show queue'),
-      '#submit' => array(array($this, 'submitShowQueue')),
-    );
+      '#submit' => [[$this, 'submitShowQueue']],
+    ];
 
-    $form['status_fieldset'] = array(
+    $form['status_fieldset'] = [
       '#type' => 'fieldset',
-      '#title' => $this->t('Queue status for @name', array('@name' => $queue_name)),
+      '#title' => $this->t('Queue status for @name', ['@name' => $queue_name]),
       '#collapsible' => TRUE,
-    );
+    ];
 
     if (count($items) > 0) {
-      $form['status_fieldset']['status'] = array(
+      $form['status_fieldset']['status'] = [
         '#theme' => 'table',
-        '#header' => array(
+        '#header' => [
           $this->t('Item ID'),
           $this->t('Claimed/Expiration'),
           $this->t('Created'),
           $this->t('Content/Data'),
-        ),
-        '#rows' => array_map(array($this, 'processQueueItemForTable'), $items),
-      );
+        ],
+        '#rows' => array_map([$this, 'processQueueItemForTable'], $items),
+      ];
     }
     else {
-      $form['status_fieldset']['status'] = array(
+      $form['status_fieldset']['status'] = [
         '#type' => 'markup',
         '#markup' => $this->t('There are no items in the queue.'),
-      );
+      ];
     }
 
-    $form['insert_fieldset'] = array(
+    $form['insert_fieldset'] = [
       '#type' => 'fieldset',
-      '#title' => $this->t('Insert into @name', array('@name' => $queue_name)),
-    );
+      '#title' => $this->t('Insert into @name', ['@name' => $queue_name]),
+    ];
 
-    $form['insert_fieldset']['string_to_add'] = array(
+    $form['insert_fieldset']['string_to_add'] = [
       '#type' => 'textfield',
       '#size' => 10,
-      '#default_value' => $this->t('item @counter', array('@counter' => $form_state->get('insert_counter'))),
-    );
+      '#default_value' => $this->t('item @counter', ['@counter' => $form_state->get('insert_counter')]),
+    ];
 
-    $form['insert_fieldset']['add_item'] = array(
+    $form['insert_fieldset']['add_item'] = [
       '#type' => 'submit',
       '#value' => $this->t('Insert into queue'),
-      '#submit' => array(array($this, 'submitAddQueueItem')),
-    );
+      '#submit' => [[$this, 'submitAddQueueItem']],
+    ];
 
-    $form['claim_fieldset'] = array(
+    $form['claim_fieldset'] = [
       '#type' => 'fieldset',
       '#title' => $this->t('Claim from queue'),
       '#collapsible' => TRUE,
-    );
+    ];
 
-    $form['claim_fieldset']['claim_time'] = array(
+    $form['claim_fieldset']['claim_time'] = [
       '#type' => 'radios',
       '#title' => $this->t('Claim time, in seconds'),
-      '#options' => array(
+      '#options' => [
         0 => $this->t('none'),
         5 => $this->t('5 seconds'),
         60 => $this->t('60 seconds'),
-      ),
+      ],
       '#description' => $this->t('This time is only valid if cron runs during this time period. You can run cron manually below.'),
       '#default_value' => $form_state->getValue('claim_time') ?: 5,
-    );
+    ];
 
-    $form['claim_fieldset']['claim_item'] = array(
+    $form['claim_fieldset']['claim_item'] = [
       '#type' => 'submit',
       '#value' => $this->t('Claim the next item from the queue'),
-      '#submit' => array(array($this, 'submitClaimItem')),
-    );
+      '#submit' => [[$this, 'submitClaimItem']],
+    ];
 
-    $form['claim_fieldset']['claim_and_delete_item'] = array(
+    $form['claim_fieldset']['claim_and_delete_item'] = [
       '#type' => 'submit',
       '#value' => $this->t('Claim the next item and delete it'),
-      '#submit' => array(array($this, 'submitClaimDeleteItem')),
-    );
+      '#submit' => [[$this, 'submitClaimDeleteItem']],
+    ];
 
-    $form['claim_fieldset']['run_cron'] = array(
+    $form['claim_fieldset']['run_cron'] = [
       '#type' => 'submit',
       '#value' => $this->t('Run cron manually to expire claims'),
-      '#submit' => array(array($this, 'submitRunCron')),
-    );
+      '#submit' => [[$this, 'submitRunCron']],
+    ];
 
-    $form['delete_queue'] = array(
+    $form['delete_queue'] = [
       '#type' => 'submit',
       '#value' => $this->t('Delete the queue and items in it'),
-      '#submit' => array(array($this, 'submitDeleteQueue')),
-    );
+      '#submit' => [[$this, 'submitDeleteQueue']],
+    ];
 
     return $form;
   }
@@ -226,7 +226,7 @@ class QueueExampleForm extends FormBase {
    *   An array of item arrays.
    */
   public function retrieveQueue($queue_name) {
-    $items = array();
+    $items = [];
 
     // This example requires the default queue implementation to work,
     // so we bail if some other queue implementation has been installed.
@@ -303,7 +303,7 @@ class QueueExampleForm extends FormBase {
     // Queue the string.
     $queue->createItem($form_state->getValue('string_to_add'));
     $count = $queue->numberOfItems();
-    drupal_set_message($this->t('Queued your string (@string_to_add). There are now @count items in the queue.', array('@count' => $count, '@string_to_add' => $form_state->getValue('string_to_add'))));
+    drupal_set_message($this->t('Queued your string (@string_to_add). There are now @count items in the queue.', ['@count' => $count, '@string_to_add' => $form_state->getValue('string_to_add')]));
     // Allows us to keep information in $form_state.
     $form_state->setRebuild();
 
@@ -331,15 +331,15 @@ class QueueExampleForm extends FormBase {
     $count = $queue->numberOfItems();
     if (!empty($item)) {
       drupal_set_message($this->t('Claimed item id=@item_id string=@string for @seconds seconds. There are @count items in the queue.',
-                          array(
+                          [
                             '@count' => $count,
                             '@item_id' => $item->item_id,
                             '@string' => $item->data,
                             '@seconds' => $form_state->getValue('claim_time'),
-                          )));
+                          ]));
     }
     else {
-      drupal_set_message($this->t('There were no items in the queue available to claim. There are @count items in the queue.', array('@count' => $count)));
+      drupal_set_message($this->t('There were no items in the queue available to claim. There are @count items in the queue.', ['@count' => $count]));
     }
     $form_state->setRebuild();
   }
@@ -359,19 +359,19 @@ class QueueExampleForm extends FormBase {
     $count = $queue->numberOfItems();
     $item = $queue->claimItem(60);
     if (!empty($item)) {
-      drupal_set_message($this->t('Claimed and deleted item id=@item_id string=@string for @seconds seconds. There are @count items in the queue.', array(
+      drupal_set_message($this->t('Claimed and deleted item id=@item_id string=@string for @seconds seconds. There are @count items in the queue.', [
         '@count' => $count,
         '@item_id' => $item->item_id,
         '@string' => $item->data,
         '@seconds' => $form_state->getValue('claim_time'),
-      )));
+      ]));
       $queue->deleteItem($item);
       $count = $queue->numberOfItems();
-      drupal_set_message($this->t('There are now @count items in the queue.', array('@count' => $count)));
+      drupal_set_message($this->t('There are now @count items in the queue.', ['@count' => $count]));
     }
     else {
       $count = $queue->numberOfItems();
-      drupal_set_message($this->t('There were no items in the queue available to claim/delete. There are currently @count items in the queue.', array('@count' => $count)));
+      drupal_set_message($this->t('There were no items in the queue available to claim/delete. There are currently @count items in the queue.', ['@count' => $count]));
     }
     $form_state->setRebuild();
   }
@@ -396,7 +396,7 @@ class QueueExampleForm extends FormBase {
     // There is no harm in trying to recreate existing.
     $queue->createQueue();
     $count = $queue->numberOfItems();
-    drupal_set_message($this->t('Ran cron. If claimed items expired, they should be expired now. There are now @count items in the queue', array('@count' => $count)));
+    drupal_set_message($this->t('Ran cron. If claimed items expired, they should be expired now. There are now @count items in the queue', ['@count' => $count]));
     $form_state->setRebuild();
   }
 
@@ -411,7 +411,7 @@ class QueueExampleForm extends FormBase {
   public function submitDeleteQueue(array &$form, FormStateInterface $form_state) {
     $queue = $this->queueFactory->get($form_state->getValue('queue_name'));
     $queue->deleteQueue();
-    drupal_set_message($this->t('Deleted the @queue_name queue and all items in it', array('@queue_name' => $form_state->getValue('queue_name'))));
+    drupal_set_message($this->t('Deleted the @queue_name queue and all items in it', ['@queue_name' => $form_state->getValue('queue_name')]));
   }
 
   /**
@@ -426,7 +426,7 @@ class QueueExampleForm extends FormBase {
    */
   private function processQueueItemForTable(array $item) {
     if ($item['expire'] > 0) {
-      $item['expire'] = $this->t('Claimed: expires %expire', array('%expire' => date('r', $item['expire'])));
+      $item['expire'] = $this->t('Claimed: expires %expire', ['%expire' => date('r', $item['expire'])]);
     }
     else {
       $item['expire'] = $this->t('Unclaimed');

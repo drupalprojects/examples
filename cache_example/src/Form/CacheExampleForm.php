@@ -122,102 +122,102 @@ class CacheExampleForm extends FormBase {
     $intro_message .= '<p>'
       . $this->t(
         '<a href="@url">Reload this page</a> to see cache in action.',
-        array('@url' => $this->getRequest()->getRequestUri())
+        ['@url' => $this->getRequest()->getRequestUri()]
       )
       . ' ';
     $intro_message .= $this->t('You can use the button below to remove cached data.') . '</p>';
 
-    $form['file_search'] = array(
+    $form['file_search'] = [
       '#type' => 'fieldset',
       '#title' => $this->t('File search caching'),
-    );
-    $form['file_search']['introduction'] = array(
+    ];
+    $form['file_search']['introduction'] = [
       '#markup' => $intro_message,
-    );
+    ];
 
     $color = empty($cache) ? 'red' : 'green';
     $retrieval = empty($cache) ? $this->t('calculated by traversing the filesystem') : $this->t('retrieved from cache');
 
-    $form['file_search']['statistics'] = array(
+    $form['file_search']['statistics'] = [
       '#type' => 'item',
-      '#markup' => $this->t('%count files exist in this Drupal installation; @retrieval in @time ms. <br/>(Source: <span style="color:@color;">@source</span>)', array(
+      '#markup' => $this->t('%count files exist in this Drupal installation; @retrieval in @time ms. <br/>(Source: <span style="color:@color;">@source</span>)', [
         '%count' => $files_count,
         '@retrieval' => $retrieval,
         '@time' => number_format($duration * 1000, 2),
         '@color' => $color,
         '@source' => empty($cache) ? $this->t('actual file search') : $this->t('cached'),
-      )
+      ]
       ),
-    );
-    $form['file_search']['remove_file_count'] = array(
+    ];
+    $form['file_search']['remove_file_count'] = [
       '#type' => 'submit',
-      '#submit' => array(array($this, 'expireFiles')),
+      '#submit' => [[$this, 'expireFiles']],
       '#value' => $this->t('Explicitly remove cached file count'),
-    );
+    ];
 
-    $form['expiration_demo'] = array(
+    $form['expiration_demo'] = [
       '#type' => 'fieldset',
       '#title' => $this->t('Cache expiration settings'),
-    );
-    $form['expiration_demo']['explanation'] = array(
+    ];
+    $form['expiration_demo']['explanation'] = [
       '#markup' => $this->t('A cache item can be set as CACHE_PERMANENT, meaning that it will only be removed when explicitly cleared, or it can have an expiration time (a Unix timestamp).'),
-    );
+    ];
 
     $item = $this->cacheBackend->get('cache_example_expiring_item', TRUE);
     if ($item == FALSE) {
       $item_status = $this->t('Cache item does not exist');
     }
     else {
-      $item_status = $item->valid ? $this->t('Cache item exists and is set to expire at %time', array('%time' => $item->data)) :
+      $item_status = $item->valid ? $this->t('Cache item exists and is set to expire at %time', ['%time' => $item->data]) :
       $this->t('Cache_item is invalid');
     }
 
-    $form['expiration_demo']['current_status'] = array(
+    $form['expiration_demo']['current_status'] = [
       '#type' => 'item',
       '#title' => $this->t('Current status of cache item "cache_example_expiring_item"'),
       '#markup' => $item_status,
-    );
-    $form['expiration_demo']['expiration'] = array(
+    ];
+    $form['expiration_demo']['expiration'] = [
       '#type' => 'select',
       '#title' => $this->t('Time before cache expiration'),
-      '#options' => array(
+      '#options' => [
         'never_remove' => $this->t('CACHE_PERMANENT'),
         -10 => $this->t('Immediate expiration'),
         10 => $this->t('10 seconds from form submission'),
         60 => $this->t('1 minute from form submission'),
         300 => $this->t('5 minutes from form submission'),
-      ),
+      ],
       '#default_value' => -10,
       '#description' => $this->t('Any cache item can be set to only expire when explicitly cleared, or to expire at a given time.'),
-    );
-    $form['expiration_demo']['create_cache_item'] = array(
+    ];
+    $form['expiration_demo']['create_cache_item'] = [
       '#type' => 'submit',
       '#value' => $this->t('Create a cache item with this expiration'),
-      '#submit' => array(array($this, 'createExpiringItem')),
-    );
+      '#submit' => [[$this, 'createExpiringItem']],
+    ];
 
-    $form['cache_clearing'] = array(
+    $form['cache_clearing'] = [
       '#type' => 'fieldset',
       '#title' => $this->t('Expire and remove options'),
       '#description' => $this->t("We have APIs to expire cached items and also to just remove them. Unfortunately, they're all the same API, cache_clear_all"),
-    );
-    $form['cache_clearing']['cache_clear_type'] = array(
+    ];
+    $form['cache_clearing']['cache_clear_type'] = [
       '#type' => 'radios',
       '#title' => $this->t('Type of cache clearing to do'),
-      '#options' => array(
+      '#options' => [
         'expire' => $this->t('Remove items from the "cache" bin that have expired'),
         'remove_all' => $this->t('Remove all items from the "cache" bin regardless of expiration'),
         'remove_tag' => $this->t('Remove all items in the "cache" bin with the tag "cache_example" set to 1'),
-      ),
+      ],
       '#default_value' => 'expire',
-    );
+    ];
     // Submit button to clear cached data.
-    $form['cache_clearing']['clear_expired'] = array(
+    $form['cache_clearing']['clear_expired'] = [
       '#type' => 'submit',
       '#value' => $this->t('Clear or expire cache'),
-      '#submit' => array(array($this, 'cacheClearing')),
+      '#submit' => [[$this, 'cacheClearing']],
       '#access' => $this->currentUser->hasPermission('administer site configuration'),
-    );
+    ];
 
     return $form;
   }
@@ -245,9 +245,9 @@ class CacheExampleForm extends FormBase {
    */
   public function createExpiringItem($form, &$form_state) {
 
-    $tags = array(
+    $tags = [
       'cache_example:1',
-    );
+    ];
 
     $interval = $form_state->getValue('expiration');
     if ($interval == 'never_remove') {
@@ -262,7 +262,7 @@ class CacheExampleForm extends FormBase {
     // required interval. Also add a tag to it to be able to clear caches more
     // precise.
     $this->cacheBackend->set('cache_example_expiring_item', $expiration_friendly, $expiration, $tags);
-    drupal_set_message($this->t('cache_example_expiring_item was set to expire at %time', array('%time' => $expiration_friendly)));
+    drupal_set_message($this->t('cache_example_expiring_item was set to expire at %time', ['%time' => $expiration_friendly]));
   }
 
   /**
@@ -287,9 +287,9 @@ class CacheExampleForm extends FormBase {
       case 'remove_tag':
         // This removes cache entries with the tag "cache_example" set to 1 in
         // the "cache".
-        $tags = array(
+        $tags = [
           'cache_example:1',
-        );
+        ];
         Cache::invalidateTags($tags);
         drupal_set_message($this->t('Cache entries with the tag "cache_example" set to 1 in the "cache" bin were invalidated with \Drupal\Core\Cache\Cache::invalidateTags($tags).'));
         break;

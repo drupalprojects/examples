@@ -22,9 +22,9 @@ class AjaxAddMore extends DemoBase {
    * the corresponding "remove" button.
    */
   public function buildForm(array $form, FormStateInterface $form_state) {
-    $form['description'] = array(
+    $form['description'] = [
       '#markup' => '<div>' . t('This example shows an add-more and a remove-last button.') . '</div>',
-    );
+    ];
 
     // Gather the number of names in the form already.
     $num_names = $form_state->get('num_names');
@@ -55,7 +55,7 @@ class AjaxAddMore extends DemoBase {
     $form['names_fieldset']['actions']['add_name'] = [
       '#type' => 'submit',
       '#value' => t('Add one more'),
-      '#submit' => array('::addOne'),
+      '#submit' => ['::addOne'],
       '#ajax' => [
         'callback' => '::addmoreCallback',
         'wrapper' => 'names-fieldset-wrapper',
@@ -66,7 +66,7 @@ class AjaxAddMore extends DemoBase {
       $form['names_fieldset']['actions']['remove_name'] = [
         '#type' => 'submit',
         '#value' => t('Remove one'),
-        '#submit' => array('::removeCallback'),
+        '#submit' => ['::removeCallback'],
         '#ajax' => [
           'callback' => '::addmoreCallback',
           'wrapper' => 'names-fieldset-wrapper',
@@ -131,11 +131,11 @@ class AjaxAddMore extends DemoBase {
    * Reports what values were finally set.
    */
   public function submitForm(array &$form, FormStateInterface $form_state) {
-    $values = $form_state->getValue(array('names_fieldset', 'name'));
+    $values = $form_state->getValue(['names_fieldset', 'name']);
 
-    $output = t('These people are coming to the picnic: @names', array(
+    $output = t('These people are coming to the picnic: @names', [
       '@names' => implode(', ', $values),
-    )
+    ]
     );
     drupal_set_message($output);
   }

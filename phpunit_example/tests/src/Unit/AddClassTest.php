@@ -137,10 +137,10 @@ class AddClassTest extends UnitTestCase {
    * @see AddClassTest::testAddWithDataProvider()
    */
   public function addDataProvider() {
-    return array(
-      array(5, 2, 3),
-      array(50, 20, 30),
-    );
+    return [
+      [5, 2, 3],
+      [50, 20, 30],
+    ];
   }
 
   /**
@@ -156,23 +156,23 @@ class AddClassTest extends UnitTestCase {
    * @see AddClassTest::testAddWithBadDataProvider()
    */
   public function addBadDataProvider() {
-    $bad_data = array();
+    $bad_data = [];
     // Set up an array with data that should cause add()
     // to throw an exception.
-    $bad_data_types = array('string', FALSE, array('foo'), new \stdClass());
+    $bad_data_types = ['string', FALSE, ['foo'], new \stdClass()];
     // Create some data where both $a and $b are bad types.
     foreach ($bad_data_types as $bad_datum_a) {
       foreach ($bad_data_types as $bad_datum_b) {
-        $bad_data[] = array($bad_datum_a, $bad_datum_b);
+        $bad_data[] = [$bad_datum_a, $bad_datum_b];
       }
     }
     // Create some data where $a is good and $b is bad.
     foreach ($bad_data_types as $bad_datum_b) {
-      $bad_data[] = array(1, $bad_datum_b);
+      $bad_data[] = [1, $bad_datum_b];
     }
     // Create some data where $b is good and $a is bad.
     foreach ($bad_data_types as $bad_datum_a) {
-      $bad_data[] = array($bad_datum_a, 1);
+      $bad_data[] = [$bad_datum_a, 1];
     }
     return $bad_data;
   }

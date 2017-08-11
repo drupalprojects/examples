@@ -22,17 +22,17 @@ class ColorBackgroudFormatter extends FormatterBase {
    * {@inheritdoc}
    */
   public function viewElements(FieldItemListInterface $items, $langcode) {
-    $elements = array();
+    $elements = [];
 
     foreach ($items as $delta => $item) {
-      $elements[$delta] = array(
+      $elements[$delta] = [
         '#type' => 'html_tag',
         '#tag' => 'p',
-        '#value' => t('The content area color has been changed to @code', array('@code' => $item->value)),
-        '#attributes' => array(
+        '#value' => t('The content area color has been changed to @code', ['@code' => $item->value]),
+        '#attributes' => [
           'style' => 'background-color: ' . $item->value,
-        ),
-      );
+        ],
+      ];
     }
     return $elements;
   }

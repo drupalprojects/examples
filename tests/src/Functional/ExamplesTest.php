@@ -16,7 +16,7 @@ class ExamplesTest extends ExamplesBrowserTestBase {
    *
    * @var array
    */
-  public static $modules = array('examples', 'toolbar');
+  public static $modules = ['examples', 'toolbar'];
 
   /**
    * Test whether the module was installed.
@@ -25,7 +25,7 @@ class ExamplesTest extends ExamplesBrowserTestBase {
     $assert = $this->assertSession();
 
     // Verify that the toolbar tab and tray are showing and functioning.
-    $user = $this->drupalCreateUser(array('access toolbar'));
+    $user = $this->drupalCreateUser(['access toolbar']);
     $this->drupalLogin($user);
 
     // Check for the 'Examples' tab.
@@ -54,7 +54,7 @@ class ExamplesTest extends ExamplesBrowserTestBase {
 
     // Install phpunit_example and see if it appears in the toolbar. We use
     // phpunit_example because it's very light-weight.
-    $this->container->get('module_installer')->install(array('phpunit_example'), TRUE);
+    $this->container->get('module_installer')->install(['phpunit_example'], TRUE);
     // SimpleTest needs for us to reset all the caches.
     $this->resetAll();
 

@@ -55,22 +55,22 @@ class JsExampleController {
    */
   public function getJsWeightImplementation() {
     // Create an array of items with random-ish weight values.
-    $weights = array(
+    $weights = [
       'red' => -4,
       'blue' => -2,
       'green' => -1,
       'brown' => -2,
       'black' => -1,
       'purple' => -5,
-    );
+    ];
 
     // Start building the content.
-    $build = array();
+    $build = [];
     // Main container DIV. We give it a unique ID so that the JavaScript can
     // find it using jQuery.
-    $build['content'] = array(
+    $build['content'] = [
       '#markup' => '<div id="js-weights" class="js-weights"></div>',
-    );
+    ];
     // Attach library containing css and js files.
     $build['#attached']['library'][] = 'js_example/js_example.weights';
     // Attach the weights array to our JavaScript settings. This allows the
@@ -96,10 +96,10 @@ class JsExampleController {
     $title = t('Click sections to expand or collapse:');
     // Build using our theme. This gives us content, which is not a good
     // practice, but which allows us to demonstrate adding JavaScript here.
-    $build['myelement'] = array(
+    $build['myelement'] = [
       '#theme' => 'js_example_accordion',
       '#title' => $title,
-    );
+    ];
     // Add our script. It is tiny, but this demonstrates how to add it. We pass
     // our module name followed by the internal library name declared in
     // libraries yml file.

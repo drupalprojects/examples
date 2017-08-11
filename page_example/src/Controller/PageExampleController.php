@@ -31,9 +31,9 @@ class PageExampleController extends ControllerBase {
    * appropriate blocks, navigation, and styling.
    */
   public function simple() {
-    return array(
+    return [
       '#markup' => '<p>' . $this->t('Simple page: The quick brown fox jumps over the lazy dog.') . '</p>',
-    );
+    ];
   }
 
   /**
@@ -70,17 +70,17 @@ class PageExampleController extends ControllerBase {
       throw new AccessDeniedHttpException();
     }
 
-    $list[] = $this->t("First number was @number.", array('@number' => $first));
-    $list[] = $this->t("Second number was @number.", array('@number' => $second));
-    $list[] = $this->t('The total was @number.', array('@number' => $first + $second));
+    $list[] = $this->t("First number was @number.", ['@number' => $first]);
+    $list[] = $this->t("Second number was @number.", ['@number' => $second]);
+    $list[] = $this->t('The total was @number.', ['@number' => $first + $second]);
 
-    $render_array['page_example_arguments'] = array(
+    $render_array['page_example_arguments'] = [
       // The theme function to apply to the #items.
       '#theme' => 'item_list',
       // The list itself.
       '#items' => $list,
       '#title' => $this->t('Argument Information'),
-    );
+    ];
     return $render_array;
   }
 

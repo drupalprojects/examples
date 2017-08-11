@@ -138,9 +138,9 @@ class Contact extends ContentEntityBase implements ContactInterface {
    */
   public static function preCreate(EntityStorageInterface $storage_controller, array &$values) {
     parent::preCreate($storage_controller, $values);
-    $values += array(
+    $values += [
       'user_id' => \Drupal::currentUser()->id(),
-    );
+    ];
   }
 
   /**
@@ -217,42 +217,42 @@ class Contact extends ContentEntityBase implements ContactInterface {
     $fields['name'] = BaseFieldDefinition::create('string')
       ->setLabel(t('Name'))
       ->setDescription(t('The name of the Contact entity.'))
-      ->setSettings(array(
+      ->setSettings([
         'max_length' => 255,
         'text_processing' => 0,
-      ))
+      ])
       // Set no default value.
       ->setDefaultValue(NULL)
-      ->setDisplayOptions('view', array(
+      ->setDisplayOptions('view', [
         'label' => 'above',
         'type' => 'string',
         'weight' => -6,
-      ))
-      ->setDisplayOptions('form', array(
+      ])
+      ->setDisplayOptions('form', [
         'type' => 'string_textfield',
         'weight' => -6,
-      ))
+      ])
       ->setDisplayConfigurable('form', TRUE)
       ->setDisplayConfigurable('view', TRUE);
 
     $fields['first_name'] = BaseFieldDefinition::create('string')
       ->setLabel(t('First Name'))
       ->setDescription(t('The first name of the Contact entity.'))
-      ->setSettings(array(
+      ->setSettings([
         'max_length' => 255,
         'text_processing' => 0,
-      ))
+      ])
       // Set no default value.
       ->setDefaultValue(NULL)
-      ->setDisplayOptions('view', array(
+      ->setDisplayOptions('view', [
         'label' => 'above',
         'type' => 'string',
         'weight' => -5,
-      ))
-      ->setDisplayOptions('form', array(
+      ])
+      ->setDisplayOptions('form', [
         'type' => 'string_textfield',
         'weight' => -5,
-      ))
+      ])
       ->setDisplayConfigurable('form', TRUE)
       ->setDisplayConfigurable('view', TRUE);
 
@@ -264,21 +264,21 @@ class Contact extends ContentEntityBase implements ContactInterface {
     $fields['gender'] = BaseFieldDefinition::create('list_string')
       ->setLabel(t('Gender'))
       ->setDescription(t('The gender of the Contact entity.'))
-      ->setSettings(array(
-        'allowed_values' => array(
+      ->setSettings([
+        'allowed_values' => [
           'female' => 'female',
           'male' => 'male',
-        ),
-      ))
-      ->setDisplayOptions('view', array(
+        ],
+      ])
+      ->setDisplayOptions('view', [
         'label' => 'above',
         'type' => 'string',
         'weight' => -4,
-      ))
-      ->setDisplayOptions('form', array(
+      ])
+      ->setDisplayOptions('form', [
         'type' => 'options_select',
         'weight' => -4,
-      ))
+      ])
       ->setDisplayConfigurable('form', TRUE)
       ->setDisplayConfigurable('view', TRUE);
 
@@ -291,20 +291,20 @@ class Contact extends ContentEntityBase implements ContactInterface {
       ->setDescription(t('The Name of the associated user.'))
       ->setSetting('target_type', 'user')
       ->setSetting('handler', 'default')
-      ->setDisplayOptions('view', array(
+      ->setDisplayOptions('view', [
         'label' => 'above',
         'type' => 'author',
         'weight' => -3,
-      ))
-      ->setDisplayOptions('form', array(
+      ])
+      ->setDisplayOptions('form', [
         'type' => 'entity_reference_autocomplete',
-        'settings' => array(
+        'settings' => [
           'match_operator' => 'CONTAINS',
           'size' => 60,
           'placeholder' => '',
-        ),
+        ],
         'weight' => -3,
-      ))
+      ])
       ->setDisplayConfigurable('form', TRUE)
       ->setDisplayConfigurable('view', TRUE);
 
@@ -313,23 +313,23 @@ class Contact extends ContentEntityBase implements ContactInterface {
     $fields['role'] = BaseFieldDefinition::create('list_string')
       ->setLabel(t('Role'))
       ->setDescription(t('The role of the Contact entity.'))
-      ->setSettings(array(
-        'allowed_values' => array(
+      ->setSettings([
+        'allowed_values' => [
           'administrator' => 'administrator',
           'user' => 'user',
-        ),
-      ))
+        ],
+      ])
       // Set the default value of this field to 'user'.
       ->setDefaultValue('user')
-      ->setDisplayOptions('view', array(
+      ->setDisplayOptions('view', [
         'label' => 'above',
         'type' => 'string',
         'weight' => -2,
-      ))
-      ->setDisplayOptions('form', array(
+      ])
+      ->setDisplayOptions('form', [
         'type' => 'options_select',
         'weight' => -2,
-      ))
+      ])
       ->setDisplayConfigurable('form', TRUE)
       ->setDisplayConfigurable('view', TRUE);
 

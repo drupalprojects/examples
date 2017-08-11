@@ -15,15 +15,15 @@
  */
 function tablesort_example_install() {
   // Let's fill the database with some values for sorting.
-  $rows = array(
-    array('numbers' => 1, 'alpha' => 'e', 'random' => '912cv21'),
-    array('numbers' => 2, 'alpha' => 'a', 'random' => '0kuykuh'),
-    array('numbers' => 3, 'alpha' => 'm', 'random' => 'fuye8734h'),
-    array('numbers' => 4, 'alpha' => 'w', 'random' => '80jsv772'),
-    array('numbers' => 5, 'alpha' => 'o', 'random' => 'd82sf-csj'),
-    array('numbers' => 6, 'alpha' => 's', 'random' => 'au832'),
-    array('numbers' => 7, 'alpha' => 'e', 'random' => 't982hkv'),
-  );
+  $rows = [
+    ['numbers' => 1, 'alpha' => 'e', 'random' => '912cv21'],
+    ['numbers' => 2, 'alpha' => 'a', 'random' => '0kuykuh'],
+    ['numbers' => 3, 'alpha' => 'm', 'random' => 'fuye8734h'],
+    ['numbers' => 4, 'alpha' => 'w', 'random' => '80jsv772'],
+    ['numbers' => 5, 'alpha' => 'o', 'random' => 'd82sf-csj'],
+    ['numbers' => 6, 'alpha' => 's', 'random' => 'au832'],
+    ['numbers' => 7, 'alpha' => 'e', 'random' => 't982hkv'],
+  ];
 
   $db_connection = \Drupal::database();
   if ($db_connection->schema()->tableExists('tablesort_example')) {
@@ -51,30 +51,30 @@ function tablesort_example_uninstall() {
  * @ingroup tablesort_example
  */
 function tablesort_example_schema() {
-  $schema['tablesort_example'] = array(
+  $schema['tablesort_example'] = [
     'description' => 'Stores some values for sorting fun.',
-    'fields' => array(
-      'numbers' => array(
+    'fields' => [
+      'numbers' => [
         'description' => 'This column simply holds numbers values',
         'type' => 'varchar',
         'length' => 2,
         'not null' => TRUE,
-      ),
-      'alpha' => array(
+      ],
+      'alpha' => [
         'description' => 'This column simply holds alpha values',
         'type' => 'varchar',
         'length' => 2,
         'not null' => TRUE,
-      ),
-      'random' => array(
+      ],
+      'random' => [
         'description' => 'This column simply holds random values',
         'type' => 'varchar',
         'length' => 12,
         'not null' => TRUE,
-      ),
-    ),
-    'primary key' => array('numbers'),
-  );
+      ],
+    ],
+    'primary key' => ['numbers'],
+  ];
 
   return $schema;
 }

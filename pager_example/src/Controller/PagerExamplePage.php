@@ -91,19 +91,19 @@ class PagerExamplePage extends ControllerBase {
 
     if ($count_nodes == 0) {
       if ($this->currentUser->hasPermission('create page content')) {
-        $build['no-nodes'] = array(
+        $build['no-nodes'] = [
           '#markup' => $this->t('There are no nodes to display.
             Please <a href=":url">create a node</a>.',
-            array(
-              ':url' => Url::fromRoute('node.add', array('node_type' => 'page'))->toString(),
-            )
+            [
+              ':url' => Url::fromRoute('node.add', ['node_type' => 'page'])->toString(),
+            ]
           ),
-        );
+        ];
       }
       else {
-        $build['no-nodes'] = array(
+        $build['no-nodes'] = [
           '#markup' => $this->t('There are no nodes to display.'),
-        );
+        ];
       }
 
       // Ensure that Drupal clears the cache when nodes have been published,
@@ -146,23 +146,23 @@ class PagerExamplePage extends ControllerBase {
       // "mask" these nodes that should not be accessible. If we don't do this
       // masking, it's possible that we'd have lots of pages that don't show any
       // content.
-      $rows[] = array(
+      $rows[] = [
         'nid' => $node->access('view') ? $node->id() : t('XXXXXX'),
         'title' => $node->access('view') ? $node->getTitle() : t('Redacted'),
-      );
+      ];
     }
 
     // Build a render array which will be themed as a table with a pager.
-    $build['pager_example'] = array(
+    $build['pager_example'] = [
       '#rows' => $rows,
-      '#header' => array(t('NID'), t('Title')),
+      '#header' => [t('NID'), t('Title')],
       '#type' => 'table',
       '#empty' => t('No content available.'),
-    );
-    $build['pager'] = array(
+    ];
+    $build['pager'] = [
       '#type' => 'pager',
       '#weight' => 10,
-    );
+    ];
 
     // Ensure that Drupal clears the cache when nodes have been published,
     // unpublished, added or deleted; and when user permissions change.

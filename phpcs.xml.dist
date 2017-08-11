@@ -7,8 +7,8 @@
 <ruleset name="drupal_examples">
   <description>Default PHP CodeSniffer configuration for Examples for Developers.</description>
   <file>.</file>
-  <arg name="extensions" value="css,inc,install,module,php,profile,test,theme,yml"/>
-  <rule ref="Drupal.Array.Array.CommaLastItem"/>
+  <arg name="extensions" value="css,inc,install,module,php,profile,test,theme"/>
+  <rule ref="Drupal.Array"/>
   <rule ref="Drupal.CSS"/>
   <rule ref="Drupal.Classes"/>
   <rule ref="Drupal.Commenting.DocComment">

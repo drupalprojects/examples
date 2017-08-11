@@ -86,7 +86,7 @@ class ExampleMeatballSandwich extends SandwichBase implements ContainerFactoryPl
    * {@inheritdoc}
    */
   public function order(array $extras) {
-    $ingredients = array('meatballs', 'irresistible marinara sauce');
+    $ingredients = ['meatballs', 'irresistible marinara sauce'];
     $sandwich = array_merge($ingredients, $extras);
     return 'You ordered an ' . implode(', ', $sandwich) . ' sandwich. Enjoy!';
   }

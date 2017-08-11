@@ -24,12 +24,12 @@
  * Implements hook_theme().
  */
 function js_example_theme() {
-  return array(
-    'js_example_accordion' => array(
+  return [
+    'js_example_accordion' => [
       'template' => 'accordion',
-      'variables' => array('title' => NULL),
-    ),
-  );
+      'variables' => ['title' => NULL],
+    ],
+  ];
 }
 
 /**

@@ -30,9 +30,9 @@ function simpletest_example_test_node_view(
   EntityViewDisplayInterface $display,
   $view_mode) {
   if ($node->getType() == 'simpletest_example') {
-    $build['simpletest_example_test_section'] = array(
+    $build['simpletest_example_test_section'] = [
       '#markup' => t('The test module did its thing.'),
       '#weight' => -99,
-    );
+    ];
   }
 }

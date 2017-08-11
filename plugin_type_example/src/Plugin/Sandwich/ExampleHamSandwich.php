@@ -43,7 +43,7 @@ class ExampleHamSandwich extends SandwichBase {
    *   A description of the sandwich ordered.
    */
   public function order(array $extras) {
-    $ingredients = array('ham, mustard', 'rocket', 'sun-dried tomatoes');
+    $ingredients = ['ham, mustard', 'rocket', 'sun-dried tomatoes'];
     $sandwich = array_merge($ingredients, $extras);
     return 'You ordered an ' . implode(', ', $sandwich) . ' sandwich. Enjoy!';
   }

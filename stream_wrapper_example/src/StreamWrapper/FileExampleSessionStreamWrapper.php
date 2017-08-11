@@ -570,9 +570,9 @@ class FileExampleSessionStreamWrapper implements StreamWrapperInterface {
    * @see http://php.net/manual/en/streamwrapper.stream-stat.php
    */
   public function stream_stat() {
-    return array(
+    return [
       'size' => strlen($this->sessionContent),
-    );
+    ];
   }
 
   /**
@@ -769,7 +769,7 @@ class FileExampleSessionStreamWrapper implements StreamWrapperInterface {
 
       // There are no protections on this, so all writable.
       $mode |= 0777;
-      $return = array(
+      $return = [
         'dev' => 0,
         'ino' => 0,
         'mode' => $mode,
@@ -783,7 +783,7 @@ class FileExampleSessionStreamWrapper implements StreamWrapperInterface {
         'ctime' => 0,
         'blksize' => 0,
         'blocks' => 0,
-      );
+      ];
     }
     return $return;
   }

@@ -44,18 +44,18 @@ function email_example_mail($key, &$message, $params) {
   // current user's selected language, depending on the type of e-mail being
   // sent. This $options array is used later in the t() calls for subject
   // and body to ensure the proper translation takes effect.
-  $options = array(
+  $options = [
     'langcode' => $message['langcode'],
-  );
+  ];
 
   switch ($key) {
     // Send a simple message from the contact form.
     case 'contact_message':
       $from = \Drupal::config('system.site')->get('mail');
-      $message['subject'] = t('E-mail sent from @site-name', array('@site-name' => $from), $options);
+      $message['subject'] = t('E-mail sent from @site-name', ['@site-name' => $from], $options);
       // Note that the message body is an array, not a string.
       $account = \Drupal::currentUser();
-      $message['body'][] = t('@name sent you the following message:', array('@name' => $account->getUsername()), $options);
+      $message['body'][] = t('@name sent you the following message:', ['@name' => $account->getUsername()], $options);
       // Because this is just user-entered text, we do not need to translate it.
       // Since user-entered text may have unintentional HTML entities in it like
       // '<' or '>', we need to make sure these entities are properly escaped,
@@ -80,11 +80,11 @@ function email_example_mail_alter(&$message) {
   // For the purpose of this example, modify all the outgoing messages and
   // attach a site signature. The signature will be translated to the language
   // in which message was built.
-  $options = array(
+  $options = [
     'langcode' => $message['langcode'],
-  );
+  ];
 
-  $signature = t("\n--\nMail altered by email_example module.", array(), $options);
+  $signature = t("\n--\nMail altered by email_example module.", [], $options);
   if (is_array($message['body'])) {
     $message['body'][] = $signature;
   }

@@ -25,16 +25,16 @@ class TextWidget extends WidgetBase {
    */
   public function formElement(FieldItemListInterface $items, $delta, array $element, array &$form, FormStateInterface $form_state) {
     $value = isset($items[$delta]->value) ? $items[$delta]->value : '';
-    $element += array(
+    $element += [
       '#type' => 'textfield',
       '#default_value' => $value,
       '#size' => 7,
       '#maxlength' => 7,
-      '#element_validate' => array(
-        array($this, 'validate'),
-      ),
-    );
-    return array('value' => $element);
+      '#element_validate' => [
+        [$this, 'validate'],
+      ],
+    ];
+    return ['value' => $element];
   }
 
   /**

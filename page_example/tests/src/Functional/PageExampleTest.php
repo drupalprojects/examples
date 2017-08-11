@@ -17,7 +17,7 @@ class PageExampleTest extends BrowserTestBase {
    *
    * @var array
    */
-  public static $modules = array('page_example');
+  public static $modules = ['page_example'];
 
   /**
    * The installation profile to use with this test.
@@ -97,7 +97,7 @@ class PageExampleTest extends BrowserTestBase {
    */
   public function testPageExampleLinks($permission, $links) {
     if ($permission) {
-      $user = $this->drupalCreateUser(array($permission));
+      $user = $this->drupalCreateUser([$permission]);
       $this->drupalLogin($user);
     }
     foreach ($links as $page => $path) {
@@ -132,7 +132,7 @@ class PageExampleTest extends BrowserTestBase {
     $this->pageExampleVerifyNoAccess('examples/page-example/arguments/1/2');
 
     // Create a user with permissions to access 'simple' page and login.
-    $this->webUser = $this->drupalCreateUser(array('access simple page'));
+    $this->webUser = $this->drupalCreateUser(['access simple page']);
     $this->drupalLogin($this->webUser);
 
     // Verify that user can access simple content.
@@ -144,7 +144,7 @@ class PageExampleTest extends BrowserTestBase {
     $this->pageExampleVerifyNoAccess('examples/page-example/arguments/1/2');
 
     // Create a user with permissions to access 'simple' page and login.
-    $this->webUser = $this->drupalCreateUser(array('access arguments page'));
+    $this->webUser = $this->drupalCreateUser(['access arguments page']);
     $this->drupalLogin($this->webUser);
 
     // Verify that user can access arguments content.
@@ -153,9 +153,9 @@ class PageExampleTest extends BrowserTestBase {
     $this->drupalGet('/examples/page-example/arguments/' . $first . '/' . $second);
     $assert_session->statusCodeEquals(200);
     // Verify argument usage.
-    $assert_session->pageTextContains(t('First number was @number.', array('@number' => $first)));
-    $assert_session->pageTextContains(t('Second number was @number.', array('@number' => $second)));
-    $assert_session->pageTextContains(t('The total was @number.', array('@number' => $first + $second)));
+    $assert_session->pageTextContains(t('First number was @number.', ['@number' => $first]));
+    $assert_session->pageTextContains(t('Second number was @number.', ['@number' => $second]));
+    $assert_session->pageTextContains(t('The total was @number.', ['@number' => $first + $second]));
 
     // Verify incomplete argument call to arguments content.
     $this->drupalGet('/examples/page-example/arguments/' . $first . '/');

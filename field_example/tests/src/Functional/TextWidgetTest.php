@@ -40,14 +40,14 @@ class TextWidgetTest extends FieldExampleBrowserTestBase {
 
     // Add a node.
     $title = $this->randomMachineName(20);
-    $edit = array(
+    $edit = [
       'title[0][value]' => $title,
       'field_' . $this->fieldName . '[0][value]' => '#000001',
-    );
+    ];
 
     // Create the content.
     $this->drupalPostForm(NULL, $edit, t('Save'));
-    $assert->pageTextContains(t('@type @title has been created', array('@type' => $this->contentTypeName, '@title' => $title)));
+    $assert->pageTextContains(t('@type @title has been created', ['@type' => $this->contentTypeName, '@title' => $title]));
 
     // Verify the value is shown when viewing this node.
     $field_p = $this->xpath("//div[contains(@class,'field--type-field-example-rgb')]/div/p");
@@ -79,21 +79,21 @@ class TextWidgetTest extends FieldExampleBrowserTestBase {
 
     // Add a node.
     $title = $this->randomMachineName(20);
-    $edit = array(
+    $edit = [
       'title[0][value]' => $title,
       'field_' . $this->fieldName . '[0][value]' => '#00ff00',
-    );
+    ];
 
     // We want to add a 2nd item to the multivalue field, so hit "add another".
     $this->drupalPostForm(NULL, $edit, t('Add another item'));
 
-    $edit = array(
+    $edit = [
       'field_' . $this->fieldName . '[1][value]' => '#ffffff',
-    );
+    ];
 
     // Now we can fill in the second item in the multivalue field and save.
     $this->drupalPostForm(NULL, $edit, t('Save'));
-    $assert->pageTextContains(t('@type @title has been created', array('@type' => $this->contentTypeName, '@title' => $title)));
+    $assert->pageTextContains(t('@type @title has been created', ['@type' => $this->contentTypeName, '@title' => $title]));
 
     // Verify the value is shown when viewing this node.
     $field_p = $this->xpath("//div[contains(@class,'field--type-field-example-rgb')]/div/div/p");

@@ -36,10 +36,10 @@ class DbtngExampleStorage {
         ->execute();
     }
     catch (\Exception $e) {
-      drupal_set_message(t('db_insert failed. Message = %message, query= %query', array(
+      drupal_set_message(t('db_insert failed. Message = %message, query= %query', [
         '%message' => $e->getMessage(),
         '%query' => $e->query_string,
-      )
+      ]
       ), 'error');
     }
     return $return_value;
@@ -65,10 +65,10 @@ class DbtngExampleStorage {
         ->execute();
     }
     catch (\Exception $e) {
-      drupal_set_message(t('db_update failed. Message = %message, query= %query', array(
+      drupal_set_message(t('db_update failed. Message = %message, query= %query', [
         '%message' => $e->getMessage(),
         '%query' => $e->query_string,
-      )
+      ]
       ), 'error');
     }
     return $count;
@@ -161,7 +161,7 @@ class DbtngExampleStorage {
    * @see http://drupal.org/node/310072
    * @see http://drupal.org/node/310075
    */
-  public static function load(array $entry = array()) {
+  public static function load(array $entry = []) {
     // Read all fields from the dbtng_example table.
     $select = db_select('dbtng_example', 'example');
     $select->fields('example');

@@ -60,36 +60,36 @@ class DbtngExampleAddForm implements FormInterface, ContainerInjectionInterface 
    * {@inheritdoc}
    */
   public function buildForm(array $form, FormStateInterface $form_state) {
-    $form = array();
+    $form = [];
 
-    $form['message'] = array(
+    $form['message'] = [
       '#markup' => $this->t('Add an entry to the dbtng_example table.'),
-    );
+    ];
 
-    $form['add'] = array(
+    $form['add'] = [
       '#type' => 'fieldset',
       '#title' => $this->t('Add a person entry'),
-    );
-    $form['add']['name'] = array(
+    ];
+    $form['add']['name'] = [
       '#type' => 'textfield',
       '#title' => $this->t('Name'),
       '#size' => 15,
-    );
-    $form['add']['surname'] = array(
+    ];
+    $form['add']['surname'] = [
       '#type' => 'textfield',
       '#title' => $this->t('Surname'),
       '#size' => 15,
-    );
-    $form['add']['age'] = array(
+    ];
+    $form['add']['age'] = [
       '#type' => 'textfield',
       '#title' => $this->t('Age'),
       '#size' => 5,
       '#description' => $this->t("Values greater than 127 will cause an exception. Try it - it's a great example why exception handling is needed with DTBNG."),
-    );
-    $form['add']['submit'] = array(
+    ];
+    $form['add']['submit'] = [
       '#type' => 'submit',
       '#value' => $this->t('Add'),
-    );
+    ];
 
     return $form;
   }
@@ -115,15 +115,15 @@ class DbtngExampleAddForm implements FormInterface, ContainerInjectionInterface 
     // Gather the current user so the new record has ownership.
     $account = $this->currentUser;
     // Save the submitted entry.
-    $entry = array(
+    $entry = [
       'name' => $form_state->getValue('name'),
       'surname' => $form_state->getValue('surname'),
       'age' => $form_state->getValue('age'),
       'uid' => $account->id(),
-    );
+    ];
     $return = DbtngExampleStorage::insert($entry);
     if ($return) {
-      drupal_set_message($this->t('Created entry @entry', array('@entry' => print_r($entry, TRUE))));
+      drupal_set_message($this->t('Created entry @entry', ['@entry' => print_r($entry, TRUE)]));
     }
   }
 

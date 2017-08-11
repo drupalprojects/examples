@@ -215,7 +215,7 @@ class InputDemo extends FormBase {
       // Only display for controls that have titles and values.
       if ($value && $label) {
         $display_value = is_array($value) ? preg_replace('/[\n\r\s]+/', ' ', print_r($value, 1)) : $value;
-        $message = $this->t('Value for %title: %value', array('%title' => $label, '%value' => $display_value));
+        $message = $this->t('Value for %title: %value', ['%title' => $label, '%value' => $display_value]);
         drupal_set_message($message);
       }
     }

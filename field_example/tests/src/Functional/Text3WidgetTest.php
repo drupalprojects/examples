@@ -36,16 +36,16 @@ class Text3WidgetTest extends FieldExampleBrowserTestBase {
 
     // Fill the create form.
     $title = 'test_title';
-    $edit = array(
+    $edit = [
       'title[0][value]' => $title,
       'field_' . $this->fieldName . '[0][value][r]' => '00',
       'field_' . $this->fieldName . '[0][value][g]' => '0a',
       'field_' . $this->fieldName . '[0][value][b]' => '01',
-    );
+    ];
 
     // Create the content.
     $this->drupalPostForm(NULL, $edit, t('Save'));
-    $assert->pageTextContains(t('@type @title has been created', array('@type' => $this->contentTypeName, '@title' => $title)));
+    $assert->pageTextContains(t('@type @title has been created', ['@type' => $this->contentTypeName, '@title' => $title]));
 
     // Verify the value is shown when viewing this node.
     $field_p = $this->xpath("//div[contains(@class,'field--type-field-example-rgb')]/div/p");
@@ -76,24 +76,24 @@ class Text3WidgetTest extends FieldExampleBrowserTestBase {
 
     // Fill the create form.
     $title = $this->randomMachineName(20);
-    $edit = array(
+    $edit = [
       'title[0][value]' => $title,
       'field_' . $this->fieldName . '[0][value][r]' => '00',
       'field_' . $this->fieldName . '[0][value][g]' => 'ff',
       'field_' . $this->fieldName . '[0][value][b]' => '00',
-    );
+    ];
 
     // Add a 2nd item to the multivalue field, so hit "add another".
     $this->drupalPostForm(NULL, $edit, t('Add another item'));
-    $edit = array(
+    $edit = [
       'field_' . $this->fieldName . '[1][value][r]' => 'ff',
       'field_' . $this->fieldName . '[1][value][g]' => 'ff',
       'field_' . $this->fieldName . '[1][value][b]' => 'ff',
-    );
+    ];
 
     // Create the content.
     $this->drupalPostForm(NULL, $edit, t('Save'));
-    $assert->pageTextContains(t('@type @title has been created', array('@type' => $this->contentTypeName, '@title' => $title)));
+    $assert->pageTextContains(t('@type @title has been created', ['@type' => $this->contentTypeName, '@title' => $title]));
 
     // Verify the values are shown when viewing this node.
     $field_p = $this->xpath("//div[contains(@class,'field--type-field-example-rgb')]/div/div/p");

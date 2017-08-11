@@ -42,14 +42,14 @@ class TableSortExampleController extends ControllerBase {
    */
   public function description() {
     // We are going to output the results in a table with a nice header.
-    $header = array(
+    $header = [
       // The header gives the table the information it needs in order to make
       // the query calls for ordering. TableSort uses the field information
       // to know what database column to sort by.
-      array('data' => t('Numbers'), 'field' => 't.numbers'),
-      array('data' => t('Letters'), 'field' => 't.alpha'),
-      array('data' => t('Mixture'), 'field' => 't.random'),
-    );
+      ['data' => t('Numbers'), 'field' => 't.numbers'],
+      ['data' => t('Letters'), 'field' => 't.alpha'],
+      ['data' => t('Mixture'), 'field' => 't.random'],
+    ];
 
     // Using the TableSort Extender is what tells  the query object that we
     // are sorting.
@@ -62,24 +62,24 @@ class TableSortExampleController extends ControllerBase {
       ->orderByHeader($header)
       ->execute();
 
-    $rows = array();
+    $rows = [];
     foreach ($result as $row) {
       // Normally we would add some nice formatting to our rows
       // but for our purpose we are simply going to add our row
       // to the array.
-      $rows[] = array('data' => (array) $row);
+      $rows[] = ['data' => (array) $row];
     }
 
     // Build the table for the nice output.
-    $build = array(
+    $build = [
       '#markup' => '<p>' . t('The layout here is a themed as a table
            that is sortable by clicking the header name.') . '</p>',
-    );
-    $build['tablesort_table'] = array(
+    ];
+    $build['tablesort_table'] = [
       '#theme' => 'table',
       '#header' => $header,
       '#rows' => $rows,
-    );
+    ];
 
     return $build;
   }

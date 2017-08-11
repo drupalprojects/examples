@@ -23,20 +23,20 @@ class SimpleTextFormatter extends FormatterBase {
    * {@inheritdoc}
    */
   public function viewElements(FieldItemListInterface $items, $langcode) {
-    $elements = array();
+    $elements = [];
 
     foreach ($items as $delta => $item) {
-      $elements[$delta] = array(
+      $elements[$delta] = [
         // We create a render array to produce the desired markup,
         // "<p style="color: #hexcolor">The color code ... #hexcolor</p>".
         // See theme_html_tag().
         '#type' => 'html_tag',
         '#tag' => 'p',
-        '#attributes' => array(
+        '#attributes' => [
           'style' => 'color: ' . $item->value,
-        ),
-        '#value' => $this->t('The color code in this field is @code', array('@code' => $item->value)),
-      );
+        ],
+        '#value' => $this->t('The color code in this field is @code', ['@code' => $item->value]),
+      ];
     }
 
     return $elements;

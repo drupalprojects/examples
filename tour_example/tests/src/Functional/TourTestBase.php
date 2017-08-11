@@ -31,7 +31,7 @@ abstract class TourTestBase extends ExamplesBrowserTestBase {
    * $this->assertTourTips($tips);
    * @endcode
    */
-  public function assertTourTips(array $tips = array()) {
+  public function assertTourTips(array $tips = []) {
     $assert = $this->assertSession();
     // Get the rendered tips and their data-id and data-class attributes.
     if (empty($tips)) {
@@ -62,12 +62,12 @@ abstract class TourTestBase extends ExamplesBrowserTestBase {
       foreach ($tips as $tip) {
         if (!empty($tip['data-id'])) {
           $elements = $this->getSession()->getPage()->find('css', "#{$tip['data-id']}");
-          $this->assertTrue(!empty($elements) && count($elements) === 1, format_string('Found corresponding page element for tour tip with id #%data-id', array('%data-id' => $tip['data-id'])));
+          $this->assertTrue(!empty($elements) && count($elements) === 1, format_string('Found corresponding page element for tour tip with id #%data-id', ['%data-id' => $tip['data-id']]));
         }
         elseif (!empty($tip['data-class'])) {
           $elements = $this->getSession()->getPage()->find('css', "#{$tip['data-class']}");
 
-          $this->assertFalse(empty($elements), format_string('Found corresponding page element for tour tip with class .%data-class', array('%data-class' => $tip['data-class'])));
+          $this->assertFalse(empty($elements), format_string('Found corresponding page element for tour tip with class .%data-class', ['%data-class' => $tip['data-class']]));
         }
         else {
           // It's a modal.
@@ -75,7 +75,7 @@ abstract class TourTestBase extends ExamplesBrowserTestBase {
         }
         $total++;
       }
-      $this->verbose(format_string('Total %total Tips tested of which %modals modal(s).', array('%total' => $total, '%modals' => $modals)));
+      $this->verbose(format_string('Total %total Tips tested of which %modals modal(s).', ['%total' => $total, '%modals' => $modals]));
     }
   }
 

@@ -22,7 +22,7 @@ class EmailExampleTest extends ExamplesBrowserTestBase {
    *
    * @var array
    */
-  public static $modules = array('email_example');
+  public static $modules = ['email_example'];
 
   /**
    * The installation profile to use with this test.
@@ -55,7 +55,7 @@ class EmailExampleTest extends ExamplesBrowserTestBase {
     $assert->fieldValueEquals('edit-message', NULL);
 
     // Verifiy email form is submitted.
-    $edit = array('email' => 'example@example.com', 'message' => 'test');
+    $edit = ['email' => 'example@example.com', 'message' => 'test'];
     $this->drupalPostForm('examples/email-example', $edit, t('Submit'));
     $assert->statusCodeEquals(200);
 
@@ -65,10 +65,10 @@ class EmailExampleTest extends ExamplesBrowserTestBase {
 
     // Verifiy correct email recieved.
     $from = \Drupal::config('system.site')->get('mail');
-    $t_options = array('langcode' => \Drupal::languageManager()->getDefaultLanguage()->getId());
-    $this->assertMailString('subject', t('E-mail sent from @site-name', array('@site-name' => $from), $t_options), 1);
+    $t_options = ['langcode' => \Drupal::languageManager()->getDefaultLanguage()->getId()];
+    $this->assertMailString('subject', t('E-mail sent from @site-name', ['@site-name' => $from], $t_options), 1);
     $this->assertMailString('body', $edit['message'], 1);
-    $this->assertMailString('body', t("\n--\nMail altered by email_example module.", array(), $t_options), 1);
+    $this->assertMailString('body', t("\n--\nMail altered by email_example module.", [], $t_options), 1);
   }
 
 }

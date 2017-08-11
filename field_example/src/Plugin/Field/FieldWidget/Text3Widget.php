@@ -30,34 +30,34 @@ class Text3Widget extends WidgetBase {
       preg_match_all('@..@', substr($value, 1), $match);
     }
     else {
-      $match = array(array());
+      $match = [[]];
     }
 
     // Set up the form element for this widget.
-    $element += array(
+    $element += [
       '#type' => 'details',
-      '#element_validate' => array(
-        array($this, 'validate'),
-      ),
-    );
+      '#element_validate' => [
+        [$this, 'validate'],
+      ],
+    ];
 
     // Add in the RGB textfield elements.
-    foreach (array('r' => t('Red'), 'g' => t('Green'), 'b' => t('Blue')) as $key => $title) {
-      $element[$key] = array(
+    foreach (['r' => t('Red'), 'g' => t('Green'), 'b' => t('Blue')] as $key => $title) {
+      $element[$key] = [
         '#type' => 'textfield',
         '#title' => $title,
         '#size' => 2,
         '#default_value' => array_shift($match[0]),
-        '#attributes' => array('class' => array('rgb-entry')),
-        '#description' => t('The 2-digit hexadecimal representation of @color saturation, like "a1" or "ff"', array('@color' => $title)),
-      );
+        '#attributes' => ['class' => ['rgb-entry']],
+        '#description' => t('The 2-digit hexadecimal representation of @color saturation, like "a1" or "ff"', ['@color' => $title]),
+      ];
       // Since Form API doesn't allow a fieldset to be required, we
       // have to require each field element individually.
       if ($element['#required']) {
         $element[$key]['#required'] = TRUE;
       }
     }
-    return array('value' => $element);
+    return ['value' => $element];
   }
 
   /**
@@ -65,8 +65,8 @@ class Text3Widget extends WidgetBase {
    */
   public function validate($element, FormStateInterface $form_state) {
     // Validate each of the textfield entries.
-    $values = array();
-    foreach (array('r', 'g', 'b') as $colorfield) {
+    $values = [];
+    foreach (['r', 'g', 'b'] as $colorfield) {
       $values[$colorfield] = $element[$colorfield]['#value'];
       // If they left any empty, we'll set the value empty and quit.
       if (strlen($values[$colorfield]) == 0) {

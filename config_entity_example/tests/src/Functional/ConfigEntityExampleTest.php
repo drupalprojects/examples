@@ -19,7 +19,7 @@ class ConfigEntityExampleTest extends BrowserTestBase {
    *
    * @var array
    */
-  public static $modules = array('config_entity_example');
+  public static $modules = ['config_entity_example'];
 
   /**
    * The installation profile to use with this test.
@@ -55,12 +55,12 @@ class ConfigEntityExampleTest extends BrowserTestBase {
     // 2) Verify that permissions are applied to the various defined paths.
     // Define some paths. Since the Marvin entity is defined, we can use it
     // in our management paths.
-    $forbidden_paths = array(
+    $forbidden_paths = [
       '/examples/config-entity-example',
       '/examples/config-entity-example/add',
       '/examples/config-entity-example/manage/marvin',
       '/examples/config-entity-example/manage/marvin/delete',
-    );
+    ];
     // Check each of the paths to make sure we don't have access. At this point
     // we haven't logged in any users, so the client is anonymous.
     foreach ($forbidden_paths as $path) {
@@ -79,7 +79,7 @@ class ConfigEntityExampleTest extends BrowserTestBase {
     }
 
     // Create a user who can administer robots.
-    $admin_user = $this->drupalCreateUser(array('administer robots'));
+    $admin_user = $this->drupalCreateUser(['administer robots']);
     $this->drupalLogin($admin_user);
     // Forbidden paths aren't forbidden any more.
     foreach ($forbidden_paths as $unforbidden) {
@@ -100,11 +100,11 @@ class ConfigEntityExampleTest extends BrowserTestBase {
     $robot_machine_name = 'roboname';
     $this->drupalPostForm(
       NULL,
-      array(
+      [
         'label' => $robot_machine_name,
         'id' => $robot_machine_name,
         'floopy' => TRUE,
-      ),
+      ],
       t('Create Robot')
     );
 
@@ -120,11 +120,11 @@ class ConfigEntityExampleTest extends BrowserTestBase {
     $robby_label = 'Robby label';
     $this->drupalPostForm(
       NULL,
-      array(
+      [
         'label' => $robby_label,
         'id' => $robby_machine_name,
         'floopy' => TRUE,
-      ),
+      ],
       t('Create Robot')
     );
     $this->drupalGet('/examples/config-entity-example');

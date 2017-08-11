@@ -24,18 +24,18 @@ class ColorPickerWidget extends TextWidget {
    */
   public function formElement(FieldItemListInterface $items, $delta, array $element, array &$form, FormStateInterface $form_state) {
     $element = parent::formElement($items, $delta, $element, $form, $form_state);
-    $element['value'] += array(
+    $element['value'] += [
       '#suffix' => '<div class="field-example-colorpicker"></div>',
-      '#attributes' => array('class' => array('edit-field-example-colorpicker')),
-      '#attached' => array(
+      '#attributes' => ['class' => ['edit-field-example-colorpicker']],
+      '#attached' => [
         // Add Farbtastic color picker and javascript file to trigger the
         // colorpicker.
-        'library' => array(
+        'library' => [
           'core/jquery.farbtastic',
           'field_example/colorpicker',
-        ),
-      ),
-    );
+        ],
+      ],
+    ];
 
     return $element;
   }

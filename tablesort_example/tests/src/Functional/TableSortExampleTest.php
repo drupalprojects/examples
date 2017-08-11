@@ -17,7 +17,7 @@ class TableSortExampleTest extends ExamplesBrowserTestBase {
   /**
    * {@inheritdoc}
    */
-  public static $modules = array('tablesort_example');
+  public static $modules = ['tablesort_example'];
 
   /**
    * The installation profile to use with this test.
@@ -36,39 +36,39 @@ class TableSortExampleTest extends ExamplesBrowserTestBase {
     $assert = $this->assertSession();
 
     // No need to login for this test.
-    $this->drupalGet('/examples/tablesort-example', array('query' => array('sort' => 'desc', 'order' => 'Numbers')));
+    $this->drupalGet('/examples/tablesort-example', ['query' => ['sort' => 'desc', 'order' => 'Numbers']]);
     $assert->statusCodeEquals(200);
     // Ordered by number decending.
     $item = $this->getSession()->getPage()->find('xpath', '//tbody/tr/td[1]');
     $this->assertEquals(7, $item->getText(), 'Ordered by number decending.');
 
-    $this->drupalGet('/examples/tablesort-example', array('query' => array('sort' => 'asc', 'order' => 'Numbers')));
+    $this->drupalGet('/examples/tablesort-example', ['query' => ['sort' => 'asc', 'order' => 'Numbers']]);
     $assert->statusCodeEquals(200);
     // Ordered by Number ascending.
     $item = $this->getSession()->getPage()->find('xpath', '//tbody/tr/td[1]');
     $this->assertEquals(1, $item->getText(), 'Ordered by Number ascending.');
 
     // Sort by Letters.
-    $this->drupalGet('/examples/tablesort-example', array('query' => array('sort' => 'desc', 'order' => 'Letters')));
+    $this->drupalGet('/examples/tablesort-example', ['query' => ['sort' => 'desc', 'order' => 'Letters']]);
     $assert->statusCodeEquals(200);
     // Ordered by Letters decending.
     $item = $this->getSession()->getPage()->find('xpath', '//tbody/tr/td[2]');
     $this->assertEquals('w', $item->getText(), 'Ordered by Letters decending.');
 
-    $this->drupalGet('/examples/tablesort-example', array('query' => array('sort' => 'asc', 'order' => 'Letters')));
+    $this->drupalGet('/examples/tablesort-example', ['query' => ['sort' => 'asc', 'order' => 'Letters']]);
     $assert->statusCodeEquals(200);
     // Ordered by Letters ascending.
     $item = $this->getSession()->getPage()->find('xpath', '//tbody/tr/td[2]');
     $this->assertEquals('a', $item->getText(), 'Ordered by Letters ascending.');
 
     // Sort by Mixture.
-    $this->drupalGet('/examples/tablesort-example', array('query' => array('sort' => 'desc', 'order' => 'Mixture')));
+    $this->drupalGet('/examples/tablesort-example', ['query' => ['sort' => 'desc', 'order' => 'Mixture']]);
     $assert->statusCodeEquals(200);
     // Ordered by Mixture decending.
     $item = $this->getSession()->getPage()->find('xpath', '//tbody/tr/td[3]');
     $this->assertEquals('t982hkv', $item->getText(), 'Ordered by Mixture decending.');
 
-    $this->drupalGet('/examples/tablesort-example', array('query' => array('sort' => 'asc', 'order' => 'Mixture')));
+    $this->drupalGet('/examples/tablesort-example', ['query' => ['sort' => 'asc', 'order' => 'Mixture']]);
     $assert->statusCodeEquals(200);
     // Ordered by Mixture ascending.
     $item = $this->getSession()->getPage()->find('xpath', '//tbody/tr/td[3]');
@@ -85,9 +85,9 @@ class TableSortExampleTest extends ExamplesBrowserTestBase {
    *   The value is the link that should appear on that page.
    */
   protected function providerMenuLinks() {
-    return array(
+    return [
       '' => '/examples/tablesort-example',
-    );
+    ];
   }
 
   /**

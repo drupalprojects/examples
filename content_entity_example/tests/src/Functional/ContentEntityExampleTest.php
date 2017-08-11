@@ -15,7 +15,7 @@ use Drupal\Tests\examples\Functional\ExamplesBrowserTestBase;
  */
 class ContentEntityExampleTest extends ExamplesBrowserTestBase {
 
-  public static $modules = array('content_entity_example', 'block', 'field_ui');
+  public static $modules = ['content_entity_example', 'block', 'field_ui'];
 
   /**
    * Basic tests for Content Entity Example.
@@ -23,7 +23,7 @@ class ContentEntityExampleTest extends ExamplesBrowserTestBase {
   public function testContentEntityExample() {
     $assert = $this->assertSession();
 
-    $web_user = $this->drupalCreateUser(array(
+    $web_user = $this->drupalCreateUser([
       'add contact entity',
       'edit contact entity',
       'view contact entity',
@@ -32,7 +32,7 @@ class ContentEntityExampleTest extends ExamplesBrowserTestBase {
       'administer content_entity_example_contact display',
       'administer content_entity_example_contact fields',
       'administer content_entity_example_contact form display',
-    ));
+    ]);
 
     // Anonymous User should not see the link to the listing.
     $assert->pageTextNotContains('Content Entity Example: Contacts Listing');
@@ -58,12 +58,12 @@ class ContentEntityExampleTest extends ExamplesBrowserTestBase {
     $assert->fieldValueEquals('user_id[0][target_id]', $user_ref);
 
     // Post content, save an instance. Go back to list after saving.
-    $edit = array(
+    $edit = [
       'name[0][value]' => 'test name',
       'first_name[0][value]' => 'test first name',
       'gender' => 'male',
       'role' => 'administrator',
-    );
+    ];
     $this->drupalPostForm(NULL, $edit, t('Save'));
 
     // Entity listed.
@@ -86,7 +86,7 @@ class ContentEntityExampleTest extends ExamplesBrowserTestBase {
 
     // Confirm deletion.
     $assert->linkExists('Cancel');
-    $this->drupalPostForm(NULL, array(), 'Delete');
+    $this->drupalPostForm(NULL, [], 'Delete');
 
     // Back to list, must be empty.
     $assert->pageTextNotContains('test name');
@@ -110,12 +110,12 @@ class ContentEntityExampleTest extends ExamplesBrowserTestBase {
 
     // Generate a contact so that we can test the paths against it.
     $contact = Contact::create(
-      array(
+      [
         'name' => 'somename',
         'first_name' => 'Joe',
         'gender' => 'female',
         'role' => 'administrator',
-      )
+      ]
     );
     $contact->save();
 
@@ -127,7 +127,7 @@ class ContentEntityExampleTest extends ExamplesBrowserTestBase {
       // drupalCreateUser() doesn't know what to do with an empty permission
       // array, so we help it out.
       if ($datum[2]) {
-        $user = $this->drupalCreateUser(array($datum[2]));
+        $user = $this->drupalCreateUser([$datum[2]]);
         $this->drupalLogin($user);
       }
       else {
@@ -152,91 +152,91 @@ class ContentEntityExampleTest extends ExamplesBrowserTestBase {
    *   - Permission for the user.
    */
   protected function providerTestPaths($contact_id) {
-    return array(
-      array(
+    return [
+      [
         200,
         '/content_entity_example_contact/' . $contact_id,
         'view contact entity',
-      ),
-      array(
+      ],
+      [
         403,
         '/content_entity_example_contact/' . $contact_id,
         '',
-      ),
-      array(
+      ],
+      [
         200,
         '/content_entity_example_contact/list',
         'view contact entity',
-      ),
-      array(
+      ],
+      [
         403,
         '/content_entity_example_contact/list',
         '',
-      ),
-      array(
+      ],
+      [
         200,
         '/content_entity_example_contact/add',
         'add contact entity',
-      ),
-      array(
+      ],
+      [
         403,
         '/content_entity_example_contact/add',
         '',
-      ),
-      array(
+      ],
+      [
         200,
         '/content_entity_example_contact/' . $contact_id . '/edit',
         'edit contact entity',
-      ),
-      array(
+      ],
+      [
         403,
         '/content_entity_example_contact/' . $contact_id . '/edit',
         '',
-      ),
-      array(
+      ],
+      [
         200,
         '/contact/' . $contact_id . '/delete',
         'delete contact entity',
-      ),
-      array(
+      ],
+      [
         403,
         '/contact/' . $contact_id . '/delete',
         '',
-      ),
-      array(
+      ],
+      [
         200,
         'admin/structure/content_entity_example_contact_settings',
         'administer contact entity',
-      ),
-      array(
+      ],
+      [
         403,
         'admin/structure/content_entity_example_contact_settings',
         '',
-      ),
-    );
+      ],
+    ];
   }
 
   /**
    * Test add new fields to the contact entity.
    */
   public function testAddFields() {
-    $web_user = $this->drupalCreateUser(array(
+    $web_user = $this->drupalCreateUser([
       'administer contact entity',
       'administer content_entity_example_contact display',
       'administer content_entity_example_contact fields',
       'administer content_entity_example_contact form display',
-    ));
+    ]);
 
     $this->drupalLogin($web_user);
     $entity_name = 'content_entity_example_contact';
     $add_field_url = 'admin/structure/' . $entity_name . '_settings/fields/add-field';
     $this->drupalGet($add_field_url);
     $field_name = 'test_name';
-    $edit = array(
+    $edit = [
       'new_storage_type' => 'list_string',
       'label' => 'test name',
       'field_name' => $field_name,
-    );
+    ];
 
     $this->drupalPostForm(NULL, $edit, t('Save and continue'));
     $expected_path = $this->buildUrl('admin/structure/' . $entity_name . '_settings/fields/' . $entity_name . '.' . $entity_name . '.field_' . $field_name . '/storage');

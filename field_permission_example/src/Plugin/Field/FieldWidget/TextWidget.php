@@ -25,11 +25,11 @@ class TextWidget extends WidgetBase {
    */
   public function formElement(FieldItemListInterface $items, $delta, array $element, array &$form, FormStateInterface $form_state) {
     $value = isset($items[$delta]->value) ? $items[$delta]->value : '';
-    $element += array(
+    $element += [
       '#type' => 'textarea',
       '#default_value' => $value,
-    );
-    return array('value' => $element);
+    ];
+    return ['value' => $element];
   }
 
 }

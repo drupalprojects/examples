@@ -25,7 +25,7 @@ class AddClass {
    */
   public function add($a, $b) {
     // Check whether the arguments are numeric.
-    foreach (array($a, $b) as $argument) {
+    foreach ([$a, $b] as $argument) {
       if (!is_numeric($argument)) {
         throw new \InvalidArgumentException('Arguments must be numeric.');
       }

@@ -83,29 +83,29 @@ class RobotFormBase extends EntityForm {
     $robot = $this->entity;
 
     // Build the form.
-    $form['label'] = array(
+    $form['label'] = [
       '#type' => 'textfield',
       '#title' => $this->t('Label'),
       '#maxlength' => 255,
       '#default_value' => $robot->label(),
       '#required' => TRUE,
-    );
-    $form['id'] = array(
+    ];
+    $form['id'] = [
       '#type' => 'machine_name',
       '#title' => $this->t('Machine name'),
       '#default_value' => $robot->id(),
-      '#machine_name' => array(
-        'exists' => array($this, 'exists'),
+      '#machine_name' => [
+        'exists' => [$this, 'exists'],
         'replace_pattern' => '([^a-z0-9_]+)|(^custom$)',
         'error' => 'The machine-readable name must be unique, and can only contain lowercase letters, numbers, and underscores. Additionally, it can not be the reserved word "custom".',
-      ),
+      ],
       '#disabled' => !$robot->isNew(),
-    );
-    $form['floopy'] = array(
+    ];
+    $form['floopy'] = [
       '#type' => 'checkbox',
       '#title' => $this->t('Floopy'),
       '#default_value' => $robot->floopy,
-    );
+    ];
 
     // Return the form.
     return $form;
@@ -205,12 +205,12 @@ class RobotFormBase extends EntityForm {
 
     if ($status == SAVED_UPDATED) {
       // If we edited an existing entity...
-      drupal_set_message($this->t('Robot %label has been updated.', array('%label' => $robot->label())));
+      drupal_set_message($this->t('Robot %label has been updated.', ['%label' => $robot->label()]));
       $this->logger('contact')->notice('Robot %label has been updated.', ['%label' => $robot->label(), 'link' => $edit_link]);
     }
     else {
       // If we created a new entity...
-      drupal_set_message($this->t('Robot %label has been added.', array('%label' => $robot->label())));
+      drupal_set_message($this->t('Robot %label has been added.', ['%label' => $robot->label()]));
       $this->logger('contact')->notice('Robot %label has been added.', ['%label' => $robot->label(), 'link' => $edit_link]);
     }
 

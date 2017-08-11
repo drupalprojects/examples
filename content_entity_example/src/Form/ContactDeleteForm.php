@@ -17,7 +17,7 @@ class ContactDeleteForm extends ContentEntityConfirmFormBase {
    * {@inheritdoc}
    */
   public function getQuestion() {
-    return $this->t('Are you sure you want to delete entity %name?', array('%name' => $this->entity->label()));
+    return $this->t('Are you sure you want to delete entity %name?', ['%name' => $this->entity->label()]);
   }
 
   /**
@@ -46,10 +46,10 @@ class ContactDeleteForm extends ContentEntityConfirmFormBase {
     $entity->delete();
 
     $this->logger('content_entity_example')->notice('@type: deleted %title.',
-      array(
+      [
         '@type' => $this->entity->bundle(),
         '%title' => $this->entity->label(),
-      ));
+      ]);
     $form_state->setRedirect('entity.content_entity_example_contact.collection');
   }
 

@@ -115,7 +115,7 @@ function hooks_example_node_view(array &$build, EntityInterface $entity, EntityV
   //
   // Retrieve the active session from the current request object.
   $session = \Drupal::request()->getSession();
-  $current_counts = $session->get('hooks_example.view_counts', array());
+  $current_counts = $session->get('hooks_example.view_counts', []);
   if (!isset($current_counts[$entity->id()])) {
     // If this is the first time they've viewed the page we need to start the
     // counter.
@@ -171,20 +171,20 @@ function hooks_example_node_view(array &$build, EntityInterface $entity, EntityV
   // In this example we're invoking hook_hooks_example_count_incremented() and
   // passing all implementations the current view count for the node, and the
   // node object itself.
-  $module_handler->invokeAll('hooks_example_count_incremented', array($current_counts[$entity->id()], $entity));
+  $module_handler->invokeAll('hooks_example_count_incremented', [$current_counts[$entity->id()], $entity]);
 
   // Display the current number of pages the user has viewed along with the
   // node's content.
-  $build['view_count'] = array(
-    '#markup' => '<p>' . t('You have viewed this node @total times this session.', array('@total' => $current_counts[$entity->id()])) . '</p>',
+  $build['view_count'] = [
+    '#markup' => '<p>' . t('You have viewed this node @total times this session.', ['@total' => $current_counts[$entity->id()]]) . '</p>',
     // In order for this example to work we disable caching for the content of
     // this node completely. This ensures that our hook is called every time the
     // node is viewed instead of using a cached version of the page for
     // subsequent requests.
-    '#cache' => array(
+    '#cache' => [
       'max-age' => 0,
-    ),
-  );
+    ],
+  ];
 }
 
 /**
@@ -217,7 +217,7 @@ function hooks_example_form_alter(&$form, FormStateInterface $form_state, $form_
  */
 function hooks_example_hooks_example_count_incremented($current_count, NodeInterface $node) {
   if ($current_count === 1) {
-    drupal_set_message(t('This is the first time you have viewed the node %title.', array('%title' => $node->label())));
+    drupal_set_message(t('This is the first time you have viewed the node %title.', ['%title' => $node->label()]));
   }
 }
 

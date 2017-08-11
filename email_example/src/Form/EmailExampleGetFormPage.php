@@ -63,23 +63,23 @@ class EmailExampleGetFormPage extends FormBase {
    * {@inheritdoc}
    */
   public function buildForm(array $form, FormStateInterface $form_state) {
-    $form['intro'] = array(
+    $form['intro'] = [
       '#markup' => t('Use this form to send a message to an e-mail address. No spamming!'),
-    );
-    $form['email'] = array(
+    ];
+    $form['email'] = [
       '#type' => 'textfield',
       '#title' => t('E-mail address'),
       '#required' => TRUE,
-    );
-    $form['message'] = array(
+    ];
+    $form['message'] = [
       '#type' => 'textarea',
       '#title' => t('Message'),
       '#required' => TRUE,
-    );
-    $form['submit'] = array(
+    ];
+    $form['submit'] = [
       '#type' => 'submit',
       '#value' => t('Submit'),
-    );
+    ];
     return $form;
   }
 

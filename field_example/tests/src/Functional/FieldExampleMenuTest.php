@@ -18,7 +18,7 @@ class FieldExampleMenuTest extends FieldExampleBrowserTestBase {
    *
    * @var array
    */
-  public static $modules = array('field_example');
+  public static $modules = ['field_example'];
 
   /**
    * The installation profile to use with this test.

@@ -20,7 +20,7 @@ class BlockExampleTest extends BrowserTestBase {
    *
    * @var array
    */
-  public static $modules = array('block', 'block_example');
+  public static $modules = ['block', 'block_example'];
 
   /**
    * Tests block_example functionality.
@@ -29,7 +29,7 @@ class BlockExampleTest extends BrowserTestBase {
     $assert = $this->assertSession();
 
     // Create user.
-    $web_user = $this->drupalCreateUser(array('administer blocks'));
+    $web_user = $this->drupalCreateUser(['administer blocks']);
     // Login the admin user.
     $this->drupalLogin($web_user);
 
@@ -42,25 +42,25 @@ class BlockExampleTest extends BrowserTestBase {
     $assert->pageTextContains('Example: uppercase this please');
 
     // Define and place blocks.
-    $settings_configurable = array(
+    $settings_configurable = [
       'label' => t('Configurable text'),
       'id' => 'block_example_example_configurable_text',
       'theme' => $theme_name,
-    );
+    ];
     $this->drupalPlaceBlock('example_configurable_text', $settings_configurable);
 
-    $settings_uppercase = array(
+    $settings_uppercase = [
       'label' => t('Configurable block to be uppercased'),
       'id' => 'block_example_example_uppercased',
       'theme' => $theme_name,
-    );
+    ];
     $this->drupalPlaceBlock('example_uppercase', $settings_uppercase);
 
-    $settings_empty = array(
+    $settings_empty = [
       'label' => t('Empty block'),
       'id' => 'block_example_example_empty',
       'theme' => $theme_name,
-    );
+    ];
     $this->drupalPlaceBlock('example_empty', $settings_empty);
 
     // Verify that blocks are there. Empty block will not be shown, because it
@@ -72,9 +72,9 @@ class BlockExampleTest extends BrowserTestBase {
     $assert->pageTextNotContains($settings_empty['label']);
 
     // Change content of configurable text block.
-    $edit = array(
+    $edit = [
       'settings[block_example_string_text]' => $this->randomMachineName(),
-    );
+    ];
     $this->drupalPostForm('/admin/structure/block/manage/' . $settings_configurable['id'], $edit, t('Save block'));
     $assert->statusCodeEquals(200);
 

@@ -19,7 +19,7 @@ class TourExampleTest extends TourTestBasic {
    *
    * @var array
    */
-  public static $modules = array('tour', 'tour_example');
+  public static $modules = ['tour', 'tour_example'];
 
   /**
    * The installation profile to use with this test.

@@ -23,24 +23,24 @@ class SimpleTextFormatter extends FormatterBase {
    * {@inheritdoc}
    */
   public function viewElements(FieldItemListInterface $items, $langcode) {
-    $elements = array();
+    $elements = [];
 
     foreach ($items as $delta => $item) {
-      $elements[$delta] = array(
+      $elements[$delta] = [
         // We wrap the fieldnote content up in a div tag.
         '#type' => 'html_tag',
         '#tag' => 'div',
         // This text is auto-XSS escaped.  See docs for the html_tag element.
         '#value' => $item->value,
         // Let's give the note a nice sticky-note CSS appearance.
-        '#attributes' => array(
+        '#attributes' => [
           'class' => 'stickynote',
-        ),
+        ],
         // ..And this is the CSS for the stickynote.
-        '#attached' => array(
-          'library' => array('field_permission_example/fieldnote_sticky'),
-        ),
-      );
+        '#attached' => [
+          'library' => ['field_permission_example/fieldnote_sticky'],
+        ],
+      ];
     }
 
     return $elements;

@@ -203,7 +203,7 @@ class FileExampleReadWriteForm extends FormBase {
   private static function getManagedFile($uri) {
     $fid = Database::getConnection('default')->query(
       'SELECT fid FROM {file_managed} WHERE uri = :uri',
-      array(':uri' => $uri)
+      [':uri' => $uri]
     )->fetchField();
     if (!empty($fid)) {
       $file_object = File::load($fid);
@@ -271,113 +271,113 @@ class FileExampleReadWriteForm extends FormBase {
     $default_file = $this->getDefaultFile();
     $default_directory = $this->getDefaultDirectory();
 
-    $form['description'] = array(
+    $form['description'] = [
       '#markup' => $this->t('This form demonstrates the Drupal 8 file api. Experiment with the form, and then look at the submit handlers in the code to understand the file api.'),
-    );
+    ];
 
-    $form['write_file'] = array(
+    $form['write_file'] = [
       '#type' => 'fieldset',
       '#title' => $this->t('Write to a file'),
-    );
-    $form['write_file']['write_contents'] = array(
+    ];
+    $form['write_file']['write_contents'] = [
       '#type' => 'textfield',
       '#title' => $this->t('Enter something you would like to write to a file'),
       '#default_value' => $this->t('Put some text here or just use this text'),
-    );
+    ];
 
-    $form['write_file']['destination'] = array(
+    $form['write_file']['destination'] = [
       '#type' => 'textfield',
       '#default_value' => $default_file,
       '#title' => $this->t('Optional: Enter the streamwrapper saying where it should be written'),
       '#description' => $this->t('This may be public://some_dir/test_file.txt or private://another_dir/some_file.txt, for example. If you include a directory, it must already exist. The default is "public://". Since this example supports session://, you can also use something like session://somefile.txt.'),
-    );
+    ];
 
-    $form['write_file']['managed_submit'] = array(
+    $form['write_file']['managed_submit'] = [
       '#type' => 'submit',
       '#value' => $this->t('Write managed file'),
-      '#submit' => array('::handleManagedFile'),
-    );
-    $form['write_file']['unmanaged_submit'] = array(
+      '#submit' => ['::handleManagedFile'],
+    ];
+    $form['write_file']['unmanaged_submit'] = [
       '#type' => 'submit',
       '#value' => $this->t('Write unmanaged file'),
-      '#submit' => array('::handleUnmanagedFile'),
-    );
-    $form['write_file']['unmanaged_php'] = array(
+      '#submit' => ['::handleUnmanagedFile'],
+    ];
+    $form['write_file']['unmanaged_php'] = [
       '#type' => 'submit',
       '#value' => $this->t('Unmanaged using PHP'),
-      '#submit' => array('::handleUnmanagedPhp'),
-    );
+      '#submit' => ['::handleUnmanagedPhp'],
+    ];
 
-    $form['fileops'] = array(
+    $form['fileops'] = [
       '#type' => 'fieldset',
       '#title' => $this->t('Read from a file'),
-    );
-    $form['fileops']['fileops_file'] = array(
+    ];
+    $form['fileops']['fileops_file'] = [
       '#type' => 'textfield',
       '#default_value' => $default_file,
       '#title' => $this->t('Enter the URI of a file'),
       '#description' => $this->t('This must be a stream-type description like public://some_file.txt or http://drupal.org or private://another_file.txt or (for this example) session://yet_another_file.txt.'),
-    );
-    $form['fileops']['read_submit'] = array(
+    ];
+    $form['fileops']['read_submit'] = [
       '#type' => 'submit',
       '#value' => $this->t('Read the file and store it locally'),
-      '#submit' => array('::handleFileRead'),
-    );
-    $form['fileops']['delete_submit'] = array(
+      '#submit' => ['::handleFileRead'],
+    ];
+    $form['fileops']['delete_submit'] = [
       '#type' => 'submit',
       '#value' => $this->t('Delete file'),
-      '#submit' => array('::handleFileDelete'),
-    );
-    $form['fileops']['check_submit'] = array(
+      '#submit' => ['::handleFileDelete'],
+    ];
+    $form['fileops']['check_submit'] = [
       '#type' => 'submit',
       '#value' => $this->t('Check to see if file exists'),
-      '#submit' => array('::handleFileExists'),
-    );
+      '#submit' => ['::handleFileExists'],
+    ];
 
-    $form['directory'] = array(
+    $form['directory'] = [
       '#type' => 'fieldset',
       '#title' => $this->t('Create or prepare a directory'),
-    );
+    ];
 
-    $form['directory']['directory_name'] = array(
+    $form['directory']['directory_name'] = [
       '#type' => 'textfield',
       '#title' => $this->t('Directory to create/prepare/delete'),
       '#default_value' => $default_directory,
       '#description' => $this->t('This is a directory as in public://some/directory or private://another/dir.'),
-    );
-    $form['directory']['create_directory'] = array(
+    ];
+    $form['directory']['create_directory'] = [
       '#type' => 'submit',
       '#value' => $this->t('Create directory'),
-      '#submit' => array('::handleDirectoryCreate'),
-    );
-    $form['directory']['delete_directory'] = array(
+      '#submit' => ['::handleDirectoryCreate'],
+    ];
+    $form['directory']['delete_directory'] = [
       '#type' => 'submit',
       '#value' => $this->t('Delete directory'),
-      '#submit' => array('::handleDirectoryDelete'),
-    );
-    $form['directory']['check_directory'] = array(
+      '#submit' => ['::handleDirectoryDelete'],
+    ];
+    $form['directory']['check_directory'] = [
       '#type' => 'submit',
       '#value' => $this->t('Check to see if directory exists'),
-      '#submit' => array('::handleDirectoryExists'),
-    );
+      '#submit' => ['::handleDirectoryExists'],
+    ];
 
-    $form['debug'] = array(
+    $form['debug'] = [
       '#type' => 'fieldset',
       '#title' => $this->t('Debugging'),
-    );
+    ];
     // The Session Wrapper Exampple is not yet committed, so
     // we hide this button until this happens.
-    $form['debug']['show_raw_session'] = array(
+    $form['debug']['show_raw_session'] = [
       '#type' => 'submit',
       '#value' => $this->t('Show raw $_SESSION contents'),
-      '#submit' => array('::handleShowSession'),
+      '#submit' => ['::handleShowSession'],
       '#access' => $this->sessionSchemeEnabled,
-    );
-    $form['debug']['reset_session'] = array(
+    ];
+    $form['debug']['reset_session'] = [
       '#type' => 'submit',
       '#value' => t('Reset the Session'),
-      '#submit' => array('::handleResetSession'),
-    );
+      '#submit' => ['::handleResetSession'],
+    ];
 
     return $form;
   }
@@ -419,12 +419,12 @@ class FileExampleReadWriteForm extends FormBase {
       if ($url) {
         drupal_set_message(
          $this->t('Saved managed file: %file to destination %destination (accessible via <a href=":url">this URL</a>, actual uri=<span id="uri">@uri</span>)',
-            array(
+            [
               '%file' => print_r($file_data, TRUE),
               '%destination' => $uri,
               '@uri' => $file_object->getFileUri(),
               ':url' => $url->toString(),
-            )
+            ]
           )
         );
       }
@@ -432,11 +432,11 @@ class FileExampleReadWriteForm extends FormBase {
         // This Uri is not routable, so we cannot give a link to it.
         drupal_set_message(
          $this->t('Saved managed file: %file to destination %destination (no URL, since this stream type does not support it)',
-            array(
+            [
               '%file' => print_r($file_data, TRUE),
               '%destination' => $uri,
               '@uri' => $file_object->getFileUri(),
-            )
+            ]
           )
         );
 
@@ -483,21 +483,21 @@ class FileExampleReadWriteForm extends FormBase {
       if ($url) {
         drupal_set_message(
          $this->t('Saved file as %filename (accessible via <a href=":url">this URL</a>, uri=<span id="uri">@uri</span>)',
-            array(
+            [
               '%filename' => $filename,
               '@uri' => $filename,
               ':url' => $url->toString(),
-            )
+            ]
           )
         );
       }
       else {
         drupal_set_message(
          $this->t('Saved file as %filename (not accessible externally)',
-            array(
+            [
               '%filename' => $filename,
               '@uri' => $filename,
-            )
+            ]
           )
         );
       }
@@ -546,7 +546,7 @@ class FileExampleReadWriteForm extends FormBase {
     for ($i = 0; $i < $length; $i += $write_size) {
       $result = fwrite($fp, substr($data, $i, $write_size));
       if ($result === FALSE) {
-        drupal_set_message(t('Failed writing to the file %file', array('%file' => $destination)), 'error');
+        drupal_set_message(t('Failed writing to the file %file', ['%file' => $destination]), 'error');
         fclose($fp);
         return;
       }
@@ -556,21 +556,21 @@ class FileExampleReadWriteForm extends FormBase {
     if ($url) {
       drupal_set_message(
        $this->t('Saved file as %filename (accessible via <a href=":url">this URL</a>, uri=<span id="uri">@uri</span>)',
-          array(
+          [
             '%filename' => $destination,
             '@uri' => $destination,
             ':url' => $url->toString(),
-          )
+          ]
         )
       );
     }
     else {
       drupal_set_message(
        $this->t('Saved file as %filename (not accessible externally)',
-          array(
+          [
             '%filename' => $destination,
             '@uri' => $destination,
-          )
+          ]
         )
       );
     }
@@ -608,7 +608,7 @@ class FileExampleReadWriteForm extends FormBase {
     $uri = $form_values['fileops_file'];
 
     if (empty($uri) or !is_file($uri)) {
-      drupal_set_message(t('The file "%uri" does not exist', array('%uri' => $uri)), 'error');
+      drupal_set_message(t('The file "%uri" does not exist', ['%uri' => $uri]), 'error');
       return;
     }
 
@@ -626,19 +626,19 @@ class FileExampleReadWriteForm extends FormBase {
         if ($url) {
           drupal_set_message(
            $this->t('The file was read and copied to %filename which is accessible at <a href=":url">this URL</a>',
-              array(
+              [
                 '%filename' => $sourcename,
                 ':url' => $url->toString(),
-              )
+              ]
             )
           );
         }
         else {
           drupal_set_message(
            $this->t('The file was read and copied to %filename (not accessible externally)',
-              array(
+              [
                 '%filename' => $sourcename,
-              )
+              ]
             )
           );
 
@@ -650,7 +650,7 @@ class FileExampleReadWriteForm extends FormBase {
     }
     else {
       // We failed to get the contents of the requested file.
-      drupal_set_message(t('Failed to retrieve the file %file', array('%file' => $uri)));
+      drupal_set_message(t('Failed to retrieve the file %file', ['%file' => $uri]));
     }
 
   }
@@ -680,15 +680,15 @@ class FileExampleReadWriteForm extends FormBase {
         // This no longer returns a result code.  If things go bad,
         // it will throw an exception:
         file_delete($file_object->id());
-        drupal_set_message(t('Successfully deleted managed file %uri', array('%uri' => $uri)));
+        drupal_set_message(t('Successfully deleted managed file %uri', ['%uri' => $uri]));
         $this->setDefaultFile($uri);
       }
       catch (\Exception $e) {
         drupal_set_message(t('Failed deleting managed file %uri. Result was %result',
-          array(
+          [
             '%uri' => $uri,
             '%result' => print_r($e->getMessage(), TRUE),
-          )
+          ]
         ), 'error');
       }
     }
@@ -696,10 +696,10 @@ class FileExampleReadWriteForm extends FormBase {
     else {
       $result = file_unmanaged_delete($uri);
       if ($result !== TRUE) {
-        drupal_set_message(t('Failed deleting unmanaged file %uri', array('%uri' => $uri, 'error')));
+        drupal_set_message(t('Failed deleting unmanaged file %uri', ['%uri' => $uri, 'error']));
       }
       else {
-        drupal_set_message(t('Successfully deleted unmanaged file %uri', array('%uri' => $uri)));
+        drupal_set_message(t('Successfully deleted unmanaged file %uri', ['%uri' => $uri]));
         $this->setDefaultFile('file_example_default_file', $uri);
       }
     }
@@ -712,10 +712,10 @@ class FileExampleReadWriteForm extends FormBase {
     $form_values = $form_state->getValues();
     $uri = $form_values['fileops_file'];
     if (is_file($uri)) {
-      drupal_set_message(t('The file %uri exists.', array('%uri' => $uri)));
+      drupal_set_message(t('The file %uri exists.', ['%uri' => $uri]));
     }
     else {
-      drupal_set_message(t('The file %uri does not exist.', array('%uri' => $uri)));
+      drupal_set_message(t('The file %uri does not exist.', ['%uri' => $uri]));
     }
   }
 
@@ -737,11 +737,11 @@ class FileExampleReadWriteForm extends FormBase {
     // by default to 0755, or to the value of the variable
     // 'file_chmod_directory'.
     if (!file_prepare_directory($directory, FILE_MODIFY_PERMISSIONS | FILE_CREATE_DIRECTORY)) {
-      drupal_set_message(t('Failed to create %directory.', array('%directory' => $directory)), 'error');
+      drupal_set_message(t('Failed to create %directory.', ['%directory' => $directory]), 'error');
     }
     else {
       $result = is_dir($directory);
-      drupal_set_message(t('Directory %directory is ready for use.', array('%directory' => $directory)));
+      drupal_set_message(t('Directory %directory is ready for use.', ['%directory' => $directory]));
       $this->setDefaultDirectory($directory);
     }
   }
@@ -757,10 +757,10 @@ class FileExampleReadWriteForm extends FormBase {
 
     $result = file_unmanaged_delete_recursive($directory);
     if (!$result) {
-      drupal_set_message(t('Failed to delete %directory.', array('%directory' => $directory)), 'error');
+      drupal_set_message(t('Failed to delete %directory.', ['%directory' => $directory]), 'error');
     }
     else {
-      drupal_set_message(t('Recursively deleted directory %directory.', array('%directory' => $directory)));
+      drupal_set_message(t('Recursively deleted directory %directory.', ['%directory' => $directory]));
       $this->setDefaultDirectory($directory);
     }
   }
@@ -780,10 +780,10 @@ class FileExampleReadWriteForm extends FormBase {
     $directory = $form_values['directory_name'];
     $result = is_dir($directory);
     if (!$result) {
-      drupal_set_message(t('Directory %directory does not exist.', array('%directory' => $directory)));
+      drupal_set_message(t('Directory %directory does not exist.', ['%directory' => $directory]));
     }
     else {
-      drupal_set_message(t('Directory %directory exists.', array('%directory' => $directory)));
+      drupal_set_message(t('Directory %directory exists.', ['%directory' => $directory]));
     }
   }
 

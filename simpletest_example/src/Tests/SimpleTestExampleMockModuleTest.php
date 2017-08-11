@@ -39,10 +39,10 @@ class SimpleTestExampleMockModuleTest extends WebTestBase {
    *
    * @var array
    */
-  static public $modules = array(
+  static public $modules = [
     'simpletest_example',
     'simpletest_example_test',
-  );
+  ];
 
   /**
    * Test modifications made by our mock module.
@@ -52,14 +52,14 @@ class SimpleTestExampleMockModuleTest extends WebTestBase {
    */
   public function testSimpleTestExampleMockModule() {
     // Create a user.
-    $test_user = $this->drupalCreateUser(array('access content'));
+    $test_user = $this->drupalCreateUser(['access content']);
     // Log them in.
     $this->drupalLogin($test_user);
     // Set up some content.
-    $settings = array(
+    $settings = [
       'type' => 'simpletest_example',
       'title' => $this->randomMachineName(32),
-    );
+    ];
     // Create the content node.
     $node = $this->drupalCreateNode($settings);
     // View the node.

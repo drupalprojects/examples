@@ -20,7 +20,7 @@ class DbtngExampleTest extends ExamplesBrowserTestBase {
    *
    * @var array
    */
-  public static $modules = array('dbtng_example');
+  public static $modules = ['dbtng_example'];
 
   /**
    * The installation profile to use with this test.
@@ -70,16 +70,16 @@ class DbtngExampleTest extends ExamplesBrowserTestBase {
    *   - The value is an array of links that should appear on that page.
    */
   protected function providerMenuLinks() {
-    return array(
-      '' => array(
+    return [
+      '' => [
         '/examples/dbtng-example',
-      ),
-      '/examples/dbtng-example' => array(
+      ],
+      '/examples/dbtng-example' => [
         '/examples/dbtng-example/add',
         '/examples/dbtng-example/update',
         '/examples/dbtng-example/advanced',
-      ),
-    );
+      ],
+    ];
   }
 
   /**
@@ -98,11 +98,11 @@ class DbtngExampleTest extends ExamplesBrowserTestBase {
     // Add the new entry.
     $this->drupalPostForm(
       '/examples/dbtng-example/add',
-      array(
+      [
         'name' => 'Some',
         'surname' => 'Anonymous',
         'age' => 33,
-      ),
+      ],
       'Add'
     );
     // Now find the new entry.
@@ -110,7 +110,7 @@ class DbtngExampleTest extends ExamplesBrowserTestBase {
     $assert->pageTextMatches('%Some[td/<>\w\s]+Anonymous%');
     // Try the update tab.
     // Find out the pid of our "anonymous" guy.
-    $result = DbtngExampleStorage::load(array('surname' => 'Anonymous'));
+    $result = DbtngExampleStorage::load(['surname' => 'Anonymous']);
     $this->drupalGet('/examples/dbtng-example');
     $this->assertCount(1, $result, 'Did not find one entry in the table with surname = "Anonymous".');
     $entry = $result[0];
@@ -134,11 +134,11 @@ class DbtngExampleTest extends ExamplesBrowserTestBase {
     $this->drupalLogout();
     $this->drupalPostForm(
       '/examples/dbtng-example/add',
-      array(
+      [
         'name' => 'Anonymous',
         'surname' => 'UserCannotPost',
         'age' => 'not a number',
-      ),
+      ],
       'Add'
     );
     $assert->pageTextContains('You must be logged in to add values to the database.');
@@ -150,19 +150,19 @@ class DbtngExampleTest extends ExamplesBrowserTestBase {
    */
   public function testDbtngExampleStorage() {
     // Create a new entry.
-    $entry = array(
+    $entry = [
       'name' => 'James',
       'surname' => 'Doe',
       'age' => 23,
-    );
+    ];
     DbtngExampleStorage::insert($entry);
 
     // Save another entry.
-    $entry = array(
+    $entry = [
       'name' => 'Jane',
       'surname' => 'NotDoe',
       'age' => 19,
-    );
+    ];
     DbtngExampleStorage::insert($entry);
 
     // Verify that 4 records are found in the database.
@@ -170,11 +170,11 @@ class DbtngExampleTest extends ExamplesBrowserTestBase {
     $this->assertCount(4, $result);
 
     // Verify 2 of these records have 'Doe' as surname.
-    $result = DbtngExampleStorage::load(array('surname' => 'Doe'));
+    $result = DbtngExampleStorage::load(['surname' => 'Doe']);
     $this->assertCount(2, $result, 'Did not find two entries in the table with surname = "Doe".');
 
     // Now find our not-Doe entry.
-    $result = DbtngExampleStorage::load(array('surname' => 'NotDoe'));
+    $result = DbtngExampleStorage::load(['surname' => 'NotDoe']);
     // Found one entry in the table with surname "NotDoe'.
     $this->assertCount(1, $result, 'Did not find one entry in the table with surname "NotDoe');
     // Our NotDoe will be changed to "NowDoe".
@@ -183,11 +183,11 @@ class DbtngExampleTest extends ExamplesBrowserTestBase {
     // update() returns the number of entries updated.
     $this->assertNotEquals(DbtngExampleStorage::update((array) $entry), 0);
 
-    $result = DbtngExampleStorage::load(array('surname' => 'NowDoe'));
+    $result = DbtngExampleStorage::load(['surname' => 'NowDoe']);
     $this->assertCount(1, $result, "Did not find renamed 'NowDoe' surname.");
 
     // Read only John Doe entry.
-    $result = DbtngExampleStorage::load(array('name' => 'John', 'surname' => 'Doe'));
+    $result = DbtngExampleStorage::load(['name' => 'John', 'surname' => 'Doe']);
     $this->assertCount(1, $result, 'Did not find one entry for John Doe.');
 
     // Get the entry.
@@ -199,7 +199,7 @@ class DbtngExampleTest extends ExamplesBrowserTestBase {
 
     // Find entries with age = 45.
     // Read only John Doe entry.
-    $result = DbtngExampleStorage::load(array('surname' => 'NowDoe'));
+    $result = DbtngExampleStorage::load(['surname' => 'NowDoe']);
     // Found one entry with surname = Nowdoe.
     $this->assertCount(1, $result, 'Did not find one entry with surname = Nowdoe.');
 

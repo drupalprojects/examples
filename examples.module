@@ -34,7 +34,7 @@ use Drupal\Core\Url;
 function examples_toolbar() {
   // First, build an array of all example modules and their routes.
   // We resort to this hard-coded way so as not to muck up each example.
-  $examples = array(
+  $examples = [
     'block_example' => 'block_example.description',
     'cache_example' => 'cache_example.description',
     'config_entity_example' => 'entity.robot.list',
@@ -60,65 +60,65 @@ function examples_toolbar() {
     'queue_example' => 'queue_example',
     'tablesort_example' => 'tablesort_example_description',
     'tour_example' => 'tour_example_description',
-  );
+  ];
 
   // Build a list of links for the menu.
-  $links = array();
+  $links = [];
   foreach ($examples as $module => $route) {
     // Get the module info (title, description) from Drupal.
     $info = system_get_info('module', $module);
 
     // If there's no info, the example isn't enabled, so don't display it.
     if (!empty($info)) {
-      $links[$module] = array(
+      $links[$module] = [
         'title' => t($info['name']),
         'url' => Url::fromRoute($route),
-        'attributes' => array(
+        'attributes' => [
           'title' => t($info['description']),
-        ),
-      );
+        ],
+      ];
     }
   }
 
   // Add a link to enable all examples.
-  $links['enable_examples'] = array(
+  $links['enable_examples'] = [
     'title' => t('Enable Examples'),
     'url' => Url::fromRoute('system.modules_list'),
-    'options' => array(
+    'options' => [
       'title' => t('Enable more examples in on the Extend page.'),
-    ),
+    ],
     'fragment' => 'edit-modules-example-modules',
-  );
+  ];
 
   // Create the examples toolbar render array.
-  $items['examples'] = array(
+  $items['examples'] = [
     '#type' => 'toolbar_item',
-    'tab' => array(
+    'tab' => [
       '#type' => 'link',
       '#title' => t('Examples'),
       '#url' => Url::fromRoute('<front>'),
-      '#attributes' => array(
+      '#attributes' => [
         'title' => t('Developer Examples'),
-        'class' => array('toolbar-icon', 'toolbar-icon-examples'),
-      ),
-    ),
-    'tray' => array(
+        'class' => ['toolbar-icon', 'toolbar-icon-examples'],
+      ],
+    ],
+    'tray' => [
       '#heading' => t('Developer Examples'),
-      'shortcuts' => array(
+      'shortcuts' => [
         '#theme' => 'links__toolbar_example',
         '#links' => $links,
-        '#attributes' => array(
-          'class' => array('toolbar-menu'),
-        ),
-      ),
-    ),
+        '#attributes' => [
+          'class' => ['toolbar-menu'],
+        ],
+      ],
+    ],
     '#weight' => 99,
-    '#attached' => array(
-      'library' => array(
+    '#attached' => [
+      'library' => [
         'examples/examples.icons',
-      ),
-    ),
-  );
+      ],
+    ],
+  ];
 
   return $items;
 }

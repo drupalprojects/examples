@@ -38,14 +38,14 @@ class ColorPickerWidgetTest extends FieldExampleBrowserTestBase {
 
     // Details to be submitted for content creation.
     $title = $this->randomMachineName(20);
-    $edit = array(
+    $edit = [
       'title[0][value]' => $title,
       'field_' . $this->fieldName . '[0][value]' => '#00ff00',
-    );
+    ];
 
     // Submit the content creation form.
     $this->drupalPostForm(NULL, $edit, t('Save'));
-    $assert->pageTextContains(t('@type @title has been created', array('@type' => $this->contentTypeName, '@title' => $title)));
+    $assert->pageTextContains(t('@type @title has been created', ['@type' => $this->contentTypeName, '@title' => $title]));
 
     // Verify color.
     $assert->pageTextContains('The color code in this field is #00ff00');
@@ -74,22 +74,22 @@ class ColorPickerWidgetTest extends FieldExampleBrowserTestBase {
 
     // Details to be submitted for content creation.
     $title = $this->randomMachineName(20);
-    $edit = array(
+    $edit = [
       'title[0][value]' => $title,
       'field_' . $this->fieldName . '[0][value]' => '#00ff00',
-    );
+    ];
 
     // Add another field value.
     $this->drupalPostForm(NULL, $edit, t('Add another item'));
 
     // Set value for newly added item.
-    $edit = array(
+    $edit = [
       'field_' . $this->fieldName . '[1][value]' => '#ffffff',
-    );
+    ];
 
     // Submit the content creation form.
     $this->drupalPostForm(NULL, $edit, t('Save'));
-    $assert->pageTextContains(t('@type @title has been created', array('@type' => $this->contentTypeName, '@title' => $title)));
+    $assert->pageTextContains(t('@type @title has been created', ['@type' => $this->contentTypeName, '@title' => $title]));
 
     // Verify color.
     $assert->pageTextContains('The color code in this field is #00ff00');
