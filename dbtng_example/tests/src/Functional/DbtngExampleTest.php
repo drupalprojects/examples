@@ -85,7 +85,7 @@ class DbtngExampleTest extends ExamplesBrowserTestBase {
   /**
    * Test the UI.
    */
-  public function testUI() {
+  public function testUi() {
     $assert = $this->assertSession();
 
     $this->drupalLogin($this->createUser());

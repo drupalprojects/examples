@@ -51,7 +51,7 @@ class PHPUnitExampleMenuTest extends BrowserTestBase {
   /**
    * Verify and validate that default menu links were loaded for this module.
    */
-  public function testPHPUnitExampleLink() {
+  public function testPhpUnitExampleLink() {
     $links = $this->providerMenuLinks();
     foreach ($links as $page => $path) {
       $this->drupalGet($page);
@@ -62,7 +62,7 @@ class PHPUnitExampleMenuTest extends BrowserTestBase {
   /**
    * Tests phpunit_example menus.
    */
-  public function testPHPUnitExampleMenu() {
+  public function testPhpUnitExampleMenu() {
     $this->drupalGet('/examples/phpunit-example');
     $this->assertResponse(200, 'Description page exists.');
   }

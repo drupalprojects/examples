@@ -43,7 +43,7 @@ class ExampleFixtureManagementTest extends KernelTestBase {
   /**
    * An 'owner' user object.
    *
-   * @var \Drupal\user\Entity\UserInterface $owner
+   * @var \Drupal\user\Entity\UserInterface
    */
   protected $owner;
 

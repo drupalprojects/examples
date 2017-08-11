@@ -23,7 +23,7 @@ class ProtectedPrivatesSubclass extends ProtectedPrivates {
    * We use a naming convention to make it clear that we are using a
    * shimmed method.
    */
-  public function sub_protectedAdd($a, $b) {
+  public function subclassProtectedAdd($a, $b) {
     return $this->protectedAdd($a, $b);
   }
 

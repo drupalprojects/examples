@@ -1,4 +1,5 @@
 <?php
+// @codingStandardsIgnoreFile
 
 namespace Drupal\stream_wrapper_example\StreamWrapper;
 
@@ -89,7 +90,7 @@ class FileExampleSessionStreamWrapper implements StreamWrapperInterface {
    *
    * These streams will be references as 'session://example_target'
    *
-   * @var String
+   * @var string
    */
   protected $uri;
 
@@ -99,21 +100,29 @@ class FileExampleSessionStreamWrapper implements StreamWrapperInterface {
    * Since this trivial example just uses the $_SESSION variable, this is
    * simply a reference to the contents of the related part of
    * $_SESSION['stream_wrapper_example'].
+   *
+   * @var array
    */
   protected $sessionContent;
 
   /**
    * Pointer to where we are in a directory read.
+   *
+   * @var int
    */
   protected $directoryPointer;
 
   /**
    * List of keys in a given directory.
+   *
+   * @var string[]
    */
   protected $directoryKeys;
 
   /**
    * The pointer to the next read or write within the session variable.
+   *
+   * @var int
    */
   protected $streamPointer;
 
@@ -121,6 +130,8 @@ class FileExampleSessionStreamWrapper implements StreamWrapperInterface {
    * The mode we are currently in.
    *
    * Possible values are FALSE, 'r', 'w'.
+   *
+   * @var mixed
    */
   protected $streamMode;
 

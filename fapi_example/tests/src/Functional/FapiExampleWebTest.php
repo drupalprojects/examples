@@ -18,14 +18,14 @@ class FapiExampleWebTest extends ExamplesBrowserTestBase {
   /**
    * Our module dependencies.
    *
-   * @var array List of test dependencies.
+   * @var string[]
    */
   static public $modules = ['fapi_example'];
 
   /**
    * The installation profile to use with this test.
    *
-   * @var string Installation profile required for test.
+   * @var string
    */
   protected $profile = 'minimal';
 

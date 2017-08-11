@@ -8,7 +8,7 @@ use Drupal\Tests\examples\Functional\ExamplesBrowserTestBase;
  * Class ExampleFunctionalTest.
  *
  * You likely will want to see the various pages and forms navigated by this
- * test. To do so, run PHPUnit with the equivalent of
+ * test. To do so, run PHPUnit with the equivalent of:
  *
  * @code
  * vendor/phpunit/phpunit/phpunit -c core/phpunit.xml --printer '\Drupal\Tests\Listeners\HtmlOutputPrinter' modules/examples/testing_example/tests/src/Functional
@@ -120,16 +120,16 @@ class ExampleFunctionalTest extends ExamplesBrowserTestBase {
   /**
    * Demonstrate node creation via NodeCreationTrait::createNode.
    */
-  public function testNewPageAPICreate() {
+  public function testNewPageApiCreate() {
     $assert = $this->assertSession();
 
     $this->drupalLogin($this->adminUser);
 
-    $nodeTitle = 'Test node for testNewPageAPICreate';
+    $nodeTitle = 'Test node for testNewPageApiCreate';
 
     // Create new node using API.
     $node = $this->drupalCreateNode([
-      'type' => 'test_content_type', // Default value: page.
+      'type' => 'test_content_type',
       'title' => $nodeTitle,
       'body' => [
         [

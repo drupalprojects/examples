@@ -54,7 +54,7 @@ class FileExampleReadWriteForm extends FormBase {
   /**
    * Indicator variable for the session:// scheme being available.
    *
-   * @vqr bool
+   * @var bool
    */
   protected $sessionSchemeEnabled;
 

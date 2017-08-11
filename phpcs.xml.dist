@@ -11,20 +11,22 @@
   <rule ref="Drupal.Array"/>
   <rule ref="Drupal.CSS"/>
   <rule ref="Drupal.Classes"/>
-  <rule ref="Drupal.Commenting.DocComment">
-      <exclude name="Drupal.Commenting.DocComment.LongFullStop"/>
+  <rule ref="Drupal.Commenting">
       <exclude name="Drupal.Commenting.DocComment.MissingShort"/>
+      <!-- TagsNotGrouped has false positives for @code/@endcode. See
+        https://www.drupal.org/node/2502837 -->
       <exclude name="Drupal.Commenting.DocComment.TagsNotGrouped"/>
+      <!-- We have to document hooks in a non-standard way in order to be
+        informative -->
+      <exclude name="Drupal.Commenting.HookComment.HookParamDoc"/>
+      <exclude name="Drupal.Commenting.HookComment.HookReturnDoc"/>
   </rule>
-  <rule ref="Drupal.Commenting.DataTypeNamespace"/>
-  <rule ref="Drupal.Commenting.FileComment.NamespaceNoFileDoc"/>
-  <rule ref="Drupal.Commenting.FunctionComment"/>
-  <rule ref="Drupal.Commenting.InlineComment"/>
   <rule ref="Drupal.ControlStructures"/>
   <rule ref="Drupal.Files"/>
   <rule ref="Drupal.Formatting"/>
   <rule ref="Drupal.Functions"/>
   <rule ref="Drupal.InfoFiles"/>
+  <rule ref="Drupal.NamingConventions"/>
   <rule ref="Drupal.Strings"/>
   <rule ref="Drupal.WhiteSpace"/>
 
@@ -32,8 +34,6 @@
   <rule ref="Generic.Formatting.SpaceAfterCast"/>
   <rule ref="Generic.Functions.FunctionCallArgumentSpacing"/>
   <rule ref="Generic.Functions.OpeningFunctionBraceKernighanRitchie"/>
-  <rule ref="Generic.NamingConventions.ConstructorName"/>
-  <rule ref="Generic.NamingConventions.UpperCaseConstantName"/>
   <rule ref="Generic.PHP.DeprecatedFunctions"/>
   <rule ref="Generic.PHP.DisallowShortOpenTag"/>
   <rule ref="Generic.PHP.LowerCaseKeyword"/>

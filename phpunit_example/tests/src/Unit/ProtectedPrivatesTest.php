@@ -129,7 +129,7 @@ class ProtectedPrivatesTest extends UnitTestCase {
    */
   public function testProtectedAdd($expected, $a, $b) {
     $stub = new ProtectedPrivatesSubclass();
-    $this->assertEquals($expected, $stub->sub_protectedAdd($a, $b));
+    $this->assertEquals($expected, $stub->subclassProtectedAdd($a, $b));
   }
 
   /**
@@ -143,7 +143,7 @@ class ProtectedPrivatesTest extends UnitTestCase {
    */
   public function testProtectedAddBadData($a, $b) {
     $stub = new ProtectedPrivatesSubclass();
-    $stub->sub_protectedAdd($a, $b);
+    $stub->subclassProtectedAdd($a, $b);
   }
 
 }
