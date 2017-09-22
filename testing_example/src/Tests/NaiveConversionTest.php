@@ -11,6 +11,8 @@ use Drupal\simpletest\WebTestBase;
 
 /**
  * Change this class declaration so it extends BrowserTestBase.
+ *
+ * @group testing_example
  */
 class NaiveConversionTest extends WebTestBase {
 
