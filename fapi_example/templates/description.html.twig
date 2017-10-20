@@ -1,0 +1,31 @@
+{#
+
+Description text for the Fapi Example.
+
+#}
+
+{{ attach_library('core/drupal.dialog.ajax') }}
+{% set simple_form = path('fapi_example.simple_form') %}
+{% set multistep_form = path('fapi_example.multistep_form') %}
+{% set input_demo = path('fapi_example.input_demo') %}
+{% set build_demo = path('fapi_example.build_demo') %}
+{% set container_demo = path('fapi_example.container_demo') %}
+{% set state_demo = path('fapi_example.state_demo') %}
+{% set vertical_tabs_demo = path('fapi_example.vertical_tabs_demo') %}
+{% set ajax_demo = path('fapi_example.ajax_demo') %}
+{% set ajax_addmore = path('fapi_example.ajax_addmore') %}
+{% set modal_form = path('fapi_example.modal_form') %}
+{% trans %}
+
+<p>Form examples to demonstrate common UI solutions using the Drupal Form API</p>
+<p><a href={{ simple_form }}>Simple Form</a></p>
+<p><a href={{ multistep_form }}>Multistep Form</a></p>
+<p><a href={{ input_demo }}>Common Input Elements</a></p>
+<p><a href={{ build_demo }}>Build Form Demo</a></p>
+<p><a href={{ container_demo }}>Container Elements</a></p>
+<p><a href={{ state_demo }}>Form State Binding</a></p>
+<p><a href={{ vertical_tabs_demo }}>Vertical Tab Elements</a></p>
+<p><a href={{ ajax_demo }}>Ajax Form</a></p>
+<p><a href={{ ajax_addmore }}>Add-more Button</a></p>
+<p><a href={{ modal_form }} class='use-ajax' data-dialog-type= 'modal'>Modal Form</a></p>
+{% endtrans %}
