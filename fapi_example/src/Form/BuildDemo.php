@@ -77,7 +77,7 @@ class BuildDemo extends FormBase {
     ];
 
     $form['actions']['rebuild'] = [
-      '#type' => 'button',
+      '#type' => 'submit',
       '#value' => 'Submit Rebuild',
       '#submit' => ['::rebuildFormSubmit'],
     ];

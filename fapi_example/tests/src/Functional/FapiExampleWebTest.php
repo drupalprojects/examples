@@ -72,12 +72,16 @@ class FapiExampleWebTest extends ExamplesBrowserTestBase {
     $edit = [
       'change' => '1',
     ];
-    $this->drupalPostForm('/examples/fapi-example/build-demo', $edit, t('Submit'));
+    $this->drupalPostForm('/examples/fapi-example/build-demo', $edit, 'Submit');
 
     $assert->pageTextContains('1. __construct');
     $assert->pageTextContains('2. getFormId');
     $assert->pageTextContains('3. validateForm');
     $assert->pageTextContains('4. submitForm');
+
+    // Ensure the 'submit rebuild' action performs the rebuild.
+    $this->drupalPostForm('/examples/fapi-example/build-demo', $edit, 'Submit Rebuild');
+    $assert->pageTextContains('4. rebuildFormSubmit');
   }
 
   /**
