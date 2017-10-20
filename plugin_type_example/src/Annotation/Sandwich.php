@@ -20,14 +20,6 @@ use Drupal\Component\Annotation\Plugin;
  * @Annotation
  */
 class Sandwich extends Plugin {
-
-  /**
-   * The plugin ID.
-   *
-   * @var string
-   */
-  public $id;
-
   /**
    * A brief, human readable, description of the sandwich type.
    *
