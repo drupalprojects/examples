@@ -17,4 +17,5 @@ class Page {
   public function getModuleName() {
     return 'fapi_example';
   }
+
 }
