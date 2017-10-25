@@ -10,10 +10,13 @@ use Drupal\testing_example\Controller\ContrivedController;
  */
 class ContrivedControllerTest extends UnitTestCase {
 
+  /**
+   * Data provider for testAdd().
+   */
   public function provideTestAdd() {
     return [
       [4, 2, 2],
-      [0, NULL, '']
+      [0, NULL, ''],
     ];
   }
 
@@ -27,6 +30,78 @@ class ContrivedControllerTest extends UnitTestCase {
     $ref_add = new \ReflectionMethod($controller, 'add');
     $ref_add->setAccessible(TRUE);
     $this->assertEquals($expected, $ref_add->invokeArgs($controller, [$first, $second]));
+  }
+
+  /**
+   * Data provider for testHandCount().
+   */
+  public function provideTestHandCount() {
+    return [
+      ['I can count these on one hand.', 0, 0],
+      ['I can count these on one hand.', 1, 0],
+      ['I can count these on one hand.', 0, 1],
+      ['I need two hands to count these.', 5, 5],
+      ['That\'s just too many numbers to count.', 5, 6],
+      ['That\'s just too many numbers to count.', 6, 5],
+    ];
+  }
+
+  /**
+   * @dataProvider provideTestHandCount
+   */
+  public function testHandCount($expected, $first, $second) {
+    // Get a mock translation service.
+    $mock_translation = $this->getStringTranslationStub();
+    // Create a new controller with our mocked translation service.
+    $controller = new ContrivedController($mock_translation);
+
+    // Set up a reflection for handCount().
+    $ref_hand_count = new \ReflectionMethod($controller, 'handCount');
+    // Set handCount() to be public.
+    $ref_hand_count->setAccessible(TRUE);
+    // Check out whether handCount() meets our expectation.
+    $message = $ref_hand_count->invokeArgs($controller, [$first, $second]);
+    $this->assertEquals($expected, (string) $message);
+  }
+
+  /**
+   * Data provider for testHandCountIsolated().
+   */
+  public function providerTestHandCountIsolated() {
+    return [
+      ['I can count these on one hand.', 0],
+      ['I can count these on one hand.', 5],
+      ['I need two hands to count these.', 10],
+      ['That\'s just too many numbers to count.', 11],
+    ];
+  }
+
+  /**
+   * @dataProvider providerTestHandCountIsolated
+   */
+  public function testHandCountIsolated($expected, $sum) {
+    // Mock a ContrivedController, using a mocked translation service.
+    $controller = $this->getMockBuilder(ContrivedController::class)
+      ->setConstructorArgs([$this->getStringTranslationStub()])
+      // Specify that we'll also mock add().
+      ->setMethods(['add'])
+      ->getMock();
+
+    // Mock add() so that it returns our $sum when it's called with (0,0).
+    $controller->expects($this->once())
+      ->method('add')
+      ->with($this->equalTo(0), $this->equalTo(0))
+      ->willReturn($sum);
+
+    // Use reflection to make handCount() public.
+    $ref_hand_count = new \ReflectionMethod($controller, 'handCount');
+    $ref_hand_count->setAccessible(TRUE);
+
+    // Invoke handCount().
+    $message = (string) $ref_hand_count->invokeArgs($controller, [0, 0]);
+
+    // Assert our expectations.
+    $this->assertEquals($expected, $message);
   }
 
 }

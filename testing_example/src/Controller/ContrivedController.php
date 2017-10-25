@@ -40,6 +40,7 @@ class ContrivedController implements ContainerInjectionInterface {
    *   A parameter to the controller path.
    * @param int $second
    *   A parameter to the controller path.
+   *
    * @return string[]
    *   A markup array.
    */
@@ -61,11 +62,11 @@ class ContrivedController implements ContainerInjectionInterface {
    *   The translated message.
    */
   protected function handCount($first, $second) {
-    $sum = abs($this->add((int)$first, (int)$second));
+    $sum = abs($this->add((int) $first, (int) $second));
     if ($sum <= 5) {
       $message = $this->t('I can count these on one hand.');
     }
-    else if ($sum <= 10) {
+    elseif ($sum <= 10) {
       $message = $this->t('I need two hands to count these.');
     }
     else {
