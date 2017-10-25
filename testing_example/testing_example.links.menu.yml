@@ -1,3 +1,8 @@
 testing_example.description:
   title: Testing Example
   route_name: testing_example.description
+  expanded: TRUE
+testing_example.sum_in_hands:
+  title: Sum In Hands
+  route_name: testing_example.sum_in_hands
+  parent: testing_example.description
