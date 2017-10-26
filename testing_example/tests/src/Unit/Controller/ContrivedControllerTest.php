@@ -68,12 +68,24 @@ class ContrivedControllerTest extends UnitTestCase {
    * Data provider for testHandCountIsolated().
    */
   public function providerTestHandCountIsolated() {
-    return [
-      ['I can count these on one hand.', 0],
-      ['I can count these on one hand.', 5],
-      ['I need two hands to count these.', 10],
-      ['That\'s just too many numbers to count.', 11],
-    ];
+    $data = [];
+
+    // Add one-hand data.
+    foreach (range(0, 5) as $sum) {
+      $data[] = ['I can count these on one hand.', $sum];
+    }
+
+    // Add two-hand data.
+    foreach (range(6, 10) as $sum) {
+      $data[] = ['I need two hands to count these.', $sum];
+    }
+
+    // Add too-many data.
+    foreach (range(11, 15) as $sum) {
+      $data[] = ['That\'s just too many numbers to count.', $sum];
+    }
+
+    return $data;
   }
 
   /**
