@@ -5,7 +5,7 @@ namespace Drupal\Tests\testing_example\Functional;
 use Drupal\Tests\BrowserTestBase;
 
 /**
- * Tests core menu behavior.
+ * Tests for the existence of links on the front page.
  *
  * This test is meant to support a Drupalize.me tutorial.
  *
@@ -29,7 +29,7 @@ class FrontPageLinkTest extends BrowserTestBase {
   public function testAddContentMenuItem() {
     // Step 1: Log in a user who can add content.
     $this->drupalLogin(
-      $this->drupalCreateUser([
+      $this->createUser([
         'create article content',
       ])
     );
