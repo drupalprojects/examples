@@ -11,7 +11,7 @@ use Drupal\Tests\BrowserTestBase;
  *
  * @group testing_example
  *
- * @see Drupal\Tests\testing_example\Functional\FrontPageLinkBonusPointsTest
+ * @see Drupal\Tests\testing_example\Functional\FrontPageLinkDependenciesTest
  */
 class FrontPageLinkTest extends BrowserTestBase {
 

@@ -20,7 +20,7 @@ use Drupal\Tests\BrowserTestBase;
  *
  * @see Drupal\Tests\testing_example\Functional\FrontPageLinkTest
  */
-class FrontPageLinkBonusPointsTest extends BrowserTestBase {
+class FrontPageLinkDependenciesTest extends BrowserTestBase {
 
   /**
    * {@inheritdoc}
@@ -55,7 +55,7 @@ class FrontPageLinkBonusPointsTest extends BrowserTestBase {
   public function testAddContentMenuItem() {
     // Step 1: Log in a user who can add content.
     $this->drupalLogin(
-      $this->drupalCreateUser([
+      $this->createUser([
         'create ' . $this->contentType->id() . ' content',
       ])
     );
