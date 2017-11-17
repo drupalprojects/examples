@@ -6,9 +6,7 @@
 /**
  * Toolbar tab icon.
  */
-.toolbar-bar .toolbar-icon-examples:before {
-  background-image: url(../images/examples.svg);
-}
+.toolbar-bar .toolbar-icon-examples:before,
 .toolbar-bar .toolbar-icon-examples:active:before,
 .toolbar-bar .toolbar-icon-examples.active:before {
   background-image: url(../images/examples.svg);
