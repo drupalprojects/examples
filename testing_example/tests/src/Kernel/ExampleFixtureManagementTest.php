@@ -3,8 +3,8 @@
 namespace Drupal\Tests\testing_example\Kernel;
 
 use Drupal\KernelTests\KernelTestBase;
-use Drupal\simpletest\NodeCreationTrait;
-use Drupal\simpletest\UserCreationTrait;
+use Drupal\Tests\node\Traits\NodeCreationTrait;
+use Drupal\Tests\user\Traits\UserCreationTrait;
 
 /**
  * Demonstrate manipulating fixture data in a kernel test.
