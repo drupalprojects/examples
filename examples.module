@@ -56,6 +56,7 @@ function examples_toolbar() {
     'phpunit_example' => 'phpunit_example_description',
     'plugin_type_example' => 'plugin_type_example.description',
     'simpletest_example' => 'simpletest_example_description',
+    'tabledrag_example' => 'tabledrag_example.description',
     'stream_wrapper_example' => 'stream_wrapper_example.description',
     'testing_example' => 'testing_example.description',
     'queue_example' => 'queue_example',

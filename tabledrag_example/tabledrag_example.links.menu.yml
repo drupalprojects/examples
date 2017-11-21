@@ -1,0 +1,28 @@
+tabledrag_example.description:
+  title: Tabledrag Overview
+  route_name: tabledrag_example.description
+  expanded: TRUE
+
+tabledrag_example.simple_form:
+  title: Simple Rows
+  route_name: tabledrag_example.simple_form
+  parent: tabledrag_example.description
+  weight: -4
+
+tabledrag_example.parent_form:
+  title: Nested
+  route_name: tabledrag_example.parent_form
+  parent: tabledrag_example.description
+  weight: -3
+
+tabledrag_example.rootleaf_form:
+  title: Roots And Leaves
+  route_name: tabledrag_example.rootleaf_form
+  parent: tabledrag_example.description
+  weight: -2
+
+tabledrag_example.reset_form:
+  title: Data Reset
+  route_name: tabledrag_example.reset_form
+  parent: tabledrag_example.description
+  weight: -1
