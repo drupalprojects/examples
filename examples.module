@@ -35,6 +35,7 @@ function examples_toolbar() {
   // First, build an array of all example modules and their routes.
   // We resort to this hard-coded way so as not to muck up each example.
   $examples = [
+    'ajax_example' => 'ajax_example.description',
     'batch_example' => 'batch_example.form',
     'block_example' => 'block_example.description',
     'cache_example' => 'cache_example.description',
