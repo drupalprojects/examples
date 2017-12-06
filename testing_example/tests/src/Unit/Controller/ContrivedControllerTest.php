@@ -16,7 +16,7 @@ class ContrivedControllerTest extends UnitTestCase {
   public function provideTestAdd() {
     return [
       [4, 2, 2],
-      [0, NULL, ''],
+      // NULL + '' evaluates to 0 in PHP < 7.1. [0, NULL, ''],
     ];
   }
 
