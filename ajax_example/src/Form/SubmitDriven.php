@@ -21,18 +21,24 @@ class SubmitDriven extends FormBase {
    * {@inheritdoc}
    */
   public function buildForm(array $form, FormStateInterface $form_state) {
-    $form['box'] = [
+    // This container wil be replaced by AJAX.
+    $form['container'] = [
+      '#type' => 'container',
+      '#attributes' => ['id' => 'box-container'],
+    ];
+    // The box contains some markup that we can change on a submit request.
+    $form['container']['box'] = [
       '#type' => 'markup',
-      '#prefix' => '<div id="box">',
-      '#suffix' => '</div>',
       '#markup' => '<h1>Initial markup for box</h1>',
     ];
 
     $form['submit'] = [
       '#type' => 'submit',
+      // The AJAX handler will call our callback, and will replace whatever page
+      // element has id box-container.
       '#ajax' => [
-        'callback' => '::prompt',
-        'wrapper' => 'box',
+        'callback' => '::promptCallback',
+        'wrapper' => 'box-container',
       ],
       '#value' => $this->t('Submit'),
     ];
@@ -55,12 +61,12 @@ class SubmitDriven extends FormBase {
    * @return array
    *   Renderable array (the box element)
    */
-  public function prompt(array &$form, FormStateInterface $form_state) {
+  public function promptCallback(array &$form, FormStateInterface $form_state) {
     // In most cases, it is recommended that you put this logic in form
     // generation rather than the callback. Submit driven forms are an
     // exception, because you may not want to return the form at all.
-    $element = $form['box'];
-    $element['#markup'] = "Clicked submit ({$form_state->getValue('op')}): " . date('c');
+    $element = $form['container'];
+    $element['box']['#markup'] = "Clicked submit ({$form_state->getValue('op')}): " . date('c');
     return $element;
   }
 

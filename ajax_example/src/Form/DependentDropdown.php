@@ -89,7 +89,7 @@ class DependentDropdown extends FormBase {
         // select elements), but valid values include any jQuery event,
         // most notably 'mousedown', 'blur', and 'submit'.
         'callback' => '::instrumentDropdownCallback',
-        'wrapper' => 'instrument-fieldset',
+        'wrapper' => 'instrument-fieldset-container',
       ],
     ];
     // Since we don't know if the user has js or not, we always need to output
@@ -111,17 +111,19 @@ class DependentDropdown extends FormBase {
       unset($form['instrument_family_fieldset']['choose_family']['#attributes']);
     }
 
+    // Since we're managing state for this whole fieldset (both the dropdown
+    // and enabling the Submit button), we want to replace the whole thing
+    // on AJAX requests. That's why we put it in this container.
+    $form['instrument_fieldset_container'] = [
+      '#type' => 'container',
+      '#attributes' => ['id' => 'instrument-fieldset-container'],
+    ];
     // Build the instrument field set.
-    $form['instrument_fieldset'] = [
+    $form['instrument_fieldset_container']['instrument_fieldset'] = [
       '#type' => 'fieldset',
       '#title' => $this->t('Choose an instrument'),
-      // Since we're managing state for this whole fieldset (both the dropdown
-      // and enabling the Submit button), we want to replace the whole thing
-      // on AJAX requests.
-      '#prefix' => '<div id="instrument-fieldset">',
-      '#suffix' => '</div>',
     ];
-    $form['instrument_fieldset']['instrument_dropdown'] = [
+    $form['instrument_fieldset_container']['instrument_fieldset']['instrument_dropdown'] = [
       '#type' => 'select',
       '#title' => $instrument_family_options[$selected_family] . ' ' . $this->t('Instruments'),
       // When the form is rebuilt during ajax processing, the $selected_family
@@ -129,7 +131,7 @@ class DependentDropdown extends FormBase {
       '#options' => static::getSecondDropdownOptions($selected_family),
       '#default_value' => !empty($form_state->getValue('instrument_dropdown')) ? $form_state->getValue('instrument_dropdown') : '',
     ];
-    $form['instrument_fieldset']['submit'] = [
+    $form['instrument_fieldset_container']['instrument_fieldset']['submit'] = [
       '#type' => 'submit',
       '#value' => $this->t('Submit'),
     ];
@@ -138,13 +140,14 @@ class DependentDropdown extends FormBase {
     // JavaScript running, #state won't work either. We have to set up the state
     // of the instrument fieldset here, based on the selected instrument family.
     if ($selected_family == 'none') {
-      $form['instrument_fieldset']['instrument_dropdown']['#title'] = $this->t('You must choose an instrument family.');
-      $form['instrument_fieldset']['instrument_dropdown']['#disabled'] = TRUE;
-      $form['instrument_fieldset']['submit']['#disabled'] = TRUE;
+      $form['instrument_fieldset_container']['instrument_fieldset']['instrument_dropdown']['#title'] =
+        $this->t('You must choose an instrument family.');
+      $form['instrument_fieldset_container']['instrument_fieldset']['instrument_dropdown']['#disabled'] = TRUE;
+      $form['instrument_fieldset_container']['instrument_fieldset']['submit']['#disabled'] = TRUE;
     }
     else {
-      $form['instrument_fieldset']['instrument_dropdown']['#disabled'] = FALSE;
-      $form['instrument_fieldset']['submit']['#disabled'] = FALSE;
+      $form['instrument_fieldset_container']['instrument_fieldset']['instrument_dropdown']['#disabled'] = FALSE;
+      $form['instrument_fieldset_container']['instrument_fieldset']['submit']['#disabled'] = FALSE;
     }
 
     return $form;
@@ -186,7 +189,7 @@ class DependentDropdown extends FormBase {
    *   instrument-dropdown-replace form element.
    */
   public function instrumentDropdownCallback(array $form, FormStateInterface $form_state) {
-    return $form['instrument_fieldset'];
+    return $form['instrument_fieldset_container'];
   }
 
   /**

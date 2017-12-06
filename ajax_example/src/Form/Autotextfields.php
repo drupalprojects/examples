@@ -25,8 +25,8 @@ class Autotextfields extends FormBase {
       '#type' => 'checkbox',
       '#title' => $this->t('Ask me my first name'),
       '#ajax' => [
-        'callback' => '::prompt',
-        'wrapper' => 'textfields',
+        'callback' => '::promptCallback',
+        'wrapper' => 'textfields-container',
         'effect' => 'fade',
       ],
     ];
@@ -34,36 +34,40 @@ class Autotextfields extends FormBase {
       '#type' => 'checkbox',
       '#title' => $this->t('Ask me my last name'),
       '#ajax' => [
-        'callback' => '::prompt',
-        'wrapper' => 'textfields',
+        'callback' => '::promptCallback',
+        'wrapper' => 'textfields-container',
         'effect' => 'fade',
       ],
     ];
 
-    $form['textfields'] = [
-      '#title' => $this->t("Generated text fields for first and last name"),
-      '#prefix' => '<div id="textfields">',
-      '#suffix' => '</div>',
+    // Wrap textfields in a container. This container will be replaced through
+    // AJAX.
+    $form['textfields_container'] = [
+      '#type' => 'container',
+      '#attributes' => ['id' => 'textfields-container'],
+    ];
+    $form['textfields_container']['textfields'] = [
       '#type' => 'fieldset',
+      '#title' => $this->t("Generated text fields for first and last name"),
       '#description' => t('This is where we put automatically generated textfields'),
     ];
 
     // Since checkboxes return TRUE or FALSE, we have to check that
     // $form_state has been filled as well as what it contains.
     if (!empty($form_state->getValue('ask_first_name')) && $form_state->getValue('ask_first_name')) {
-      $form['textfields']['first_name'] = [
+      $form['textfields_container']['textfields']['first_name'] = [
         '#type' => 'textfield',
         '#title' => $this->t('First Name'),
       ];
     }
     if (!empty($form_state->getValue('ask_last_name')) && $form_state->getValue('ask_last_name')) {
-      $form['textfields']['last_name'] = [
+      $form['textfields_container']['textfields']['last_name'] = [
         '#type' => 'textfield',
         '#title' => $this->t('Last Name'),
       ];
     }
 
-    $form['submit'] = [
+    $form['textfields_container']['submit'] = [
       '#type' => 'submit',
       '#value' => $this->t('Click Me'),
     ];
@@ -75,6 +79,7 @@ class Autotextfields extends FormBase {
    * {@inheritdoc}
    */
   public function submitForm(array &$form, FormStateInterface $form_state) {
+    // @todo: Do something on submit.
   }
 
   /**
@@ -83,8 +88,8 @@ class Autotextfields extends FormBase {
    * Selects the piece of the form we want to use as replacement text and
    * returns it as a form (renderable array).
    */
-  public function prompt($form, FormStateInterface $form_state) {
-    return $form['textfields'];
+  public function promptCallback($form, FormStateInterface $form_state) {
+    return $form['textfields_container'];
   }
 
 }

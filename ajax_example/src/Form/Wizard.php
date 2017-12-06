@@ -34,8 +34,6 @@ class Wizard extends FormBase {
     $linktwo = Link::fromTextAndUrl($this->t('examples/ajax-example/wizard'), $urltwo)
       ->toString();
 
-    // $form['#prefix'] = '<div id="wizard-form-wrapper">';
-    // $form['#suffix'] = '</div>';
     // We want to deal with hierarchical form values.
     $form['#tree'] = TRUE;
     $form['description'] = [
