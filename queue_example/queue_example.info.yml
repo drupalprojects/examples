@@ -1,4 +1,4 @@
-name: Queue example
+name: Queue Example
 type: module
 description: Examples of using the Drupal Queue API.
 package: Example modules

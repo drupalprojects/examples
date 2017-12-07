@@ -1,4 +1,4 @@
-name: Cache example
+name: Cache Example
 description: Demonstrates how to use Cache API.
 package: Example modules
 core: 8.x

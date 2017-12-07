@@ -10,7 +10,7 @@ use Drupal\Core\Session\AccountInterface;
 use Drupal\node\NodeInterface;
 
 /**
- * @defgroup simpletest_example Example: Simpletest
+ * @defgroup simpletest_example Example: SimpleTest
  * @ingroup examples
  * @{
  *

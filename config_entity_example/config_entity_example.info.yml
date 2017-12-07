@@ -1,4 +1,4 @@
-name: 'Config entity example'
+name: 'Config Entity Example'
 type: module
 description: 'Demonstrates how to create a config entity type.'
 package: Example modules

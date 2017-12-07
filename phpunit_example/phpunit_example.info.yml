@@ -1,4 +1,4 @@
-name: PHPUnit example
+name: PHPUnit Example
 type: module
 description: Demontrates how to use PHPUnit-based tests.
 package: Example modules

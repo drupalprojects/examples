@@ -1,4 +1,4 @@
-name: Events example
+name: Events Example
 type: module
 description: Provides an example of subscribing to and dispatching events.
 package: Example modules

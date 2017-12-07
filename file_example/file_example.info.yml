@@ -1,4 +1,4 @@
-name: File example
+name: File Example
 type: module
 description: Demonstrates using the Drupal File API and stream wrappers.
 package: Example modules

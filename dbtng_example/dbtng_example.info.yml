@@ -1,4 +1,4 @@
-name: DBTNG example
+name: DBTNG Example
 type: module
 description: 'Demonstrates how to use the database API: DBTNG.'
 package: Example modules

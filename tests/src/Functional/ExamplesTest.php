@@ -49,7 +49,8 @@ class ExamplesTest extends ExamplesBrowserTestBase {
       'Found the Examples toolbar tray.'
     );
     // Assert that PHPUnit link does not appears in the tray.
-    $assert->linkNotExists('PHPUnit example');
+    $phpunit_link = 'PHPUnit Example';
+    $assert->linkNotExists($phpunit_link);
     $assert->pageTextNotContains('<li class="phpunit-example">');
 
     // Install phpunit_example and see if it appears in the toolbar. We use
@@ -60,7 +61,7 @@ class ExamplesTest extends ExamplesBrowserTestBase {
 
     // Verify that PHPUnit appears in the tray.
     $this->drupalGet('');
-    $assert->linkExists('PHPUnit example');
+    $assert->linkExists($phpunit_link);
     // Assert that the PHPUnit tray item is present.
     $this->assertEquals(
       1,

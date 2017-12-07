@@ -1,4 +1,4 @@
-name: 'Tour example'
+name: 'Tour Example'
 type: module
 description: 'Demonstrates how to create a tour in Drupal 8.'
 package: Example modules

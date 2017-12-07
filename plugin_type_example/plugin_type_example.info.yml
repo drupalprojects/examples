@@ -1,4 +1,4 @@
-name: Plugin type example
+name: Plugin Type Example
 type: module
 description: Provides an example of defining a plugin type.
 package: Example modules

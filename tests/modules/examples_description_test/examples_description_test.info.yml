@@ -1,4 +1,4 @@
-name: 'Sample description template test'
+name: 'Sample Description Template Test'
 type: module
 description: 'Support module for testing the DescriptionTemplateTrait.'
 package: Testing

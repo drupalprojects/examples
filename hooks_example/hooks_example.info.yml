@@ -1,4 +1,4 @@
-name: Hooks example
+name: Hooks Example
 type: module
 description: Provides examples of implementing, defining, and invoking hooks.
 package: Example modules

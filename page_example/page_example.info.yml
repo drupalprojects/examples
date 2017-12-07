@@ -1,4 +1,4 @@
-name: Page example
+name: Page Example
 type: module
 description: 'Demonstrates how to display a page at a given URL.'
 package: Example modules
