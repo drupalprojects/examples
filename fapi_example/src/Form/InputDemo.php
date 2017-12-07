@@ -43,11 +43,30 @@ class InputDemo extends FormBase {
       '#description' => 'Date, #type = date',
     ];
 
+    // Date-time.
+    $form['datetime'] = [
+      '#type' => 'datetime',
+      '#title' => 'Date Time',
+      '#date_increment' => 1,
+      '#date_timezone' => drupal_get_user_timezone(),
+      '#default_value' => drupal_get_user_timezone(),
+      '#description' => $this->t('Date time, #type = datetime'),
+    ];
+
+    // URL.
+    $form['url'] = [
+      '#type' => 'url',
+      '#title' => $this->t('URL'),
+      '#maxlength' => 255,
+      '#size' => 30,
+      '#description' => $this->t('URL, #type = url'),
+    ];
+
     // Email.
     $form['email'] = [
       '#type' => 'email',
       '#title' => $this->t('Email'),
-      '#description' => 'Email, #type = email',
+      '#description' => $this->t('Email, #type = email'),
     ];
 
     // Number.
@@ -108,11 +127,32 @@ class InputDemo extends FormBase {
       '#description' => $this->t('Select, #type = select'),
     ];
 
+    // Multiple values option elements.
+    $form['select_multiple'] = [
+      '#type' => 'select',
+      '#title' => 'Select (multiple)',
+      '#multiple' => TRUE,
+      '#options' => [
+        'sat' => 'SAT',
+        'act' => 'ACT',
+        'none' => 'N/A',
+      ],
+      '#default_value' => ['sat'],
+      '#description' => 'Select Multiple',
+    ];
+
     // Tel.
     $form['phone'] = [
       '#type' => 'tel',
       '#title' => $this->t('Phone'),
       '#description' => $this->t('Tel, #type = tel'),
+    ];
+
+    // Details.
+    $form['details'] = [
+      '#type' => 'details',
+      '#title' => $this->t('Details'),
+      '#description' => $this->t('Details, #type = details'),
     ];
 
     // TableSelect.
@@ -140,6 +180,22 @@ class InputDemo extends FormBase {
       '#type' => 'textarea',
       '#title' => $this->t('Text'),
       '#description' => $this->t('Textarea, #type = textarea'),
+    ];
+
+    // Text format.
+    $form['text_format'] = [
+      '#type' => 'text_format',
+      '#title' => 'Text format',
+      '#format' => 'plain_text',
+      '#expected_value' => [
+        'value' => 'Text value',
+        'format' => 'plain_text',
+      ],
+      '#textformat_value' => [
+        'value' => 'Testvalue',
+        'format' => 'filtered_html',
+      ],
+      '#description' => $this->t('Text format, #type = text_format'),
     ];
 
     // Textfield.
@@ -181,11 +237,51 @@ class InputDemo extends FormBase {
       ],
     ];
 
+    // File.
+    $form['file'] = [
+      '#type' => 'file',
+      '#title' => 'File',
+      '#description' => $this->t('File, #type = file'),
+    ];
+
+    // Manage file.
+    $form['managed_file'] = [
+      '#type' => 'managed_file',
+      '#title' => 'Managed file',
+      '#description' => $this->t('Manage file, #type = managed_file'),
+    ];
+
+    // Image Buttons.
+    $form['image_button'] = [
+      '#type' => 'image_button',
+      '#value' => 'Image button',
+      '#src' => drupal_get_path('module', 'examples') . '/images/100x30.svg',
+      '#description' => $this->t('image file, #type = image_button'),
+    ];
+
+    // Button.
+    $form['button'] = [
+      '#type' => 'button',
+      '#value' => 'Button',
+      '#description' => $this->t('Button, #type = button'),
+    ];
+
     // Add a submit button that handles the submission of the form.
     $form['actions']['submit'] = [
       '#type' => 'submit',
       '#value' => $this->t('Submit'),
       '#description' => $this->t('Submit, #type = submit'),
+    ];
+
+    // Add a reset button that handles the submission of the form.
+    $form['actions']['reset'] = [
+      '#type' => 'button',
+      '#button_type' => 'reset',
+      '#value' => t('Reset'),
+      '#description' => $this->t('Submit, #type = button, #button_type = reset, #attributes = this.form.reset();return false'),
+      '#attributes' => [
+        'onclick' => 'this.form.reset(); return false;',
+      ],
     ];
 
     return $form;

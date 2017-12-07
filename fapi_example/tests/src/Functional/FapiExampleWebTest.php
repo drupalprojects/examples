@@ -132,8 +132,10 @@ class FapiExampleWebTest extends ExamplesBrowserTestBase {
     // Post the form.
     $edit = [
       'tests_taken[SAT]' => TRUE,
-      'color' => '#ff6bf1',
+      'color' => '#2b49ff',
       'expiration' => '2015-10-21',
+      'datetime[date]' => '2017-12-07 15:32:10',
+      'url' => 'https://www.drupal.org',
       'email' => 'somebody@example.org',
       'quantity' => '4',
       'password' => 'letmein',
@@ -143,19 +145,23 @@ class FapiExampleWebTest extends ExamplesBrowserTestBase {
       'active' => '1',
       'search' => 'my search string',
       'favorite' => 'blue',
+      'select_multiple[]' => ['act'],
       'phone' => '555-555-5555',
       'table[1]' => TRUE,
       'table[3]' => TRUE,
       'text' => 'This is a test of my form.',
+      'text_format[value]' => 'Examples for Developers',
       'subject' => 'Form test',
       'weight' => '3',
     ];
     $this->drupalPostForm('/examples/fapi-example/input-demo', $edit, t('Submit'));
     $assert->statusCodeEquals(200);
 
-    $assert->pageTextContains('Value for What standardized tests did you take?: Array ( [SAT] => SAT )');
-    $assert->pageTextContains('Value for Color: #ff6bf1');
+    $assert->pageTextContains('Value for What standardized tests did you take?');
+    $assert->pageTextContains('Value for Color: #2b49ff');
     $assert->pageTextContains('Value for Content expiration: 2015-10-21');
+    $assert->pageTextContains('Value for Date Time: 2017-12-07 15:32:10');
+    $assert->pageTextContains('Value for URL: https://www.drupal.org');
     $assert->pageTextContains('Value for Email: somebody@example.org');
     $assert->pageTextContains('Value for Quantity: 4');
     $assert->pageTextContains('Value for Password: letmein');
@@ -164,9 +170,11 @@ class FapiExampleWebTest extends ExamplesBrowserTestBase {
     $assert->pageTextContains('Value for active: 1');
     $assert->pageTextContains('Value for Search: my search string');
     $assert->pageTextContains('Value for Favorite color: blue');
+    $assert->pageTextContains('Value for Select (multiple): Array ( [act] => act )');
     $assert->pageTextContains('Value for Phone: 555-555-5555');
     $assert->pageTextContains('Value for Users: Array ( [1] => 1 [3] => 3 )');
     $assert->pageTextContains('Value for Text: This is a test of my form.');
+    $assert->pageTextContains('Value for Text format: Array ( [value] => Examples for Developers [format] => plain_text )');
     $assert->pageTextContains('Value for Subject: Form test');
     $assert->pageTextContains('Value for Weight: 3');
   }
