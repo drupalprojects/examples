@@ -67,13 +67,13 @@ class FileExampleTest extends ExamplesBrowserTestBase {
         $edit = [
           'directory_name' => $dirname,
         ];
-        $this->drupalPostForm('examples/file_example', $edit, t('Check to see if directory exists'));
+        $this->drupalPostForm('examples/file_example', $edit, 'Check to see if directory exists');
         $assert->pageTextContains(t('Directory @dirname does not exist', ['@dirname' => $dirname]));
 
-        $this->drupalPostForm('examples/file_example', $edit, t('Create directory'));
+        $this->drupalPostForm('examples/file_example', $edit, 'Create directory');
         $assert->pageTextContains(t('Directory @dirname is ready for use', ['@dirname' => $dirname]));
 
-        $this->drupalPostForm('examples/file_example', $edit, t('Check to see if directory exists'));
+        $this->drupalPostForm('examples/file_example', $edit, 'Check to see if directory exists');
         $assert->pageTextContains(t('Directory @dirname exists', ['@dirname' => $dirname]));
 
         // Create a file in the directory we created.
@@ -84,18 +84,10 @@ class FileExampleTest extends ExamplesBrowserTestBase {
         $edit = [
           'fileops_file' => $filename,
         ];
-        $this->drupalPostForm('examples/file_example', $edit, t('Check to see if file exists'));
+        $this->drupalPostForm('examples/file_example', $edit, 'Check to see if file exists');
         $assert->pageTextContains(t('The file @filename does not exist', ['@filename' => $filename]));
 
-        $this->verbose((string) t('Processing button=%button, scheme=%scheme, dir=%dirname, file=%filename',
-            [
-              '%button' => $button,
-              '%scheme' => $scheme,
-              '%filename' => $filename,
-              '%dirname' => $dirname,
-            ]
-          )
-        );
+        $this->verbose("Processing button=$button, scheme=$scheme, dir=$dirname, file=$filename");
         $edit = [
           'write_contents' => $content,
           'destination' => $filename,
@@ -126,15 +118,15 @@ class FileExampleTest extends ExamplesBrowserTestBase {
         $edit = [
           'fileops_file' => $filename,
         ];
-        $this->drupalPostForm('examples/file_example', $edit, t('Check to see if file exists'));
-        $assert->pageTextContains(t('The file @filename exists', ['@filename' => $filename]));
+        $this->drupalPostForm('examples/file_example', $edit, 'Check to see if file exists');
+        $assert->pageTextContains("The file $filename exists");
 
         // Now read the file that got written above and verify that we can use
         // the writing tools.
         $edit = [
           'fileops_file' => $output_filename,
         ];
-        $this->drupalPostForm('examples/file_example', $edit, t('Read the file and store it locally'));
+        $this->drupalPostForm('examples/file_example', $edit, 'Read the file and store it locally');
 
         $assert->pageTextContains('The file was read and copied');
 
@@ -142,16 +134,16 @@ class FileExampleTest extends ExamplesBrowserTestBase {
           'fileops_file' => $filename,
         ];
 
-        $this->drupalPostForm('examples/file_example', $edit, t('Delete file'));
+        $this->drupalPostForm('examples/file_example', $edit, 'Delete file');
         $assert->pageTextContains('Successfully deleted');
-        $this->drupalPostForm('examples/file_example', $edit, t('Check to see if file exists'));
+        $this->drupalPostForm('examples/file_example', $edit, 'Check to see if file exists');
         $assert->pageTextContains(t('The file @filename does not exist', ['@filename' => $filename]));
 
         $edit = [
           'directory_name' => $dirname,
         ];
-        $this->drupalPostForm('examples/file_example', $edit, t('Delete directory'));
-        $this->drupalPostForm('examples/file_example', $edit, t('Check to see if directory exists'));
+        $this->drupalPostForm('examples/file_example', $edit, 'Delete directory');
+        $this->drupalPostForm('examples/file_example', $edit, 'Check to see if directory exists');
         $assert->pageTextContains(t('Directory @dirname does not exist', ['@dirname' => $dirname]));
       }
     }

@@ -53,7 +53,7 @@ class HooksExampleTest extends BrowserTestBase {
     // Create a new node.
     $settings = [
       'type' => 'page',
-      'title' => t('Hooks Example Testing Node'),
+      'title' => 'Hooks Example Testing Node',
       'status' => 1,
     ];
     $node = $this->drupalCreateNode($settings);

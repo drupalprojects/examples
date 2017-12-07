@@ -64,7 +64,7 @@ class ContentEntityExampleTest extends ExamplesBrowserTestBase {
       'gender' => 'male',
       'role' => 'administrator',
     ];
-    $this->drupalPostForm(NULL, $edit, t('Save'));
+    $this->drupalPostForm(NULL, $edit, 'Save');
 
     // Entity listed.
     $assert->linkExists('Edit');
@@ -238,7 +238,7 @@ class ContentEntityExampleTest extends ExamplesBrowserTestBase {
       'field_name' => $field_name,
     ];
 
-    $this->drupalPostForm(NULL, $edit, t('Save and continue'));
+    $this->drupalPostForm(NULL, $edit, 'Save and continue');
     $expected_path = $this->buildUrl('admin/structure/' . $entity_name . '_settings/fields/' . $entity_name . '.' . $entity_name . '.field_' . $field_name . '/storage');
 
     // Fetch url without query parameters.

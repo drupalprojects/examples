@@ -48,7 +48,7 @@ class FapiExampleWebTest extends ExamplesBrowserTestBase {
     $edit = [
       'temperature' => 'warm',
     ];
-    $this->drupalPostForm('/examples/fapi-example/ajax-demo', $edit, t('Submit'));
+    $this->drupalPostForm('/examples/fapi-example/ajax-demo', $edit, 'Submit');
     $assert->statusCodeEquals(200);
     $assert->pageTextContains('Value for Temperature: warm');
   }
@@ -107,7 +107,7 @@ class FapiExampleWebTest extends ExamplesBrowserTestBase {
       'publisher' => 'me',
       'diet' => 'vegan',
     ];
-    $this->drupalPostForm('/examples/fapi-example/container-demo', $edit, t('Submit'));
+    $this->drupalPostForm('/examples/fapi-example/container-demo', $edit, 'Submit');
     $assert->pageTextContains('Value for name: Dave');
     $assert->pageTextContains('Value for pen_name: DMan');
     $assert->pageTextContains('Value for title: My Book');
@@ -154,7 +154,7 @@ class FapiExampleWebTest extends ExamplesBrowserTestBase {
       'subject' => 'Form test',
       'weight' => '3',
     ];
-    $this->drupalPostForm('/examples/fapi-example/input-demo', $edit, t('Submit'));
+    $this->drupalPostForm('/examples/fapi-example/input-demo', $edit, 'Submit');
     $assert->statusCodeEquals(200);
 
     $assert->pageTextContains('Value for What standardized tests did you take?');
@@ -197,7 +197,7 @@ class FapiExampleWebTest extends ExamplesBrowserTestBase {
     $edit = [
       'title' => 'My Book',
     ];
-    $this->drupalPostForm('/examples/fapi-example/modal-form', $edit, t('Submit'));
+    $this->drupalPostForm('/examples/fapi-example/modal-form', $edit, 'Submit');
     $assert->pageTextContains('Submit handler: You specified a title of My Book.');
   }
 
@@ -222,7 +222,7 @@ class FapiExampleWebTest extends ExamplesBrowserTestBase {
 
     // Post a title.
     $edit = ['title' => 'My Custom Title'];
-    $this->drupalPostForm('/examples/fapi-example/simple-form', $edit, t('Submit'));
+    $this->drupalPostForm('/examples/fapi-example/simple-form', $edit, 'Submit');
     $assert->pageTextContains('You specified a title of My Custom Title.');
   }
 
@@ -247,7 +247,7 @@ class FapiExampleWebTest extends ExamplesBrowserTestBase {
       'needs_accommodation' => TRUE,
       'diet' => 'vegan',
     ];
-    $this->drupalPostForm('/examples/fapi-example/state-demo', $edit, t('Submit'));
+    $this->drupalPostForm('/examples/fapi-example/state-demo', $edit, 'Submit');
     $assert->pageTextContains('Dietary Restriction Requested: vegan');
   }
 
@@ -272,7 +272,7 @@ class FapiExampleWebTest extends ExamplesBrowserTestBase {
       'name' => 'Dave',
       'publisher' => 'me',
     ];
-    $this->drupalPostForm('/examples/fapi-example/container-demo', $edit, t('Submit'));
+    $this->drupalPostForm('/examples/fapi-example/container-demo', $edit, 'Submit');
     $assert->pageTextContains('Value for name: Dave');
     $assert->pageTextContains('Value for publisher: me');
   }
@@ -303,7 +303,7 @@ class FapiExampleWebTest extends ExamplesBrowserTestBase {
     // and click on 'Add one more' button.
     $edit = [];
     $edit['names_fieldset[name][0]'] = $name_one;
-    $this->drupalPostForm('/examples/fapi-example/ajax-addmore', $edit, t('Add one more'));
+    $this->drupalPostForm('/examples/fapi-example/ajax-addmore', $edit, 'Add one more');
 
     // Verify field-2 gets added.
     // and value of field-1 should retained.
@@ -315,7 +315,7 @@ class FapiExampleWebTest extends ExamplesBrowserTestBase {
     // Enter the value in field-2
     // and click on 'Add one more' button.
     $edit['names_fieldset[name][1]'] = $name_two;
-    $this->drupalPostForm(NULL, $edit, t('Add one more'));
+    $this->drupalPostForm(NULL, $edit, 'Add one more');
 
     // Verify field-3 gets added.
     // and value of field-1 and field-2 are retained.
@@ -325,13 +325,13 @@ class FapiExampleWebTest extends ExamplesBrowserTestBase {
 
     // Click on "Remove one" button to test remove button works.
     // and value of field-1 and field-2 are retained.
-    $this->drupalPostForm(NULL, NULL, t('Remove one'));
+    $this->drupalPostForm(NULL, NULL, 'Remove one');
     $this->assertFieldsByValue($this->xpath('//input[@id = "edit-names-fieldset-name-0"]'), $name_one);
     $this->assertFieldsByValue($this->xpath('//input[@id = "edit-names-fieldset-name-1"]'), $name_two);
     $this->assertFalse($this->xpath('//input[@id = "edit-names-fieldset-name-2"]'));
 
     // Submit the form and verify the results.
-    $this->drupalPostForm(NULL, NULL, t('Submit'));
+    $this->drupalPostForm(NULL, NULL, 'Submit');
     $this->assertText('These people are coming to the picnic: ' . $name_one . ', ' . $name_two);
 
   }

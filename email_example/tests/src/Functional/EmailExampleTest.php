@@ -56,7 +56,7 @@ class EmailExampleTest extends ExamplesBrowserTestBase {
 
     // Verifiy email form is submitted.
     $edit = ['email' => 'example@example.com', 'message' => 'test'];
-    $this->drupalPostForm('examples/email-example', $edit, t('Submit'));
+    $this->drupalPostForm('examples/email-example', $edit, 'Submit');
     $assert->statusCodeEquals(200);
 
     // Verifiy comfirmation page.
@@ -65,10 +65,9 @@ class EmailExampleTest extends ExamplesBrowserTestBase {
 
     // Verifiy correct email recieved.
     $from = \Drupal::config('system.site')->get('mail');
-    $t_options = ['langcode' => \Drupal::languageManager()->getDefaultLanguage()->getId()];
-    $this->assertMailString('subject', t('E-mail sent from @site-name', ['@site-name' => $from], $t_options), 1);
+    $this->assertMailString('subject', "E-mail sent from $from", 1);
     $this->assertMailString('body', $edit['message'], 1);
-    $this->assertMailString('body', t("\n--\nMail altered by email_example module.", [], $t_options), 1);
+    $this->assertMailString('body', "\n--\nMail altered by email_example module.", 1);
   }
 
 }

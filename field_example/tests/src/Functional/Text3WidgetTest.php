@@ -44,7 +44,7 @@ class Text3WidgetTest extends FieldExampleBrowserTestBase {
     ];
 
     // Create the content.
-    $this->drupalPostForm(NULL, $edit, t('Save'));
+    $this->drupalPostForm(NULL, $edit, 'Save');
     $assert->pageTextContains(t('@type @title has been created', ['@type' => $this->contentTypeName, '@title' => $title]));
 
     // Verify the value is shown when viewing this node.
@@ -84,7 +84,7 @@ class Text3WidgetTest extends FieldExampleBrowserTestBase {
     ];
 
     // Add a 2nd item to the multivalue field, so hit "add another".
-    $this->drupalPostForm(NULL, $edit, t('Add another item'));
+    $this->drupalPostForm(NULL, $edit, 'Add another item');
     $edit = [
       'field_' . $this->fieldName . '[1][value][r]' => 'ff',
       'field_' . $this->fieldName . '[1][value][g]' => 'ff',
@@ -92,7 +92,7 @@ class Text3WidgetTest extends FieldExampleBrowserTestBase {
     ];
 
     // Create the content.
-    $this->drupalPostForm(NULL, $edit, t('Save'));
+    $this->drupalPostForm(NULL, $edit, 'Save');
     $assert->pageTextContains(t('@type @title has been created', ['@type' => $this->contentTypeName, '@title' => $title]));
 
     // Verify the values are shown when viewing this node.

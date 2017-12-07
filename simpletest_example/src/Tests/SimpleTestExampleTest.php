@@ -83,7 +83,7 @@ class SimpleTestExampleTest extends WebTestBase {
     $edit = [];
     $edit['title[0][value]'] = $this->randomMachineName(8);
     $edit['body[0][value]'] = $this->randomMachineName(16);
-    $this->drupalPostForm('node/add/simpletest_example', $edit, t('Save'));
+    $this->drupalPostForm('node/add/simpletest_example', $edit, 'Save');
 
     // Check that our simpletest_example node has been created.
     $this->assertText(t('@post @title has been created.', [
@@ -96,10 +96,9 @@ class SimpleTestExampleTest extends WebTestBase {
 
     // Verify 'submitted by' information. Drupal adds a newline in there, so
     // we have to check for that.
-    $submitted_by = t("Submitted by @username\n on @datetime", [
-      '@username' => $this->loggedInUser->getUsername(),
-      '@datetime' => format_date($node->getCreatedTime()),
-    ]);
+    $username = $this->loggedInUser->getUsername();
+    $datetime = format_date($node->getCreatedTime());
+    $submitted_by = "Submitted by $username\n on $datetime";
 
     $this->drupalGet('node/' . $node->id());
     $this->assertText($submitted_by);

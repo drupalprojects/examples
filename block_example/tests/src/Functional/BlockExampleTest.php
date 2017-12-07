@@ -43,21 +43,21 @@ class BlockExampleTest extends BrowserTestBase {
 
     // Define and place blocks.
     $settings_configurable = [
-      'label' => t('Configurable text'),
+      'label' => 'Configurable text',
       'id' => 'block_example_example_configurable_text',
       'theme' => $theme_name,
     ];
     $this->drupalPlaceBlock('example_configurable_text', $settings_configurable);
 
     $settings_uppercase = [
-      'label' => t('Configurable block to be uppercased'),
+      'label' => 'Configurable block to be uppercased',
       'id' => 'block_example_example_uppercased',
       'theme' => $theme_name,
     ];
     $this->drupalPlaceBlock('example_uppercase', $settings_uppercase);
 
     $settings_empty = [
-      'label' => t('Empty block'),
+      'label' => 'Empty block',
       'id' => 'block_example_example_empty',
       'theme' => $theme_name,
     ];
@@ -75,7 +75,7 @@ class BlockExampleTest extends BrowserTestBase {
     $edit = [
       'settings[block_example_string_text]' => $this->randomMachineName(),
     ];
-    $this->drupalPostForm('/admin/structure/block/manage/' . $settings_configurable['id'], $edit, t('Save block'));
+    $this->drupalPostForm('/admin/structure/block/manage/' . $settings_configurable['id'], $edit, 'Save block');
     $assert->statusCodeEquals(200);
 
     // Verify that new content is shown.

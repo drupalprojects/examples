@@ -105,7 +105,7 @@ class ConfigEntityExampleTest extends BrowserTestBase {
         'id' => $robot_machine_name,
         'floopy' => TRUE,
       ],
-      t('Create Robot')
+      'Create Robot'
     );
 
     // 4) Verify that our robot appears when we edit it.
@@ -125,7 +125,7 @@ class ConfigEntityExampleTest extends BrowserTestBase {
         'id' => $robby_machine_name,
         'floopy' => TRUE,
       ],
-      t('Create Robot')
+      'Create Robot'
     );
     $this->drupalGet('/examples/config-entity-example');
     $assert->pageTextContains($robby_label);
