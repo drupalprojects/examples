@@ -28,8 +28,8 @@
  * Further resources include the limited @link queue @endlink documentation.
  * More:
  *
- * @link http://www.ent.iastate.edu/it/Batch_and_Queue.pdf Batch vs Queue Presentation slides by John VanDyk @endlink
- * @link http://sf2010.drupal.org/conference/sessions/batch-vs-queue-api-smackdown session video. @endlink
+ * @link https://www.ent.iastate.edu/it/Batch_and_Queue.pdf Batch vs Queue Presentation slides by John VanDyk @endlink
+ * @link https://archive.org/details/BatchVs.QueueAnApiSmackdown session video. @endlink
  */
 
 /**
