@@ -3,6 +3,7 @@ js_example.info:
   title: JavaScript Example
   description: Some information about the JavaScript example.
   route_name: js_example.info
+  expanded: TRUE
 
 js_example.weights:
   title: JavaScript weighting in action

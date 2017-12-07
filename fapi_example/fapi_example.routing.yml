@@ -22,7 +22,7 @@ fapi_example.simple_form:
   path: 'examples/fapi-example/simple-form'
   defaults:
     _form:  '\Drupal\fapi_example\Form\SimpleForm'
-    _title: 'Simple Form'
+    _title: 'Simple form'
   requirements:
     _permission: 'access content'
 
@@ -30,7 +30,7 @@ fapi_example.input_demo:
   path: 'examples/fapi-example/input-demo'
   defaults:
     _form:  '\Drupal\fapi_example\Form\InputDemo'
-    _title: 'Common Input Elements'
+    _title: 'Common input elements'
   requirements:
     _permission: 'access content'
 
@@ -38,7 +38,7 @@ fapi_example.state_demo:
   path: 'examples/fapi-example/state-demo'
   defaults:
     _form:  '\Drupal\fapi_example\Form\StateDemo'
-    _title: 'Form State Binding'
+    _title: 'Form state binding'
   requirements:
     _permission: 'access content'
 
@@ -46,7 +46,7 @@ fapi_example.container_demo:
   path: 'examples/fapi-example/container-demo'
   defaults:
     _form:  '\Drupal\fapi_example\Form\ContainerDemo'
-    _title: 'Container Elements'
+    _title: 'Container elements'
   requirements:
     _permission: 'access content'
 
@@ -54,7 +54,7 @@ fapi_example.vertical_tabs_demo:
   path: 'examples/fapi-example/vertical-tabs-demo'
   defaults:
     _form:  '\Drupal\fapi_example\Form\VerticalTabsDemo'
-    _title: 'Vertical Tab Elements'
+    _title: 'Vertical tab elements'
   requirements:
     _permission: 'access content'
 
@@ -62,7 +62,7 @@ fapi_example.modal_form:
   path: 'examples/fapi-example/modal-form'
   defaults:
     _form:  '\Drupal\fapi_example\Form\ModalForm'
-    _title: 'Modal Form'
+    _title: 'Modal form'
   requirements:
     _permission: 'access content'
 
@@ -70,7 +70,7 @@ fapi_example.ajax_demo:
   path: 'examples/fapi-example/ajax-demo'
   defaults:
     _form:  '\Drupal\fapi_example\Form\AjaxDemo'
-    _title: 'Ajax Form'
+    _title: 'Ajax form'
   requirements:
     _permission: 'access content'
 
@@ -78,7 +78,7 @@ fapi_example.build_demo:
   path: 'examples/fapi-example/build-demo'
   defaults:
     _form:  '\Drupal\fapi_example\Form\BuildDemo'
-    _title: 'Build Form Demo'
+    _title: 'Build form demo'
   requirements:
     _permission: 'access content'
 
@@ -86,7 +86,7 @@ fapi_example.ajax_addmore:
   path: 'examples/fapi-example/ajax-addmore'
   defaults:
     _form:  '\Drupal\fapi_example\Form\AjaxAddMore'
-    _title: 'Add-more Button'
+    _title: 'Add-more button'
   requirements:
     _permission: 'access content'
 
@@ -94,6 +94,6 @@ fapi_example.multistep_form:
   path: 'examples/fapi-example/multistep-form'
   defaults:
     _form: '\Drupal\fapi_example\Form\MultistepForm'
-    _title: 'Multistep Form'
+    _title: 'Multistep form'
   requirements:
     _permission: 'access content'

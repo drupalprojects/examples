@@ -3,6 +3,6 @@ testing_example.description:
   route_name: testing_example.description
   expanded: TRUE
 testing_example.sum_in_hands:
-  title: Sum In Hands
+  title: Sum in hands
   route_name: testing_example.sum_in_hands
   parent: testing_example.description

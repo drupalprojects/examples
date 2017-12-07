@@ -21,7 +21,7 @@ class MultistepFormTest extends BrowserTestBase {
     $this->drupalGet('examples/fapi-example/multistep-form');
     $page = $this->getSession()->getPage();
     $h1 = $page->find('css', 'h1');
-    $this->assertContains('Multistep Form', $h1->getText());
+    $this->assertContains('Multistep form', $h1->getText());
     $desc = $page->find('css', '#edit-description label');
     $this->assertContains('page 1', $desc->getText());
     $this->submitForm([

@@ -4,7 +4,7 @@ tabledrag_example.description:
   expanded: TRUE
 
 tabledrag_example.simple_form:
-  title: Simple Rows
+  title: Simple rows
   route_name: tabledrag_example.simple_form
   parent: tabledrag_example.description
   weight: -4
@@ -16,13 +16,13 @@ tabledrag_example.parent_form:
   weight: -3
 
 tabledrag_example.rootleaf_form:
-  title: Roots And Leaves
+  title: Roots and leaves
   route_name: tabledrag_example.rootleaf_form
   parent: tabledrag_example.description
   weight: -2
 
 tabledrag_example.reset_form:
-  title: Data Reset
+  title: Data reset
   route_name: tabledrag_example.reset_form
   parent: tabledrag_example.description
   weight: -1

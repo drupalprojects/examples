@@ -1,4 +1,4 @@
 email_example.description:
-  title: 'E-mail Example: contact form'
+  title: 'E-mail Example: Contact Form'
   description: 'Callback for generating form.'
   route_name: email_example.description

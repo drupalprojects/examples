@@ -3,7 +3,7 @@
 content_entity_example.contact_add:
   # Which route will be called by the link
   route_name: content_entity_example.contact_add
-  title: 'Add Contact'
+  title: 'Add contact'
 
   # Where will the link appear, defined by route name.
   appears_on:

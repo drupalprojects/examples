@@ -2,6 +2,6 @@ batch_example.form:
   path: 'examples/batch_example'
   defaults:
     _form: '\Drupal\batch_example\Form\BatchExampleForm'
-    _title: 'Demo of Batch processing'
+    _title: 'Demo of batch processing'
   requirements:
     _permission: 'access content'

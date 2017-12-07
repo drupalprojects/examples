@@ -8,7 +8,7 @@ config_entity_example.add_action:
 
 config_entity_example.list_action:
   route_name: entity.robot.list
-  title: 'List Robots'
+  title: 'List robots'
   appears_on:
     - entity.robot.add_form
     - entity.robot.edit_form

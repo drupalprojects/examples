@@ -7,7 +7,7 @@ entity.content_entity_example_contact.canonical:
   defaults:
   # Calls the view controller, defined in the annotation of the contact entity
     _entity_view: 'content_entity_example_contact'
-    _title: 'Contact Content'
+    _title: 'Contact content'
   requirements:
   # Calls the access controller of the entity, $operation 'view'
     _entity_access: 'content_entity_example_contact.view'
@@ -17,7 +17,7 @@ entity.content_entity_example_contact.collection:
   defaults:
   # Calls the list controller, defined in the annotation of the contact entity.
     _entity_list: 'content_entity_example_contact'
-    _title: 'Contact List'
+    _title: 'Contact list'
   requirements:
   # Checks for permission directly.
     _permission: 'view contact entity'
@@ -27,7 +27,7 @@ content_entity_example.contact_add:
   defaults:
   # Calls the form.add controller, defined in the contact entity.
     _entity_form: content_entity_example_contact.add
-    _title: 'Add Contact'
+    _title: 'Add contact'
   requirements:
     _entity_create_access: 'content_entity_example_contact'
 
@@ -36,7 +36,7 @@ entity.content_entity_example_contact.edit_form:
   defaults:
   # Calls the form.edit controller, defined in the contact entity.
     _entity_form: content_entity_example_contact.edit
-    _title: 'Edit Contact'
+    _title: 'Edit contact'
   requirements:
     _entity_access: 'content_entity_example_contact.edit'
 
@@ -45,7 +45,7 @@ entity.content_entity_example_contact.delete_form:
   defaults:
     # Calls the form.delete controller, defined in the contact entity.
     _entity_form: content_entity_example_contact.delete
-    _title: 'Delete Contact'
+    _title: 'Delete contact'
   requirements:
     _entity_access: 'content_entity_example_contact.delete'
 
@@ -53,6 +53,6 @@ content_entity_example.contact_settings:
   path: 'admin/structure/content_entity_example_contact_settings'
   defaults:
     _form: '\Drupal\content_entity_example\Form\ContactSettingsForm'
-    _title: 'Contact Settings'
+    _title: 'Contact settings'
   requirements:
     _permission: 'administer contact entity'
