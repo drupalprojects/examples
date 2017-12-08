@@ -1,6 +1,8 @@
 <?php
 
 namespace Drupal\Tests\fapi_example\Functional;
+
+use Drupal\Core\Url;
 use Drupal\Tests\examples\Functional\ExamplesBrowserTestBase;
 
 /**
@@ -30,25 +32,81 @@ class FapiExampleWebTest extends ExamplesBrowserTestBase {
   protected $profile = 'minimal';
 
   /**
+   * Aggregate all the tests.
+   *
+   * Since this is a functional test, and we don't expect to need isolation
+   * between these form tests, we'll aggregate them here for speed's sake. That
+   * way the testing system doesn't have to rebuild a new Drupal for us for each
+   * test.
+   */
+  public function testFunctional() {
+    // Please fail this one first.
+    $this->doTestRoutes();
+
+    $this->doTestAjaxAddMore();
+    $this->doTestAjaxDemoForm();
+    $this->doTestBuildDemo();
+    $this->doTestContainerDemoForm();
+    $this->doTestInputDemoForm();
+    $this->doTestModalForm();
+    $this->doTestSimpleFormExample();
+    $this->doTestStateDemoForm();
+    $this->doTestVerticalTabsDemoForm();
+  }
+
+  /**
+   * Tests links.
+   */
+  public function doTestRoutes() {
+    $assertion = $this->assertSession();
+
+    // Routes with menu links, and their form buttons.
+    $routes = [
+      'fapi_example.description' => [],
+      'fapi_example.simple_form' => ['Submit'],
+      'fapi_example.input_demo' => ['Submit'],
+      'fapi_example.state_demo' => ['Submit'],
+      'fapi_example.container_demo' => ['Submit'],
+      'fapi_example.vertical_tabs_demo' => ['Submit'],
+      // Modal form has a submit button, but requires input.
+      'fapi_example.modal_form' => [],
+      'fapi_example.ajax_demo' => ['Submit'],
+      'fapi_example.build_demo' => ['Submit'],
+      'fapi_example.ajax_addmore' => ['Submit'],
+      // Multistep form has submit buttons, but requires input.
+      'fapi_example.multistep_form' => [],
+    ];
+
+    // Ensure the links appear in the tools menu sidebar.
+    $this->drupalGet('');
+    foreach (array_keys($routes) as $route) {
+      $assertion->linkByHrefExists(Url::fromRoute($route)->getInternalPath());
+    }
+
+    // Go to all the routes and click all the buttons.
+    foreach ($routes as $route => $buttons) {
+      $path = Url::fromRoute($route);
+      error_log($route);
+      $this->drupalGet($path);
+      $assertion->statusCodeEquals(200);
+      foreach ($buttons as $button) {
+        $this->drupalPostForm($path, [], $button);
+        $assertion->statusCodeEquals(200);
+      }
+    }
+  }
+
+  /**
    * Test the ajax demo form.
    */
-  public function testAjaxDemoForm() {
-
+  public function doTestAjaxDemoForm() {
     $assert = $this->assertSession();
-
-    // Test for a link to the ajax_demo example on the fapi_example page.
-    $this->drupalGet('examples/fapi-example');
-    $assert->linkByHrefExists('examples/fapi-example/ajax-demo');
-
-    // Verify that anonymous can access the page.
-    $this->drupalGet('examples/fapi-example/ajax-demo');
-    $assert->statusCodeEquals(200);
 
     // Post the form.
     $edit = [
       'temperature' => 'warm',
     ];
-    $this->drupalPostForm('/examples/fapi-example/ajax-demo', $edit, 'Submit');
+    $this->drupalPostForm(Url::fromRoute('fapi_example.ajax_demo'), $edit, 'Submit');
     $assert->statusCodeEquals(200);
     $assert->pageTextContains('Value for Temperature: warm');
   }
@@ -56,23 +114,14 @@ class FapiExampleWebTest extends ExamplesBrowserTestBase {
   /**
    * Test the build demo form.
    */
-  public function testBuildDemo() {
+  public function doTestBuildDemo() {
     $assert = $this->assertSession();
-
-    // Test for a link to the build_demo example on the fapi_example page.
-    $this->drupalGet('examples/fapi-example');
-    $assert->statusCodeEquals(200);
-
-    $assert->linkByHrefExists('examples/fapi-example/build-demo');
-
-    // Verify that anonymous can access the page.
-    $this->drupalGet('examples/fapi-example/build-demo');
-    $assert->statusCodeEquals(200);
+    $build_demo_url = Url::fromRoute('fapi_example.build_demo');
 
     $edit = [
       'change' => '1',
     ];
-    $this->drupalPostForm('/examples/fapi-example/build-demo', $edit, 'Submit');
+    $this->drupalPostForm($build_demo_url, $edit, 'Submit');
 
     $assert->pageTextContains('1. __construct');
     $assert->pageTextContains('2. getFormId');
@@ -80,24 +129,15 @@ class FapiExampleWebTest extends ExamplesBrowserTestBase {
     $assert->pageTextContains('4. submitForm');
 
     // Ensure the 'submit rebuild' action performs the rebuild.
-    $this->drupalPostForm('/examples/fapi-example/build-demo', $edit, 'Submit Rebuild');
+    $this->drupalPostForm($build_demo_url, $edit, 'Submit Rebuild');
     $assert->pageTextContains('4. rebuildFormSubmit');
   }
 
   /**
    * Test the container demo form.
    */
-  public function testContainerDemoForm() {
+  public function doTestContainerDemoForm() {
     $assert = $this->assertSession();
-
-    // Test for a link to the container_demo example on the fapi_example page.
-    $this->drupalGet('examples/fapi-example');
-
-    $assert->linkByHrefExists('examples/fapi-example/container-demo');
-
-    // Verify that anonymous can access the container_demo example page.
-    $this->drupalGet('examples/fapi-example/container-demo');
-    $assert->statusCodeEquals(200);
 
     // Post the form.
     $edit = [
@@ -107,7 +147,7 @@ class FapiExampleWebTest extends ExamplesBrowserTestBase {
       'publisher' => 'me',
       'diet' => 'vegan',
     ];
-    $this->drupalPostForm('/examples/fapi-example/container-demo', $edit, 'Submit');
+    $this->drupalPostForm(Url::fromRoute('fapi_example.container_demo'), $edit, 'Submit');
     $assert->pageTextContains('Value for name: Dave');
     $assert->pageTextContains('Value for pen_name: DMan');
     $assert->pageTextContains('Value for title: My Book');
@@ -118,16 +158,8 @@ class FapiExampleWebTest extends ExamplesBrowserTestBase {
   /**
    * Test the input demo form.
    */
-  public function testInputDemoForm() {
+  public function doTestInputDemoForm() {
     $assert = $this->assertSession();
-
-    // Test for a link to the input_demo example on the fapi_example page.
-    $this->drupalGet('examples/fapi-example');
-    $this->assertLinkByHref('examples/fapi-example/input-demo');
-
-    // Verify that anonymous can access the input_demo page.
-    $this->drupalGet('examples/fapi-example/input-demo');
-    $assert->statusCodeEquals(200);
 
     // Post the form.
     $edit = [
@@ -154,7 +186,7 @@ class FapiExampleWebTest extends ExamplesBrowserTestBase {
       'subject' => 'Form test',
       'weight' => '3',
     ];
-    $this->drupalPostForm('/examples/fapi-example/input-demo', $edit, 'Submit');
+    $this->drupalPostForm(Url::fromRoute('fapi_example.input_demo'), $edit, 'Submit');
     $assert->statusCodeEquals(200);
 
     $assert->pageTextContains('Value for What standardized tests did you take?');
@@ -182,97 +214,56 @@ class FapiExampleWebTest extends ExamplesBrowserTestBase {
   /**
    * Test the modal form.
    */
-  public function testModalForm() {
+  public function doTestModalForm() {
     $assert = $this->assertSession();
-
-    // Test for a link to the modal_form example on the fapi_example page.
-    $this->drupalGet('examples/fapi-example');
-    $assert->linkByHrefExists('examples/fapi-example/modal-form');
-
-    // Verify that anonymous can access the page.
-    $this->drupalGet('examples/fapi-example/modal-form');
-    $assert->statusCodeEquals(200);
 
     // Post the form.
     $edit = [
       'title' => 'My Book',
     ];
-    $this->drupalPostForm('/examples/fapi-example/modal-form', $edit, 'Submit');
+    $this->drupalPostForm(Url::fromRoute('fapi_example.modal_form'), $edit, 'Submit');
     $assert->pageTextContains('Submit handler: You specified a title of My Book.');
   }
 
   /**
    * Check routes defined by fapi_example.
    */
-  public function testSimpleFormExample() {
+  public function doTestSimpleFormExample() {
     $assert = $this->assertSession();
-
-    // Test for a link to the fapi_example in the Tools menu.
-    $this->drupalGet('');
-    $assert->statusCodeEquals(200);
-    $assert->linkByHrefExists('examples/fapi-example');
-
-    // Test for a link to the simple_form example on the fapi_example page.
-    $this->drupalGet('examples/fapi-example');
-    $assert->linkByHrefExists('examples/fapi-example/simple-form');
-
-    // Verify that anonymous can access the simple_form page.
-    $this->drupalGet('examples/fapi-example/simple-form');
-    $assert->statusCodeEquals(200);
 
     // Post a title.
     $edit = ['title' => 'My Custom Title'];
-    $this->drupalPostForm('/examples/fapi-example/simple-form', $edit, 'Submit');
+    $this->drupalPostForm(Url::fromRoute('fapi_example.simple_form'), $edit, 'Submit');
     $assert->pageTextContains('You specified a title of My Custom Title.');
   }
 
   /**
    * Test the state demo form.
    */
-  public function testStateDemoForm() {
+  public function doTestStateDemoForm() {
     $assert = $this->assertSession();
-
-    // Test for a link to the state_demo example on the fapi_example page.
-    $this->drupalGet('examples/fapi-example');
-    $assert->statusCodeEquals(200);
-
-    $assert->linkByHrefExists('examples/fapi-example/state-demo');
-
-    // Verify that anonymous can access the state_demo page.
-    $this->drupalGet('examples/fapi-example/state-demo');
-    $assert->statusCodeEquals(200);
 
     // Post the form.
     $edit = [
       'needs_accommodation' => TRUE,
       'diet' => 'vegan',
     ];
-    $this->drupalPostForm('/examples/fapi-example/state-demo', $edit, 'Submit');
+    $this->drupalPostForm(Url::fromRoute('fapi_example.state_demo'), $edit, 'Submit');
     $assert->pageTextContains('Dietary Restriction Requested: vegan');
   }
 
   /**
    * Test the vertical tabs demo form.
    */
-  public function testVerticalTabsDemoForm() {
+  public function doTestVerticalTabsDemoForm() {
     $assert = $this->assertSession();
-
-    // Test for a link to the vertical_tabs_demo example on the fapi_example
-    // page.
-    $this->drupalGet('examples/fapi-example');
-
-    $assert->linkByHrefExists('examples/fapi-example/vertical-tabs-demo');
-
-    // Verify that anonymous can access the vertical_tabs_demo page.
-    $this->drupalGet('examples/fapi-example/vertical-tabs-demo');
-    $assert->statusCodeEquals(200);
 
     // Post the form.
     $edit = [
       'name' => 'Dave',
       'publisher' => 'me',
     ];
-    $this->drupalPostForm('/examples/fapi-example/container-demo', $edit, 'Submit');
+    $this->drupalPostForm(Url::fromRoute('fapi_example.container_demo'), $edit, 'Submit');
     $assert->pageTextContains('Value for name: Dave');
     $assert->pageTextContains('Value for publisher: me');
   }
@@ -280,18 +271,15 @@ class FapiExampleWebTest extends ExamplesBrowserTestBase {
   /**
    * Test the Ajax Add More demo form.
    */
-  public function testAjaxAddMore() {
+  public function doTestAjaxAddMore() {
     // XPath for the remove button. We have to use contains() here because the
     // ID will have a hash value at the end.
     $button_xpath = '//input[contains(@id,"edit-names-fieldset-actions-remove-name")]';
 
-    // Test for a link to the ajax_add_more example on the fapi_example
-    // page.
-    $this->drupalGet('examples/fapi-example');
-    $this->assertLinkByHref('examples/fapi-example/ajax-addmore');
+    $ajax_addmore_url = Url::fromRoute('fapi_example.ajax_addmore');
 
     // Verify that anonymous can access the ajax_add_more page.
-    $this->drupalGet('examples/fapi-example/ajax-addmore');
+    $this->drupalGet($ajax_addmore_url);
     $this->assertResponse(200, 'The Demo of Container page is available.');
     // Verify that there is no remove button.
     $this->assertFalse($this->xpath($button_xpath));
@@ -303,7 +291,7 @@ class FapiExampleWebTest extends ExamplesBrowserTestBase {
     // and click on 'Add one more' button.
     $edit = [];
     $edit['names_fieldset[name][0]'] = $name_one;
-    $this->drupalPostForm('/examples/fapi-example/ajax-addmore', $edit, 'Add one more');
+    $this->drupalPostForm($ajax_addmore_url, $edit, 'Add one more');
 
     // Verify field-2 gets added.
     // and value of field-1 should retained.
