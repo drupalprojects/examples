@@ -2,7 +2,6 @@
 
 namespace Drupal\fapi_example\Form;
 
-
 use Drupal\Core\Form\FormBase;
 use Drupal\Core\Form\FormStateInterface;
 
@@ -49,6 +48,11 @@ class BuildDemo extends FormBase {
    * {@inheritdoc}
    */
   public function buildForm(array $form, FormStateInterface $form_state) {
+
+    $form['description'] = [
+      '#type' => 'item',
+      '#markup' => $this->t('Demonstrates how submit, rebuild, form-rebuild and #ajax submit work.'),
+    ];
 
     // Simple checkbox for ajax orders.
     $form['change'] = [

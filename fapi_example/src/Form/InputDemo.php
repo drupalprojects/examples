@@ -19,6 +19,11 @@ class InputDemo extends FormBase {
    */
   public function buildForm(array $form, FormStateInterface $form_state) {
 
+    $form['description'] = [
+      '#type' => 'item',
+      '#markup' => $this->t('This example shows the use of all input-types.'),
+    ];
+
     // CheckBoxes.
     $form['tests_taken'] = [
       '#type' => 'checkboxes',

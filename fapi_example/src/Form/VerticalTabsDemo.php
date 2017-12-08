@@ -22,6 +22,11 @@ class VerticalTabsDemo extends DemoBase {
    */
   public function buildForm(array $form, FormStateInterface $form_state) {
 
+    $form['description'] = [
+      '#type' => 'item',
+      '#markup' => $this->t('This example demonstrates the use of vertical tabs to group elements.'),
+    ];
+
     $form['information'] = [
       '#type' => 'vertical_tabs',
       '#default_tab' => 'edit-publication',

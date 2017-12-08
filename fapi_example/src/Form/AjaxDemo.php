@@ -27,6 +27,12 @@ class AjaxDemo extends DemoBase {
    * {@inheritdoc}
    */
   public function buildForm(array $form, FormStateInterface $form_state) {
+
+    $form['description'] = [
+      '#type' => 'item',
+      '#markup' => $this->t('This form example demonstrates functioning of an AJAX callback.'),
+    ];
+
     // The #ajax attribute used in the temperature input element defines an ajax
     // callback that will invoke the 'updateColor' method on this form object.
     // Whenever the temperature element changes, it will invoke this callback

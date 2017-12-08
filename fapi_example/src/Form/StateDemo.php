@@ -26,6 +26,11 @@ class StateDemo extends DemoBase {
    * @inheritdoc
    */
   public function buildForm(array $form, FormStateInterface $form_state) {
+    $form['description'] = [
+      '#type' => 'item',
+      '#markup' => $this->t('This example demonstrates the #states property. #states makes an element visibility dependent on another.'),
+    ];
+
     $form['needs_accommodation'] = [
       '#type' => 'checkbox',
       '#title' => 'Need Special Accommodations?',

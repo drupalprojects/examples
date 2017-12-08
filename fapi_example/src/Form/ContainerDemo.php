@@ -21,6 +21,11 @@ class ContainerDemo extends DemoBase {
    */
   public function buildForm(array $form, FormStateInterface $form_state) {
 
+    $form['description'] = [
+      '#type' => 'item',
+      '#markup' => $this->t('This form example demonstrates container elements: details, fieldset and container.'),
+    ];
+
     // Details containers replace D7's collapsible field sets.
     $form['author'] = [
       '#type' => 'details',

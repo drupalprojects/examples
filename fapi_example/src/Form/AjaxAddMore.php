@@ -23,7 +23,8 @@ class AjaxAddMore extends DemoBase {
    */
   public function buildForm(array $form, FormStateInterface $form_state) {
     $form['description'] = [
-      '#markup' => '<div>' . t('This example shows an add-more and a remove-last button.') . '</div>',
+      '#type' => 'item',
+      '#markup' => $this->t('This example shows an add-more and a remove-last button.'),
     ];
 
     // Gather the number of names in the form already.

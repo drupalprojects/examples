@@ -2,7 +2,6 @@
 
 namespace Drupal\fapi_example\Form;
 
-
 use Drupal\Core\Form\FormBase;
 use Drupal\Core\Form\FormStateInterface;
 
@@ -31,6 +30,11 @@ class SimpleForm extends FormBase {
    *   The render array defining the elements of the form.
    */
   public function buildForm(array $form, FormStateInterface $form_state) {
+
+    $form['description'] = [
+      '#type' => 'item',
+      '#markup' => $this->t('This basic example shows a single text input element and a submit button'),
+    ];
 
     $form['title'] = [
       '#type' => 'textfield',

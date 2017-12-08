@@ -2,7 +2,6 @@
 
 namespace Drupal\fapi_example\Form;
 
-
 use Drupal\Core\Form\FormBase;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Ajax\AjaxResponse;
@@ -26,6 +25,10 @@ class ModalForm extends FormBase {
    * {@inheritdoc}
    */
   public function buildForm(array $form, FormStateInterface $form_state) {
+    $form['description'] = [
+      '#type' => 'item',
+      '#markup' => $this->t('This example demonstrates a modal form.'),
+    ];
     $form['#prefix'] = '<div id="fapi-example-modal-form">';
     $form['#suffix'] = '</div>';
     $form['title'] = [
