@@ -6,7 +6,7 @@ use Drupal\Core\Url;
 use Drupal\Tests\BrowserTestBase;
 
 /**
- * Verify functionalities of ajax_example.
+ * Verify tool block menu items and operability of all our routes.
  *
  * @group ajax_example
  * @group examples
@@ -66,11 +66,11 @@ class AjaxExampleMenuTest extends BrowserTestBase {
     // Go to all the routes and click all the buttons.
     $routes = array_merge($routes_with_menu_links, $routes);
     foreach ($routes as $route => $buttons) {
-      $path = Url::fromRoute($route);
-      $this->drupalGet($path);
+      $url = Url::fromRoute($route);
+      $this->drupalGet($url);
       $assertion->statusCodeEquals(200);
       foreach ($buttons as $button) {
-        $this->drupalPostForm($path, [], $button);
+        $this->drupalPostForm($url, [], $button);
         $assertion->statusCodeEquals(200);
       }
     }

@@ -17,7 +17,7 @@ use Drupal\Core\Link;
  * configured.
  *
  * The third $no_js_use argument is strictly for demonstrating operation
- * without javascript, without making the user/developer turn off javascript.
+ * without JavaScript, without making the user/developer turn off JavaScript.
  */
 class DynamicFormSections extends FormBase {
 
@@ -81,21 +81,21 @@ class DynamicFormSections extends FormBase {
     $form['question_type_submit'] = [
       '#type' => 'submit',
       '#value' => t('Choose'),
-      '#attributes' => ['class' => ['ajax-example-hide']],
+      '#attributes' => ['class' => ['ajax-example-inline']],
       // No need to validate when submitting this.
       '#limit_validation_errors' => [],
       '#validate' => [],
     ];
 
-    // This simply allows us to demonstrate no-javascript use without
-    // actually turning off javascript in the browser. Removing the #ajax
-    // element turns off AJAX behaviors on that element and as a result
-    // ajax.js doesn't get loaded.
-    if ($nojs == 'nojs') {
+    // This section allows us to demonstrate no-AJAX use without turning off
+    // javascript in the browser.
+    if ($nojs != 'nojs') {
+      // Allow JavaScript to hide the choose button if we're using AJAX.
+      $form['question_type_submit']['#attributes']['class'][] = 'ajax-example-hide';
+    }
+    else {
       // Remove #ajax from the above, so it won't perform AJAX behaviors.
       unset($form['question_type_select']['#ajax']);
-      // Make sure question_type_submit isn't hidden by our JavaScript.
-      unset($form['question_type_submit']['#attributes']);
     }
 
     // This fieldset just serves as a container for the part of the form
@@ -113,12 +113,12 @@ class DynamicFormSections extends FormBase {
     // no JavaScript, the form state will tell us what the user has selected
     // from the dropdown. We can look at the value of the dropdown to determine
     // which secondary form to display.
-    if (!empty($form_state->getValue('question_type_select'))) {
+    $question_type = $form_state->getValue('question_type_select');
+    if (!empty($question_type) && $question_type !== 'Choose question style') {
 
       $form['questions_fieldset']['question'] = [
         '#markup' => t('Who was the first president of the U.S.?'),
       ];
-      $question_type = $form_state->getValue('question_type_select');
 
       // Build up a secondary form, based on the type of question the user
       // chose.
@@ -184,7 +184,6 @@ class DynamicFormSections extends FormBase {
     if ($form_state->getValue('submit') == 'Submit your answer') {
       $form_state->setRebuild(FALSE);
       $answer = $form_state->getValue('question');
-      print_r($answers);
       // Special handling for the checkbox.
       if ($answer == 1 && $form['questions_fieldset']['question']['#type'] == 'checkbox') {
         $answer = $form['questions_fieldset']['question']['#title'];

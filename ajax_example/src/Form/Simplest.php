@@ -39,7 +39,7 @@ class Simplest extends FormBase {
       ],
     ];
 
-    // The 'replace-textfield-container' container will be replace whenever
+    // The 'replace-textfield-container' container will be replaced whenever
     // 'changethis' is updated.
     $form['replace_textfield_container'] = [
       '#type' => 'container',
@@ -53,8 +53,11 @@ class Simplest extends FormBase {
     // An AJAX request calls the form builder function for every change.
     // We can change how we build the form based on $form_state.
     $value = $form_state->getValue('changethis');
-    if (!empty($value)) {
-      $form['replace_textfield_container']['replace_textfield']['#description'] = $this->t("Say why you chose '@value'", ['@value' => $value]);
+    // The getValue() method returns NULL by default if the form element does
+    // not exist. It won't exist yet if we're building it for the first time.
+    if ($value !== NULL) {
+      $form['replace_textfield_container']['replace_textfield']['#description'] =
+        $this->t("Say why you chose '@value'", ['@value' => $value]);
     }
     return $form;
   }
