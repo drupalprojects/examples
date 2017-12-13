@@ -72,5 +72,7 @@ fapi_example.modal_form:
   title: Modal form
   description: Demonstrates using Drupal's modal form.
   route_name: fapi_example.modal_form
+  route_parameters:
+    nojs: nojs
   parent: fapi_example.description
   weight: 0

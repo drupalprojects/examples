@@ -8,14 +8,12 @@ use Drupal\Tests\examples\Functional\ExamplesBrowserTestBase;
 /**
  * Ensure that the fapi_example forms work properly.
  *
- * SimpleTest uses group annotations to help you organize your tests.
- *
  * @group fapi_example
  * @group examples
  *
  * @ingroup fapi_example
  */
-class FapiExampleWebTest extends ExamplesBrowserTestBase {
+class FapiExampleTest extends ExamplesBrowserTestBase {
 
   /**
    * Our module dependencies.

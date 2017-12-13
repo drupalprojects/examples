@@ -59,10 +59,11 @@ fapi_example.vertical_tabs_demo:
     _permission: 'access content'
 
 fapi_example.modal_form:
-  path: 'examples/fapi-example/modal-form'
+  path: 'examples/fapi-example/modal-form/{nojs}'
   defaults:
     _form:  '\Drupal\fapi_example\Form\ModalForm'
     _title: 'Modal form'
+    nojs: ajax
   requirements:
     _permission: 'access content'
 
