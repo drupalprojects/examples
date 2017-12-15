@@ -1,24 +1,25 @@
 <?php
 
-namespace Drupal\Tests\fapi_example\Functional;
+namespace Drupal\Tests\form_api_example\Functional;
 
+use Drupal\Core\Url;
 use Drupal\Tests\BrowserTestBase;
 
 /**
  * Tests the Multistep FAPI Example.
  *
- * @group fapi_example
+ * @group form_api_example
  * @group examples
  */
 class MultistepFormTest extends BrowserTestBase {
 
-  public static $modules = ['fapi_example'];
+  public static $modules = ['form_api_example'];
 
   /**
    * Test of paths through the example wizard form.
    */
   public function testWizardForm() {
-    $this->drupalGet('examples/fapi-example/multistep-form');
+    $this->drupalGet(Url::fromRoute('form_api_example.multistep_form'));
     $page = $this->getSession()->getPage();
     $h1 = $page->find('css', 'h1');
     $this->assertContains('Multistep form', $h1->getText());

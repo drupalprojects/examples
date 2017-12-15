@@ -1,6 +1,6 @@
 <?php
 
-namespace Drupal\fapi_example\Form;
+namespace Drupal\form_api_example\Form;
 
 use Drupal\Core\Form\FormStateInterface;
 
@@ -13,10 +13,10 @@ use Drupal\Core\Form\FormStateInterface;
  * form elements are made visible.
  *
  * The submit handler for this form is implemented by the
- * \Drupal\fapi_example\Form\DemoBase class.
+ * \Drupal\form_api_example\Form\DemoBase class.
  *
  * @see \Drupal\Core\Form\FormBase
- * @see \Drupal\fapi_example\Form\DemoBase
+ * @see \Drupal\form_api_example\Form\DemoBase
  */
 class StateDemo extends DemoBase {
 
@@ -70,7 +70,7 @@ class StateDemo extends DemoBase {
    * @inheritdoc
    */
   public function getFormId() {
-    return 'fapi_example_state_demo';
+    return 'form_api_example_state_demo';
   }
 
   /**

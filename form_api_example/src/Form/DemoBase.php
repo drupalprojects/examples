@@ -1,12 +1,12 @@
 <?php
 
-namespace Drupal\fapi_example\Form;
+namespace Drupal\form_api_example\Form;
 
 use Drupal\Core\Form\FormBase;
 use Drupal\Core\Form\FormStateInterface;
 
 /**
- * Implements common submit handler used in fapi_example demo forms.
+ * Implements common submit handler used in form_api_example demo forms.
  *
  * We extend FormBase, which is the simplest form base class used in Drupal, to
  * add a common submitForm method that will display the submitted values via

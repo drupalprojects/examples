@@ -1,6 +1,6 @@
 <?php
 
-namespace Drupal\fapi_example\Form;
+namespace Drupal\form_api_example\Form;
 
 use Drupal\Core\Form\FormStateInterface;
 
@@ -20,7 +20,7 @@ class AjaxDemo extends DemoBase {
    * {@inheritdoc}
    */
   public function getFormId() {
-    return 'fapi_example_ajax_demo';
+    return 'form_api_example_ajax_demo';
   }
 
   /**

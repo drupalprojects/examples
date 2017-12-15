@@ -1,6 +1,6 @@
 <?php
 
-namespace Drupal\fapi_example\Form;
+namespace Drupal\form_api_example\Form;
 
 use Drupal\Core\Form\FormBase;
 use Drupal\Core\Form\FormStateInterface;
@@ -108,7 +108,7 @@ class BuildDemo extends FormBase {
    */
   public function getFormId() {
     $this->displayMethodInvocation('getFormId');
-    return 'fapi_example_simple_form';
+    return 'form_api_example_simple_form';
   }
 
   /**

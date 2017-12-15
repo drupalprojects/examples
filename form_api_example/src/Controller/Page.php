@@ -1,6 +1,6 @@
 <?php
 
-namespace Drupal\fapi_example\Controller;
+namespace Drupal\form_api_example\Controller;
 
 use Drupal\examples\Utility\DescriptionTemplateTrait;
 
@@ -15,7 +15,7 @@ class Page {
    * {@inheritdoc}
    */
   public function getModuleName() {
-    return 'fapi_example';
+    return 'form_api_example';
   }
 
 }

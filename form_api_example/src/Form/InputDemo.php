@@ -1,6 +1,6 @@
 <?php
 
-namespace Drupal\fapi_example\Form;
+namespace Drupal\form_api_example\Form;
 
 use Drupal\Core\Form\FormBase;
 use Drupal\Core\Form\FormStateInterface;
@@ -233,11 +233,11 @@ class InputDemo extends FormBase {
       '#links' => [
         'simple_form' => [
           'title' => $this->t('Simple Form'),
-          'url' => Url::fromRoute('fapi_example.simple_form'),
+          'url' => Url::fromRoute('form_api_example.simple_form'),
         ],
         'demo' => [
           'title' => $this->t('Build Demo'),
-          'url' => Url::fromRoute('fapi_example.build_demo'),
+          'url' => Url::fromRoute('form_api_example.build_demo'),
         ],
       ],
     ];
@@ -296,7 +296,7 @@ class InputDemo extends FormBase {
    * {@inheritdoc}
    */
   public function getFormId() {
-    return 'fapi_example_input_demo_form';
+    return 'form_api_example_input_demo_form';
   }
 
   /**

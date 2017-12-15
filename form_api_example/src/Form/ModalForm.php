@@ -1,6 +1,6 @@
 <?php
 
-namespace Drupal\fapi_example\Form;
+namespace Drupal\form_api_example\Form;
 
 use Drupal\Component\Render\FormattableMarkup;
 use Drupal\Core\Ajax\AjaxResponse;
@@ -15,7 +15,7 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
  *
  * This example demonstrates implementation of a form that is designed to be
  * used as a modal form.  To properly display the modal the link presented by
- * the \Drupal\fapi_example\Controller\Page page controller loads the Drupal
+ * the \Drupal\form_api_example\Controller\Page page controller loads the Drupal
  * dialog and ajax libraries.  The submit handler in this class returns ajax
  * commands to replace text in the calling page after submission .
  *
@@ -38,7 +38,7 @@ class ModalForm extends FormBase {
    * {@inheritdoc}
    */
   public function getFormId() {
-    return 'fapi_example_modal_form';
+    return 'form_api_example_modal_form';
   }
 
   /**
@@ -78,7 +78,7 @@ class ModalForm extends FormBase {
       $form['use_ajax_container']['use_ajax'] = [
         '#type' => 'link',
         '#title' => $this->t('See this form as a modal.'),
-        '#url' => Url::fromRoute('fapi_example.modal_form', ['nojs' => 'ajax']),
+        '#url' => Url::fromRoute('form_api_example.modal_form', ['nojs' => 'ajax']),
         '#attributes' => [
           'class' => ['use-ajax'],
           'data-dialog-type' => 'modal',

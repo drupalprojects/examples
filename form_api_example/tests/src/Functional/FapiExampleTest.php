@@ -1,17 +1,17 @@
 <?php
 
-namespace Drupal\Tests\fapi_example\Functional;
+namespace Drupal\Tests\form_api_example\Functional;
 
 use Drupal\Core\Url;
 use Drupal\Tests\examples\Functional\ExamplesBrowserTestBase;
 
 /**
- * Ensure that the fapi_example forms work properly.
+ * Ensure that the form_api_example forms work properly.
  *
- * @group fapi_example
+ * @group form_api_example
  * @group examples
  *
- * @ingroup fapi_example
+ * @ingroup form_api_example
  */
 class FapiExampleTest extends ExamplesBrowserTestBase {
 
@@ -20,7 +20,7 @@ class FapiExampleTest extends ExamplesBrowserTestBase {
    *
    * @var string[]
    */
-  static public $modules = ['fapi_example'];
+  static public $modules = ['form_api_example'];
 
   /**
    * The installation profile to use with this test.
@@ -60,19 +60,19 @@ class FapiExampleTest extends ExamplesBrowserTestBase {
 
     // Routes with menu links, and their form buttons.
     $routes = [
-      'fapi_example.description' => [],
-      'fapi_example.simple_form' => ['Submit'],
-      'fapi_example.input_demo' => ['Submit'],
-      'fapi_example.state_demo' => ['Submit'],
-      'fapi_example.container_demo' => ['Submit'],
-      'fapi_example.vertical_tabs_demo' => ['Submit'],
+      'form_api_example.description' => [],
+      'form_api_example.simple_form' => ['Submit'],
+      'form_api_example.input_demo' => ['Submit'],
+      'form_api_example.state_demo' => ['Submit'],
+      'form_api_example.container_demo' => ['Submit'],
+      'form_api_example.vertical_tabs_demo' => ['Submit'],
       // Modal form has a submit button, but requires input.
-      'fapi_example.modal_form' => [],
-      'fapi_example.ajax_demo' => ['Submit'],
-      'fapi_example.build_demo' => ['Submit'],
-      'fapi_example.ajax_addmore' => ['Submit'],
+      'form_api_example.modal_form' => [],
+      'form_api_example.ajax_demo' => ['Submit'],
+      'form_api_example.build_demo' => ['Submit'],
+      'form_api_example.ajax_addmore' => ['Submit'],
       // Multistep form has submit buttons, but requires input.
-      'fapi_example.multistep_form' => [],
+      'form_api_example.multistep_form' => [],
     ];
 
     // Ensure the links appear in the tools menu sidebar.
@@ -104,7 +104,7 @@ class FapiExampleTest extends ExamplesBrowserTestBase {
     $edit = [
       'temperature' => 'warm',
     ];
-    $this->drupalPostForm(Url::fromRoute('fapi_example.ajax_demo'), $edit, 'Submit');
+    $this->drupalPostForm(Url::fromRoute('form_api_example.ajax_demo'), $edit, 'Submit');
     $assert->statusCodeEquals(200);
     $assert->pageTextContains('Value for Temperature: warm');
   }
@@ -114,7 +114,7 @@ class FapiExampleTest extends ExamplesBrowserTestBase {
    */
   public function doTestBuildDemo() {
     $assert = $this->assertSession();
-    $build_demo_url = Url::fromRoute('fapi_example.build_demo');
+    $build_demo_url = Url::fromRoute('form_api_example.build_demo');
 
     $edit = [
       'change' => '1',
@@ -145,7 +145,7 @@ class FapiExampleTest extends ExamplesBrowserTestBase {
       'publisher' => 'me',
       'diet' => 'vegan',
     ];
-    $this->drupalPostForm(Url::fromRoute('fapi_example.container_demo'), $edit, 'Submit');
+    $this->drupalPostForm(Url::fromRoute('form_api_example.container_demo'), $edit, 'Submit');
     $assert->pageTextContains('Value for name: Dave');
     $assert->pageTextContains('Value for pen_name: DMan');
     $assert->pageTextContains('Value for title: My Book');
@@ -184,7 +184,7 @@ class FapiExampleTest extends ExamplesBrowserTestBase {
       'subject' => 'Form test',
       'weight' => '3',
     ];
-    $this->drupalPostForm(Url::fromRoute('fapi_example.input_demo'), $edit, 'Submit');
+    $this->drupalPostForm(Url::fromRoute('form_api_example.input_demo'), $edit, 'Submit');
     $assert->statusCodeEquals(200);
 
     $assert->pageTextContains('Value for What standardized tests did you take?');
@@ -219,19 +219,19 @@ class FapiExampleTest extends ExamplesBrowserTestBase {
     $edit = [
       'title' => 'My Book',
     ];
-    $this->drupalPostForm(Url::fromRoute('fapi_example.modal_form'), $edit, 'Submit');
+    $this->drupalPostForm(Url::fromRoute('form_api_example.modal_form'), $edit, 'Submit');
     $assert->pageTextContains('Submit handler: You specified a title of My Book.');
   }
 
   /**
-   * Check routes defined by fapi_example.
+   * Check routes defined by form_api_example.
    */
   public function doTestSimpleFormExample() {
     $assert = $this->assertSession();
 
     // Post a title.
     $edit = ['title' => 'My Custom Title'];
-    $this->drupalPostForm(Url::fromRoute('fapi_example.simple_form'), $edit, 'Submit');
+    $this->drupalPostForm(Url::fromRoute('form_api_example.simple_form'), $edit, 'Submit');
     $assert->pageTextContains('You specified a title of My Custom Title.');
   }
 
@@ -246,7 +246,7 @@ class FapiExampleTest extends ExamplesBrowserTestBase {
       'needs_accommodation' => TRUE,
       'diet' => 'vegan',
     ];
-    $this->drupalPostForm(Url::fromRoute('fapi_example.state_demo'), $edit, 'Submit');
+    $this->drupalPostForm(Url::fromRoute('form_api_example.state_demo'), $edit, 'Submit');
     $assert->pageTextContains('Dietary Restriction Requested: vegan');
   }
 
@@ -261,7 +261,7 @@ class FapiExampleTest extends ExamplesBrowserTestBase {
       'name' => 'Dave',
       'publisher' => 'me',
     ];
-    $this->drupalPostForm(Url::fromRoute('fapi_example.container_demo'), $edit, 'Submit');
+    $this->drupalPostForm(Url::fromRoute('form_api_example.container_demo'), $edit, 'Submit');
     $assert->pageTextContains('Value for name: Dave');
     $assert->pageTextContains('Value for publisher: me');
   }
@@ -274,7 +274,7 @@ class FapiExampleTest extends ExamplesBrowserTestBase {
     // ID will have a hash value at the end.
     $button_xpath = '//input[contains(@id,"edit-names-fieldset-actions-remove-name")]';
 
-    $ajax_addmore_url = Url::fromRoute('fapi_example.ajax_addmore');
+    $ajax_addmore_url = Url::fromRoute('form_api_example.ajax_addmore');
 
     // Verify that anonymous can access the ajax_add_more page.
     $this->drupalGet($ajax_addmore_url);

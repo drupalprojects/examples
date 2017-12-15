@@ -1,14 +1,14 @@
 <?php
 
-namespace Drupal\Tests\fapi_example\FunctionalJavascript;
+namespace Drupal\Tests\form_api_example\FunctionalJavascript;
 
 use Drupal\FunctionalJavascriptTests\JavascriptTestBase;
 use Drupal\Core\Url;
 
 /**
- * @group fapi_example
+ * @group form_api_example
  *
- * @ingroup fapi_example
+ * @ingroup form_api_example
  */
 class ModalFormTest extends JavascriptTestBase {
 
@@ -17,7 +17,7 @@ class ModalFormTest extends JavascriptTestBase {
    *
    * @var string[]
    */
-  static public $modules = ['fapi_example'];
+  static public $modules = ['form_api_example'];
 
   /**
    * Functional test of the modal form example.
@@ -34,7 +34,7 @@ class ModalFormTest extends JavascriptTestBase {
    */
   public function testModalForm() {
     // Visit form route.
-    $modal_route_nojs = Url::fromRoute('fapi_example.modal_form', ['nojs' => 'nojs']);
+    $modal_route_nojs = Url::fromRoute('form_api_example.modal_form', ['nojs' => 'nojs']);
     $this->drupalGet($modal_route_nojs);
 
     // Get Mink stuff.

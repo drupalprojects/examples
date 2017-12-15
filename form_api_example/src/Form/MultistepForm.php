@@ -1,6 +1,6 @@
 <?php
 
-namespace Drupal\fapi_example\Form;
+namespace Drupal\form_api_example\Form;
 
 use Drupal\Core\Form\FormBase;
 use Drupal\Core\Form\FormStateInterface;
@@ -19,7 +19,7 @@ class MultistepForm extends FormBase {
    * {@inheritdoc}
    */
   public function getFormId() {
-    return 'fapi_example_multistep_form';
+    return 'form_api_example_multistep_form';
   }
 
   /**
