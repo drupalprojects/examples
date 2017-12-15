@@ -62,7 +62,7 @@ class ModalForm extends FormBase {
 
     $form['description'] = [
       '#type' => 'item',
-      '#markup' => $this->t('This example demonstrates a modal form. The submit handler will be an AJAX dialog.'),
+      '#markup' => $this->t('This example demonstrates a form that can work as a normal multi-request form, or as a modal dialog using AJAX.'),
     ];
     // Add a link to show this form in a modal dialog if we're not already in
     // one.
