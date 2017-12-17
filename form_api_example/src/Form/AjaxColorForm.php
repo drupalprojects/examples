@@ -14,13 +14,13 @@ use Drupal\Core\Form\FormStateInterface;
  * @see \Drupal\Core\Form\FormBase
  * @see \Drupal\Core\Form\ConfigFormBase
  */
-class AjaxDemo extends DemoBase {
+class AjaxColorForm extends DemoBase {
 
   /**
    * {@inheritdoc}
    */
   public function getFormId() {
-    return 'form_api_example_ajax_demo';
+    return 'form_api_example_ajax_color_demo';
   }
 
   /**

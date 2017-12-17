@@ -54,10 +54,10 @@ form_api_example.vertical_tabs_demo:
   parent: form_api_example.description
   weight: -3
 
-form_api_example.ajax_demo:
+form_api_example.ajax_color_demo:
   title: Ajax form
-  description: A form to demonstrate use of AJAX.
-  route_name: form_api_example.ajax_demo
+  description: AJAX form demo.
+  route_name: form_api_example.ajax_color_demo
   parent: form_api_example.description
   weight: -2
 

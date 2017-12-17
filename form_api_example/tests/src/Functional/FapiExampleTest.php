@@ -42,7 +42,7 @@ class FapiExampleTest extends ExamplesBrowserTestBase {
     $this->doTestRoutes();
 
     $this->doTestAjaxAddMore();
-    $this->doTestAjaxDemoForm();
+    $this->doTestAjaxColorForm();
     $this->doTestBuildDemo();
     $this->doTestContainerDemoForm();
     $this->doTestInputDemoForm();
@@ -68,7 +68,7 @@ class FapiExampleTest extends ExamplesBrowserTestBase {
       'form_api_example.vertical_tabs_demo' => ['Submit'],
       // Modal form has a submit button, but requires input.
       'form_api_example.modal_form' => [],
-      'form_api_example.ajax_demo' => ['Submit'],
+      'form_api_example.ajax_color_demo' => ['Submit'],
       'form_api_example.build_demo' => ['Submit'],
       'form_api_example.ajax_addmore' => ['Submit'],
       // Multistep form has submit buttons, but requires input.
@@ -97,14 +97,14 @@ class FapiExampleTest extends ExamplesBrowserTestBase {
   /**
    * Test the ajax demo form.
    */
-  public function doTestAjaxDemoForm() {
+  public function doTestAjaxColorForm() {
     $assert = $this->assertSession();
 
     // Post the form.
     $edit = [
       'temperature' => 'warm',
     ];
-    $this->drupalPostForm(Url::fromRoute('form_api_example.ajax_demo'), $edit, 'Submit');
+    $this->drupalPostForm(Url::fromRoute('form_api_example.ajax_color_demo'), $edit, 'Submit');
     $assert->statusCodeEquals(200);
     $assert->pageTextContains('Value for Temperature: warm');
   }

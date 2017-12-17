@@ -67,11 +67,11 @@ form_api_example.modal_form:
   requirements:
     _permission: 'access content'
 
-form_api_example.ajax_demo:
-  path: 'examples/form-api-example/ajax-demo'
+form_api_example.ajax_color_demo:
+  path: 'examples/form-api-example/ajax-color-demo'
   defaults:
-    _form:  '\Drupal\form_api_example\Form\AjaxDemo'
-    _title: 'Ajax form'
+    _form:  '\Drupal\form_api_example\Form\AjaxColorForm'
+    _title: 'AJAX color form'
   requirements:
     _permission: 'access content'
 

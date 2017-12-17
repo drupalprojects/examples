@@ -32,7 +32,7 @@
  * - Vertical Tabs elements in forms
  *   - \Drupal\form_api_example\Form\VerticalTabsDemo
  * - Populating a portion on a form with Ajax callbacks
- *   - \Drupal\form_api_example\Form\AjaxDemo
+ *   - \Drupal\form_api_example\Form\AjaxColorForm
  * - Adding additional fields to a form with Ajax callbacks
  *   - \Drupal\form_api_example\Form\AjaxAddMore
  * - Modal form creation
