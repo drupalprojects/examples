@@ -51,6 +51,7 @@ function examples_toolbar() {
     'file_example' => 'file_example.fileapi',
     'hooks_example' => 'hooks_example.description',
     'js_example' => 'js_example.info',
+    'menu_example' => 'examples.menu_example',
     'node_type_example' => 'config_node_type_example.description',
     'page_example' => 'page_example_description',
     'pager_example' => 'pager_example.page',

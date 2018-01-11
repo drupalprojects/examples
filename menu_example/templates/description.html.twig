@@ -1,0 +1,17 @@
+{#
+
+Description text for the Menu Example.
+
+#}
+
+{% set link = path('examples.menu_example.route_only') %}
+
+{% trans %}
+
+<p>This page is displayed by the simplest (and base) menu example. Note that
+the title of the page is the same as the link title.
+You can also <a href="{{ link }}">visit a similar page with no menu link</a>.
+There are a number of examples here, from the most basic (like this one) to
+extravagant mappings of loaded placeholder arguments. Enjoy!</p>
+
+{% endtrans %}
