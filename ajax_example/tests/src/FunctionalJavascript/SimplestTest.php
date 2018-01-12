@@ -18,17 +18,22 @@ class SimplestTest extends JavascriptTestBase {
   public static $modules = ['ajax_example'];
 
   /**
-   * Test the user interactions for the Autotextfields example.
+   * Test AJAX behavior for the dropdown selector.
+   *
+   * We'll perform the following steps:
+   * - Open the simplest example page.
+   * - Verify that our AJAX wrapper element is present, but is empty.
+   * - Cause events by changing the value of the dropdown for all the different
+   *   values.
+   * - Verify that the prompt text changes when the dropdown changes.
    */
   public function testAutotextfields() {
-    // Get our Mink stuff.
-    $session = $this->getSession();
-    $page = $session->getPage();
-    $assert = $this->assertSession();
-
     // Get the page.
-    $form_url = Url::fromRoute('ajax_example.simplest');
-    $this->drupalGet($form_url);
+    $this->drupalGet(Url::fromRoute('ajax_example.simplest'));
+
+    // Get our Mink stuff.
+    $page = $this->getSession()->getPage();
+    $assert = $this->assertSession();
 
     // Don't repeat ourselves. This makes it easier if we change the markup
     // later.
@@ -38,8 +43,8 @@ class SimplestTest extends JavascriptTestBase {
     $assert->elementExists('css', '#replace-textfield-container');
     $assert->elementNotExists('css', $description_selector);
 
-    // Select values on the dropdown. Start with three so the change event is
-    // triggered.
+    // Cause events by changing the value of the dropdown for all the different
+    // values. Start with three so the change event is triggered.
     foreach (['three', 'two', 'one'] as $value) {
       // Select the dropdown value.
       $page->selectFieldOption('changethis', $value);
@@ -49,7 +54,7 @@ class SimplestTest extends JavascriptTestBase {
       $assert->elementExists('css', $description_selector);
       // Get the description element from the page.
       $prompt_element = $page->find('css', $description_selector);
-      // Assert that the description element says what we expect it to say.
+      // Verify that the prompt text changes when the dropdown changes.
       $this->assertEquals(
         "Say why you chose '$value'",
         $prompt_element->getText()

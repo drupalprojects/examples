@@ -44,28 +44,25 @@ class ModalFormTest extends JavascriptTestBase {
 
     // Click on 'see this form as a modal'.
     $this->clickLink('ajax-example-modal-link');
-
     $this->assertNotEmpty($assert->waitForElementVisible('css', '.ui-dialog'));
 
     // Enter a value.
     $this->assertNotEmpty($input = $page->find('css', 'div.ui-dialog input[name="title"]'));
     $input->setValue('test_title');
 
+        $this->createScreenshot(\Drupal::root() . '/screencap.png');
+
     // Click 'submit'.
-    // @todo: Switch to using NodeElement::click() on the button or
-    // NodeElement::submit() on the form when #2831506 is fixed.
-    // @see https://www.drupal.org/node/2831506
-    $session->executeScript("jQuery('button.ui-button.form-submit').click()");
+    $this->assertNotEmpty($submit = $page->find('css', 'button.ui-button.form-submit'));
+    $submit->click();
     $assert->assertWaitOnAjaxRequest();
 
-    // Check that we have a new modal.
+    // Check that we have a result modal.
     $assert->elementContains('css', 'span.ui-dialog-title', 'test_title');
 
     // Click the close X.
-    // @todo: Switch to using NodeElement::click() on the button or
-    // NodeElement::submit() on the form when #2831506 is fixed.
-    // @see https://www.drupal.org/node/2831506
-    $session->executeScript("jQuery('button.ui-dialog-titlebar-close').click()");
+    $this->assertNotEmpty($close = $page->find('css', 'button.ui-dialog-titlebar-close'));
+    $close->click();
     $assert->assertWaitOnAjaxRequest();
 
     // Verify that the modal went away.
