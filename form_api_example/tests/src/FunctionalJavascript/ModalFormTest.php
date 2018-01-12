@@ -50,8 +50,6 @@ class ModalFormTest extends JavascriptTestBase {
     $this->assertNotEmpty($input = $page->find('css', 'div.ui-dialog input[name="title"]'));
     $input->setValue('test_title');
 
-        $this->createScreenshot(\Drupal::root() . '/screencap.png');
-
     // Click 'submit'.
     $this->assertNotEmpty($submit = $page->find('css', 'button.ui-button.form-submit'));
     $submit->click();
