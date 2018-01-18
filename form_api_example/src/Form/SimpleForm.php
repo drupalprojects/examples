@@ -63,8 +63,8 @@ class SimpleForm extends FormBase {
    * Getter method for Form ID.
    *
    * The form ID is used in implementations of hook_form_alter() to allow other
-   * modules to alter the render array built by this form controller.  it must
-   * be unique site wide. It normally starts with the providing module's name.
+   * modules to alter the render array built by this form controller. It must be
+   * unique site wide. It normally starts with the providing module's name.
    *
    * @return string
    *   The unique ID of the form defined by this class.
@@ -108,7 +108,7 @@ class SimpleForm extends FormBase {
      * with the title.
      */
     $title = $form_state->getValue('title');
-    drupal_set_message(t('You specified a title of %title.', ['%title' => $title]));
+    drupal_set_message($this->t('You specified a title of %title.', ['%title' => $title]));
   }
 
 }
