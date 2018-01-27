@@ -6,9 +6,6 @@ use Drupal\Tests\examples\Functional\ExamplesBrowserTestBase;
 
 /**
  * Base class for testing Tour functionality.
- *
- * @todo: When tour module's TourTestBase is updated to phpunit, we can remove
- *        this class and use that one instead.
  */
 abstract class TourTestBase extends ExamplesBrowserTestBase {
 
@@ -30,6 +27,10 @@ abstract class TourTestBase extends ExamplesBrowserTestBase {
    * $tips[] = array('data-class' => 'baz');
    * $this->assertTourTips($tips);
    * @endcode
+   *
+   * @todo Force the caller to provide data rather than searching for it and
+   *   then asserting that the elements we found do exist.
+   * @see https://www.drupal.org/project/examples/issues/2940089
    */
   public function assertTourTips(array $tips = []) {
     $assert = $this->assertSession();
@@ -57,25 +58,15 @@ abstract class TourTestBase extends ExamplesBrowserTestBase {
     }
     else {
       // Check for corresponding page elements.
-      $total = 0;
-      $modals = 0;
+      $page = $this->getSession()->getPage();
       foreach ($tips as $tip) {
         if (!empty($tip['data-id'])) {
-          $elements = $this->getSession()->getPage()->find('css', "#{$tip['data-id']}");
-          $this->assertTrue(!empty($elements) && count($elements) === 1, format_string('Found corresponding page element for tour tip with id #%data-id', ['%data-id' => $tip['data-id']]));
+          $this->assertNotNull($page->find('css', "#{$tip['data-id']}"));
         }
         elseif (!empty($tip['data-class'])) {
-          $elements = $this->getSession()->getPage()->find('css', "#{$tip['data-class']}");
-
-          $this->assertFalse(empty($elements), format_string('Found corresponding page element for tour tip with class .%data-class', ['%data-class' => $tip['data-class']]));
+          $this->assertNotNull($page->find('css', "#{$tip['data-class']}"));
         }
-        else {
-          // It's a modal.
-          $modals++;
-        }
-        $total++;
       }
-      $this->verbose(format_string('Total %total Tips tested of which %modals modal(s).', ['%total' => $total, '%modals' => $modals]));
     }
   }
 

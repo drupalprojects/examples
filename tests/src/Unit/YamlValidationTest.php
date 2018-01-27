@@ -2,6 +2,7 @@
 
 namespace Drupal\Tests\examples\Unit;
 
+use PHPUnit\Framework\TestCase;
 use Symfony\Component\Yaml\Yaml;
 
 /**
@@ -12,7 +13,7 @@ use Symfony\Component\Yaml\Yaml;
  *
  * @group examples
  */
-class YamlValidationTest extends \PHPUnit_Framework_TestCase {
+class YamlValidationTest extends TestCase {
 
   /**
    * Find all the config YAML files and provide them to the test.
