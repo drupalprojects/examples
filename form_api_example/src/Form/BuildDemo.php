@@ -108,7 +108,7 @@ class BuildDemo extends FormBase {
    */
   public function getFormId() {
     $this->displayMethodInvocation('getFormId');
-    return 'form_api_example_simple_form';
+    return 'form_api_example_build_form';
   }
 
   /**
