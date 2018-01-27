@@ -15,35 +15,39 @@ use Drupal\Core\Entity\EntityChangedTrait;
  *
  * @ingroup content_entity_example
  *
- * This is the main definition of the entity type. From it, an entityType is
- * derived. The most important properties in this example are listed below.
+ * This is the main definition of the entity type. From it, an EntityType object
+ * is derived. The most important properties in this example are listed below.
  *
- * id: The unique identifier of this entityType. It follows the pattern
+ * id: The unique identifier of this entity type. It follows the pattern
  * 'moduleName_xyz' to avoid naming conflicts.
  *
  * label: Human readable name of the entity type.
  *
  * handlers: Handler classes are used for different tasks. You can use
- * standard handlers provided by D8 or build your own, most probably derived
- * from the standard class. In detail:
+ * standard handlers provided by Drupal or build your own, most probably derived
+ * from the ones provided by Drupal. In detail:
  *
  * - view_builder: we use the standard controller to view an instance. It is
- *   called when a route lists an '_entity_view' default for the entityType
- *   (see routing.yml for details. The view can be manipulated by using the
- *   standard drupal tools in the settings.
+ *   called when a route lists an '_entity_view' default for the entity type.
+ *   You can see this in the entity.content_entity_example_contact.canonical
+ *   route in the content_entity_example.routing.yml file. The view can be
+ *   manipulated by using the standard Drupal tools in the settings.
  *
- * - list_builder: We derive our own list builder class from the
- *   entityListBuilder to control the presentation.
- *   If there is a view available for this entity from the views module, it
- *   overrides the list builder. @todo: any view? naming convention?
+ * - list_builder: We derive our own list builder class from EntityListBuilder
+ *   to control the presentation. If there is a view available for this entity
+ *   from the views module, it overrides the list builder if the "collection"
+ *   key in the links array in the Entity annotation below is changed to the
+ *   path of the View. In this case the entity collection route will give the
+ *   view path.
  *
  * - form: We derive our own forms to add functionality like additional fields,
- *   redirects etc. These forms are called when the routing list an
- *   '_entity_form' default for the entityType. Depending on the suffix
- *   (.add/.edit/.delete) in the route, the correct form is called.
+ *   redirects etc. These forms are used when the route specifies an
+ *   '_entity_form' default for the entity type. Depending on the suffix
+ *   (.add/.edit/.delete) of the '_entity_form' default, the form specified in
+ *   the annotation is used.
  *
- * - access: Our own accessController where we determine access rights based on
- *   permissions.
+ * - access: Our own access controller, where we determine access rights based
+ *   on permissions.
  *
  * More properties:
  *
@@ -52,10 +56,11 @@ use Drupal\Core\Entity\EntityChangedTrait;
  *    BaseFieldDefinitions below. The table is automatically created during
  *    installation.
  *
- *  - fieldable: Can additional fields be added to the entity via the GUI?
- *    Analog to content types.
+ *  - fieldable: Can additional fields be attached to the entity via the GUI?
+ *    Can the user add fields, like they would to a node?
  *
- *  - entity_keys: How to access the fields. Analog to 'nid' or 'uid'.
+ *  - entity_keys: How to access the fields. Specify fields from
+ *    baseFieldDefinitions() which can be used as keys.
  *
  *  - links: Provide links to do standard tasks. The 'edit-form' and
  *    'delete-form' links are added to the list built by the
