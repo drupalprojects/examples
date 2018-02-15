@@ -4,7 +4,7 @@
 # for this module.
 
 # Menu items corresponding to these URLs are defined separately in the
-# page_example.menu_links.yml file.
+# page_example.links.menu.yml file.
 
 # If the user accesses http://example.com/?q=examples/page-example, the routing
 # system will look for a route with that path. In this case it will find a
