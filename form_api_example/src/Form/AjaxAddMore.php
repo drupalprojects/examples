@@ -96,7 +96,6 @@ class AjaxAddMore extends DemoBase {
    * Selects and returns the fieldset with the names in it.
    */
   public function addmoreCallback(array &$form, FormStateInterface $form_state) {
-    $name_field = $form_state->get('num_names');
     return $form['names_fieldset'];
   }
 
