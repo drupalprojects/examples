@@ -1,5 +1,5 @@
 ajax_example.description:
-  path: 'examples/ajax-example'
+  path: '/examples/ajax-example'
   defaults:
     _controller: '\Drupal\ajax_example\Controller\AjaxExampleController::description'
     _title: 'AJAX Example'
@@ -7,7 +7,7 @@ ajax_example.description:
     _permission: 'access content'
 
 ajax_example.simplest:
-  path: 'examples/ajax-example/simplest'
+  path: '/examples/ajax-example/simplest'
   defaults:
     _form: '\Drupal\ajax_example\Form\Simplest'
     _title: 'Simplest AJAX example'
@@ -15,7 +15,7 @@ ajax_example.simplest:
     _permission: 'access content'
 
 ajax_example.autotextfields:
-  path: 'examples/ajax-example/autotextfields'
+  path: '/examples/ajax-example/autotextfields'
   defaults:
     _form: '\Drupal\ajax_example\Form\Autotextfields'
     _title: 'Generate textfields'
@@ -23,7 +23,7 @@ ajax_example.autotextfields:
     _permission: 'access content'
 
 ajax_example.submit_driven_ajax:
-  path: 'examples/ajax-example/submit-driven-ajax'
+  path: '/examples/ajax-example/submit-driven-ajax'
   defaults:
     _form: '\Drupal\ajax_example\Form\SubmitDriven'
     _title: 'Submit-driven AJAX'
@@ -31,7 +31,7 @@ ajax_example.submit_driven_ajax:
     _permission: 'access content'
 
 ajax_example.dependent_dropdown:
-  path: 'examples/ajax-example/dependent-dropdown/{nojs}'
+  path: '/examples/ajax-example/dependent-dropdown/{nojs}'
   defaults:
     _form: '\Drupal\ajax_example\Form\DependentDropdown'
     _title: 'Dependent dropdown'
@@ -40,7 +40,7 @@ ajax_example.dependent_dropdown:
     _permission: 'access content'
 
 ajax_example.dynamic_form_sections:
-  path: 'examples/ajax-example/dynamic-form-sections/{nojs}'
+  path: '/examples/ajax-example/dynamic-form-sections/{nojs}'
   defaults:
     _form: '\Drupal\ajax_example\Form\DynamicFormSections'
     _title: 'Dynamic form sections'
@@ -49,7 +49,7 @@ ajax_example.dynamic_form_sections:
     _permission: 'access content'
 
 ajax_example.wizard:
-  path: 'examples/ajax-example/wizard'
+  path: '/examples/ajax-example/wizard'
   defaults:
     _form: '\Drupal\ajax_example\Form\Wizard'
     _title: 'Wizard with graceful degradation'
@@ -57,7 +57,7 @@ ajax_example.wizard:
     _permission: 'access content'
 
 ajax_example.wizardnojs:
-  path: 'examples/ajax-example/wizard-nojs/{no_js_use}'
+  path: '/examples/ajax-example/wizard-nojs/{no_js_use}'
   defaults:
     _form: '\Drupal\ajax_example\Form\Wizard'
     _title: 'Wizard with graceful degradation, w/JS turned off'
@@ -66,7 +66,7 @@ ajax_example.wizardnojs:
     _permission: 'access content'
 
 ajax_example.ajax_link_render:
-  path: 'examples/ajax-example/ajax-link-renderable'
+  path: '/examples/ajax-example/ajax-link-renderable'
   defaults:
     _controller: '\Drupal\ajax_example\Controller\AjaxExampleController::renderLinkRenderableArray'
     _title: 'AJAX link from a render array'
@@ -78,7 +78,7 @@ ajax_example.ajax_link_render:
 # a way to know whether the request is an AJAX request or is from some other
 # source.
 ajax_example.ajax_link_callback:
-  path: 'examples/ajax-example/ajax-link-callback/{nojs}'
+  path: '/examples/ajax-example/ajax-link-callback/{nojs}'
   defaults:
     _controller: '\Drupal\ajax_example\Controller\AjaxExampleController::ajaxLinkCallback'
     # We provide a default value for {nojs}, so that it can be an optional
@@ -88,7 +88,7 @@ ajax_example.ajax_link_callback:
     _permission: 'access content'
 
 ajax_example.autocomplete_user:
-  path: 'examples/ajax_example/user_autocomplete'
+  path: '/examples/ajax_example/user_autocomplete'
   defaults:
     _form: '\Drupal\ajax_example\Form\EntityAutocomplete'
     _title: 'Autocomplete users with entity_autocomplete.'

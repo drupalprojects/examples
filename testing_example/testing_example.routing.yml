@@ -1,6 +1,6 @@
 # This route is to a page explaining the module.
 testing_example.description:
-  path: 'examples/testing-example'
+  path: '/examples/testing-example'
   defaults:
     _controller: '\Drupal\testing_example\Controller\TestingExampleController::description'
   requirements:
@@ -8,7 +8,7 @@ testing_example.description:
 # This route displays a sum of two numbers in terms of how many hands are
 # required to count it.
 testing_example.sum_in_hands:
-  path: 'examples/testing-example/sum-in-hands/{first}/{second}'
+  path: '/examples/testing-example/sum-in-hands/{first}/{second}'
   defaults:
     _controller: '\Drupal\testing_example\Controller\ContrivedController::displayAddedNumbers'
     first: 23

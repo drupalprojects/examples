@@ -90,7 +90,7 @@ examples.menu_example.route_only.callback:
 # method. Matching the variable name is must. The {arg} element in the URL is
 # called a slug and is available as a $arg in the controller method.
 examples.menu_example.use_url_arguments:
-  path: 'examples/menu-example/use-url-arguments/{arg1}/{arg2}'
+  path: '/examples/menu-example/use-url-arguments/{arg1}/{arg2}'
   defaults:
     _title: 'URL Arguments'
     _controller: '\Drupal\menu_example\Controller\MenuExampleController::urlArgument'
@@ -103,7 +103,7 @@ examples.menu_example.use_url_arguments:
 # Title of this menu entry will be altered by controller method defined by
 # key '_title_callback'.
 examples.menu_example.title_callbacks:
-  path: 'examples/menu-example/title-callbacks'
+  path: '/examples/menu-example/title-callbacks'
   defaults:
     _title_callback: 'Drupal\menu_example\Controller\MenuExampleController::titleCallback'
     _controller: '\Drupal\menu_example\Controller\MenuExampleController::titleCallbackContent'
@@ -112,7 +112,7 @@ examples.menu_example.title_callbacks:
 
 # A menu item entry to demonstrate use of parameters in routes.
 examples.menu_example.placeholder_argument:
-  path: 'examples/menu-example/placeholder-argument'
+  path: '/examples/menu-example/placeholder-argument'
   defaults:
     _title: 'Placeholder Arguments'
     _controller: '\Drupal\menu_example\Controller\MenuExampleController::placeholderArgs'
@@ -121,7 +121,7 @@ examples.menu_example.placeholder_argument:
 
 # Parameters in routes can be used as placeholders arguments too.
 examples.menu_example.placeholder_argument.display:
-  path: 'examples/menu-example/placeholder-argument/{arg}/display'
+  path: '/examples/menu-example/placeholder-argument/{arg}/display'
   defaults:
     _title: 'Placeholder Arguments'
     _controller: '\Drupal\menu_example\Controller\MenuExampleController::placeholderArgsDisplay'
@@ -131,7 +131,7 @@ examples.menu_example.placeholder_argument.display:
 
 # Any route defined here can be altered. We can do so by defining a RouteSubscriber!
 example.menu_example.path_override:
-  path: 'examples/menu-example/menu-original-path'
+  path: '/examples/menu-example/menu-original-path'
   defaults:
     _title: 'Menu path that will be altered'
     _controller: '\Drupal\menu_example\Controller\MenuExampleController::pathOverride'

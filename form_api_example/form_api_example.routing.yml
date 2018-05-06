@@ -11,7 +11,7 @@
 # Menu items corresponding to these URLs are defined separately in the
 # form_api_example.links.menu.yml file.
 form_api_example.description:
-  path: 'examples/form-api-example'
+  path: '/examples/form-api-example'
   defaults:
     _controller:  '\Drupal\form_api_example\Controller\Page::description'
     _title: 'Form API Examples'
@@ -19,7 +19,7 @@ form_api_example.description:
     _permission: 'access content'
 
 form_api_example.simple_form:
-  path: 'examples/form-api-example/simple-form'
+  path: '/examples/form-api-example/simple-form'
   defaults:
     _form:  '\Drupal\form_api_example\Form\SimpleForm'
     _title: 'Simple form'
@@ -27,7 +27,7 @@ form_api_example.simple_form:
     _permission: 'access content'
 
 form_api_example.input_demo:
-  path: 'examples/form-api-example/input-demo'
+  path: '/examples/form-api-example/input-demo'
   defaults:
     _form:  '\Drupal\form_api_example\Form\InputDemo'
     _title: 'Common input elements'
@@ -35,7 +35,7 @@ form_api_example.input_demo:
     _permission: 'access content'
 
 form_api_example.state_demo:
-  path: 'examples/form-api-example/state-demo'
+  path: '/examples/form-api-example/state-demo'
   defaults:
     _form:  '\Drupal\form_api_example\Form\StateDemo'
     _title: 'Form state binding'
@@ -43,7 +43,7 @@ form_api_example.state_demo:
     _permission: 'access content'
 
 form_api_example.container_demo:
-  path: 'examples/form-api-example/container-demo'
+  path: '/examples/form-api-example/container-demo'
   defaults:
     _form:  '\Drupal\form_api_example\Form\ContainerDemo'
     _title: 'Container elements'
@@ -51,7 +51,7 @@ form_api_example.container_demo:
     _permission: 'access content'
 
 form_api_example.vertical_tabs_demo:
-  path: 'examples/form-api-example/vertical-tabs-demo'
+  path: '/examples/form-api-example/vertical-tabs-demo'
   defaults:
     _form:  '\Drupal\form_api_example\Form\VerticalTabsDemo'
     _title: 'Vertical tab elements'
@@ -59,7 +59,7 @@ form_api_example.vertical_tabs_demo:
     _permission: 'access content'
 
 form_api_example.modal_form:
-  path: 'examples/form-api-example/modal-form/{nojs}'
+  path: '/examples/form-api-example/modal-form/{nojs}'
   defaults:
     _form:  '\Drupal\form_api_example\Form\ModalForm'
     _title: 'Modal form'
@@ -68,7 +68,7 @@ form_api_example.modal_form:
     _permission: 'access content'
 
 form_api_example.ajax_color_demo:
-  path: 'examples/form-api-example/ajax-color-demo'
+  path: '/examples/form-api-example/ajax-color-demo'
   defaults:
     _form:  '\Drupal\form_api_example\Form\AjaxColorForm'
     _title: 'AJAX color form'
@@ -76,7 +76,7 @@ form_api_example.ajax_color_demo:
     _permission: 'access content'
 
 form_api_example.build_demo:
-  path: 'examples/form-api-example/build-demo'
+  path: '/examples/form-api-example/build-demo'
   defaults:
     _form:  '\Drupal\form_api_example\Form\BuildDemo'
     _title: 'Build form demo'
@@ -84,7 +84,7 @@ form_api_example.build_demo:
     _permission: 'access content'
 
 form_api_example.ajax_addmore:
-  path: 'examples/form-api-example/ajax-addmore'
+  path: '/examples/form-api-example/ajax-addmore'
   defaults:
     _form:  '\Drupal\form_api_example\Form\AjaxAddMore'
     _title: 'Add-more button'
@@ -92,7 +92,7 @@ form_api_example.ajax_addmore:
     _permission: 'access content'
 
 form_api_example.multistep_form:
-  path: 'examples/form-api-example/multistep-form'
+  path: '/examples/form-api-example/multistep-form'
   defaults:
     _form: '\Drupal\form_api_example\Form\MultistepForm'
     _title: 'Multistep form'

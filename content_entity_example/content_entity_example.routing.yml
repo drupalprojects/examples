@@ -50,7 +50,7 @@ entity.content_entity_example_contact.delete_form:
     _entity_access: 'content_entity_example_contact.delete'
 
 content_entity_example.contact_settings:
-  path: 'admin/structure/content_entity_example_contact_settings'
+  path: '/admin/structure/content_entity_example_contact_settings'
   defaults:
     _form: '\Drupal\content_entity_example\Form\ContactSettingsForm'
     _title: 'Contact settings'

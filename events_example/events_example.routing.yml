@@ -1,6 +1,6 @@
 # Define a route for our event dispatching example.
 events_example.description:
-  path: 'examples/events-example'
+  path: '/examples/events-example'
   defaults:
     _form: '\Drupal\events_example\Form\EventsExampleForm'
     _title: 'Events Example'

@@ -1,5 +1,5 @@
 tour_example_description:
-  path: 'examples/tour-example'
+  path: '/examples/tour-example'
   options:
     _admin_route: TRUE
   defaults:

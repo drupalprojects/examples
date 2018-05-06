@@ -1,5 +1,5 @@
 cache_example.description:
-  path: 'examples/cache-example'
+  path: '/examples/cache-example'
   defaults:
     _form: '\Drupal\cache_example\Form\CacheExampleForm'
   requirements:
