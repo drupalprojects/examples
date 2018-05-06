@@ -42,7 +42,7 @@ use Drupal\Core\Block\BlockPluginInterface;
 function block_example_block_view_alter(array &$build, BlockPluginInterface $block) {
   // We'll search for the string 'uppercase'.
   $definition = $block->getPluginDefinition();
-  if ((!empty($build['#configuration']['label']) && stristr($build['#configuration']['label'], 'uppercase')) || (!empty($definition['subject']) && stristr($definition['subject'], 'uppercase'))) {
+  if ((!empty($build['#configuration']['label']) && Unicode::strpos($build['#configuration']['label'], 'uppercase')) || (!empty($definition['subject']) && Unicode::strpos($definition['subject'], 'uppercase'))) {
     // This will uppercase the block title.
     $build['#configuration']['label'] = Unicode::strtoupper($build['#configuration']['label']);
   }
