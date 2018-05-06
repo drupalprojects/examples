@@ -7,16 +7,17 @@ use Drupal\Core\Form\FormStateInterface;
 /**
  * Implements the state demo form controller.
  *
- * This example demonstrates using the #state property to bind the visibility of
- * a form element to the value of another element in the form. In the example,
- * when the user checks the "Need Special Accommodation" checkbox, additional
- * form elements are made visible.
+ * This example demonstrates using the #states property to bind the visibility
+ * of a form element to the value of another element in the form. In the
+ * example, when the user checks the "Need Special Accommodation" checkbox,
+ * additional form elements are made visible.
  *
  * The submit handler for this form is implemented by the
  * \Drupal\form_api_example\Form\DemoBase class.
  *
  * @see \Drupal\Core\Form\FormBase
  * @see \Drupal\form_api_example\Form\DemoBase
+ * @see drupal_process_states()
  */
 class StateDemo extends DemoBase {
 
@@ -43,9 +44,22 @@ class StateDemo extends DemoBase {
       '#attributes' => [
         'class' => 'accommodation',
       ],
+      // #states is an associative array. Each key is the name of a state to
+      // apply to the element, such as 'visible'. Each value is another array,
+      // making a list of conditions that denote when the state should be
+      // applied. Every condition is a key/value pair, whose key is a jQuery
+      // selector that denotes another element on the page, and whose value is
+      // an array of conditions, which must bet met on in order for the state to
+      // be applied.
+      //
+      // For additional documentation on the #states property including a list
+      // of valid states and conditions see drupal_process_states().
       '#states' => [
+        // The state being affected is "invisible".
         'invisible' => [
-          'input[name="needs_accommodation"]' => ['checked' => FALSE],
+          // Drupal will only apply this state when the element that satisfies
+          // the selector input[name="needs_accommodation"] is un-checked.
+          ':input[name="needs_accommodation"]' => ['checked' => FALSE],
         ],
       ],
     ];
