@@ -1,7 +1,9 @@
 <?php
 
 namespace Drupal\Tests\config_entity_example\Functional;
+
 use Drupal\config_entity_example\Entity\Robot;
+use Drupal\Core\Url;
 use Drupal\Tests\BrowserTestBase;
 
 /**
@@ -131,7 +133,21 @@ class ConfigEntityExampleTest extends BrowserTestBase {
     $assert->pageTextContains($robby_label);
     $assert->pageTextContains($robby_machine_name);
 
+    // Try to re-submit the same robot, and verify that we see an error message
+    // and not a PHP error.
+    $this->drupalPostForm(
+      Url::fromRoute('entity.robot.add_form'),
+      [
+        'label' => $robby_label,
+        'id' => $robby_machine_name,
+        'floopy' => TRUE,
+      ],
+      'Create Robot'
+    );
+    $assert->pageTextContains('The machine-readable name is already in use.');
+
     // 6) Verify that required links are present on respective paths.
+    $this->drupalGet(Url::fromRoute('entity.robot.list'));
     $this->assertLinkByHref('/examples/config-entity-example/add');
     $this->assertLinkByHref('/examples/config-entity-example/manage/robby_machine_name');
     $this->assertLinkByHref('/examples/config-entity-example/manage/robby_machine_name/delete');
@@ -153,6 +169,20 @@ class ConfigEntityExampleTest extends BrowserTestBase {
       [':path' => '/examples/config-entity-example']
     );
     $this->assertEqual(count($cancel_button), 1, 'Found cancel button linking to list page.');
+
+    // Try to submit a robot with a machine name of 'custom'. This is a reserved
+    // keyword we've disallowed in the form.
+    $this->drupalPostForm(
+      Url::fromRoute('entity.robot.add_form'),
+      [
+        'label' => 'Custom',
+        'id' => 'custom',
+        'floopy' => TRUE,
+      ],
+      'Create Robot'
+    );
+    $assert->pageTextContains('Additionally, it can not be the reserved word "custom".');
+
   }
 
   /**

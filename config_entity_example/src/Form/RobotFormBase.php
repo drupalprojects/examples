@@ -3,7 +3,7 @@
 namespace Drupal\config_entity_example\Form;
 
 use Drupal\Core\Entity\EntityForm;
-use Drupal\Core\Entity\Query\QueryFactory;
+use Drupal\Core\Entity\EntityStorageInterface;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Link;
 use Symfony\Component\DependencyInjection\ContainerInterface;
@@ -21,9 +21,9 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
 class RobotFormBase extends EntityForm {
 
   /**
-   * @var \Drupal\Core\Entity\Query\QueryFactory
+   * @var \Drupal\Core\Entity\EntityStorageInterface
    */
-  protected $entityQueryFactory;
+  protected $entityStorage;
 
   /**
    * Construct the RobotFormBase.
@@ -33,11 +33,11 @@ class RobotFormBase extends EntityForm {
    * from the container. We later use this query factory to build an entity
    * query for the exists() method.
    *
-   * @param \Drupal\Core\Entity\Query\QueryFactory $query_factory
+   * @param \Drupal\Core\Entity\EntityStorageInterface $entity_storage
    *   An entity query factory for the robot entity type.
    */
-  public function __construct(QueryFactory $query_factory) {
-    $this->entityQueryFactory = $query_factory;
+  public function __construct(EntityStorageInterface $entity_storage) {
+    $this->entityStorage  = $entity_storage;
   }
 
   /**
@@ -55,7 +55,7 @@ class RobotFormBase extends EntityForm {
    * pass the factory to our class as a constructor parameter.
    */
   public static function create(ContainerInterface $container) {
-    return new static($container->get('entity.query'));
+    return new static($container->get('entity_type.manager')->getStorage('robot'));
   }
 
   /**
@@ -126,7 +126,7 @@ class RobotFormBase extends EntityForm {
    */
   public function exists($entity_id, array $element, FormStateInterface $form_state) {
     // Use the query factory to build a new robot entity query.
-    $query = $this->entityQueryFactory->get('robot');
+    $query = $this->entityStorage->getQuery();
 
     // Query the entity ID to see if its in use.
     $result = $query->condition('id', $element['#field_prefix'] . $entity_id)
