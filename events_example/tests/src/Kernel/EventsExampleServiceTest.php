@@ -8,8 +8,10 @@ use Drupal\events_example\EventSubscriber\EventsExampleSubscriber;
 /**
  * Test to ensure 'events_example_subscriber' service is reachable.
  *
- * @ingroup events_example
+ * @group events_example
  * @group examples
+ *
+ * @ingroup events_example
  */
 class EventsExampleServiceTest extends KernelTestBase {
 

@@ -2,6 +2,7 @@
 
 namespace Drupal\Tests\events_example\Functional;
 
+use Drupal\Core\Url;
 use Drupal\Tests\BrowserTestBase;
 
 /**
@@ -10,8 +11,10 @@ use Drupal\Tests\BrowserTestBase;
  * For another example of testing whether or not events are dispatched see
  * \Drupal\Tests\migrate\Kernel\MigrateEventsTest.
  *
- * @ingroup events_example
+ * @group events_example
  * @group examples
+ *
+ * @ingroup events_example
  */
 class EventsExampleTest extends BrowserTestBase {
 
@@ -30,7 +33,8 @@ class EventsExampleTest extends BrowserTestBase {
    */
   public function testEventsExample() {
     // Test that the main page for the example is accessible.
-    $this->drupalGet('examples/events-example');
+    $events_example_form = Url::fromRoute('events_example.description');
+    $this->drupalGet($events_example_form);
     $this->assertSession()->statusCodeEquals(200);
 
     // Verify the page contains the required form fields.
@@ -48,7 +52,7 @@ class EventsExampleTest extends BrowserTestBase {
       'incident_type' => 'stolen_princess',
       'incident' => $this->randomString(),
     ];
-    $this->drupalPostForm('examples/events-example', $values, 'Submit');
+    $this->drupalPostForm($events_example_form, $values, 'Submit');
     $this->assertSession()->pageTextContains('Mario has been alerted. Thank you.');
 
     // Fill out the form again, this time testing that the
@@ -57,8 +61,17 @@ class EventsExampleTest extends BrowserTestBase {
       'incident_type' => 'joker',
       'incident' => $this->randomString(),
     ];
-    $this->drupalPostForm('examples/events-example', $values, 'Submit');
+    $this->drupalPostForm($events_example_form, $values, 'Submit');
     $this->assertSession()->pageTextContains('Batman has been alerted. Thank you.');
+
+    // Fill out the form again, this time testing that our default handler
+    // catches all the remaining values.
+    $values = [
+      'incident_type' => 'cat',
+      'incident' => $this->randomString(),
+    ];
+    $this->drupalPostForm($events_example_form, $values, 'Submit');
+    $this->assertSession()->pageTextContains('notifyDefault()');
   }
 
 }
