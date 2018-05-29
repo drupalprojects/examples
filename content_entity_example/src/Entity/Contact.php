@@ -151,20 +151,6 @@ class Contact extends ContentEntityBase implements ContactInterface {
   /**
    * {@inheritdoc}
    */
-  public function getCreatedTime() {
-    return $this->get('created')->value;
-  }
-
-  /**
-   * {@inheritdoc}
-   */
-  public function getChangedTime() {
-    return $this->get('changed')->value;
-  }
-
-  /**
-   * {@inheritdoc}
-   */
   public function getOwner() {
     return $this->get('user_id')->entity;
   }
