@@ -7,7 +7,7 @@ use Drupal\Tests\BrowserTestBase;
 /**
  * Functional tests for the Batch Example module.
  *
- * @group fapi_example
+ * @group batch_example
  *
  * @ingroup batch_example
  */

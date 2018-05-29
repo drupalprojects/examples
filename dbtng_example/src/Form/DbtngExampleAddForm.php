@@ -5,6 +5,7 @@ namespace Drupal\dbtng_example\Form;
 use Drupal\Core\DependencyInjection\ContainerInjectionInterface;
 use Drupal\Core\Form\FormInterface;
 use Drupal\Core\Form\FormStateInterface;
+use Drupal\Core\Messenger\MessengerTrait;
 use Drupal\Core\Session\AccountProxyInterface;
 use Drupal\Core\StringTranslation\StringTranslationTrait;
 use Drupal\dbtng_example\DbtngExampleStorage;
@@ -16,6 +17,7 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
 class DbtngExampleAddForm implements FormInterface, ContainerInjectionInterface {
 
   use StringTranslationTrait;
+  use MessengerTrait;
 
   /**
    * The current user.
@@ -39,6 +41,7 @@ class DbtngExampleAddForm implements FormInterface, ContainerInjectionInterface 
     // The StringTranslationTrait trait manages the string translation service
     // for us. We can inject the service here.
     $form->setStringTranslation($container->get('string_translation'));
+    $form->setMessenger($container->get('messenger'));
     return $form;
   }
 
@@ -123,7 +126,7 @@ class DbtngExampleAddForm implements FormInterface, ContainerInjectionInterface 
     ];
     $return = DbtngExampleStorage::insert($entry);
     if ($return) {
-      drupal_set_message($this->t('Created entry @entry', ['@entry' => print_r($entry, TRUE)]));
+      $this->messenger()->addMessage($this->t('Created entry @entry', ['@entry' => print_r($entry, TRUE)]));
     }
   }
 

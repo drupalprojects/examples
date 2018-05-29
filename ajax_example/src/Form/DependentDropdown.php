@@ -161,7 +161,7 @@ class DependentDropdown extends FormBase {
     switch ($trigger) {
       case 'Submit':
         // Submit: We're done.
-        drupal_set_message($this->t('Your values have been submitted. Instrument family: @family, Instrument: @instrument', [
+        $this->messenger()->addMessage($this->t('Your values have been submitted. Instrument family: @family, Instrument: @instrument', [
           '@family' => $form_state->getValue('instrument_family_dropdown'),
           '@instrument' => $form_state->getValue('instrument_dropdown'),
         ]));

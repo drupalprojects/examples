@@ -8,7 +8,7 @@ use Drupal\Core\Form\FormStateInterface;
 /**
  * Implements the build demo form controller.
  *
- * This example uses drupal_set_message() calls to demonstrate the order of
+ * This example uses the Messenger service to demonstrate the order of
  * controller method invocations by the form api.
  *
  * @see \Drupal\Core\Form\FormBase
@@ -41,7 +41,7 @@ class BuildDemo extends FormBase {
    */
   private function displayMethodInvocation($method_name) {
     self::$sequenceCounter++;
-    drupal_set_message(self::$sequenceCounter . ". $method_name");
+    $this->messenger()->addMessage(self::$sequenceCounter . ". $method_name");
   }
 
   /**

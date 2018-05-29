@@ -107,17 +107,18 @@ function batch_example_op_2($operation_details, &$context) {
  * Batch 'finished' callback used by both batch 1 and batch 2.
  */
 function batch_example_finished($success, $results, $operations) {
+  $messenger = \Drupal::messenger();
   if ($success) {
     // Here we could do something meaningful with the results.
     // We just display the number of nodes we processed...
-    drupal_set_message(t('@count results processed.', ['@count' => count($results)]));
-    drupal_set_message(t('The final result was "%final"', ['%final' => end($results)]));
+    $messenger->addMessage(t('@count results processed.', ['@count' => count($results)]));
+    $messenger->addMessage(t('The final result was "%final"', ['%final' => end($results)]));
   }
   else {
     // An error occurred.
     // $operations contains the operations that remained unprocessed.
     $error_operation = reset($operations);
-    drupal_set_message(
+    $messenger->addMessage(
       t('An error occurred while processing @operation with arguments : @args',
         [
           '@operation' => $error_operation[0],

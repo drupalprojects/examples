@@ -116,7 +116,7 @@ class Wizard extends FormBase {
           $value_message .= "$key=$value, ";
         }
       }
-      drupal_set_message($value_message);
+      $this->messenger()->addMessage($value_message);
       $form_state->setRebuild(FALSE);
       // Redirect to #action, else return.
       return;

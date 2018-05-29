@@ -44,7 +44,7 @@ function hook_hooks_example_count_incremented($current_count, \Drupal\node\NodeI
   // If this is the first time the user has viewed this node we display a
   // message letting them know.
   if ($current_count === 1) {
-    drupal_set_message(t('This is the first time you have viewed the node %title.', ['%title' => $node->label()]));
+    \Drupal::messenger()->addMessage(t('This is the first time you have viewed the node %title.', ['%title' => $node->label()]));
   }
 }
 

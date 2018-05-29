@@ -137,7 +137,7 @@ class AjaxAddMore extends DemoBase {
       '@names' => implode(', ', $values),
     ]
     );
-    drupal_set_message($output);
+    $this->messenger()->addMessage($output);
   }
 
 }

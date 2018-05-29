@@ -144,7 +144,7 @@ class DbtngExampleUpdateForm extends FormBase {
       'uid' => $account->id(),
     ];
     $count = DbtngExampleStorage::update($entry);
-    drupal_set_message(t('Updated entry @entry (@count row updated)', [
+    $this->messenger()->addMessage(t('Updated entry @entry (@count row updated)', [
       '@count' => $count,
       '@entry' => print_r($entry, TRUE),
     ]));

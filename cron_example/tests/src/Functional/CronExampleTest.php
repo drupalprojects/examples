@@ -2,6 +2,7 @@
 
 namespace Drupal\Tests\cron_example\Functional;
 
+use Drupal\Core\Url;
 use Drupal\Tests\examples\Functional\ExamplesBrowserTestBase;
 
 /**
@@ -46,14 +47,16 @@ class CronExampleTest extends ExamplesBrowserTestBase {
   public function testCronExampleBasic() {
     $assert = $this->assertSession();
 
+    $cron_form = Url::fromRoute('cron_example');
+
     // Pretend that cron has never been run (even though simpletest seems to
     // run it once...).
     \Drupal::state()->set('cron_example.next_execution', 0);
-    $this->drupalGet('examples/cron-example');
+    $this->drupalGet($cron_form);
 
     // Initial run should cause cron_example_cron() to fire.
     $post = [];
-    $this->drupalPostForm('examples/cron-example', $post, 'Run cron now');
+    $this->drupalPostForm($cron_form, $post, 'Run cron now');
     $assert->pageTextContains('cron_example executed at');
 
     // Forcing should also cause cron_example_cron() to fire.
@@ -82,7 +85,7 @@ class CronExampleTest extends ExamplesBrowserTestBase {
     $this->drupalPostForm(NULL, $post, 'Add jobs to queue');
     $assert->pageTextContains('There are currently 5 items in queue 1 and 100 items in queue 2');
 
-    $this->drupalPostForm('examples/cron-example', [], 'Run cron now');
+    $this->drupalPostForm($cron_form, [], 'Run cron now');
     $assert->responseMatches('/Queue 1 worker processed item with sequence 5 /');
     $assert->responseMatches('/Queue 2 worker processed item with sequence 100 /');
   }

@@ -46,10 +46,12 @@ class EmailExampleGetFormPage extends FormBase {
    * {@inheritdoc}
    */
   public static function create(ContainerInterface $container) {
-    return new static(
+    $form = new static(
       $container->get('plugin.manager.mail'),
       $container->get('language_manager')
     );
+    $form->setMessenger($container->get('messenger'));
+    return $form;
   }
 
   /**
@@ -138,10 +140,10 @@ class EmailExampleGetFormPage extends FormBase {
     // while sending.
     $result = $this->mailManager->mail($module, $key, $to, $language_code, $params, $from, $send_now);
     if ($result['result'] == TRUE) {
-      drupal_set_message(t('Your message has been sent.'));
+      $this->messenger()->addMessage(t('Your message has been sent.'));
     }
     else {
-      drupal_set_message(t('There was a problem sending your message and it was not sent.'), 'error');
+      $this->messenger()->addMessage(t('There was a problem sending your message and it was not sent.'), 'error');
     }
   }
 

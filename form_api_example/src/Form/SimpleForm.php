@@ -108,7 +108,7 @@ class SimpleForm extends FormBase {
      * with the title.
      */
     $title = $form_state->getValue('title');
-    drupal_set_message($this->t('You specified a title of %title.', ['%title' => $title]));
+    $this->messenger()->addMessage($this->t('You specified a title of %title.', ['%title' => $title]));
   }
 
 }

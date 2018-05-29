@@ -2,12 +2,13 @@
 
 namespace Drupal\cron_example\Plugin\QueueWorker;
 
-use Drupal\Core\State\StateInterface;
+use Drupal\Core\Logger\LoggerChannelFactoryInterface;
+use Drupal\Core\Messenger\MessengerTrait;
+use Drupal\Core\Plugin\ContainerFactoryPluginInterface;
 use Drupal\Core\Queue\QueueWorkerBase;
+use Drupal\Core\State\StateInterface;
 use Drupal\Core\StringTranslation\StringTranslationTrait;
 use Symfony\Component\DependencyInjection\ContainerInterface;
-use Drupal\Core\Plugin\ContainerFactoryPluginInterface;
-use Drupal\Core\Logger\LoggerChannelFactoryInterface;
 
 /**
  * Provides base functionality for the ReportWorkers.
@@ -15,7 +16,7 @@ use Drupal\Core\Logger\LoggerChannelFactoryInterface;
 abstract class ReportWorkerBase extends QueueWorkerBase implements ContainerFactoryPluginInterface {
 
   use StringTranslationTrait;
-
+  use MessengerTrait;
 
   /**
    * The state.
@@ -55,13 +56,15 @@ abstract class ReportWorkerBase extends QueueWorkerBase implements ContainerFact
    * {@inheritdoc}
    */
   public static function create(ContainerInterface $container, array $configuration, $plugin_id, $plugin_definition) {
-    return new static(
+    $form = new static(
       $configuration,
       $plugin_id,
       $plugin_definition,
       $container->get('state'),
       $container->get('logger.factory')
     );
+    $form->setMessenger($container->get('messenger'));
+    return $form;
   }
 
   /**
@@ -74,7 +77,7 @@ abstract class ReportWorkerBase extends QueueWorkerBase implements ContainerFact
    */
   protected function reportWork($worker, $item) {
     if ($this->state->get('cron_example_show_status_message')) {
-      drupal_set_message(
+      $this->messenger()->addMessage(
         $this->t('Queue @worker worker processed item with sequence @sequence created at @time', [
           '@worker' => $worker,
           '@sequence' => $item->sequence,

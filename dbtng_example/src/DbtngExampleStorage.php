@@ -36,7 +36,7 @@ class DbtngExampleStorage {
         ->execute();
     }
     catch (\Exception $e) {
-      drupal_set_message(t('db_insert failed. Message = %message, query= %query', [
+      \Drupal::messenger()->addMessage(t('db_insert failed. Message = %message, query= %query', [
         '%message' => $e->getMessage(),
         '%query' => $e->query_string,
       ]
@@ -65,7 +65,7 @@ class DbtngExampleStorage {
         ->execute();
     }
     catch (\Exception $e) {
-      drupal_set_message(t('db_update failed. Message = %message, query= %query', [
+      \Drupal::messenger()->addMessage(t('db_update failed. Message = %message, query= %query', [
         '%message' => $e->getMessage(),
         '%query' => $e->query_string,
       ]

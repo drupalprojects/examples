@@ -69,7 +69,9 @@ class QueueExampleForm extends FormBase {
    * {@inheritdoc}
    */
   public static function create(ContainerInterface $container) {
-    return new static($container->get('queue'), $container->get('database'), $container->get('cron'), $container->get('settings'));
+    $form = new static($container->get('queue'), $container->get('database'), $container->get('cron'), $container->get('settings'));
+    $form->setMessenger($container->get('messenger'));
+    return $form;
   }
 
   /**
@@ -303,7 +305,7 @@ class QueueExampleForm extends FormBase {
     // Queue the string.
     $queue->createItem($form_state->getValue('string_to_add'));
     $count = $queue->numberOfItems();
-    drupal_set_message($this->t('Queued your string (@string_to_add). There are now @count items in the queue.', ['@count' => $count, '@string_to_add' => $form_state->getValue('string_to_add')]));
+    $this->messenger()->addMessage($this->t('Queued your string (@string_to_add). There are now @count items in the queue.', ['@count' => $count, '@string_to_add' => $form_state->getValue('string_to_add')]));
     // Allows us to keep information in $form_state.
     $form_state->setRebuild();
 
@@ -330,16 +332,15 @@ class QueueExampleForm extends FormBase {
     $item = $queue->claimItem($form_state->getValue('claim_time'));
     $count = $queue->numberOfItems();
     if (!empty($item)) {
-      drupal_set_message($this->t('Claimed item id=@item_id string=@string for @seconds seconds. There are @count items in the queue.',
-                          [
-                            '@count' => $count,
-                            '@item_id' => $item->item_id,
-                            '@string' => $item->data,
-                            '@seconds' => $form_state->getValue('claim_time'),
-                          ]));
+      $this->messenger()->addMessage($this->t('Claimed item id=@item_id string=@string for @seconds seconds. There are @count items in the queue.', [
+        '@count' => $count,
+        '@item_id' => $item->item_id,
+        '@string' => $item->data,
+        '@seconds' => $form_state->getValue('claim_time'),
+      ]));
     }
     else {
-      drupal_set_message($this->t('There were no items in the queue available to claim. There are @count items in the queue.', ['@count' => $count]));
+      $this->messenger()->addMessage($this->t('There were no items in the queue available to claim. There are @count items in the queue.', ['@count' => $count]));
     }
     $form_state->setRebuild();
   }
@@ -359,7 +360,7 @@ class QueueExampleForm extends FormBase {
     $count = $queue->numberOfItems();
     $item = $queue->claimItem(60);
     if (!empty($item)) {
-      drupal_set_message($this->t('Claimed and deleted item id=@item_id string=@string for @seconds seconds. There are @count items in the queue.', [
+      $this->messenger()->addMessage($this->t('Claimed and deleted item id=@item_id string=@string for @seconds seconds. There are @count items in the queue.', [
         '@count' => $count,
         '@item_id' => $item->item_id,
         '@string' => $item->data,
@@ -367,11 +368,11 @@ class QueueExampleForm extends FormBase {
       ]));
       $queue->deleteItem($item);
       $count = $queue->numberOfItems();
-      drupal_set_message($this->t('There are now @count items in the queue.', ['@count' => $count]));
+      $this->messenger()->addMessage($this->t('There are now @count items in the queue.', ['@count' => $count]));
     }
     else {
       $count = $queue->numberOfItems();
-      drupal_set_message($this->t('There were no items in the queue available to claim/delete. There are currently @count items in the queue.', ['@count' => $count]));
+      $this->messenger()->addMessage($this->t('There were no items in the queue available to claim/delete. There are currently @count items in the queue.', ['@count' => $count]));
     }
     $form_state->setRebuild();
   }
@@ -396,7 +397,7 @@ class QueueExampleForm extends FormBase {
     // There is no harm in trying to recreate existing.
     $queue->createQueue();
     $count = $queue->numberOfItems();
-    drupal_set_message($this->t('Ran cron. If claimed items expired, they should be expired now. There are now @count items in the queue', ['@count' => $count]));
+    $this->messenger()->addMessage($this->t('Ran cron. If claimed items expired, they should be expired now. There are now @count items in the queue', ['@count' => $count]));
     $form_state->setRebuild();
   }
 
@@ -411,7 +412,7 @@ class QueueExampleForm extends FormBase {
   public function submitDeleteQueue(array &$form, FormStateInterface $form_state) {
     $queue = $this->queueFactory->get($form_state->getValue('queue_name'));
     $queue->deleteQueue();
-    drupal_set_message($this->t('Deleted the @queue_name queue and all items in it', ['@queue_name' => $form_state->getValue('queue_name')]));
+    $this->messenger()->addMessage($this->t('Deleted the @queue_name queue and all items in it', ['@queue_name' => $form_state->getValue('queue_name')]));
   }
 
   /**

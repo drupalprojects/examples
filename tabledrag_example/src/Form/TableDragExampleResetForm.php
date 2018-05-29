@@ -90,7 +90,7 @@ class TableDragExampleResetForm extends ConfirmFormBase {
         ->condition('id', $id, '=')
         ->execute();
     }
-    drupal_set_message($this->t('Data for TableDrag Example has been reset.'), 'status');
+    $this->messenger()->addMessage($this->t('Data for TableDrag Example has been reset.'), 'status');
     $form_state->setRedirect('tabledrag_example.description');
   }
 

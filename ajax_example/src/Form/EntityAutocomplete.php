@@ -6,6 +6,7 @@ use Drupal\Core\DependencyInjection\ContainerInjectionInterface;
 use Drupal\Core\Entity\EntityTypeManagerInterface;
 use Drupal\Core\Form\FormInterface;
 use Drupal\Core\Form\FormStateInterface;
+use Drupal\Core\Messenger\MessengerTrait;
 use Drupal\Core\StringTranslation\StringTranslationTrait;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
@@ -17,6 +18,7 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
 class EntityAutocomplete implements FormInterface, ContainerInjectionInterface {
 
   use StringTranslationTrait;
+  use MessengerTrait;
 
   /**
    * The entity type manager service.
@@ -41,6 +43,7 @@ class EntityAutocomplete implements FormInterface, ContainerInjectionInterface {
       $container->get('entity_type.manager')
     );
     $form->setStringTranslation($container->get('string_translation'));
+    $form->setMessenger($container->get('messenger'));
     return $form;
   }
 
@@ -120,7 +123,7 @@ class EntityAutocomplete implements FormInterface, ContainerInjectionInterface {
       $uid = $state_user['target_id'];
       $users[] = $this->entityTypeManager->getStorage('user')->load($uid)->getUsername();
     }
-    drupal_set_message('These are your users: ' . implode(' ', $users));
+    $this->messenger()->addMessage('These are your users: ' . implode(' ', $users));
   }
 
 }

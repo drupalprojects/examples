@@ -137,7 +137,7 @@ class SimpleTestExampleTest extends WebTestBase {
       $this->drupalGet('node/' . $node->id() . '/edit');
       // The debug() statement will output information into the test results.
       // It can also be used in Drupal anywhere in code and will come out
-      // as a drupal_set_message().
+      // as a message from the Messenger service.
       debug('The following test should fail. Examine the verbose message above it to see why.');
       // Make sure we don't get a 401 unauthorized response:
       $this->assertResponse(200, 'User is allowed to edit the content.');

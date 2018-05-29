@@ -75,7 +75,7 @@ class BatchExampleForm extends FormBase {
    */
   public function generateBatch1() {
     $num_operations = 1000;
-    drupal_set_message(t('Creating an array of @num operations', ['@num' => $num_operations]));
+    $this->messenger()->addMessage($this->t('Creating an array of @num operations', ['@num' => $num_operations]));
 
     $operations = [];
     // Set up an operations array with 1000 elements, each doing function

@@ -94,6 +94,7 @@ use Drupal\Core\Entity\EntityInterface;
  * by those who shouldn't.
  */
 function field_permission_example_entity_field_access($operation, FieldDefinitionInterface $field_definition, AccountInterface $account, FieldItemListInterface $items = NULL) {
+  $messenger = \Drupal::messenger();
   // Find out what field we're looking at.  If it isn't
   // our sticky note widget, tell Drupal we don't care about its access.
   if ($field_definition->getType() != 'field_permission_example_fieldnote') {
@@ -104,26 +105,26 @@ function field_permission_example_entity_field_access($operation, FieldDefinitio
   // permissions that node provides. This way administrators
   // will be able to administer the content types.
   if ($account->hasPermission('bypass node access')) {
-    drupal_set_message(t('User can bypass node access.'));
+    $messenger->addMessage(t('User can bypass node access.'));
     return AccessResult::allowed();
   }
   if ($account->hasPermission('administer content types', $account)) {
-    drupal_set_message(t('User can administer content types.'));
+    $messenger->addMessage(t('User can administer content types.'));
     return AccessResult::allowed();
   }
   if ($account->hasPermission('administer the fieldnote field', $account)) {
-    drupal_set_message(t('User can administer this field.'));
+    $messenger->addMessage(t('User can administer this field.'));
     return AccessResult::allowed();
   }
 
   // For anyone else, it depends on the desired operation.
   if ($operation == 'view' and $account->hasPermission('view any fieldnote')) {
-    drupal_set_message(t('User can view any field note.'));
+    $messenger->addMessage(t('User can view any field note.'));
     return AccessResult::allowed();
   }
 
   if ($operation == 'edit' and $account->hasPermission('edit any fieldnote')) {
-    drupal_set_message(t('User can edit any field note.'));
+    $messenger->addMessage(t('User can edit any field note.'));
     return AccessResult::allowed();
   }
 
@@ -139,11 +140,11 @@ function field_permission_example_entity_field_access($operation, FieldDefinitio
          $entity->name->value == $account->getAccountName())
         ) {
       if ($operation == 'view' and $account->hasPermission('view own fieldnote')) {
-        drupal_set_message(t('User can view their own field note.'));
+        $messenger->addMessage(t('User can view their own field note.'));
         return AccessResult::allowed();
       }
       if ($operation == 'edit' and $account->hasPermission('edit own fieldnote')) {
-        drupal_set_message(t('User can edit their own field note.'));
+        $messenger->addMessage(t('User can edit their own field note.'));
         return AccessResult::allowed();
       }
     }

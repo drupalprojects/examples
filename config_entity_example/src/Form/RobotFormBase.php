@@ -37,7 +37,7 @@ class RobotFormBase extends EntityForm {
    *   An entity query factory for the robot entity type.
    */
   public function __construct(EntityStorageInterface $entity_storage) {
-    $this->entityStorage  = $entity_storage;
+    $this->entityStorage = $entity_storage;
   }
 
   /**
@@ -55,7 +55,9 @@ class RobotFormBase extends EntityForm {
    * pass the factory to our class as a constructor parameter.
    */
   public static function create(ContainerInterface $container) {
-    return new static($container->get('entity_type.manager')->getStorage('robot'));
+    $form = new static($container->get('entity_type.manager')->getStorage('robot'));
+    $form->setMessenger($container->get('messenger'));
+    return $form;
   }
 
   /**
@@ -205,12 +207,12 @@ class RobotFormBase extends EntityForm {
 
     if ($status == SAVED_UPDATED) {
       // If we edited an existing entity...
-      drupal_set_message($this->t('Robot %label has been updated.', ['%label' => $robot->label()]));
+      $this->messenger()->addMessage($this->t('Robot %label has been updated.', ['%label' => $robot->label()]));
       $this->logger('contact')->notice('Robot %label has been updated.', ['%label' => $robot->label(), 'link' => $edit_link]);
     }
     else {
       // If we created a new entity...
-      drupal_set_message($this->t('Robot %label has been added.', ['%label' => $robot->label()]));
+      $this->messenger()->addMessage($this->t('Robot %label has been added.', ['%label' => $robot->label()]));
       $this->logger('contact')->notice('Robot %label has been added.', ['%label' => $robot->label(), 'link' => $edit_link]);
     }
 

@@ -44,7 +44,7 @@ function cron_example_cron() {
     // making any changes to your database.
     \Drupal::logger('cron_example')->notice('cron_example ran');
     if (\Drupal::state()->get('cron_example_show_status_message')) {
-      drupal_set_message(t('cron_example executed at %time', ['%time' => date_iso8601(REQUEST_TIME)]));
+      \Drupal::messenger()->addMessage(t('cron_example executed at %time', ['%time' => date_iso8601(REQUEST_TIME)]));
       \Drupal::state()->set('cron_example_show_status_message', FALSE);
     }
     \Drupal::state()->set('cron_example.next_execution', REQUEST_TIME + $interval);

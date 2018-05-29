@@ -60,13 +60,15 @@ class CronExampleForm extends ConfigFormBase {
    * {@inheritdoc}
    */
   public static function create(ContainerInterface $container) {
-    return new static(
+    $form = new static(
       $container->get('config.factory'),
       $container->get('current_user'),
       $container->get('cron'),
       $container->get('queue'),
       $container->get('state')
     );
+    $form->setMessenger($container->get('messenger'));
+    return $form;
   }
 
   /**
@@ -197,10 +199,10 @@ class CronExampleForm extends ConfigFormBase {
     // Use a state variable to signal that cron was run manually from this form.
     $this->state->set('cron_example_show_status_message', TRUE);
     if ($this->cron->run()) {
-      drupal_set_message($this->t('Cron ran successfully.'));
+      $this->messenger()->addMessage($this->t('Cron ran successfully.'));
     }
     else {
-      drupal_set_message($this->t('Cron run failed.'), 'error');
+      $this->messenger()->addError($this->t('Cron run failed.'));
     }
   }
 
@@ -229,7 +231,7 @@ class CronExampleForm extends ConfigFormBase {
       '%num' => $num_items,
       '%queue' => $queue_name,
     ];
-    drupal_set_message($this->t('Added %num items to %queue', $args));
+    $this->messenger()->addMessage($this->t('Added %num items to %queue', $args));
   }
 
   /**

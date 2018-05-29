@@ -217,7 +217,7 @@ function hooks_example_form_alter(&$form, FormStateInterface $form_state, $form_
  */
 function hooks_example_hooks_example_count_incremented($current_count, NodeInterface $node) {
   if ($current_count === 1) {
-    drupal_set_message(t('This is the first time you have viewed the node %title.', ['%title' => $node->label()]));
+    \Drupal::messenger()->addMessage(t('This is the first time you have viewed the node %title.', ['%title' => $node->label()]));
   }
 }
 

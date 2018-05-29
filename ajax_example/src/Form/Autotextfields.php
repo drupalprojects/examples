@@ -101,7 +101,7 @@ class Autotextfields extends FormBase {
    * {@inheritdoc}
    */
   public function submitForm(array &$form, FormStateInterface $form_state) {
-    drupal_set_message(
+    $this->messenger()->addMessage(
       $this->t('Submit handler: First name: @first_name Last name: @last_name',
         [
           '@first_name' => $form_state->getValue('first_name', 'n/a'),

@@ -64,12 +64,14 @@ class CacheExampleForm extends FormBase {
     // @link https://www.drupal.org/node/2203931.
     // Those services are passed in the $container through the static create
     // method.
-    return new static(
+    $form = new static(
       $container->get('request_stack'),
       $container->get('string_translation'),
       $container->get('current_user'),
       $container->get('cache.default')
     );
+    $form->setMessenger($container->get('messenger'));
+    return $form;
   }
 
   /**
@@ -237,7 +239,7 @@ class CacheExampleForm extends FormBase {
     $this->cacheBackend->delete('cache_example_files_count');
 
     // Display message to the user.
-    drupal_set_message($this->t('Cached data key "cache_example_files_count" was cleared.'), 'status');
+    $this->messenger()->addMessage($this->t('Cached data key "cache_example_files_count" was cleared.'), 'status');
   }
 
   /**
@@ -262,7 +264,7 @@ class CacheExampleForm extends FormBase {
     // required interval. Also add a tag to it to be able to clear caches more
     // precise.
     $this->cacheBackend->set('cache_example_expiring_item', $expiration_friendly, $expiration, $tags);
-    drupal_set_message($this->t('cache_example_expiring_item was set to expire at %time', ['%time' => $expiration_friendly]));
+    $this->messenger()->addMessage($this->t('cache_example_expiring_item was set to expire at %time', ['%time' => $expiration_friendly]));
   }
 
   /**
@@ -274,14 +276,14 @@ class CacheExampleForm extends FormBase {
         // Here we'll remove all cache keys in the 'cache' bin that have
         // expired.
         $this->cacheBackend->garbageCollection();
-        drupal_set_message($this->t('\Drupal::cache()->garbageCollection() was called, removing any expired cache items.'));
+        $this->messenger()->addMessage($this->t('\Drupal::cache()->garbageCollection() was called, removing any expired cache items.'));
         break;
 
       case 'remove_all':
         // This removes all keys in a bin using a super-wildcard. This
         // has nothing to do with expiration. It's just brute-force removal.
         $this->cacheBackend->deleteAll();
-        drupal_set_message($this->t('ALL entries in the "cache" bin were removed with \Drupal::cache()->deleteAll().'));
+        $this->messenger()->addMessage($this->t('ALL entries in the "cache" bin were removed with \Drupal::cache()->deleteAll().'));
         break;
 
       case 'remove_tag':
@@ -291,7 +293,7 @@ class CacheExampleForm extends FormBase {
           'cache_example:1',
         ];
         Cache::invalidateTags($tags);
-        drupal_set_message($this->t('Cache entries with the tag "cache_example" set to 1 in the "cache" bin were invalidated with \Drupal\Core\Cache\Cache::invalidateTags($tags).'));
+        $this->messenger()->addMessage($this->t('Cache entries with the tag "cache_example" set to 1 in the "cache" bin were invalidated with \Drupal\Core\Cache\Cache::invalidateTags($tags).'));
         break;
     }
   }

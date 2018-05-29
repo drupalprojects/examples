@@ -86,13 +86,13 @@ class MultistepForm extends FormBase {
   public function submitForm(array &$form, FormStateInterface $form_state) {
     $page_values = $form_state->get('page_values');
 
-    drupal_set_message($this->t('The form has been submitted. name="@first @last", year of birth=@year_of_birth', [
+    $this->messenger()->addMessage($this->t('The form has been submitted. name="@first @last", year of birth=@year_of_birth', [
       '@first' => $page_values['first_name'],
       '@last' => $page_values['last_name'],
       '@year_of_birth' => $page_values['birth_year'],
     ]));
 
-    drupal_set_message($this->t('And the favorite color is @color', ['@color' => $form_state->getValue('color')]));
+    $this->messenger()->addMessage($this->t('And the favorite color is @color', ['@color' => $form_state->getValue('color')]));
   }
 
   /**

@@ -10,7 +10,7 @@ use Drupal\Core\Form\FormStateInterface;
  *
  * We extend FormBase, which is the simplest form base class used in Drupal, to
  * add a common submitForm method that will display the submitted values via
- * drupal_set_message().
+ * the Messenger service.
  *
  * @see \Drupal\Core\Form\FormBase
  */
@@ -38,7 +38,7 @@ abstract class DemoBase extends FormBase {
       if ($value) {
         $display_value = is_array($value) ? print_r($value, 1) : $value;
         $message = $this->t('Value for %title: %value', ['%title' => $label, '%value' => $display_value]);
-        drupal_set_message($message);
+        $this->messenger()->addMessage($message);
       }
     }
   }

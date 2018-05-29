@@ -100,12 +100,15 @@ class FileExampleReadWriteForm extends FormBase {
    * {@inheritdoc}
    */
   public static function create(ContainerInterface $container) {
-    $state = $container->get('state');
-    $file_system = $container->get('file_system');
-    $module_handler = $container->get('module_handler');
-    $request_stack = $container->get('request_stack');
-    $stream_wrapper_manager = $container->get('stream_wrapper_manager');
-    return new static($state, $file_system, $stream_wrapper_manager, $module_handler, $request_stack);
+    $form = new static(
+      $container->get('state'),
+      $container->get('file_system'),
+      $container->get('stream_wrapper_manager'),
+      $container->get('module_handler'),
+      $container->get('request_stack')
+    );
+    $form->setMessenger($container->get('messenger'));
+    return $form;
   }
 
   /**
@@ -417,7 +420,7 @@ class FileExampleReadWriteForm extends FormBase {
       $this->setDefaultFile($file_object->getFileUri());
       $file_data = $file_object->toArray();
       if ($url) {
-        drupal_set_message(
+        $this->messenger()->addMessage(
          $this->t('Saved managed file: %file to destination %destination (accessible via <a href=":url">this URL</a>, actual uri=<span id="uri">@uri</span>)',
             [
               '%file' => print_r($file_data, TRUE),
@@ -430,7 +433,7 @@ class FileExampleReadWriteForm extends FormBase {
       }
       else {
         // This Uri is not routable, so we cannot give a link to it.
-        drupal_set_message(
+        $this->messenger()->addMessage(
          $this->t('Saved managed file: %file to destination %destination (no URL, since this stream type does not support it)',
             [
               '%file' => print_r($file_data, TRUE),
@@ -443,7 +446,7 @@ class FileExampleReadWriteForm extends FormBase {
       }
     }
     else {
-      drupal_set_message(t('Failed to save the managed file'), 'error');
+      $this->messenger()->addMessage(t('Failed to save the managed file'), 'error');
     }
 
   }
@@ -481,7 +484,7 @@ class FileExampleReadWriteForm extends FormBase {
       $url = $this->getExternalUrl($filename);
       $this->setDefaultFile($filename);
       if ($url) {
-        drupal_set_message(
+        $this->messenger()->addMessage(
          $this->t('Saved file as %filename (accessible via <a href=":url">this URL</a>, uri=<span id="uri">@uri</span>)',
             [
               '%filename' => $filename,
@@ -492,7 +495,7 @@ class FileExampleReadWriteForm extends FormBase {
         );
       }
       else {
-        drupal_set_message(
+        $this->messenger()->addMessage(
          $this->t('Saved file as %filename (not accessible externally)',
             [
               '%filename' => $filename,
@@ -503,7 +506,7 @@ class FileExampleReadWriteForm extends FormBase {
       }
     }
     else {
-      drupal_set_message(t('Failed to save the file'), 'error');
+      $this->messenger()->addMessage(t('Failed to save the file'), 'error');
     }
   }
 
@@ -546,7 +549,7 @@ class FileExampleReadWriteForm extends FormBase {
     for ($i = 0; $i < $length; $i += $write_size) {
       $result = fwrite($fp, substr($data, $i, $write_size));
       if ($result === FALSE) {
-        drupal_set_message(t('Failed writing to the file %file', ['%file' => $destination]), 'error');
+        $this->messenger()->addMessage(t('Failed writing to the file %file', ['%file' => $destination]), 'error');
         fclose($fp);
         return;
       }
@@ -554,7 +557,7 @@ class FileExampleReadWriteForm extends FormBase {
     $url = $this->getExternalUrl($destination);
     $this->setDefaultFile($destination);
     if ($url) {
-      drupal_set_message(
+      $this->messenger()->addMessage(
        $this->t('Saved file as %filename (accessible via <a href=":url">this URL</a>, uri=<span id="uri">@uri</span>)',
           [
             '%filename' => $destination,
@@ -565,7 +568,7 @@ class FileExampleReadWriteForm extends FormBase {
       );
     }
     else {
-      drupal_set_message(
+      $this->messenger()->addMessage(
        $this->t('Saved file as %filename (not accessible externally)',
           [
             '%filename' => $destination,
@@ -608,7 +611,7 @@ class FileExampleReadWriteForm extends FormBase {
     $uri = $form_values['fileops_file'];
 
     if (empty($uri) or !is_file($uri)) {
-      drupal_set_message(t('The file "%uri" does not exist', ['%uri' => $uri]), 'error');
+      $this->messenger()->addMessage(t('The file "%uri" does not exist', ['%uri' => $uri]), 'error');
       return;
     }
 
@@ -624,7 +627,7 @@ class FileExampleReadWriteForm extends FormBase {
         $url = $this->getExternalUrl($sourcename);
         $this->setDefaultFile($sourcename);
         if ($url) {
-          drupal_set_message(
+          $this->messenger()->addMessage(
            $this->t('The file was read and copied to %filename which is accessible at <a href=":url">this URL</a>',
               [
                 '%filename' => $sourcename,
@@ -634,7 +637,7 @@ class FileExampleReadWriteForm extends FormBase {
           );
         }
         else {
-          drupal_set_message(
+          $this->messenger()->addMessage(
            $this->t('The file was read and copied to %filename (not accessible externally)',
               [
                 '%filename' => $sourcename,
@@ -645,12 +648,12 @@ class FileExampleReadWriteForm extends FormBase {
         }
       }
       else {
-        drupal_set_message(t('Failed to save the file'));
+        $this->messenger()->addMessage(t('Failed to save the file'));
       }
     }
     else {
       // We failed to get the contents of the requested file.
-      drupal_set_message(t('Failed to retrieve the file %file', ['%file' => $uri]));
+      $this->messenger()->addMessage(t('Failed to retrieve the file %file', ['%file' => $uri]));
     }
 
   }
@@ -680,11 +683,11 @@ class FileExampleReadWriteForm extends FormBase {
         // This no longer returns a result code.  If things go bad,
         // it will throw an exception:
         file_delete($file_object->id());
-        drupal_set_message(t('Successfully deleted managed file %uri', ['%uri' => $uri]));
+        $this->messenger()->addMessage(t('Successfully deleted managed file %uri', ['%uri' => $uri]));
         $this->setDefaultFile($uri);
       }
       catch (\Exception $e) {
-        drupal_set_message(t('Failed deleting managed file %uri. Result was %result',
+        $this->messenger()->addMessage(t('Failed deleting managed file %uri. Result was %result',
           [
             '%uri' => $uri,
             '%result' => print_r($e->getMessage(), TRUE),
@@ -696,10 +699,10 @@ class FileExampleReadWriteForm extends FormBase {
     else {
       $result = file_unmanaged_delete($uri);
       if ($result !== TRUE) {
-        drupal_set_message(t('Failed deleting unmanaged file %uri', ['%uri' => $uri, 'error']));
+        $this->messenger()->addMessage(t('Failed deleting unmanaged file %uri', ['%uri' => $uri, 'error']));
       }
       else {
-        drupal_set_message(t('Successfully deleted unmanaged file %uri', ['%uri' => $uri]));
+        $this->messenger()->addMessage(t('Successfully deleted unmanaged file %uri', ['%uri' => $uri]));
         $this->setDefaultFile('file_example_default_file', $uri);
       }
     }
@@ -712,10 +715,10 @@ class FileExampleReadWriteForm extends FormBase {
     $form_values = $form_state->getValues();
     $uri = $form_values['fileops_file'];
     if (is_file($uri)) {
-      drupal_set_message(t('The file %uri exists.', ['%uri' => $uri]));
+      $this->messenger()->addMessage(t('The file %uri exists.', ['%uri' => $uri]));
     }
     else {
-      drupal_set_message(t('The file %uri does not exist.', ['%uri' => $uri]));
+      $this->messenger()->addMessage(t('The file %uri does not exist.', ['%uri' => $uri]));
     }
   }
 
@@ -737,11 +740,11 @@ class FileExampleReadWriteForm extends FormBase {
     // by default to 0755, or to the value of the variable
     // 'file_chmod_directory'.
     if (!file_prepare_directory($directory, FILE_MODIFY_PERMISSIONS | FILE_CREATE_DIRECTORY)) {
-      drupal_set_message(t('Failed to create %directory.', ['%directory' => $directory]), 'error');
+      $this->messenger()->addMessage(t('Failed to create %directory.', ['%directory' => $directory]), 'error');
     }
     else {
       $result = is_dir($directory);
-      drupal_set_message(t('Directory %directory is ready for use.', ['%directory' => $directory]));
+      $this->messenger()->addMessage(t('Directory %directory is ready for use.', ['%directory' => $directory]));
       $this->setDefaultDirectory($directory);
     }
   }
@@ -757,10 +760,10 @@ class FileExampleReadWriteForm extends FormBase {
 
     $result = file_unmanaged_delete_recursive($directory);
     if (!$result) {
-      drupal_set_message(t('Failed to delete %directory.', ['%directory' => $directory]), 'error');
+      $this->messenger()->addMessage(t('Failed to delete %directory.', ['%directory' => $directory]), 'error');
     }
     else {
-      drupal_set_message(t('Recursively deleted directory %directory.', ['%directory' => $directory]));
+      $this->messenger()->addMessage(t('Recursively deleted directory %directory.', ['%directory' => $directory]));
       $this->setDefaultDirectory($directory);
     }
   }
@@ -780,10 +783,10 @@ class FileExampleReadWriteForm extends FormBase {
     $directory = $form_values['directory_name'];
     $result = is_dir($directory);
     if (!$result) {
-      drupal_set_message(t('Directory %directory does not exist.', ['%directory' => $directory]));
+      $this->messenger()->addMessage(t('Directory %directory does not exist.', ['%directory' => $directory]));
     }
     else {
-      drupal_set_message(t('Directory %directory exists.', ['%directory' => $directory]));
+      $this->messenger()->addMessage(t('Directory %directory exists.', ['%directory' => $directory]));
     }
   }
 
@@ -801,7 +804,7 @@ class FileExampleReadWriteForm extends FormBase {
       // @codingStandardsIgnoreEnd
     }
     else {
-      drupal_set_message('<pre>' . print_r($this->getStoredData(), TRUE) . '</pre>');
+      $this->messenger()->addMessage('<pre>' . print_r($this->getStoredData(), TRUE) . '</pre>');
     }
   }
 
@@ -820,7 +823,7 @@ class FileExampleReadWriteForm extends FormBase {
     $this->state->delete('file_example_default_file');
     $this->state->delete('file_example_default_directory');
     $this->clearStoredData();
-    drupal_set_message('Session reset.');
+    $this->messenger()->addMessage('Session reset.');
   }
 
   /**

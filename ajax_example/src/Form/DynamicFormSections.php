@@ -172,6 +172,7 @@ class DynamicFormSections extends FormBase {
    * Reports what values were finally set.
    */
   public function submitForm(array &$form, FormStateInterface $form_state) {
+    $messenger = $this->messenger();
     // This is only executed when a button is pressed, not when the AJAXfield
     // select is changed.
     // Now handle the case of the next, previous, and submit buttons.
@@ -189,10 +190,10 @@ class DynamicFormSections extends FormBase {
         $answer = $form['questions_fieldset']['question']['#title'];
       }
       if ($answer == $this->t('George Washington')) {
-        drupal_set_message($this->t('You got the right answer: @answer', ['@answer' => $answer]));
+        $messenger->addMessage($this->t('You got the right answer: @answer', ['@answer' => $answer]));
       }
       else {
-        drupal_set_message($this->t('Sorry, your answer (@answer) is wrong', ['@answer' => $answer]));
+        $messenger->addMessage($this->t('Sorry, your answer (@answer) is wrong', ['@answer' => $answer]));
       }
       return;
     }
