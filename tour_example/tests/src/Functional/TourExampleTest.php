@@ -2,6 +2,9 @@
 
 namespace Drupal\Tests\tour_example\Functional;
 
+use Drupal\Core\Url;
+use Drupal\Tests\tour\Functional\TourTestBasic;
+
 /**
  * Regression tests for the tour_example module.
  *
@@ -19,7 +22,7 @@ class TourExampleTest extends TourTestBasic {
    *
    * @var array
    */
-  public static $modules = ['tour', 'tour_example'];
+  public static $modules = ['tour_example'];
 
   /**
    * The installation profile to use with this test.
@@ -31,23 +34,44 @@ class TourExampleTest extends TourTestBasic {
   /**
    * Main test.
    *
-   * Enable Tour Example and see if it can successfully return its main page
-   * and if there is a link to the tour example in the Tools menu.
+   * Make sure the Tour Example link is on the front page. Make sure all the
+   * tour tips exist on the page. Make sure all the corresponding target
+   * elements exist for tour tips that have targets.
    */
   public function testTourExample() {
-
     $assert = $this->assertSession();
 
     // Test for a link to the tour_example in the Tools menu.
-    $this->drupalGet('');
+    $this->drupalGet(Url::fromRoute('<front>'));
     $assert->statusCodeEquals(200);
     $assert->linkByHrefExists('examples/tour-example');
 
-    // Verify if the can successfully access the tour_examples page.
-    $this->drupalGet('examples/tour-example');
+    // Verify anonymous user can successfully access the tour_examples page.
+    $this->drupalGet(Url::fromRoute('tour_example_description'));
     $assert->statusCodeEquals(200);
 
-    // Verify that the tour tips exist on this page.
+    // Get all the tour elements. These are the IDs of each tour tip. See them
+    // in config/install/tour.tour.tour-example.yml.
+    $tip_ids = [
+      'introduction',
+      'first-item',
+      'second-item',
+      'third-item',
+      'fourth-item',
+    ];
+
+    // Ensure that we have the same number of tour tips that we expect.
+    $this->assertCount(count($tip_ids), $this->xpath("//ol[@id = \"tour\"]//li"));
+
+    // Ensure each item exists.
+    foreach ($tip_ids as $tip_id) {
+      $this->assertNotEmpty(
+        $this->xpath("//ol[@id = \"tour\"]//li[contains(@class, \"tip-$tip_id\")]"),
+        "Tip id: $tip_id"
+      );
+    }
+
+    // Verify that existing tour tips have corresponding target page elements.
     $this->assertTourTips();
   }
 

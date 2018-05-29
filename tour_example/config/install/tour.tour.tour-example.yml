@@ -73,7 +73,7 @@ tips:
     weight: 2
     location: bottom
     attributes:
-      data-id: tour-id-1
+      data-id: tour-target-1
   second-item:
     id: second-item
     plugin: text
@@ -82,7 +82,7 @@ tips:
     weight: 3
     location: top
     attributes:
-      data-id: tour-id-2
+      data-id: tour-target-2
   third-item:
     id: third-item
     plugin: text
@@ -91,7 +91,7 @@ tips:
     weight: 4
     location: bottom
     attributes:
-      data-id: tour-id-3
+      data-id: tour-target-3
   fourth-item:
     id: fourth-item
     plugin: text
@@ -100,4 +100,4 @@ tips:
     weight: 5
     location: left
     attributes:
-      data-id: tour-id-4
+      data-id: tour-target-4
