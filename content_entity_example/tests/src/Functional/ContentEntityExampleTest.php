@@ -1,6 +1,6 @@
 <?php
 
-namespace Drupal\content_entity_example\Tests;
+namespace Drupal\Tests\content_entity_example\Functional;
 
 use Drupal\content_entity_example\Entity\Contact;
 use Drupal\Tests\examples\Functional\ExamplesBrowserTestBase;
@@ -35,19 +35,19 @@ class ContentEntityExampleTest extends ExamplesBrowserTestBase {
     ]);
 
     // Anonymous User should not see the link to the listing.
-    $assert->pageTextNotContains('Content Entity Example: Contacts Listing');
+    $assert->pageTextNotContains('Content Entity Example: Contacts listing');
 
     $this->drupalLogin($web_user);
 
     // Web_user user has the right to view listing.
-    $assert->linkExists('Content Entity Example: Contacts Listing');
+    $assert->linkExists('Content Entity Example: Contacts listing');
 
-    $this->clickLink('Content Entity Example: Contacts Listing');
+    $this->clickLink('Content Entity Example: Contacts listing');
 
     // WebUser can add entity content.
-    $assert->linkExists('Add Contact');
+    $assert->linkExists('Add contact');
 
-    $this->clickLink(t('Add Contact'));
+    $this->clickLink(t('Add contact'));
 
     $assert->fieldValueEquals('name[0][value]', '');
     $assert->fieldValueEquals('name[0][value]', '');
@@ -77,7 +77,7 @@ class ContentEntityExampleTest extends ExamplesBrowserTestBase {
     $assert->pageTextContains('test first name');
     $assert->pageTextContains('administrator');
     $assert->pageTextContains('male');
-    $assert->linkExists('Add Contact');
+    $assert->linkExists('Add contact');
     $assert->linkExists('Edit');
     $assert->linkExists('Delete');
 
@@ -109,14 +109,12 @@ class ContentEntityExampleTest extends ExamplesBrowserTestBase {
     $assert = $this->assertSession();
 
     // Generate a contact so that we can test the paths against it.
-    $contact = Contact::create(
-      [
-        'name' => 'somename',
-        'first_name' => 'Joe',
-        'gender' => 'female',
-        'role' => 'administrator',
-      ]
-    );
+    $contact = Contact::create([
+      'name' => 'somename',
+      'first_name' => 'Joe',
+      'gender' => 'female',
+      'role' => 'administrator',
+    ]);
     $contact->save();
 
     // Gather the test data.

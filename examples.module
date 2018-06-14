@@ -13,6 +13,7 @@
  * may not be a good strategy for other modules.
  */
 
+use Drupal\Component\Utility\Html;
 use Drupal\Core\Url;
 
 /**
@@ -75,10 +76,10 @@ function examples_toolbar() {
     // If there's no info, the example isn't enabled, so don't display it.
     if (!empty($info)) {
       $links[$module] = [
-        'title' => t($info['name']),
+        'title' => Html::escape($info['name']),
         'url' => Url::fromRoute($route),
         'attributes' => [
-          'title' => t($info['description']),
+          'title' => Html::escape($info['description']),
         ],
       ];
     }

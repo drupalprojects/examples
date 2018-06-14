@@ -2,6 +2,8 @@
 
 namespace Drupal\Tests\field_example\Functional;
 
+use Drupal\Component\Render\FormattableMarkup;
+
 /**
  * Test the basic functionality of Color background  formatter.
  *
@@ -44,7 +46,7 @@ class ColorBackgroundFormatterTest extends FieldExampleBrowserTestBase {
 
     // Submit the content creation form.
     $this->drupalPostForm(NULL, $edit, 'Save');
-    $assert->pageTextContains(t('@type @title has been created', ['@type' => $this->contentTypeName, '@title' => $title]));
+    $assert->pageTextContains((string) new FormattableMarkup('@type @title has been created', ['@type' => $this->contentTypeName, '@title' => $title]));
 
     // Verify color.
     $assert->pageTextContains('The content area color has been changed to #00ff00');
@@ -88,7 +90,7 @@ class ColorBackgroundFormatterTest extends FieldExampleBrowserTestBase {
 
     // Submit the content creation form.
     $this->drupalPostForm(NULL, $edit, 'Save');
-    $assert->pageTextContains(t('@type @title has been created', ['@type' => $this->contentTypeName, '@title' => $title]));
+    $assert->pageTextContains((string) new FormattableMarkup('@type @title has been created', ['@type' => $this->contentTypeName, '@title' => $title]));
 
     // Verify color.
     $assert->pageTextContains('The content area color has been changed to #00ff00');

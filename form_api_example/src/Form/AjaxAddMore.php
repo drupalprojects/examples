@@ -46,7 +46,7 @@ class AjaxAddMore extends DemoBase {
     for ($i = 0; $i < $num_names; $i++) {
       $form['names_fieldset']['name'][$i] = [
         '#type' => 'textfield',
-        '#title' => t('Name'),
+        '#title' => $this->t('Name'),
       ];
     }
 
@@ -55,7 +55,7 @@ class AjaxAddMore extends DemoBase {
     ];
     $form['names_fieldset']['actions']['add_name'] = [
       '#type' => 'submit',
-      '#value' => t('Add one more'),
+      '#value' => $this->t('Add one more'),
       '#submit' => ['::addOne'],
       '#ajax' => [
         'callback' => '::addmoreCallback',
@@ -66,7 +66,7 @@ class AjaxAddMore extends DemoBase {
     if ($num_names > 1) {
       $form['names_fieldset']['actions']['remove_name'] = [
         '#type' => 'submit',
-        '#value' => t('Remove one'),
+        '#value' => $this->t('Remove one'),
         '#submit' => ['::removeCallback'],
         '#ajax' => [
           'callback' => '::addmoreCallback',
@@ -133,7 +133,7 @@ class AjaxAddMore extends DemoBase {
   public function submitForm(array &$form, FormStateInterface $form_state) {
     $values = $form_state->getValue(['names_fieldset', 'name']);
 
-    $output = t('These people are coming to the picnic: @names', [
+    $output = $this->t('These people are coming to the picnic: @names', [
       '@names' => implode(', ', $values),
     ]
     );

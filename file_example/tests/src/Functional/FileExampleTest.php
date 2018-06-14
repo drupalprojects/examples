@@ -1,8 +1,9 @@
 <?php
 
 namespace Drupal\Tests\file_example\Functional;
-use Drupal\Tests\examples\Functional\ExamplesBrowserTestBase;
 
+use Drupal\Component\Render\FormattableMarkup;
+use Drupal\Tests\examples\Functional\ExamplesBrowserTestBase;
 
 /**
  * Functional tests for the File Example module.
@@ -68,13 +69,13 @@ class FileExampleTest extends ExamplesBrowserTestBase {
           'directory_name' => $dirname,
         ];
         $this->drupalPostForm('examples/file_example', $edit, 'Check to see if directory exists');
-        $assert->pageTextContains(t('Directory @dirname does not exist', ['@dirname' => $dirname]));
+        $assert->pageTextContains((string) new FormattableMarkup('Directory @dirname does not exist', ['@dirname' => $dirname]));
 
         $this->drupalPostForm('examples/file_example', $edit, 'Create directory');
-        $assert->pageTextContains(t('Directory @dirname is ready for use', ['@dirname' => $dirname]));
+        $assert->pageTextContains((string) new FormattableMarkup('Directory @dirname is ready for use', ['@dirname' => $dirname]));
 
         $this->drupalPostForm('examples/file_example', $edit, 'Check to see if directory exists');
-        $assert->pageTextContains(t('Directory @dirname exists', ['@dirname' => $dirname]));
+        $assert->pageTextContains((string) new FormattableMarkup('Directory @dirname exists', ['@dirname' => $dirname]));
 
         // Create a file in the directory we created.
         $content = $this->randomMachineName(30);
@@ -85,7 +86,7 @@ class FileExampleTest extends ExamplesBrowserTestBase {
           'fileops_file' => $filename,
         ];
         $this->drupalPostForm('examples/file_example', $edit, 'Check to see if file exists');
-        $assert->pageTextContains(t('The file @filename does not exist', ['@filename' => $filename]));
+        $assert->pageTextContains((string) new FormattableMarkup('The file @filename does not exist', ['@filename' => $filename]));
 
         $this->verbose("Processing button=$button, scheme=$scheme, dir=$dirname, file=$filename");
         $edit = [
@@ -105,7 +106,7 @@ class FileExampleTest extends ExamplesBrowserTestBase {
         // Click the link provided that is an easy way to get the data for
         // checking and make sure that the data we put in is what we get out.
         if (!in_array($scheme, [])) {
-          $this->clickLink(t('this URL'));
+          $this->clickLink('this URL');
           $assert->statusCodeEquals(200);
           // assertText give sketchy answers when the content is *exactly* the
           // contents of the buffer, so let's do something less fragile.
@@ -137,14 +138,14 @@ class FileExampleTest extends ExamplesBrowserTestBase {
         $this->drupalPostForm('examples/file_example', $edit, 'Delete file');
         $assert->pageTextContains('Successfully deleted');
         $this->drupalPostForm('examples/file_example', $edit, 'Check to see if file exists');
-        $assert->pageTextContains(t('The file @filename does not exist', ['@filename' => $filename]));
+        $assert->pageTextContains((string) new FormattableMarkup('The file @filename does not exist', ['@filename' => $filename]));
 
         $edit = [
           'directory_name' => $dirname,
         ];
         $this->drupalPostForm('examples/file_example', $edit, 'Delete directory');
         $this->drupalPostForm('examples/file_example', $edit, 'Check to see if directory exists');
-        $assert->pageTextContains(t('Directory @dirname does not exist', ['@dirname' => $dirname]));
+        $assert->pageTextContains((string) new FormattableMarkup('Directory @dirname does not exist', ['@dirname' => $dirname]));
       }
     }
   }

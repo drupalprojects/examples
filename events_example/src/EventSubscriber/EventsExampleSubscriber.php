@@ -4,7 +4,6 @@ namespace Drupal\events_example\EventSubscriber;
 
 use Drupal\events_example\Event\IncidentEvents;
 use Drupal\events_example\Event\IncidentReportEvent;
-use Drupal\Core\Messenger\MessengerInterface;
 use Drupal\Core\Messenger\MessengerTrait;
 use Drupal\Core\StringTranslation\StringTranslationTrait;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;

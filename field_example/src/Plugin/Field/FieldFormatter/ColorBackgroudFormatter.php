@@ -28,7 +28,7 @@ class ColorBackgroudFormatter extends FormatterBase {
       $elements[$delta] = [
         '#type' => 'html_tag',
         '#tag' => 'p',
-        '#value' => t('The content area color has been changed to @code', ['@code' => $item->value]),
+        '#value' => $this->t('The content area color has been changed to @code', ['@code' => $item->value]),
         '#attributes' => [
           'style' => 'background-color: ' . $item->value,
         ],

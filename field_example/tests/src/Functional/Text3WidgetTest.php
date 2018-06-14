@@ -2,6 +2,8 @@
 
 namespace Drupal\Tests\field_example\Functional;
 
+use Drupal\Component\Render\FormattableMarkup;
+
 /**
  * Functional tests of the 3text widget.
  *
@@ -45,7 +47,7 @@ class Text3WidgetTest extends FieldExampleBrowserTestBase {
 
     // Create the content.
     $this->drupalPostForm(NULL, $edit, 'Save');
-    $assert->pageTextContains(t('@type @title has been created', ['@type' => $this->contentTypeName, '@title' => $title]));
+    $assert->pageTextContains((string) new FormattableMarkup('@type @title has been created', ['@type' => $this->contentTypeName, '@title' => $title]));
 
     // Verify the value is shown when viewing this node.
     $field_p = $this->xpath("//div[contains(@class,'field--type-field-example-rgb')]/div/p");
@@ -93,7 +95,7 @@ class Text3WidgetTest extends FieldExampleBrowserTestBase {
 
     // Create the content.
     $this->drupalPostForm(NULL, $edit, 'Save');
-    $assert->pageTextContains(t('@type @title has been created', ['@type' => $this->contentTypeName, '@title' => $title]));
+    $assert->pageTextContains((string) new FormattableMarkup('@type @title has been created', ['@type' => $this->contentTypeName, '@title' => $title]));
 
     // Verify the values are shown when viewing this node.
     $field_p = $this->xpath("//div[contains(@class,'field--type-field-example-rgb')]/div/div/p");

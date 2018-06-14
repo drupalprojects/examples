@@ -2,6 +2,7 @@
 
 namespace Drupal\Tests\node_type_example\Functional;
 
+use Drupal\Component\Render\FormattableMarkup;
 use Drupal\node\Entity\NodeType;
 use Drupal\Tests\examples\Functional\ExamplesBrowserTestBase;
 
@@ -111,7 +112,7 @@ class NodeTypeExampleTest extends ExamplesBrowserTestBase {
     $this->drupalPostForm('/node/add/basic_content_type', $edit, 'Save');
 
     // Check that the Basic page has been created.
-    $assert->pageTextContains(t('@post @title has been created.', [
+    $assert->pageTextContains((string) new FormattableMarkup('@post @title has been created.', [
       '@post' => 'Example: Basic Content Type',
       '@title' => $edit['title[0][value]'],
     ]));

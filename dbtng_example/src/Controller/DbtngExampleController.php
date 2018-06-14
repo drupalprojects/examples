@@ -21,7 +21,13 @@ class DbtngExampleController extends ControllerBase {
     ];
 
     $rows = [];
-    $headers = [t('Id'), t('uid'), t('Name'), t('Surname'), t('Age')];
+    $headers = [
+      $this->t('Id'),
+      $this->t('uid'),
+      $this->t('Name'),
+      $this->t('Surname'),
+      $this->t('Age'),
+    ];
 
     foreach ($entries = DbtngExampleStorage::load() as $entry) {
       // Sanitize each entry.
@@ -31,7 +37,7 @@ class DbtngExampleController extends ControllerBase {
       '#type' => 'table',
       '#header' => $headers,
       '#rows' => $rows,
-      '#empty' => t('No entries available.'),
+      '#empty' => $this->t('No entries available.'),
     ];
     // Don't cache this page.
     $content['#cache']['max-age'] = 0;
@@ -46,16 +52,15 @@ class DbtngExampleController extends ControllerBase {
     $content = [];
 
     $content['message'] = [
-      '#markup' => $this->t('A more complex list of entries in the database.') . ' ' .
-      $this->t('Only the entries with name = "John" and age older than 18 years are shown, the username of the person who created the entry is also shown.'),
+      '#markup' => $this->t('A more complex list of entries in the database. Only the entries with name = "John" and age older than 18 years are shown, the username of the person who created the entry is also shown.'),
     ];
 
     $headers = [
-      t('Id'),
-      t('Created by'),
-      t('Name'),
-      t('Surname'),
-      t('Age'),
+      $this->t('Id'),
+      $this->t('Created by'),
+      $this->t('Name'),
+      $this->t('Surname'),
+      $this->t('Age'),
     ];
 
     $rows = [];
@@ -68,7 +73,7 @@ class DbtngExampleController extends ControllerBase {
       '#header' => $headers,
       '#rows' => $rows,
       '#attributes' => ['id' => 'dbtng-example-advanced-list'],
-      '#empty' => t('No entries available.'),
+      '#empty' => $this->t('No entries available.'),
     ];
     // Don't cache this page.
     $content['#cache']['max-age'] = 0;

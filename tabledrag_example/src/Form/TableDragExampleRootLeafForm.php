@@ -44,7 +44,7 @@ class TableDragExampleRootLeafForm extends FormBase {
   public function buildForm(array $form, FormStateInterface $form_state) {
     $form['description'] = [
       '#type' => 'item',
-      '#markup' => $this->t('Tabledrag rows can be marked as roots or leaves. This limits the way the user can interact with them in drag-and-drop operations. We\'ll mark some rows this way and you can try dragging them around on the page to see how they are limited.'),
+      '#markup' => $this->t("Tabledrag rows can be marked as roots or leaves. This limits the way the user can interact with them in drag-and-drop operations. We'll mark some rows this way and you can try dragging them around on the page to see how they are limited."),
     ];
 
     $form['info'] = [

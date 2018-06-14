@@ -69,9 +69,7 @@ class EntityAutocomplete implements FormInterface, ContainerInjectionInterface {
    */
   public function buildForm(array $form, FormStateInterface $form_state) {
     $form['info'] = [
-      '#markup' => '<div>' . t("This example uses the entity_autocomplete form "
-        . "element to select users. You'll need a few users on your system for "
-        . "it to make sense.") . '</div>',
+      '#markup' => '<div>' . $this->t("This example uses the <code>entity_autocomplete</code> form element to select users. You'll need a few users on your system for it to make sense.") . '</div>',
     ];
 
     // Here we use the delightful entity_autocomplete form element. It allows us
@@ -85,7 +83,7 @@ class EntityAutocomplete implements FormInterface, ContainerInjectionInterface {
       // Specifying #tags as TRUE allows for multiple selections, separated by
       // commas.
       '#tags' => TRUE,
-      '#title' => t('Choose a user. Separate with commas.'),
+      '#title' => $this->t('Choose a user (Separate with commas)'),
     ];
 
     $form['actions'] = [

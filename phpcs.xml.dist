@@ -27,6 +27,7 @@
   <rule ref="Drupal.Functions"/>
   <rule ref="Drupal.InfoFiles"/>
   <rule ref="Drupal.NamingConventions"/>
+  <rule ref="Drupal.Semantics"/>
   <rule ref="Drupal.Strings"/>
   <rule ref="Drupal.WhiteSpace"/>
 

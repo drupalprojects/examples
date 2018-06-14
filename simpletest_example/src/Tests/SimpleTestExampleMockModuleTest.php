@@ -65,7 +65,7 @@ class SimpleTestExampleMockModuleTest extends WebTestBase {
     // View the node.
     $this->drupalGet('node/' . $node->id());
     // Check that our module did it's thing.
-    $this->assertText(t('The test module did its thing.'), "Found evidence of test module.");
+    $this->assertText('The test module did its thing.', 'Found evidence of test module.');
   }
 
 }

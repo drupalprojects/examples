@@ -2,6 +2,7 @@
 
 namespace Drupal\simpletest_example\Tests;
 
+use Drupal\Component\Render\FormattableMarkup;
 use Drupal\simpletest\WebTestBase;
 
 /**
@@ -86,7 +87,7 @@ class SimpleTestExampleTest extends WebTestBase {
     $this->drupalPostForm('node/add/simpletest_example', $edit, 'Save');
 
     // Check that our simpletest_example node has been created.
-    $this->assertText(t('@post @title has been created.', [
+    $this->assertText((string) new FormattableMarkup('@post @title has been created.', [
       '@post' => 'SimpleTest Example Node Type',
       '@title' => $edit['title[0][value]'],
     ]));
@@ -144,7 +145,7 @@ class SimpleTestExampleTest extends WebTestBase {
 
       // Looking for title text in the page to determine whether we were
       // successful opening edit form.
-      $this->assertText(t("@title", ['@title' => $settings['title']]), "Found title in edit form");
+      $this->assertText((string) new FormattableMarkup('@title', ['@title' => $settings['title']]), "Found title in edit form");
     }
   }
 

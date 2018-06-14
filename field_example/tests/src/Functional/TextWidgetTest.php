@@ -2,6 +2,8 @@
 
 namespace Drupal\Tests\field_example\Functional;
 
+use Drupal\Component\Render\FormattableMarkup;
+
 /**
  * Test basic functionality of the widgets.
  *
@@ -47,7 +49,7 @@ class TextWidgetTest extends FieldExampleBrowserTestBase {
 
     // Create the content.
     $this->drupalPostForm(NULL, $edit, 'Save');
-    $assert->pageTextContains(t('@type @title has been created', ['@type' => $this->contentTypeName, '@title' => $title]));
+    $assert->pageTextContains((string) new FormattableMarkup('@type @title has been created', ['@type' => $this->contentTypeName, '@title' => $title]));
 
     // Verify the value is shown when viewing this node.
     $field_p = $this->xpath("//div[contains(@class,'field--type-field-example-rgb')]/div/p");
@@ -93,7 +95,7 @@ class TextWidgetTest extends FieldExampleBrowserTestBase {
 
     // Now we can fill in the second item in the multivalue field and save.
     $this->drupalPostForm(NULL, $edit, 'Save');
-    $assert->pageTextContains(t('@type @title has been created', ['@type' => $this->contentTypeName, '@title' => $title]));
+    $assert->pageTextContains((string) new FormattableMarkup('@type @title has been created', ['@type' => $this->contentTypeName, '@title' => $title]));
 
     // Verify the value is shown when viewing this node.
     $field_p = $this->xpath("//div[contains(@class,'field--type-field-example-rgb')]/div/div/p");

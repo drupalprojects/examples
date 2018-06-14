@@ -48,7 +48,7 @@ class PluginTypeExampleController extends ControllerBase {
     $build = [];
 
     $build['intro'] = [
-      '#markup' => t("This page lists the sandwich plugins we've created. The sandwich plugin type is defined in Drupal\\plugin_type_example\\SandwichPluginManager. The various plugins are defined in the Drupal\\plugin_type_example\\Plugin\\Sandwich namespace."),
+      '#markup' => $this->t("This page lists the sandwich plugins we've created. The sandwich plugin type is defined in Drupal\\plugin_type_example\\SandwichPluginManager. The various plugins are defined in the Drupal\\plugin_type_example\\Plugin\\Sandwich namespace."),
     ];
 
     // Get the list of all the sandwich plugins defined on the system from the
@@ -62,7 +62,7 @@ class PluginTypeExampleController extends ControllerBase {
       // Here we use various properties from the plugin definition. These values
       // are defined in the annotation at the top of the plugin class: see
       // \Drupal\plugin_type_example\Plugin\Sandwich\ExampleHamSandwich.
-      $items[] = t("@id (calories: @calories, description: @description )", [
+      $items[] = $this->t("@id (calories: @calories, description: @description )", [
         '@id' => $sandwich_plugin_definition['id'],
         '@calories' => $sandwich_plugin_definition['calories'],
         '@description' => $sandwich_plugin_definition['description'],

@@ -42,14 +42,14 @@ class Text3Widget extends WidgetBase {
     ];
 
     // Add in the RGB textfield elements.
-    foreach (['r' => t('Red'), 'g' => t('Green'), 'b' => t('Blue')] as $key => $title) {
+    foreach (['r' => $this->t('Red'), 'g' => $this->t('Green'), 'b' => $this->t('Blue')] as $key => $title) {
       $element[$key] = [
         '#type' => 'textfield',
         '#title' => $title,
         '#size' => 2,
         '#default_value' => array_shift($match[0]),
         '#attributes' => ['class' => ['rgb-entry']],
-        '#description' => t('The 2-digit hexadecimal representation of @color saturation, like "a1" or "ff"', ['@color' => $title]),
+        '#description' => $this->t('The 2-digit hexadecimal representation of @color saturation, like "a1" or "ff"', ['@color' => $title]),
       ];
       // Since Form API doesn't allow a fieldset to be required, we
       // have to require each field element individually.
@@ -75,7 +75,7 @@ class Text3Widget extends WidgetBase {
       }
       // If they gave us anything that's not hex, reject it.
       if ((strlen($values[$colorfield]) != 2) || !ctype_xdigit($values[$colorfield])) {
-        $form_state->setError($element[$colorfield], $form_state, t("Saturation value must be a 2-digit hexadecimal value between 00 and ff."));
+        $form_state->setError($element[$colorfield], $form_state, $this->t("Saturation value must be a 2-digit hexadecimal value between 00 and ff."));
       }
     }
 

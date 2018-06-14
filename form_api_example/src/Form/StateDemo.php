@@ -66,7 +66,7 @@ class StateDemo extends DemoBase {
 
     $form['accommodation']['diet'] = [
       '#type' => 'textfield',
-      '#title' => t('Dietary Restrictions'),
+      '#title' => $this->t('Dietary Restrictions'),
     ];
 
     // Add a submit button that handles the submission of the form.

@@ -22,9 +22,11 @@ class TableSortExampleController extends ControllerBase {
    * {@inheritdoc}
    */
   public static function create(ContainerInterface $container) {
-    return new static(
+    $controller = new static(
       $container->get('database')
     );
+    $controller->setStringTranslation($container->get('string_translation'));
+    return $controller;
   }
 
   /**
@@ -46,9 +48,9 @@ class TableSortExampleController extends ControllerBase {
       // The header gives the table the information it needs in order to make
       // the query calls for ordering. TableSort uses the field information
       // to know what database column to sort by.
-      ['data' => t('Numbers'), 'field' => 't.numbers'],
-      ['data' => t('Letters'), 'field' => 't.alpha'],
-      ['data' => t('Mixture'), 'field' => 't.random'],
+      ['data' => $this->t('Numbers'), 'field' => 't.numbers'],
+      ['data' => $this->t('Letters'), 'field' => 't.alpha'],
+      ['data' => $this->t('Mixture'), 'field' => 't.random'],
     ];
 
     // Using the TableSort Extender is what tells  the query object that we

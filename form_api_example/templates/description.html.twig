@@ -1,6 +1,6 @@
 {#
 
-Description text for the Fapi Example.
+Description text for the Form API Example.
 
 #}
 
@@ -14,9 +14,9 @@ Description text for the Fapi Example.
 {% set vertical_tabs_demo = path('form_api_example.vertical_tabs_demo') %}
 {% set ajax_demo = path('form_api_example.ajax_color_demo') %}
 {% set ajax_addmore = path('form_api_example.ajax_addmore') %}
-{% set modal_form = path('form_api_example.modal_form') %}
-{% trans %}
+{% set modal_form = path('form_api_example.modal_form', {'nojs': 'nojs'}) %}
 
+{% trans %}
 <p>Form examples to demonstrate common UI solutions using the Drupal Form API</p>
 <p><a href={{ simple_form }}>Simple form</a></p>
 <p><a href={{ multistep_form }}>Multistep form</a></p>

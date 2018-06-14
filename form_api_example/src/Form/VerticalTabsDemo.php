@@ -40,18 +40,18 @@ class VerticalTabsDemo extends DemoBase {
 
     $form['author']['name'] = [
       '#type' => 'textfield',
-      '#title' => t('Name'),
+      '#title' => $this->t('Name'),
     ];
 
     $form['publication'] = [
       '#type' => 'details',
-      '#title' => t('Publication'),
+      '#title' => $this->t('Publication'),
       '#group' => 'information',
     ];
 
     $form['publication']['publisher'] = [
       '#type' => 'textfield',
-      '#title' => t('Publisher'),
+      '#title' => $this->t('Publisher'),
     ];
 
     $form['actions'] = ['#type' => 'actions'];

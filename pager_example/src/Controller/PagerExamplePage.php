@@ -147,17 +147,17 @@ class PagerExamplePage extends ControllerBase {
       // masking, it's possible that we'd have lots of pages that don't show any
       // content.
       $rows[] = [
-        'nid' => $node->access('view') ? $node->id() : t('XXXXXX'),
-        'title' => $node->access('view') ? $node->getTitle() : t('Redacted'),
+        'nid' => $node->access('view') ? $node->id() : $this->t('XXXXXX'),
+        'title' => $node->access('view') ? $node->getTitle() : $this->t('Redacted'),
       ];
     }
 
     // Build a render array which will be themed as a table with a pager.
     $build['pager_example'] = [
       '#rows' => $rows,
-      '#header' => [t('NID'), t('Title')],
+      '#header' => [$this->t('NID'), $this->t('Title')],
       '#type' => 'table',
-      '#empty' => t('No content available.'),
+      '#empty' => $this->t('No content available.'),
     ];
     $build['pager'] = [
       '#type' => 'pager',

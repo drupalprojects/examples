@@ -378,7 +378,7 @@ class FileExampleReadWriteForm extends FormBase {
     ];
     $form['debug']['reset_session'] = [
       '#type' => 'submit',
-      '#value' => t('Reset the Session'),
+      '#value' => $this->t('Reset the Session'),
       '#submit' => ['::handleResetSession'],
     ];
 
@@ -446,7 +446,7 @@ class FileExampleReadWriteForm extends FormBase {
       }
     }
     else {
-      $this->messenger()->addMessage(t('Failed to save the managed file'), 'error');
+      $this->messenger()->addMessage($this->t('Failed to save the managed file'), 'error');
     }
 
   }
@@ -506,7 +506,7 @@ class FileExampleReadWriteForm extends FormBase {
       }
     }
     else {
-      $this->messenger()->addMessage(t('Failed to save the file'), 'error');
+      $this->messenger()->addMessage($this->t('Failed to save the file'), 'error');
     }
   }
 
@@ -549,7 +549,7 @@ class FileExampleReadWriteForm extends FormBase {
     for ($i = 0; $i < $length; $i += $write_size) {
       $result = fwrite($fp, substr($data, $i, $write_size));
       if ($result === FALSE) {
-        $this->messenger()->addMessage(t('Failed writing to the file %file', ['%file' => $destination]), 'error');
+        $this->messenger()->addMessage($this->t('Failed writing to the file %file', ['%file' => $destination]), 'error');
         fclose($fp);
         return;
       }
@@ -611,7 +611,7 @@ class FileExampleReadWriteForm extends FormBase {
     $uri = $form_values['fileops_file'];
 
     if (empty($uri) or !is_file($uri)) {
-      $this->messenger()->addMessage(t('The file "%uri" does not exist', ['%uri' => $uri]), 'error');
+      $this->messenger()->addMessage($this->t('The file "%uri" does not exist', ['%uri' => $uri]), 'error');
       return;
     }
 
@@ -648,12 +648,12 @@ class FileExampleReadWriteForm extends FormBase {
         }
       }
       else {
-        $this->messenger()->addMessage(t('Failed to save the file'));
+        $this->messenger()->addMessage($this->t('Failed to save the file'));
       }
     }
     else {
       // We failed to get the contents of the requested file.
-      $this->messenger()->addMessage(t('Failed to retrieve the file %file', ['%file' => $uri]));
+      $this->messenger()->addMessage($this->t('Failed to retrieve the file %file', ['%file' => $uri]));
     }
 
   }
@@ -683,11 +683,11 @@ class FileExampleReadWriteForm extends FormBase {
         // This no longer returns a result code.  If things go bad,
         // it will throw an exception:
         file_delete($file_object->id());
-        $this->messenger()->addMessage(t('Successfully deleted managed file %uri', ['%uri' => $uri]));
+        $this->messenger()->addMessage($this->t('Successfully deleted managed file %uri', ['%uri' => $uri]));
         $this->setDefaultFile($uri);
       }
       catch (\Exception $e) {
-        $this->messenger()->addMessage(t('Failed deleting managed file %uri. Result was %result',
+        $this->messenger()->addMessage($this->t('Failed deleting managed file %uri. Result was %result',
           [
             '%uri' => $uri,
             '%result' => print_r($e->getMessage(), TRUE),
@@ -699,10 +699,10 @@ class FileExampleReadWriteForm extends FormBase {
     else {
       $result = file_unmanaged_delete($uri);
       if ($result !== TRUE) {
-        $this->messenger()->addMessage(t('Failed deleting unmanaged file %uri', ['%uri' => $uri, 'error']));
+        $this->messenger()->addMessage($this->t('Failed deleting unmanaged file %uri', ['%uri' => $uri, 'error']));
       }
       else {
-        $this->messenger()->addMessage(t('Successfully deleted unmanaged file %uri', ['%uri' => $uri]));
+        $this->messenger()->addMessage($this->t('Successfully deleted unmanaged file %uri', ['%uri' => $uri]));
         $this->setDefaultFile('file_example_default_file', $uri);
       }
     }
@@ -715,10 +715,10 @@ class FileExampleReadWriteForm extends FormBase {
     $form_values = $form_state->getValues();
     $uri = $form_values['fileops_file'];
     if (is_file($uri)) {
-      $this->messenger()->addMessage(t('The file %uri exists.', ['%uri' => $uri]));
+      $this->messenger()->addMessage($this->t('The file %uri exists.', ['%uri' => $uri]));
     }
     else {
-      $this->messenger()->addMessage(t('The file %uri does not exist.', ['%uri' => $uri]));
+      $this->messenger()->addMessage($this->t('The file %uri does not exist.', ['%uri' => $uri]));
     }
   }
 
@@ -740,11 +740,11 @@ class FileExampleReadWriteForm extends FormBase {
     // by default to 0755, or to the value of the variable
     // 'file_chmod_directory'.
     if (!file_prepare_directory($directory, FILE_MODIFY_PERMISSIONS | FILE_CREATE_DIRECTORY)) {
-      $this->messenger()->addMessage(t('Failed to create %directory.', ['%directory' => $directory]), 'error');
+      $this->messenger()->addMessage($this->t('Failed to create %directory.', ['%directory' => $directory]), 'error');
     }
     else {
       $result = is_dir($directory);
-      $this->messenger()->addMessage(t('Directory %directory is ready for use.', ['%directory' => $directory]));
+      $this->messenger()->addMessage($this->t('Directory %directory is ready for use.', ['%directory' => $directory]));
       $this->setDefaultDirectory($directory);
     }
   }
@@ -760,10 +760,10 @@ class FileExampleReadWriteForm extends FormBase {
 
     $result = file_unmanaged_delete_recursive($directory);
     if (!$result) {
-      $this->messenger()->addMessage(t('Failed to delete %directory.', ['%directory' => $directory]), 'error');
+      $this->messenger()->addMessage($this->t('Failed to delete %directory.', ['%directory' => $directory]), 'error');
     }
     else {
-      $this->messenger()->addMessage(t('Recursively deleted directory %directory.', ['%directory' => $directory]));
+      $this->messenger()->addMessage($this->t('Recursively deleted directory %directory.', ['%directory' => $directory]));
       $this->setDefaultDirectory($directory);
     }
   }
@@ -783,10 +783,10 @@ class FileExampleReadWriteForm extends FormBase {
     $directory = $form_values['directory_name'];
     $result = is_dir($directory);
     if (!$result) {
-      $this->messenger()->addMessage(t('Directory %directory does not exist.', ['%directory' => $directory]));
+      $this->messenger()->addMessage($this->t('Directory %directory does not exist.', ['%directory' => $directory]));
     }
     else {
-      $this->messenger()->addMessage(t('Directory %directory exists.', ['%directory' => $directory]));
+      $this->messenger()->addMessage($this->t('Directory %directory exists.', ['%directory' => $directory]));
     }
   }
 

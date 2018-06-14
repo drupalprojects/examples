@@ -2,6 +2,8 @@
 
 namespace Drupal\Tests\field_example\Functional;
 
+use Drupal\Component\Render\FormattableMarkup;
+
 /**
  * Test the basic functionality of Color Picker Widget.
  *
@@ -45,7 +47,7 @@ class ColorPickerWidgetTest extends FieldExampleBrowserTestBase {
 
     // Submit the content creation form.
     $this->drupalPostForm(NULL, $edit, 'Save');
-    $assert->pageTextContains(t('@type @title has been created', ['@type' => $this->contentTypeName, '@title' => $title]));
+    $assert->pageTextContains((string) new FormattableMarkup('@type @title has been created', ['@type' => $this->contentTypeName, '@title' => $title]));
 
     // Verify color.
     $assert->pageTextContains('The color code in this field is #00ff00');
@@ -89,7 +91,7 @@ class ColorPickerWidgetTest extends FieldExampleBrowserTestBase {
 
     // Submit the content creation form.
     $this->drupalPostForm(NULL, $edit, 'Save');
-    $assert->pageTextContains(t('@type @title has been created', ['@type' => $this->contentTypeName, '@title' => $title]));
+    $assert->pageTextContains((string) new FormattableMarkup('@type @title has been created', ['@type' => $this->contentTypeName, '@title' => $title]));
 
     // Verify color.
     $assert->pageTextContains('The color code in this field is #00ff00');

@@ -179,7 +179,7 @@ class ModalForm extends FormBase {
       // This will be the contents for the modal dialog.
       $content = [
         '#type' => 'item',
-        '#markup' => $this->t('Your specified title of \'%title\' appears in this modal dialog.', ['%title' => $title]),
+        '#markup' => $this->t("Your specified title of '%title' appears in this modal dialog.", ['%title' => $title]),
       ];
       // Add the OpenModalDialogCommand to the response. This will cause Drupal
       // AJAX to show the modal dialog. The user can click the little X to close

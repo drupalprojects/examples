@@ -27,7 +27,7 @@ class InputDemo extends FormBase {
     // CheckBoxes.
     $form['tests_taken'] = [
       '#type' => 'checkboxes',
-      '#options' => ['SAT' => t('SAT'), 'ACT' => t('ACT')],
+      '#options' => ['SAT' => $this->t('SAT'), 'ACT' => $this->t('ACT')],
       '#title' => $this->t('What standardized tests did you take?'),
       '#description' => 'Checkboxes, #type = checkboxes',
     ];
@@ -77,7 +77,7 @@ class InputDemo extends FormBase {
     // Number.
     $form['quantity'] = [
       '#type' => 'number',
-      '#title' => t('Quantity'),
+      '#title' => $this->t('Quantity'),
       '#description' => $this->t('Number, #type = number'),
     ];
 
@@ -98,7 +98,7 @@ class InputDemo extends FormBase {
     // Range.
     $form['size'] = [
       '#type' => 'range',
-      '#title' => t('Size'),
+      '#title' => $this->t('Size'),
       '#min' => 10,
       '#max' => 100,
       '#description' => $this->t('Range, #type = range'),
@@ -107,7 +107,7 @@ class InputDemo extends FormBase {
     // Radios.
     $form['settings']['active'] = [
       '#type' => 'radios',
-      '#title' => t('Poll status'),
+      '#title' => $this->t('Poll status'),
       '#options' => [0 => $this->t('Closed'), 1 => $this->t('Active')],
       '#description' => $this->t('Radios, #type = radios'),
     ];
@@ -168,8 +168,8 @@ class InputDemo extends FormBase {
     ];
 
     $header = [
-      'first_name' => t('First Name'),
-      'last_name' => t('Last Name'),
+      'first_name' => $this->t('First Name'),
+      'last_name' => $this->t('Last Name'),
     ];
 
     $form['table'] = [
@@ -177,7 +177,7 @@ class InputDemo extends FormBase {
       '#title' => $this->t('Users'),
       '#header' => $header,
       '#options' => $options,
-      '#empty' => t('No users found'),
+      '#empty' => $this->t('No users found'),
     ];
 
     // Textarea.
@@ -206,7 +206,7 @@ class InputDemo extends FormBase {
     // Textfield.
     $form['subject'] = [
       '#type' => 'textfield',
-      '#title' => t('Subject'),
+      '#title' => $this->t('Subject'),
       '#size' => 60,
       '#maxlength' => 128,
       '#description' => $this->t('Textfield, #type = textfield'),
@@ -215,7 +215,7 @@ class InputDemo extends FormBase {
     // Weight.
     $form['weight'] = [
       '#type' => 'weight',
-      '#title' => t('Weight'),
+      '#title' => $this->t('Weight'),
       '#delta' => 10,
       '#description' => $this->t('Weight, #type = weight'),
     ];
@@ -282,7 +282,7 @@ class InputDemo extends FormBase {
     $form['actions']['reset'] = [
       '#type' => 'button',
       '#button_type' => 'reset',
-      '#value' => t('Reset'),
+      '#value' => $this->t('Reset'),
       '#description' => $this->t('Submit, #type = button, #button_type = reset, #attributes = this.form.reset();return false'),
       '#attributes' => [
         'onclick' => 'this.form.reset(); return false;',

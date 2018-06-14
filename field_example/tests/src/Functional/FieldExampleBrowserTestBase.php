@@ -2,6 +2,7 @@
 
 namespace Drupal\Tests\field_example\Functional;
 
+use Drupal\Component\Render\FormattableMarkup;
 use Drupal\Tests\examples\Functional\ExamplesBrowserTestBase;
 
 /**
@@ -73,8 +74,8 @@ abstract class FieldExampleBrowserTestBase extends ExamplesBrowserTestBase {
       'name' => $this->contentTypeName,
       'type' => $this->contentTypeName,
     ];
-    $this->drupalPostForm(NULL, $edit, t('Save and manage fields'));
-    $this->assertText(t('The content type @name has been added.', ['@name' => $this->contentTypeName]));
+    $this->drupalPostForm(NULL, $edit, 'Save and manage fields');
+    $this->assertText((string) new FormattableMarkup('The content type @name has been added.', ['@name' => $this->contentTypeName]));
 
     // Reset the permission cache.
     $create_permission = 'create ' . $this->contentTypeName . ' content';
@@ -117,7 +118,7 @@ abstract class FieldExampleBrowserTestBase extends ExamplesBrowserTestBase {
       'field_name' => $field_name,
       'label' => $field_name,
     ];
-    $this->drupalPostForm(NULL, $edit, t('Save and continue'));
+    $this->drupalPostForm(NULL, $edit, 'Save and continue');
 
     // Fill out the $cardinality form as if we're not using an unlimited number
     // of values.
@@ -135,9 +136,9 @@ abstract class FieldExampleBrowserTestBase extends ExamplesBrowserTestBase {
     }
 
     // And now we save the cardinality settings.
-    $this->drupalPostForm(NULL, $edit, t('Save field settings'));
+    $this->drupalPostForm(NULL, $edit, 'Save field settings');
     $this->verbose(
-      t('Saved settings for field %field_name with widget %widget_type and cardinality %cardinality',
+      (string) new FormattableMarkup('Saved settings for field %field_name with widget %widget_type and cardinality %cardinality',
         [
           '%field_name' => $field_name,
           '%widget_type' => $widget_type,
@@ -145,21 +146,21 @@ abstract class FieldExampleBrowserTestBase extends ExamplesBrowserTestBase {
         ]
       )
     );
-    $assert->pageTextContains(t('Updated field @name field settings.', ['@name' => $field_name]));
+    $assert->pageTextContains((string) new FormattableMarkup('Updated field @name field settings.', ['@name' => $field_name]));
 
     // Set the widget type for the newly created field.
     $this->drupalGet('admin/structure/types/manage/' . $this->contentTypeName . '/form-display');
     $edit = [
       'fields[field_' . $field_name . '][type]' => $widget_type,
     ];
-    $this->drupalPostForm(NULL, $edit, t('Save'));
+    $this->drupalPostForm(NULL, $edit, 'Save');
 
     // Set the field formatter for the newly created field.
     $this->drupalGet('admin/structure/types/manage/' . $this->contentTypeName . '/display');
     $edit1 = [
       'fields[field_' . $field_name . '][type]' => $fieldFormatter,
     ];
-    $this->drupalPostForm(NULL, $edit1, t('Save'));
+    $this->drupalPostForm(NULL, $edit1, 'Save');
 
     return $field_name;
   }

@@ -2,6 +2,7 @@
 
 namespace Drupal\Tests\page_example\Functional;
 
+use Drupal\Component\Render\FormattableMarkup;
 use Drupal\Tests\BrowserTestBase;
 
 /**
@@ -153,9 +154,9 @@ class PageExampleTest extends BrowserTestBase {
     $this->drupalGet('/examples/page-example/arguments/' . $first . '/' . $second);
     $assert_session->statusCodeEquals(200);
     // Verify argument usage.
-    $assert_session->pageTextContains(t('First number was @number.', ['@number' => $first]));
-    $assert_session->pageTextContains(t('Second number was @number.', ['@number' => $second]));
-    $assert_session->pageTextContains(t('The total was @number.', ['@number' => $first + $second]));
+    $assert_session->pageTextContains((string) new FormattableMarkup('First number was @number.', ['@number' => $first]));
+    $assert_session->pageTextContains((string) new FormattableMarkup('Second number was @number.', ['@number' => $second]));
+    $assert_session->pageTextContains((string) new FormattableMarkup('The total was @number.', ['@number' => $first + $second]));
 
     // Verify incomplete argument call to arguments content.
     $this->drupalGet('/examples/page-example/arguments/' . $first . '/');

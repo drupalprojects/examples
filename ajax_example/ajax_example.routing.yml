@@ -91,6 +91,6 @@ ajax_example.autocomplete_user:
   path: '/examples/ajax_example/user_autocomplete'
   defaults:
     _form: '\Drupal\ajax_example\Form\EntityAutocomplete'
-    _title: 'Autocomplete users with entity_autocomplete.'
+    _title: 'Autocomplete users with entity_autocomplete'
   requirements:
     _permission: 'access content'

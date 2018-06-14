@@ -24,14 +24,14 @@ class BatchExampleForm extends FormBase {
 
     $form['description'] = [
       '#type' => 'markup',
-      '#markup' => t('This example offers two different batches. The first does 1000 identical operations, each completed in on run; the second does 20 operations, but each takes more than one run to operate if there are more than 5 nodes.'),
+      '#markup' => $this->t('This example offers two different batches. The first does 1000 identical operations, each completed in on run; the second does 20 operations, but each takes more than one run to operate if there are more than 5 nodes.'),
     ];
     $form['batch'] = [
       '#type' => 'select',
       '#title' => 'Choose batch',
       '#options' => [
-        'batch_1' => t('batch 1 - 1000 operations'),
-        'batch_2' => t('batch 2 - 20 operations.'),
+        'batch_1' => $this->t('batch 1 - 1000 operations'),
+        'batch_2' => $this->t('batch 2 - 20 operations.'),
       ],
     ];
     $form['submit'] = [
@@ -93,12 +93,12 @@ class BatchExampleForm extends FormBase {
         'batch_example_op_1',
         [
           $i + 1,
-          t('(Operation @operation)', ['@operation' => $i]),
+          $this->t('(Operation @operation)', ['@operation' => $i]),
         ],
       ];
     }
     $batch = [
-      'title' => t('Creating an array of @num operations', ['@num' => $num_operations]),
+      'title' => $this->t('Creating an array of @num operations', ['@num' => $num_operations]),
       'operations' => $operations,
       'finished' => 'batch_example_finished',
     ];
@@ -123,7 +123,7 @@ class BatchExampleForm extends FormBase {
     for ($i = 0; $i < $num_operations; $i++) {
       $operations[] = [
         'batch_example_op_2',
-        [t('(Operation @operation)', ['@operation' => $i])],
+        [$this->t('(Operation @operation)', ['@operation' => $i])],
       ];
     }
     $batch = [
@@ -137,10 +137,10 @@ class BatchExampleForm extends FormBase {
       // operations, so @total will always be 20, even though there are multiple
       // nodes per operation.
       // Defaults to t('Completed @current of @total.').
-      'title' => t('Processing batch 2'),
-      'init_message' => t('Batch 2 is starting.'),
-      'progress_message' => t('Processed @current out of @total.'),
-      'error_message' => t('Batch 2 has encountered an error.'),
+      'title' => $this->t('Processing batch 2'),
+      'init_message' => $this->t('Batch 2 is starting.'),
+      'progress_message' => $this->t('Processed @current out of @total.'),
+      'error_message' => $this->t('Batch 2 has encountered an error.'),
     ];
     return $batch;
   }

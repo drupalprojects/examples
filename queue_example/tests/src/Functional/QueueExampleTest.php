@@ -2,6 +2,7 @@
 
 namespace Drupal\Tests\queue_example\Functional;
 
+use Drupal\Component\Render\FormattableMarkup;
 use Drupal\Tests\BrowserTestBase;
 
 /**
@@ -12,6 +13,7 @@ use Drupal\Tests\BrowserTestBase;
  * @group examples
  */
 class QueueExampleTest extends BrowserTestBase {
+
   public static $modules = ['queue_example'];
 
   /**
@@ -33,13 +35,13 @@ class QueueExampleTest extends BrowserTestBase {
     for ($i = 1; $i <= 5; $i++) {
       $edit = ['queue_name' => 'queue_example_first_queue', 'string_to_add' => 'boogie' . $i];
       $this->drupalPostForm(NULL, $edit, 'Insert into queue');
-      $this->assertText(t('There are now @number items in the queue', ['@number' => $i]));
+      $this->assertText((string) new FormattableMarkup('There are now @number items in the queue', ['@number' => $i]));
     }
     // Claim each of the 5 items with a claim time of 0 seconds.
     for ($i = 1; $i <= 5; $i++) {
       $edit = ['queue_name' => 'queue_example_first_queue', 'claim_time' => 0];
       $this->drupalPostForm(NULL, $edit, 'Claim the next item from the queue');
-      $this->assertPattern(t('%Claimed item id=.*string=@string for 0 seconds.%', ['@string' => 'boogie' . $i]));
+      $this->assertPattern((string) new FormattableMarkup('%Claimed item id=.*string=@string for 0 seconds.%', ['@string' => 'boogie' . $i]));
     }
     $edit = ['queue_name' => 'queue_example_first_queue', 'claim_time' => 0];
     $this->drupalPostForm(NULL, $edit, 'Claim the next item from the queue');
@@ -57,7 +59,7 @@ class QueueExampleTest extends BrowserTestBase {
     for ($i = 1; $i <= 5; $i++) {
       $edit = ['queue_name' => 'queue_example_first_queue', 'claim_time' => 0];
       $this->drupalPostForm(NULL, $edit, 'Claim the next item and delete it');
-      $this->assertPattern(t('%Claimed and deleted item id=.*string=@string for 0 seconds.%', ['@string' => 'boogie' . $i]));
+      $this->assertPattern((string) new FormattableMarkup('%Claimed and deleted item id=.*string=@string for 0 seconds.%', ['@string' => 'boogie' . $i]));
     }
     // Verify that nothing is left to claim.
     $edit = ['queue_name' => 'queue_example_first_queue', 'claim_time' => 0];

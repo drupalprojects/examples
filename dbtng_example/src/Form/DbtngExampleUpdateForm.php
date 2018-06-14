@@ -36,14 +36,14 @@ class DbtngExampleUpdateForm extends FormBase {
     // Tell the user if there is nothing to display.
     if (empty($entries)) {
       $form['no_values'] = [
-        '#value' => t('No entries exist in the table dbtng_example table.'),
+        '#value' => $this->t('No entries exist in the table dbtng_example table.'),
       ];
       return $form;
     }
 
     $keyed_entries = [];
     foreach ($entries as $entry) {
-      $options[$entry->pid] = t('@pid: @name @surname (@age)', [
+      $options[$entry->pid] = $this->t('@pid: @name @surname (@age)', [
         '@pid' => $entry->pid,
         '@name' => $entry->name,
         '@surname' => $entry->surname,
@@ -64,7 +64,7 @@ class DbtngExampleUpdateForm extends FormBase {
     $form['pid'] = [
       '#type' => 'select',
       '#options' => $options,
-      '#title' => t('Choose entry to update'),
+      '#title' => $this->t('Choose entry to update'),
       '#default_value' => $default_entry->pid,
       '#ajax' => [
         'wrapper' => 'updateform',
@@ -74,28 +74,28 @@ class DbtngExampleUpdateForm extends FormBase {
 
     $form['name'] = [
       '#type' => 'textfield',
-      '#title' => t('Updated first name'),
+      '#title' => $this->t('Updated first name'),
       '#size' => 15,
       '#default_value' => $default_entry->name,
     ];
 
     $form['surname'] = [
       '#type' => 'textfield',
-      '#title' => t('Updated last name'),
+      '#title' => $this->t('Updated last name'),
       '#size' => 15,
       '#default_value' => $default_entry->surname,
     ];
     $form['age'] = [
       '#type' => 'textfield',
-      '#title' => t('Updated age'),
+      '#title' => $this->t('Updated age'),
       '#size' => 4,
       '#default_value' => $default_entry->age,
-      '#description' => t('Values greater than 127 will cause an exception'),
+      '#description' => $this->t('Values greater than 127 will cause an exception'),
     ];
 
     $form['submit'] = [
       '#type' => 'submit',
-      '#value' => t('Update'),
+      '#value' => $this->t('Update'),
     ];
     return $form;
   }
@@ -125,7 +125,7 @@ class DbtngExampleUpdateForm extends FormBase {
   public function validateForm(array &$form, FormStateInterface $form_state) {
     // Confirm that age is numeric.
     if (!intval($form_state->getValue('age'))) {
-      $form_state->setErrorByName('age', t('Age needs to be a number'));
+      $form_state->setErrorByName('age', $this->t('Age needs to be a number'));
     }
   }
 
@@ -144,7 +144,7 @@ class DbtngExampleUpdateForm extends FormBase {
       'uid' => $account->id(),
     ];
     $count = DbtngExampleStorage::update($entry);
-    $this->messenger()->addMessage(t('Updated entry @entry (@count row updated)', [
+    $this->messenger()->addMessage($this->t('Updated entry @entry (@count row updated)', [
       '@count' => $count,
       '@entry' => print_r($entry, TRUE),
     ]));

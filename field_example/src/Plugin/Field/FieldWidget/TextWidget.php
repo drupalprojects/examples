@@ -47,7 +47,7 @@ class TextWidget extends WidgetBase {
       return;
     }
     if (!preg_match('/^#([a-f0-9]{6})$/iD', strtolower($value))) {
-      $form_state->setError($element, t("Color must be a 6-digit hexadecimal value, suitable for CSS."));
+      $form_state->setError($element, $this->t("Color must be a 6-digit hexadecimal value, suitable for CSS."));
     }
   }
 

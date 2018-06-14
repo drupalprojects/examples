@@ -19,7 +19,7 @@ class ExampleUppercaseBlock extends BlockBase {
    */
   public function build() {
     return [
-      '#markup' => t("This block's title is changed to uppercase. Any block title which contains 'uppercase' will also be changed to uppercase."),
+      '#markup' => $this->t("This block's title is changed to uppercase. Any block title which contains 'uppercase' will also be changed to uppercase."),
     ];
   }
 

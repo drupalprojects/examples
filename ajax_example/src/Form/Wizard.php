@@ -37,7 +37,7 @@ class Wizard extends FormBase {
     // We want to deal with hierarchical form values.
     $form['#tree'] = TRUE;
     $form['description'] = [
-      '#markup' => t('This example is a step-by-step wizard. The @link does it without page reloads; the @link1 is the same code but simulates a non-javascript environment, showing it with page reloads.', [
+      '#markup' => $this->t('This example is a step-by-step wizard. The @link does it without page reloads; the @link1 is the same code but simulates a non-javascript environment, showing it with page reloads.', [
         '@link' => $linktwo,
         '@link1' => $link,
       ]),
@@ -155,7 +155,7 @@ class Wizard extends FormBase {
           unset($form['next']);
           $form['step2'] = [
             '#type' => 'fieldset',
-            '#title' => t('Step 2: Street address info'),
+            '#title' => $this->t('Step 2: Street address info'),
           ];
           $form['step2']['address'] = [
             '#type' => 'textfield',
@@ -197,7 +197,7 @@ class Wizard extends FormBase {
       if ($step > 1 && !isset($form['prev'])) {
         $form['prev'] = [
           '#type' => 'submit',
-          '#value' => t("Previous step"),
+          '#value' => $this->t("Previous step"),
           // Since all info will be discarded, don't validate on 'prev'.
           '#limit_validation_errors' => [],
           // #submit is required to use #limit_validation_errors.

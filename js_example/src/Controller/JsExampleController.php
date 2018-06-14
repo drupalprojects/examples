@@ -93,7 +93,7 @@ class JsExampleController {
    *   A renderable array.
    */
   public function getJsAccordionImplementation() {
-    $title = t('Click sections to expand or collapse:');
+    $title = $this->t('Click sections to expand or collapse:');
     // Build using our theme. This gives us content, which is not a good
     // practice, but which allows us to demonstrate adding JavaScript here.
     $build['myelement'] = [
