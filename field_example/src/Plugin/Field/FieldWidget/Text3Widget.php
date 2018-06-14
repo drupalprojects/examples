@@ -42,7 +42,11 @@ class Text3Widget extends WidgetBase {
     ];
 
     // Add in the RGB textfield elements.
-    foreach (['r' => $this->t('Red'), 'g' => $this->t('Green'), 'b' => $this->t('Blue')] as $key => $title) {
+    foreach ([
+      'r' => $this->t('Red'),
+      'g' => $this->t('Green'),
+      'b' => $this->t('Blue'),
+    ] as $key => $title) {
       $element[$key] = [
         '#type' => 'textfield',
         '#title' => $title,

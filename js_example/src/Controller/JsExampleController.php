@@ -2,6 +2,7 @@
 
 namespace Drupal\js_example\Controller;
 
+use Drupal\Core\StringTranslation\StringTranslationTrait;
 use Drupal\examples\Utility\DescriptionTemplateTrait;
 
 /**
@@ -11,7 +12,9 @@ use Drupal\examples\Utility\DescriptionTemplateTrait;
  * templates/description.html.twig file.
  */
 class JsExampleController {
+
   use DescriptionTemplateTrait;
+  use StringTranslationTrait;
 
   /**
    * {@inheritdoc}
