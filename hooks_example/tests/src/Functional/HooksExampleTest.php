@@ -40,6 +40,10 @@ class HooksExampleTest extends BrowserTestBase {
    * Test the output of the example page.
    */
   public function testHooksExample() {
+    // Make sure our menus and links work.
+    $this->drupalGet('<front>');
+    $this->assertSession()->linkExists('Hooks Example');
+
     // Test the description page at examples/hook-example returns a 200.
     $this->drupalGet('examples/hooks-example');
     $this->assertSession()->statusCodeEquals(200);

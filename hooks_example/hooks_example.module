@@ -75,7 +75,7 @@ function hooks_example_help($route_name, RouteMatchInterface $route_match) {
   switch ($route_name) {
     // For help overview pages we use the route help.page.$moduleName.
     case 'help.page.hooks_example':
-      return '<p>' . t('This text is provided by the function hooks_example_help(), which is an implementation of the hook hook_help(). To learn more about how this works checkout the code in hooks_example.module.') . '</p>';
+      return '<p>' . t('This text is provided by the function <code>hooks_example_help()</code>, which is an implementation of <code>hook hook_help()</code>. To learn more about how this works checkout the code in <code>hooks_example.module</code>.') . '</p>';
   }
 }
 

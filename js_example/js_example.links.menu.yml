@@ -10,9 +10,11 @@ js_example.weights:
   description: Show list weighting through JavaScript.
   route_name: js_example.weights
   parent: js_example.info
+  weight: 10
 
 js_example.accordion:
   title: jQuery UI accordion
   description: jQuery UI accordion demo.
   route_name: js_example.accordion
   parent: js_example.info
+  weight: 1

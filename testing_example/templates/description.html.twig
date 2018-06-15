@@ -4,8 +4,14 @@ Description text for the PHPUnit Example.
 
 #}
 
+{% set sum_in_hands = path('testing_example.sum_in_hands') %}
+
 {% trans %}
 <h2>Testing Frameworks in Drupal</h2>
+
+<p>This module <a href={{ sum_in_hands }}>provides a path</a> so we can test it.
+    The path takes two numeric arguments, and tells you how many hands are
+    required to count the sum of both numbers.</p>
 
 <h3>How to use this example module</h3>
 <p>You really should be reading the various docblocks in the files under
