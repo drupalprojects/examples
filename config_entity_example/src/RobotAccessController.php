@@ -2,6 +2,7 @@
 
 namespace Drupal\config_entity_example;
 
+use Drupal\Core\Access\AccessResult;
 use Drupal\Core\Entity\EntityAccessControlHandler;
 use Drupal\Core\Entity\EntityInterface;
 use Drupal\Core\Session\AccountInterface;
@@ -24,7 +25,7 @@ class RobotAccessController extends EntityAccessControlHandler {
     // The $opereration parameter tells you what sort of operation access is
     // being checked for.
     if ($operation == 'view') {
-      return TRUE;
+      return AccessResult::allowed();
     }
     // Other than the view operation, we're going to be insanely lax about
     // access. Don't try this at home!
