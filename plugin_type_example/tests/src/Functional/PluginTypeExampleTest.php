@@ -32,7 +32,7 @@ class PluginTypeExampleTest extends ExamplesBrowserTestBase {
   /**
    * Test the plugin manager can be loaded, and the plugins are registered.
    *
-   * @todo: Check the alter hook fired and changed a property.
+   * @todo: https://www.drupal.org/project/examples/issues/2985705
    */
   public function testPluginExample() {
     /* @var $manager \Drupal\plugin_type_example\SandwichPluginManager */

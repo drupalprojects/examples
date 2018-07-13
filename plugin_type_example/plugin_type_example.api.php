@@ -16,7 +16,7 @@
  * @param array $sandwich_plugin_info
  *   This is the array of plugin definitions.
  */
-function hook_sandwich_info_alter(array $sandwich_plugin_info) {
+function hook_sandwich_info_alter(array &$sandwich_plugin_info) {
   // Let's change the 'foobar' property for all sandwiches.
   foreach ($sandwich_plugin_info as $plugin_id => $plugin_definition) {
     $sandwich_plugin_info[$plugin_id]['foobar'] = t('We have altered this in the alter hook');
