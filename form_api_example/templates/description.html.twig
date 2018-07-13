@@ -15,6 +15,7 @@ Description text for the Form API Example.
 {% set ajax_demo = path('form_api_example.ajax_color_demo') %}
 {% set ajax_addmore = path('form_api_example.ajax_addmore') %}
 {% set modal_form = path('form_api_example.modal_form', {'nojs': 'nojs'}) %}
+{% set block_admin = path('block.admin_display') %}
 
 {% trans %}
 <p>Form examples to demonstrate common UI solutions using the Drupal Form API</p>
@@ -28,4 +29,10 @@ Description text for the Form API Example.
 <p><a href={{ ajax_demo }}>Ajax form</a></p>
 <p><a href={{ ajax_addmore }}>Add-more button</a></p>
 <p><a href={{ modal_form }}>Modal form</a></p>
+
+<p>This module also provides a block, "Example: Display a form" that
+    demonstrates how to display a form in a block. This same technique can be
+    used whenever you need to display a form that is not the primary content of
+    a page. You can enable it on your site <a href={{ block_admin }}>using the
+    block admin page</a>.</p>
 {% endtrans %}

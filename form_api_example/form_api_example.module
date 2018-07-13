@@ -38,6 +38,8 @@
  * - Modal form creation
  *   - \Drupal\form_api_example\Controller\Page
  *   - \Drupal\form_api_example\Form\ModalForm
+ * - Displaying a form in a block
+ *   - \Drupal\form_api_example\Plugin\Block\SimpleFormBlock
  *
  * @} End of "defgroup field_example".
  */
