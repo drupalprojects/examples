@@ -89,7 +89,7 @@ use Drupal\Core\Entity\EntityChangedTrait;
  *   },
  *   list_cache_contexts = { "user" },
  *   base_table = "contact",
- *   admin_permission = "administer content_entity_example entity",
+ *   admin_permission = "administer contact entity",
  *   entity_keys = {
  *     "id" = "id",
  *     "label" = "name",
