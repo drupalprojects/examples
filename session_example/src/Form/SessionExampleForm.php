@@ -2,11 +2,11 @@
 
 namespace Drupal\session_example\Form;
 
+use Drupal\Core\Cache\CacheTagsInvalidatorInterface;
 use Drupal\Core\Form\FormBase;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Link;
 use Symfony\Component\DependencyInjection\ContainerInterface;
-use Drupal\Core\Cache\CacheTagsInvalidatorInterface;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 
 /**
@@ -37,17 +37,19 @@ class SessionExampleForm extends FormBase {
    *
    * @var \Drupal\Core\Cache\CacheTagsInvalidatorInterface
    */
-  protected $cache_tag_invalidator;
+  protected $cacheTagInvalidator;
 
   /**
    * Constructs a new SessionExampleForm object.
    *
-   * @param \Symfony\Component\HttpFoundation\Session\SessionInterface
+   * @param \Symfony\Component\HttpFoundation\Session\SessionInterface $session
    *   The session object.
+   * @param \Drupal\Core\Cache\CacheTagsInvalidatorInterface $invalidator
+   *   The cache tag invalidator service.
    */
   public function __construct(SessionInterface $session, CacheTagsInvalidatorInterface $invalidator) {
     $this->session = $session;
-    $this->cache_tag_invalidator = $invalidator;
+    $this->cacheTagInvalidator = $invalidator;
   }
 
   /**
@@ -155,7 +157,7 @@ class SessionExampleForm extends FormBase {
     // Tell the user what happened here, and that they can look at another page
     // to see the result.
     $this->messenger()->addMessage($this->t('The session has been saved successfully. @link', [
-      '@link' => Link::createFromRoute('Check here.', 'session_example.view')->toString()
+      '@link' => Link::createFromRoute('Check here.', 'session_example.view')->toString(),
     ]));
     // Since we might have changed the session information, we will invalidate
     // the cache tag for this session.
@@ -188,7 +190,7 @@ class SessionExampleForm extends FormBase {
    * updates their information in the submit handlers.
    */
   protected function invalidateCacheTag() {
-    $this->cache_tag_invalidator->invalidateTags(['session_example:' . $this->session->getId()]);
+    $this->cacheTagInvalidator->invalidateTags(['session_example:' . $this->session->getId()]);
   }
 
 }

@@ -27,14 +27,14 @@ class SimpleFormBlock extends BlockBase implements ContainerFactoryPluginInterfa
    *
    * @var \Drupal\Core\Form\FormBuilderInterface
    */
-  protected $form_builder;
+  protected $formBuilder;
 
   /**
    * {@inheritdoc}
    */
   public function __construct(array $configuration, $plugin_id, $plugin_definition, FormBuilderInterface $form_builder) {
     parent::__construct($configuration, $plugin_id, $plugin_definition);
-    $this->form_builder = $form_builder;
+    $this->formBuilder = $form_builder;
   }
 
   /**
@@ -55,7 +55,7 @@ class SimpleFormBlock extends BlockBase implements ContainerFactoryPluginInterfa
   public function build() {
     $output = [
       'description' => [
-        '#markup' => $this->t('Using form provided by ' . SimpleForm::class),
+        '#markup' => $this->t('Using form provided by @classname', ['@classname' => SimpleForm::class]),
       ],
     ];
 
@@ -66,7 +66,7 @@ class SimpleFormBlock extends BlockBase implements ContainerFactoryPluginInterfa
     //
     // In this case the build() method of a block plugin is expected to return
     // a render array so we add the form to the existing output and return it.
-    $output['form'] = $this->form_builder->getForm(SimpleForm::class);
+    $output['form'] = $this->formBuilder->getForm(SimpleForm::class);
     return $output;
   }
 

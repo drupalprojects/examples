@@ -2,7 +2,6 @@
 
 namespace Drupal\Tests\form_api_example\Functional;
 
-use Drupal\Core\Url;
 use Drupal\Tests\BrowserTestBase;
 
 /**

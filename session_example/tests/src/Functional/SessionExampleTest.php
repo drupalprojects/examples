@@ -17,6 +17,9 @@ class SessionExampleTest extends BrowserTestBase {
 
   public static $modules = ['session_example', 'block'];
 
+  /**
+   * {@inheritdoc}
+   */
   protected function setUp() {
     parent::setUp();
     // Place our blocks.
@@ -119,6 +122,9 @@ class SessionExampleTest extends BrowserTestBase {
     $assert->pageTextContains('No color');
   }
 
+  /**
+   * Ensure the session data does not follow different users around.
+   */
   public function testUserIsolation() {
     $assert = $this->assertSession();
     // Our setUp() method has already logged in a user, so let's add some data.
