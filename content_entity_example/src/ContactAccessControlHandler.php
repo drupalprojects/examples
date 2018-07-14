@@ -29,7 +29,7 @@ class ContactAccessControlHandler extends EntityAccessControlHandler {
       case 'view':
         return AccessResult::allowedIfHasPermission($account, 'view contact entity');
 
-      case 'edit':
+      case 'update':
         return AccessResult::allowedIfHasPermission($account, 'edit contact entity');
 
       case 'delete':

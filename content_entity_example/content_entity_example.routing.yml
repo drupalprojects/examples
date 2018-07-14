@@ -5,11 +5,13 @@
 entity.content_entity_example_contact.canonical:
   path: '/content_entity_example_contact/{content_entity_example_contact}'
   defaults:
-  # Calls the view controller, defined in the annotation of the contact entity
+    # Calls the view controller, defined in the annotation of the contact
+    # entity. This marks this route as belonging to this entity type.
     _entity_view: 'content_entity_example_contact'
     _title: 'Contact content'
   requirements:
-  # Calls the access controller of the entity, $operation 'view'
+    # Calls the access controller of the entity, passing in the suffix ('view')
+    # as the $operation parameter to checkAccess().
     _entity_access: 'content_entity_example_contact.view'
 
 entity.content_entity_example_contact.collection:
@@ -25,20 +27,25 @@ entity.content_entity_example_contact.collection:
 content_entity_example.contact_add:
   path: '/content_entity_example_contact/add'
   defaults:
-  # Calls the form.add controller, defined in the contact entity.
-    _entity_form: content_entity_example_contact.add
+    # Calls the form.add controller, defined in the contact entity.
+    _entity_form: content_entity_example_contact.default
     _title: 'Add contact'
   requirements:
+    # Use the entity's access controller. _entity_create_access tells the router
+    # to use the access controller's checkCreateAccess() method instead of
+    # checkAccess().
     _entity_create_access: 'content_entity_example_contact'
 
 entity.content_entity_example_contact.edit_form:
   path: '/content_entity_example_contact/{content_entity_example_contact}/edit'
   defaults:
   # Calls the form.edit controller, defined in the contact entity.
-    _entity_form: content_entity_example_contact.edit
+    _entity_form: content_entity_example_contact.default
     _title: 'Edit contact'
   requirements:
-    _entity_access: 'content_entity_example_contact.edit'
+    # Calls the access controller of the entity, passing in the suffix
+    # ('update') as the $operation parameter to checkAccess().
+    _entity_access: 'content_entity_example_contact.update'
 
 entity.content_entity_example_contact.delete_form:
   path: '/contact/{content_entity_example_contact}/delete'
@@ -47,6 +54,8 @@ entity.content_entity_example_contact.delete_form:
     _entity_form: content_entity_example_contact.delete
     _title: 'Delete contact'
   requirements:
+    # Calls the access controller of the entity, passing in the suffix
+    # ('delete') as the $operation parameter to checkAccess().
     _entity_access: 'content_entity_example_contact.delete'
 
 content_entity_example.contact_settings:
