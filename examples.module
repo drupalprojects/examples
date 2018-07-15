@@ -58,6 +58,7 @@ function examples_toolbar() {
     'pager_example' => 'pager_example.page',
     'phpunit_example' => 'phpunit_example_description',
     'plugin_type_example' => 'plugin_type_example.description',
+    'render_example' => 'render_example.description',
     'session_example' => 'session_example.form',
     'simpletest_example' => 'simpletest_example_description',
     'tabledrag_example' => 'tabledrag_example.description',
