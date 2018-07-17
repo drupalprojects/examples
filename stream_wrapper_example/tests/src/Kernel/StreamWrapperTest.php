@@ -2,10 +2,8 @@
 
 namespace Drupal\Tests\stream_wrapper_example\Kernel;
 
-use Drupal\Component\FileCache\FileCacheFactory;
-use Drupal\Core\Site\Settings;
-use Drupal\KernelTests\KernelTestBase;
 use Drupal\Component\Utility\Html;
+use Drupal\KernelTests\KernelTestBase;
 use Drupal\stream_wrapper_example\StreamWrapper\MockSessionTrait;
 
 /**
@@ -38,23 +36,11 @@ class StreamWrapperTest extends KernelTestBase {
    * {@inheritdoc}
    */
   public function setUp() {
-    // @todo Extra hack to avoid test fails, remove this once
-    // https://www.drupal.org/node/2553661 is fixed.
-    FileCacheFactory::setPrefix(Settings::getApcuPrefix('file_cache', $this->root));
     parent::setUp();
-    // Typically if we need our tested class to get information from the system,
-    // we use dependency injection (DI) to get that information to the class.
-    // But stream wrappers are unusual.  They are created automatically by PHP
-    // itself when it calls one of the standard file functions, and for that
-    // reason, the constructor functions of stream wrappers cannot be passed any
-    // arguments, which prevents us from using the stardard DI technique we use
-    // in Drupal 8. The alternative is to create a "global" container that makes
-    // our services available to the class, which is what we do here.
-    $request_stack = $this->createSessionMock();
-    $this->container->set('request_stack', $request_stack);
-    $this->container->set('file_system', \Drupal::service('file_system'));
-    $this->container->set('kernel', \Drupal::service('kernel'));
-    \Drupal::setContainer($this->container);
+    // We use a mock session here so that our session-based stream wrapper is
+    // able to operate. Kernel tests don't normally have a logged-in user, so
+    // we mock one.
+    $this->container->set('request_stack', $this->createSessionMock());
   }
 
   /**
