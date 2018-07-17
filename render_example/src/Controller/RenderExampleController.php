@@ -293,6 +293,7 @@ class RenderExampleController extends ControllerBase {
     // in addition to functions. See
     // \Drupal\render_example\Controller\RenderExampleController::preRender()
     // @todo: This doesn't work, we need to fix it.
+    //   https://www.drupal.org/project/examples/issues/2986435
     // $build['#pre_render'] = [static::class, 'preRender'];
 
     // Caching is an important part of the Render API, converting an array to a

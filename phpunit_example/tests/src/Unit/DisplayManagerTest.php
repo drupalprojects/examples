@@ -9,8 +9,6 @@ use Drupal\phpunit_example\DisplayInfoInterface;
 /**
  * DisplayManager unit test with doubles.
  *
- * @todo: More documentation.
- *
  * @ingroup phpunit_example
  *
  * @group phpunit_example

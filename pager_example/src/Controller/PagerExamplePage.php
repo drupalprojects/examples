@@ -63,6 +63,7 @@ class PagerExamplePage extends ControllerBase {
     // First we'll tell the user what's going on. This content can be found
     // in the twig template file: templates/description.html.twig.
     // @todo: Set up links to create nodes and point to devel module.
+    //   https://www.drupal.org/project/examples/issues/2986434
     $build = [
       'description' => [
         '#theme' => 'pager_example_description',

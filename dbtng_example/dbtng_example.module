@@ -5,6 +5,7 @@
  * This is an example outlining how a module can use the DBTNG database API.
  *
  * @todo Demonstrate transaction usage.
+ *   https://www.drupal.org/project/examples/issues/2986423
  *
  * General documentation is available at
  * @link database Database abstraction layer documentation @endlink and

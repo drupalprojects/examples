@@ -209,6 +209,7 @@ class FileExampleSessionStreamWrapper implements StreamWrapperInterface {
    * So in session://example/test.txt, the target is 'example/test.txt'.
    *
    * @todo Figure out what this is in the new API.
+   *   https://www.drupal.org/project/examples/issues/2986437
    */
   public function getTarget($uri = NULL) {
     if (!isset($uri)) {
@@ -432,6 +433,7 @@ class FileExampleSessionStreamWrapper implements StreamWrapperInterface {
    *
    * @todo
    *   This one actually makes sense for the example.
+   *   https://www.drupal.org/project/examples/issues/2986437
    */
   public function stream_truncate($new_size) {
     return FALSE;

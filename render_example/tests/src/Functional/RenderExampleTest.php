@@ -18,6 +18,7 @@ class RenderExampleTest extends BrowserTestBase {
    *
    * @TODO: I'm not sure at all we need 'node'. Currently we need it because we
    *   create a new user with the 'Access content' permission.
+   *   https://www.drupal.org/project/examples/issues/2986430
    */
   public static $modules = ['render_example'];
 

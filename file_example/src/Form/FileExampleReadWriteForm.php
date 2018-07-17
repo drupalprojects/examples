@@ -202,6 +202,7 @@ class FileExampleReadWriteForm extends FormBase {
    *
    * @todo This should still work. An entity query could be used instead.
    *   May be other alternatives.
+   *   https://www.drupal.org/project/examples/issues/2986438
    */
   private static function getManagedFile($uri) {
     $fid = Database::getConnection('default')->query(
@@ -817,7 +818,8 @@ class FileExampleReadWriteForm extends FormBase {
    *   FormAPI form state.
    *
    * @todo Note this does NOT clear any managed file references in Drupal's DB.
-   *       It might be a good idea to add this.
+   *   It might be a good idea to add this.
+   *   https://www.drupal.org/project/examples/issues/2986438
    */
   public function handleResetSession(array &$form, FormStateInterface $form_state) {
     $this->state->delete('file_example_default_file');

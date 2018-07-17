@@ -19,8 +19,6 @@ class FileExampleTest extends ExamplesBrowserTestBase {
    * Modules to enable.
    *
    * @var array
-   *
-   * @todo Add the stream_wrapper_example when it is completed.
    */
   public static $modules = ['file_example'];
 
