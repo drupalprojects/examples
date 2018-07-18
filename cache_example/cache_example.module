@@ -2,22 +2,14 @@
 
 /**
  * @file
- * Outlines how a module can use the Cache API.
- *
- * @todo: Demonstrate allowing invalid cache items.
- * @todo: Demonstrate deleteing cache entries.
- * @todo: Demonstrate deleteing cache tags.
- * @todo: Demonstrate deleteing all cache items.
- * @todo: Demonstrate invalidating cache entries.
- * @todo: Demonstrate invalidating cache tags.
- * @todo: Demonstrate invalidating all cache items.
+ * Demonstrates how a module can use the Cache API.
  */
 
 /**
  * @defgroup cache_example Example: Cache API
  * @ingroup examples
  * @{
- * Outlines how a module can use the Cache API.
+ * Demonstrates how a module can use the Cache API.
  *
  * Cache API allows us to cache data that is heavy to calculate. As this can
  * significantly speed up the Drupal site, it is recommended to use cache
