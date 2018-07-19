@@ -293,9 +293,8 @@ class RenderExampleController extends ControllerBase {
     // in addition to functions. See
     // \Drupal\render_example\Controller\RenderExampleController::preRender()
     // @todo: This doesn't work, we need to fix it.
-    //   https://www.drupal.org/project/examples/issues/2986435
-    // $build['#pre_render'] = [static::class, 'preRender'];
-
+    // https://www.drupal.org/project/examples/issues/2986435
+    // $build['#pre_render'] = [static::class, 'preRender'];.
     // Caching is an important part of the Render API, converting an array to a
     // string of HTML can be an expensive process, and therefore whenever
     // possible the Render API will cache the results of rendering an array in
@@ -387,7 +386,7 @@ class RenderExampleController extends ControllerBase {
       ],
     ];
 
-    $output = array();
+    $output = [];
     // We are going to create a new output render array that pairs each
     // example with a set of helper render arrays. These are used to display
     // the description as a title and the unrendered content alongside the
@@ -403,7 +402,7 @@ class RenderExampleController extends ControllerBase {
           'rendered' => $build[$key],
           'unrendered' => [
             '#type' => 'markup',
-            '#markup' => htmlentities(\Drupal\Component\Utility\Variable::export($build[$key])),
+            '#markup' => htmlentities(Variable::export($build[$key])),
           ],
         ];
       }
@@ -454,8 +453,8 @@ class RenderExampleController extends ControllerBase {
           // recursive so this will still be located, and rendered to HTML.
           'rendered' => $child,
           // Export the element definition as a string of text so we can display
-          // the array that was used to create the rendered output just below the
-          // output.
+          // the array that was used to create the rendered output just below
+          // the output.
           'unrendered' => [
             '#markup' => htmlentities(Variable::export($child)),
           ],

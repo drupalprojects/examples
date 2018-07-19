@@ -113,7 +113,7 @@ class RenderExampleTest extends BrowserTestBase {
       // @todo: Add more of these.
       'foof' => 'Hello ' . $web_user->getAccountName() . ', welcome to the #cache example.',
     ];
-    foreach($xpath_array as $key => $value) {
+    foreach ($xpath_array as $key => $value) {
       $session->pageTextContains($value);
     }
   }
