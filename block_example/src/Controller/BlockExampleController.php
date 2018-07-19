@@ -3,6 +3,7 @@
 namespace Drupal\block_example\Controller;
 
 use Drupal\examples\Utility\DescriptionTemplateTrait;
+
 /**
  * Controller routines for block example routes.
  */

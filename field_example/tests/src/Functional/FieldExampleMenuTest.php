@@ -2,7 +2,6 @@
 
 namespace Drupal\Tests\field_example\Functional;
 
-
 /**
  * Test the user-facing menus in Field Example.
  *

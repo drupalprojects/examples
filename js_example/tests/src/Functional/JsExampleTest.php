@@ -1,6 +1,7 @@
 <?php
 
 namespace Drupal\Tests\js_example\Functional;
+
 use Drupal\Tests\examples\Functional\ExamplesBrowserTestBase;
 
 /**

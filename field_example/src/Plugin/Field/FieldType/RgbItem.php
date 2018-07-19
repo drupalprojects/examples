@@ -19,6 +19,7 @@ use Drupal\Core\TypedData\DataDefinition;
  * )
  */
 class RgbItem extends FieldItemBase {
+
   /**
    * {@inheritdoc}
    */

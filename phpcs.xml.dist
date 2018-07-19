@@ -12,14 +12,14 @@
   <rule ref="Drupal.CSS"/>
   <rule ref="Drupal.Classes"/>
   <rule ref="Drupal.Commenting">
-      <exclude name="Drupal.Commenting.DocComment.MissingShort"/>
-      <!-- TagsNotGrouped has false positives for @code/@endcode. See
-        https://www.drupal.org/node/2502837 -->
-      <exclude name="Drupal.Commenting.DocComment.TagsNotGrouped"/>
-      <!-- We have to document hooks in a non-standard way in order to be
+    <exclude name="Drupal.Commenting.DocComment.MissingShort"/>
+    <!-- TagsNotGrouped has false positives for @code/@endcode. See
+         https://www.drupal.org/node/2502837 -->
+    <exclude name="Drupal.Commenting.DocComment.TagsNotGrouped"/>
+    <!-- We have to document hooks in a non-standard way in order to be
         informative -->
-      <exclude name="Drupal.Commenting.HookComment.HookParamDoc"/>
-      <exclude name="Drupal.Commenting.HookComment.HookReturnDoc"/>
+    <exclude name="Drupal.Commenting.HookComment.HookParamDoc"/>
+    <exclude name="Drupal.Commenting.HookComment.HookReturnDoc"/>
   </rule>
   <rule ref="Drupal.ControlStructures"/>
   <rule ref="Drupal.Files"/>
@@ -30,11 +30,25 @@
   <rule ref="Drupal.Semantics"/>
   <rule ref="Drupal.Strings"/>
   <rule ref="Drupal.WhiteSpace"/>
+  <rule ref="Drupal.Files.TxtFileLineLength.TooLong"/>
 
-  <rule ref="Generic.Files.LineEndings"/>
+  <rule ref="Generic.CodeAnalysis.UselessOverridingMethod">
+    <!-- We exclude this rule so that we can demonstrate where to add your own
+         validation code to a form. -->
+    <exclude name="Generic.CodeAnalysis.UselessOverridingMethod.Found"/>
+  </rule>
+  <rule ref="Generic.Files.LineEndings">
+    <properties>
+      <property name="eolChar" value="\n"/>
+    </properties>
+  </rule>
   <rule ref="Generic.Formatting.SpaceAfterCast"/>
   <rule ref="Generic.Functions.FunctionCallArgumentSpacing"/>
-  <rule ref="Generic.Functions.OpeningFunctionBraceKernighanRitchie"/>
+  <rule ref="Generic.Functions.OpeningFunctionBraceKernighanRitchie">
+    <properties>
+      <property name="checkClosures" value="true"/>
+    </properties>
+  </rule>
   <rule ref="Generic.PHP.DeprecatedFunctions"/>
   <rule ref="Generic.PHP.DisallowShortOpenTag"/>
   <rule ref="Generic.PHP.LowerCaseKeyword"/>
@@ -44,6 +58,8 @@
   <rule ref="MySource.Debug.DebugCode"/>
 
   <rule ref="PSR2.Classes.PropertyDeclaration"/>
+  <rule ref="PSR2.Namespaces.NamespaceDeclaration.BlankLineAfter"/>
+  <rule ref="PSR2.Namespaces.UseDeclaration.SpaceAfterLastUse"/>
 
   <rule ref="Squiz.Arrays.ArrayBracketSpacing"/>
   <rule ref="Squiz.CSS.ClassDefinitionOpeningBraceSpace"/>
@@ -51,14 +67,35 @@
   <rule ref="Squiz.CSS.DisallowMultipleStyleDefinitions"/>
   <rule ref="Squiz.CSS.EmptyClassDefinition"/>
   <rule ref="Squiz.CSS.EmptyStyleDefinition"/>
+  <rule ref="Squiz.CSS.Indentation">
+    <properties>
+      <property name="indent" value="2"/>
+    </properties>
+  </rule>
   <rule ref="Squiz.CSS.MissingColon"/>
   <rule ref="Squiz.CSS.SemicolonSpacing"/>
   <rule ref="Squiz.Commenting.DocCommentAlignment"/>
   <rule ref="Squiz.ControlStructures.ForEachLoopDeclaration"/>
   <rule ref="Squiz.ControlStructures.ForLoopDeclaration"/>
+  <rule ref="Squiz.Functions.FunctionDeclarationArgumentSpacing">
+    <properties>
+      <property name="equalsSpacing" value="1"/>
+    </properties>
+  </rule>
   <rule ref="Squiz.PHP.LowercasePHPFunctions"/>
   <rule ref="Squiz.PHP.NonExecutableCode"/>
   <rule ref="Squiz.Scope.MethodScope"/>
+  <rule ref="Squiz.Strings.ConcatenationSpacing">
+    <properties>
+      <property name="spacing" value="1"/>
+      <property name="ignoreNewlines" value="true"/>
+    </properties>
+  </rule>
+  <rule ref="Squiz.WhiteSpace.FunctionSpacing">
+    <properties>
+      <property name="spacing" value="1"/>
+    </properties>
+  </rule>
   <rule ref="Squiz.WhiteSpace.LanguageConstructSpacing"/>
 
   <rule ref="Squiz.WhiteSpace.SemicolonSpacing"/>

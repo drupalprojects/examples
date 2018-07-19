@@ -5,7 +5,6 @@ namespace Drupal\Tests\email_example\Functional;
 use Drupal\Core\Test\AssertMailTrait;
 use Drupal\Tests\examples\Functional\ExamplesBrowserTestBase;
 
-
 /**
  * Tests for the email_example module.
  *

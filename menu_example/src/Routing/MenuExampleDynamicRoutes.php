@@ -33,7 +33,7 @@ class MenuExampleDynamicRoutes {
     ];
 
     foreach ($tabs as $path => $title) {
-      $machine_name = 'examples.menu_example.'. str_replace('/', '_', $path);
+      $machine_name = 'examples.menu_example.' . str_replace('/', '_', $path);
       $routes[$machine_name] = new Route(
         // Path to attach this route to:
         '/examples/menu-example/' . $path,

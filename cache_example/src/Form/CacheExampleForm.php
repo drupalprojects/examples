@@ -11,7 +11,6 @@ use Drupal\Core\StringTranslation\TranslationInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\HttpFoundation\RequestStack;
 
-
 /**
  * Form with examples on how to use cache.
  */

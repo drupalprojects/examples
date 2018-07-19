@@ -1,6 +1,7 @@
 <?php
 
 namespace Drupal\Tests\testing_example\Functional;
+
 /**
  * How the namespace works.
  *

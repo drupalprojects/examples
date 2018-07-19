@@ -153,7 +153,6 @@ function field_permission_example_entity_field_access($operation, FieldDefinitio
   return AccessResult::forbidden();
 }
 
-
 /**
  * Implements hook_ENTITY_TYPE_access().
  *
@@ -176,6 +175,7 @@ function field_permission_example_entity_test_access(EntityInterface $entity, $o
   }
   return AccessResult::neutral();
 }
+
 /**
  * @} End of "defgroup field_permission_example".
  */

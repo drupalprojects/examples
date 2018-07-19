@@ -2,7 +2,6 @@
 
 namespace Drupal\phpunit_example;
 
-
 /**
  * An example class to demonstrate unit testing.
  *

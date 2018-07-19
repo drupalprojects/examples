@@ -154,7 +154,6 @@ class NodeTypeExampleTest extends ExamplesBrowserTestBase {
     $this->assertText($body);
   }
 
-
   /**
    * Verify that user can uninstall and then reinstall node_type_example.
    */
