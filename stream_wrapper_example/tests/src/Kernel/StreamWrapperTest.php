@@ -4,7 +4,7 @@ namespace Drupal\Tests\stream_wrapper_example\Kernel;
 
 use Drupal\Component\Utility\Html;
 use Drupal\KernelTests\KernelTestBase;
-use Drupal\stream_wrapper_example\StreamWrapper\MockSessionTrait;
+use Drupal\Tests\stream_wrapper_example\Traits\MockSessionTrait;
 
 /**
  * Test of the Session Stream Wrapper Class.

@@ -1,7 +1,8 @@
 <?php
 
-namespace Drupal\stream_wrapper_example\StreamWrapper;
+namespace Drupal\Tests\stream_wrapper_example\Traits;
 
+use Drupal\stream_wrapper_example\StreamWrapper\SessionWrapper;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
@@ -29,7 +30,7 @@ trait MockSessionTrait {
   /**
    * Create a mock session object.
    *
-   * @return ProphecyInterface
+   * @return \Symfony\Component\HttpFoundation\RequestStack|\Prophecy\Prophecy\ProphecyInterface
    *   A test double, or mock, of a RequestStack object
    *   that can be used to return a mock Session object.
    */

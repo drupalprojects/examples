@@ -2,9 +2,9 @@
 
 namespace Drupal\Tests\stream_wrapper_example\Unit;
 
-use Drupal\Tests\UnitTestCase;
 use Drupal\stream_wrapper_example\StreamWrapper\SessionWrapper;
-use Drupal\stream_wrapper_example\StreamWrapper\MockSessionTrait;
+use Drupal\Tests\stream_wrapper_example\Traits\MockSessionTrait;
+use Drupal\Tests\UnitTestCase;
 
 /**
  * PHPUnit test for the SessionWrapper session manipulation class.
