@@ -94,11 +94,11 @@ class CronExampleForm extends ConfigFormBase {
       '#markup' => $this->t('The cron example demonstrates hook_cron() and hook_queue_info() processing. If you have administrative privileges you can run cron from this page and see the results.'),
     ];
 
-    $next_execution = \Drupal::state()->get('cron_example.next_execution');
+    $next_execution = $this->state->get('cron_example.next_execution');
     $next_execution = !empty($next_execution) ? $next_execution : REQUEST_TIME;
 
     $args = [
-      '%time' => date_iso8601(\Drupal::state()->get('cron_example.next_execution')),
+      '%time' => date_iso8601($this->state->get('cron_example.next_execution')),
       '%seconds' => $next_execution - REQUEST_TIME,
     ];
     $form['status']['last'] = [
@@ -193,7 +193,7 @@ class CronExampleForm extends ConfigFormBase {
 
     $cron_reset = $form_state->getValue('cron_reset');
     if (!empty($cron_reset)) {
-      \Drupal::state()->set('cron_example.next_execution', 0);
+      $this->state->set('cron_example.next_execution', 0);
     }
 
     // Use a state variable to signal that cron was run manually from this form.

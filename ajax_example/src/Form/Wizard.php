@@ -6,6 +6,7 @@ use Drupal\Core\Form\FormBase;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Url;
 use Drupal\Core\Link;
+use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
  * AJAX example wizard.
@@ -17,6 +18,18 @@ class Wizard extends FormBase {
    */
   public function getFormId() {
     return 'ajax_example_wizard';
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public static function create(ContainerInterface $container) {
+    // Since FormBase uses service traits, we can inject these services without
+    // adding our own __construct() method.
+    $form = new static($container);
+    $form->setStringTranslation($container->get('string_translation'));
+    $form->setMessenger($container->get('messenger'));
+    return $form;
   }
 
   /**
@@ -204,8 +217,7 @@ class Wizard extends FormBase {
    * Save away the current information.
    */
   public function submitForm(array &$form, FormStateInterface $form_state) {
-
-    $messenger = \Drupal::messenger();
+    $messenger = $this->messenger();
     $messenger->addMessage($this->t('Your information has been submitted:'));
     $messenger->addMessage($this->t('Name: @name', ['@name' => $form_state->getValue(['step1', 'name'])]));
     $messenger->addMessage($this->t('Address: @address', ['@address' => $form_state->getValue(['step2', 'address'])]));
