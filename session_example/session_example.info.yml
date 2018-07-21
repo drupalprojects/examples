@@ -1,4 +1,4 @@
-name: 'Session example'
+name: 'Session Example'
 type: module
 description: 'An example of how to use session in Drupal 8.'
 package: Example modules

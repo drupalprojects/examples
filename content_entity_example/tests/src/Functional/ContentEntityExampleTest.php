@@ -36,14 +36,14 @@ class ContentEntityExampleTest extends ExamplesBrowserTestBase {
     ]);
 
     // Anonymous User should not see the link to the listing.
-    $assert->pageTextNotContains('Content Entity Example: Contacts listing');
+    $assert->pageTextNotContains('Content Entity Example');
 
     $this->drupalLogin($web_user);
 
     // Web_user user has the right to view listing.
-    $assert->linkExists('Content Entity Example: Contacts listing');
+    $assert->linkExists('Content Entity Example');
 
-    $this->clickLink('Content Entity Example: Contacts listing');
+    $this->clickLink('Content Entity Example');
 
     // WebUser can add entity content.
     $assert->linkExists('Add contact');
