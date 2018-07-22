@@ -4,18 +4,45 @@ namespace Drupal\dbtng_example\Form;
 
 use Drupal\Core\Form\FormBase;
 use Drupal\Core\Form\FormStateInterface;
-use Drupal\dbtng_example\DbtngExampleStorage;
+use Drupal\dbtng_example\DbtngExampleRepository;
+use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
  * Sample UI to update a record.
+ *
+ * @ingroup dbtng_example
  */
 class DbtngExampleUpdateForm extends FormBase {
+
+  /**
+   * Our database repository service.
+   *
+   * @var \Drupal\dbtng_example\DbtngExampleRepository
+   */
+  protected $repository;
 
   /**
    * {@inheritdoc}
    */
   public function getFormId() {
     return 'dbtng_update_form';
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public static function create(ContainerInterface $container) {
+    $form = new static($container->get('dbtng_example.repository'));
+    $form->setStringTranslation($container->get('string_translation'));
+    $form->setMessenger($container->get('messenger'));
+    return $form;
+  }
+
+  /**
+   * Construct the new form object.
+   */
+  public function __construct(DbtngExampleRepository $repository) {
+    $this->repository = $repository;
   }
 
   /**
@@ -32,7 +59,7 @@ class DbtngExampleUpdateForm extends FormBase {
       '#markup' => $this->t('Demonstrates a database update operation.'),
     ];
     // Query for items to display.
-    $entries = DbtngExampleStorage::load();
+    $entries = $this->repository->load();
     // Tell the user if there is nothing to display.
     if (empty($entries)) {
       $form['no_values'] = [
@@ -143,7 +170,7 @@ class DbtngExampleUpdateForm extends FormBase {
       'age' => $form_state->getValue('age'),
       'uid' => $account->id(),
     ];
-    $count = DbtngExampleStorage::update($entry);
+    $count = $this->repository->update($entry);
     $this->messenger()->addMessage($this->t('Updated entry @entry (@count row updated)', [
       '@count' => $count,
       '@entry' => print_r($entry, TRUE),

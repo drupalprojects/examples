@@ -8,16 +8,25 @@ use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Messenger\MessengerTrait;
 use Drupal\Core\Session\AccountProxyInterface;
 use Drupal\Core\StringTranslation\StringTranslationTrait;
-use Drupal\dbtng_example\DbtngExampleStorage;
+use Drupal\dbtng_example\DbtngExampleRepository;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
  * Form to add a database entry, with all the interesting fields.
+ *
+ * @ingroup dbtng_example
  */
 class DbtngExampleAddForm implements FormInterface, ContainerInjectionInterface {
 
   use StringTranslationTrait;
   use MessengerTrait;
+
+  /**
+   * Our database repository service.
+   *
+   * @var \Drupal\dbtng_example\DbtngExampleRepository
+   */
+  protected $repository;
 
   /**
    * The current user.
@@ -36,6 +45,7 @@ class DbtngExampleAddForm implements FormInterface, ContainerInjectionInterface 
    */
   public static function create(ContainerInterface $container) {
     $form = new static(
+      $container->get('dbtng_example.repository'),
       $container->get('current_user')
     );
     // The StringTranslationTrait trait manages the string translation service
@@ -48,7 +58,8 @@ class DbtngExampleAddForm implements FormInterface, ContainerInjectionInterface 
   /**
    * Construct the new form object.
    */
-  public function __construct(AccountProxyInterface $current_user) {
+  public function __construct(DbtngExampleRepository $repository, AccountProxyInterface $current_user) {
+    $this->repository = $repository;
     $this->currentUser = $current_user;
   }
 
@@ -124,7 +135,7 @@ class DbtngExampleAddForm implements FormInterface, ContainerInjectionInterface 
       'age' => $form_state->getValue('age'),
       'uid' => $account->id(),
     ];
-    $return = DbtngExampleStorage::insert($entry);
+    $return = $this->repository->insert($entry);
     if ($return) {
       $this->messenger()->addMessage($this->t('Created entry @entry', ['@entry' => print_r($entry, TRUE)]));
     }

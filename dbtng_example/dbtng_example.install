@@ -15,26 +15,25 @@
  * @ingroup dbtng_example
  */
 function dbtng_example_install() {
-  // Add a default entry.
-  $fields = [
-    'name' => 'John',
-    'surname' => 'Doe',
-    'age' => 0,
+  // Insert some example data into our schema.
+  $entries = [
+    [
+      'name' => 'John',
+      'surname' => 'Doe',
+      'age' => 0,
+    ],
+    [
+      'name' => 'John',
+      'surname' => 'Roe',
+      'age' => 100,
+      'uid' => 1,
+    ],
   ];
-  db_insert('dbtng_example')
-    ->fields($fields)
-    ->execute();
 
-  // Add another entry.
-  $fields = [
-    'name' => 'John',
-    'surname' => 'Roe',
-    'age' => 100,
-    'uid' => 1,
-  ];
-  db_insert('dbtng_example')
-    ->fields($fields)
-    ->execute();
+  $connection = \Drupal::database();
+  foreach ($entries as $entry) {
+    $connection->insert('dbtng_example')->fields($entry)->execute();
+  }
 }
 
 /**

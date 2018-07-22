@@ -4,12 +4,8 @@
  * @file
  * This is an example outlining how a module can use the DBTNG database API.
  *
- * @todo Demonstrate transaction usage.
- *   https://www.drupal.org/project/examples/issues/2986423
- *
- * General documentation is available at
- * @link database Database abstraction layer documentation @endlink and
- * at @link http://drupal.org/node/310069 @endlink.
+ * @todo Demonstrate more things.
+ *   https://www.drupal.org/project/examples/issues/718672
  */
 
 /**
@@ -20,43 +16,18 @@
  *
  * 'DBTNG' means 'Database: The Next Generation.' Yes, Drupallers are nerds.
  *
- * General documentation is available at
- * @link database.inc database abstraction layer documentation @endlink and
- * at @link http://drupal.org/node/310069 Database API @endlink.
+ * The interesting database queries for this example module are located in the
+ * \Drupal\dbtng_example\DbtngExampleRepository class.
  *
- * The several examples in DbtngExampleController (see
- * /src/Drupal/dbtng_example/Controller/DbtngExampleController.php) demonstrate
- * basic database usage.
+ * General documentation is available at @link
+ * https://www.drupal.org/docs/8/api/database-api Database API @endlink.
  *
- * db_insert() example:
- * @code
- *   // INSERT INTO {dbtng_example} (name, surname) VALUES('John, 'Doe')
- *   db_insert('dbtng_example')
- *     ->fields(array('name' => 'John', 'surname' => 'Doe'))
- *     ->execute();
- * @endcode
- *
- * db_update() example:
- * @code
- *   // UPDATE {dbtng_example} SET name = 'Jane' WHERE name = 'John'
- *   db_update('dbtng_example')
- *     ->fields(array('name' => 'Jane'))
- *     ->condition('name', 'John')
- *     ->execute();
- * @endcode
- *
- * db_delete() example:
- * @code
- *   // DELETE FROM {dbtng_example} WHERE name = 'Jane'
- *   db_delete('dbtng_example')
- *     ->condition('name', 'Jane')
- *     ->execute();
- * @endcode
- *
- * See @link database Database Abstraction Layer @endlink
- * @see db_insert()
- * @see db_update()
- * @see db_delete()
+ * @see database
+ * @see \Drupal\dbtng_example\DbtngExampleRepository
+ * @see \Drupal\Core\Database\Connection:delete()
+ * @see \Drupal\Core\Database\Connection:insert()
+ * @see \Drupal\Core\Database\Connection:select()
+ * @see \Drupal\Core\Database\Connection:update()
  */
 
 /**

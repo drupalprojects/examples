@@ -3,12 +3,41 @@
 namespace Drupal\dbtng_example\Controller;
 
 use Drupal\Core\Controller\ControllerBase;
-use Drupal\dbtng_example\DbtngExampleStorage;
+use Drupal\dbtng_example\DbtngExampleRepository;
+use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
  * Controller for DBTNG Example.
+ *
+ * @ingroup dbtng_example
  */
 class DbtngExampleController extends ControllerBase {
+
+  /**
+   * The repository for our specialized queries.
+   *
+   * @var \Drupal\dbtng_example\DbtngExampleRepository
+   */
+  protected $repository;
+
+  /**
+   * {@inheritdoc}
+   */
+  public static function create(ContainerInterface $container) {
+    $controller = new static($container->get('dbtng_example.repository'));
+    $controller->setStringTranslation($container->get('string_translation'));
+    return $controller;
+  }
+
+  /**
+   * Construct a new controller.
+   *
+   * @param \Drupal\dbtng_example\DbtngExampleRepository $repository
+   *   The repository service.
+   */
+  public function __construct(DbtngExampleRepository $repository) {
+    $this->repository = $repository;
+  }
 
   /**
    * Render a list of entries in the database.
@@ -29,7 +58,7 @@ class DbtngExampleController extends ControllerBase {
       $this->t('Age'),
     ];
 
-    foreach ($entries = DbtngExampleStorage::load() as $entry) {
+    foreach ($entries = $this->repository->load() as $entry) {
       // Sanitize each entry.
       $rows[] = array_map('Drupal\Component\Utility\SafeMarkup::checkPlain', (array) $entry);
     }
@@ -64,7 +93,7 @@ class DbtngExampleController extends ControllerBase {
     ];
 
     $rows = [];
-    foreach ($entries = DbtngExampleStorage::advancedLoad() as $entry) {
+    foreach ($entries = $this->repository->advancedLoad() as $entry) {
       // Sanitize each entry.
       $rows[] = array_map('Drupal\Component\Utility\SafeMarkup::checkPlain', $entry);
     }
