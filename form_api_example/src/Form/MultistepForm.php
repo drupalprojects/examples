@@ -129,6 +129,9 @@ class MultistepForm extends FormBase {
         'birth_year' => $form_state->getValue('birth_year'),
       ])
       ->set('page_num', 2)
+      // Since we have logic in our buildForm() method, we have to tell the form
+      // builder to rebuild the form. Otherwise, even though we set 'page_num'
+      // to 2, the AJAX-rendered form will still show page 1.
       ->setRebuild(TRUE);
   }
 
@@ -187,6 +190,9 @@ class MultistepForm extends FormBase {
       // Restore values for the first step.
       ->setValues($form_state->get('page_values'))
       ->set('page_num', 1)
+      // Since we have logic in our buildForm() method, we have to tell the form
+      // builder to rebuild the form. Otherwise, even though we set 'page_num'
+      // to 1, the AJAX-rendered form will still show page 2.
       ->setRebuild(TRUE);
   }
 

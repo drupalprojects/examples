@@ -74,7 +74,6 @@ class AjaxAddMore extends DemoBase {
         ],
       ];
     }
-    $form_state->setCached(FALSE);
     $form['actions']['submit'] = [
       '#type' => 'submit',
       '#value' => $this->t('Submit'),
@@ -108,6 +107,9 @@ class AjaxAddMore extends DemoBase {
     $name_field = $form_state->get('num_names');
     $add_button = $name_field + 1;
     $form_state->set('num_names', $add_button);
+    // Since our buildForm() method relies on the value of 'num_names' to
+    // generate 'name' form elements, we have to tell the form to rebuild. If we
+    // don't do this, the form builder will not call buildForm().
     $form_state->setRebuild();
   }
 
@@ -122,6 +124,9 @@ class AjaxAddMore extends DemoBase {
       $remove_button = $name_field - 1;
       $form_state->set('num_names', $remove_button);
     }
+    // Since our buildForm() method relies on the value of 'num_names' to
+    // generate 'name' form elements, we have to tell the form to rebuild. If we
+    // don't do this, the form builder will not call buildForm().
     $form_state->setRebuild();
   }
 
