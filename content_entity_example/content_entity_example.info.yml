@@ -6,4 +6,5 @@ core: 8.x
 # These modules are required by the tests, must be available at bootstrap time
 dependencies:
   - drupal:options
+  - drupal:user
   - examples:examples

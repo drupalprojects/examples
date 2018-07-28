@@ -62,7 +62,6 @@ class ContentEntityExampleTest extends ExamplesBrowserTestBase {
     $edit = [
       'name[0][value]' => 'test name',
       'first_name[0][value]' => 'test first name',
-      'gender' => 'male',
       'role' => 'administrator',
     ];
     $this->drupalPostForm(NULL, $edit, 'Save');
@@ -77,7 +76,6 @@ class ContentEntityExampleTest extends ExamplesBrowserTestBase {
     $assert->pageTextContains('test name');
     $assert->pageTextContains('test first name');
     $assert->pageTextContains('administrator');
-    $assert->pageTextContains('male');
     $assert->linkExists('Add contact');
     $assert->linkExists('Edit');
     $assert->linkExists('Delete');
@@ -113,7 +111,6 @@ class ContentEntityExampleTest extends ExamplesBrowserTestBase {
     $contact = Contact::create([
       'name' => 'somename',
       'first_name' => 'Joe',
-      'gender' => 'female',
       'role' => 'administrator',
     ]);
     $contact->save();
@@ -269,7 +266,6 @@ class ContentEntityExampleTest extends ExamplesBrowserTestBase {
     $edit = [
       'name[0][value]' => 'Test Admin Name',
       'first_name[0][value]' => 'Admin First Name',
-      'gender' => 'female',
       'role' => 'administrator',
     ];
     $this->drupalPostForm($add_url, $edit, 'Save');
@@ -288,7 +284,6 @@ class ContentEntityExampleTest extends ExamplesBrowserTestBase {
     $edit = [
       'name[0][value]' => 'Mere Mortal Name',
       'first_name[0][value]' => 'Mortal First Name',
-      'gender' => 'male',
       'role' => 'user',
     ];
     $this->drupalPostForm($add_url, $edit, 'Save');

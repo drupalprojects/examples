@@ -250,32 +250,6 @@ class Contact extends ContentEntityBase implements ContactInterface {
       ->setDisplayConfigurable('form', TRUE)
       ->setDisplayConfigurable('view', TRUE);
 
-    // Gender field for the contact.
-    // ListTextType with a drop down menu widget.
-    // The values shown in the menu are 'male' and 'female'.
-    // In the view the field content is shown as string.
-    // In the form the choices are presented as options list.
-    $fields['gender'] = BaseFieldDefinition::create('list_string')
-      ->setLabel(t('Gender'))
-      ->setDescription(t('The gender of the Contact entity.'))
-      ->setSettings([
-        'allowed_values' => [
-          'female' => 'female',
-          'male' => 'male',
-        ],
-      ])
-      ->setDisplayOptions('view', [
-        'label' => 'above',
-        'type' => 'string',
-        'weight' => -4,
-      ])
-      ->setDisplayOptions('form', [
-        'type' => 'options_select',
-        'weight' => -4,
-      ])
-      ->setDisplayConfigurable('form', TRUE)
-      ->setDisplayConfigurable('view', TRUE);
-
     // Owner field of the contact.
     // Entity reference field, holds the reference to the user object.
     // The view shows the user name field of the user.
