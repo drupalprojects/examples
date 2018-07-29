@@ -66,8 +66,7 @@
  *
  * In our example, the key files to look at are:
  *
- *  - src/StreamWrapper/FileExampleSessionStreamWrapper.php (the stream wrapper
- *    class).
+ *  - src/StreamWrapper/SessionStreamWrapper.php (the stream wrapper class).
  *  - src/PathProcessorSessions.php, which implements something called a "path
  *    processor".
  *    A path processor is a class that lets us hook the "files" in a scheme's

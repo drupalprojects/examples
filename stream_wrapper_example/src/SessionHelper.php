@@ -1,13 +1,13 @@
 <?php
 
-namespace Drupal\stream_wrapper_example\StreamWrapper;
+namespace Drupal\stream_wrapper_example;
 
 use Symfony\Component\HttpFoundation\RequestStack;
 
 /**
- * Wrapper for modifying and accessing data embedded in the session object.
+ * Helper to manage file wrapper data stored in the session object.
  */
-class SessionWrapper {
+class SessionHelper {
 
   /**
    * Keep the top-level "file system" area in one place.
@@ -50,7 +50,7 @@ class SessionWrapper {
   }
 
   /**
-   * Get whatever's in the store.
+   * Get the contents of the session filesystem.
    *
    * @return array
    *   An associated array where scalar data represents a file, and arrays
@@ -63,14 +63,10 @@ class SessionWrapper {
   }
 
   /**
-   * Set the complete content of our session.
-   *
-   * We do this since we cannot directly probe the PHP @_SESSION variable
-   * via a PHP reference. We can only get or set automically.
+   * Set the contents of our session filesystem.
    *
    * @param array $store
-   *   The content of the whole session data store, to replace all of the
-   *   current data.
+   *   The whole filesystem represented as an array.
    */
   protected function setStore(array $store) {
     $session = $this->getSession();
@@ -227,13 +223,6 @@ class SessionWrapper {
       return TRUE;
     }
     return isset($store_info['tip'][$path_info['basename']]);
-  }
-
-  /**
-   * Set up the store for use.
-   */
-  public function setUpStore() {
-    // Nothing to do with $_SESSION version.
   }
 
   /**

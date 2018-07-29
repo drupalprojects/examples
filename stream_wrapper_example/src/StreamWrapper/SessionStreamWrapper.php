@@ -1,18 +1,17 @@
 <?php
-// @codingStandardsIgnoreFile
 
 namespace Drupal\stream_wrapper_example\StreamWrapper;
 
-// These classes are used to implement a stream wrapper class.
-use Drupal\Core\StreamWrapper\StreamWrapperInterface;
 use Drupal\Component\Utility\Html;
+use Drupal\Core\StreamWrapper\StreamWrapperInterface;
 use Drupal\Core\Routing\UrlGeneratorTrait;
+use Drupal\stream_wrapper_example\SessionHelper;
 
 /**
  * Example stream wrapper class to handle session:// streams.
  *
  * This is just an example, as it could have horrible results if much
- * information were placed in the $_SESSION variable. However, it does
+ * information were placed in the session object. However, it does
  * demonstrate both the read and write implementation of a stream wrapper.
  * You should *never* do this on any website accessable on the open
  * Internet.
@@ -32,8 +31,8 @@ use Drupal\Core\Routing\UrlGeneratorTrait;
  * because the scheme "http" is supported natively in PHP. So Drupal adds
  * the public:// and private:// schemes, and contrib modules can add any
  * scheme they want to. This example adds the session:// scheme, which allows
- * reading and writing the $_SESSION['stream_wrapper_example'] key as if it
- * were a file.
+ * reading and writing the 'stream_wrapper_example' key of the session object as
+ * if it were a file.
  *
  * Drupal makes use of this concept to implement custom URI types like
  * "private://" and "public://".  To implement a stream wrapper, reading
@@ -61,18 +60,21 @@ use Drupal\Core\Routing\UrlGeneratorTrait;
  *     See stream_wrapper_example.routing.yml for an example of this, and
  *     file.module for the hook implementation.
  *
- * Note that because this implementation uses simple PHP arrays ($_SESSION)
- * it is limited to string values, so binary files will not work correctly.
- * Only text files can be used.  Also, experienced Drupal coders will
- * notice that we are violating one of Drupal's coding standards here:
- * normally, you should use "camelCase" for the names of your public
- * functions. We cannot do this here, since PHP itself defines the interface
- * used to interact with stream wrappers. Since PHP uses names_like_this
- * we are required to do the same here.
+ * Note that because this implementation uses simple PHP arrays it is limited to
+ * string values, so binary files will not work correctly. Only text files can
+ * be used.
+ *
+ * Also, experienced Drupal coders will notice that we are violating
+ * one of Drupal's coding standards here: normally, you should use "camelCase"
+ * for the names of your public functions. We cannot do this here, since PHP
+ * itself defines the interface used to interact with stream wrappers. Since PHP
+ * uses names_like_this we are required to do the same here. We've turned off
+ * PHPCS for those method names in our implementation using the
+ * 'codingStandardsIgnore' annotation.
  *
  * @ingroup stream_wrapper_example
  */
-class FileExampleSessionStreamWrapper implements StreamWrapperInterface {
+class SessionStreamWrapper implements StreamWrapperInterface {
 
   // We use this trait in order to get nice system-style links
   // for files stored via our stream wrapper.
@@ -97,9 +99,8 @@ class FileExampleSessionStreamWrapper implements StreamWrapperInterface {
   /**
    * The content of the stream.
    *
-   * Since this trivial example just uses the $_SESSION variable, this is
-   * simply a reference to the contents of the related part of
-   * $_SESSION['stream_wrapper_example'].
+   * Since this trivial example uses the session object, this is a reference to
+   * the the session object's 'stream_wrapper_example' key.
    *
    * @var array
    */
@@ -159,7 +160,7 @@ class FileExampleSessionStreamWrapper implements StreamWrapperInterface {
     // order to use standard dependency injection as is typically done
     // in Drupal 8.
     $this->requestStack = \Drupal::service('request_stack');
-    $helper = $this->getSessionWrapper();
+    $helper = $this->getSessionHelper();
     $helper->setPath('.isadir.txt', TRUE);
     $this->streamMode = FALSE;
   }
@@ -167,8 +168,8 @@ class FileExampleSessionStreamWrapper implements StreamWrapperInterface {
   /**
    * Get wrapped session manipulators.
    */
-  public function getSessionWrapper() {
-    return new SessionWrapper($this->requestStack);
+  public function getSessionHelper() {
+    return new SessionHelper($this->requestStack);
   }
 
   /**
@@ -262,15 +263,14 @@ class FileExampleSessionStreamWrapper implements StreamWrapperInterface {
   /**
    * Returns the local path.
    *
-   * Here we aren't doing anything but stashing the "file" in a key in the
-   * $_SESSION variable, so there's not much to do but to create a "path"
-   * which is really just a key in the $_SESSION variable. So something
-   * like 'session://one/two/three.txt' becomes
-   * $_SESSION['stream_wrapper_example']['one']['two']['three.txt'] and the
-   * actual path is "one/two/three.txt".
+   * In our case, the local path is the URI minus the wrapper type. So a URI
+   * like 'session://one/two/three.txt' becomes 'one/two/three.txt'.
    *
    * @param string $uri
    *   Optional URI, supplied when doing a move or rename.
+   *
+   * @return string
+   *   The local path.
    */
   protected function getLocalPath($uri = NULL) {
     if (!isset($uri)) {
@@ -299,13 +299,15 @@ class FileExampleSessionStreamWrapper implements StreamWrapperInterface {
    *
    * @see http://php.net/manual/en/streamwrapper.stream-open.php
    */
+// @codingStandardsIgnoreStart
   public function stream_open($uri, $mode, $options, &$opened_path) {
+// @codingStandardsIgnoreEnd
     $this->uri = $uri;
     $path = $this->getLocalPath($uri);
     // We will support two modes only, 'r' and 'w'.  If the key is 'r',
     // check to make sure the file is there.
     if (stristr($mode, 'r') !== FALSE) {
-      $helper = $this->getSessionWrapper();
+      $helper = $this->getSessionHelper();
       if (!$helper->checkPath($path)) {
         return FALSE;
       }
@@ -344,7 +346,9 @@ class FileExampleSessionStreamWrapper implements StreamWrapperInterface {
    * @see stream_select()
    * @see http://php.net/manual/streamwrapper.stream-cast.php
    */
+// @codingStandardsIgnoreStart
   public function stream_cast($cast_as) {
+// @codingStandardsIgnoreEnd
     return FALSE;
   }
 
@@ -378,7 +382,9 @@ class FileExampleSessionStreamWrapper implements StreamWrapperInterface {
    *
    * @see http://www.php.net/manual/streamwrapper.stream-metadata.php
    */
+// @codingStandardsIgnoreStart
   public function stream_metadata($path, $option, $value) {
+// @codingStandardsIgnoreEnd
     // We don't really do any of these, but we want to reassure the calling code
     // that there is no problem with chown or chgrp, even though we do not
     // actually support these.
@@ -416,7 +422,9 @@ class FileExampleSessionStreamWrapper implements StreamWrapperInterface {
    *   TRUE on success, FALSE otherwise. If $option is not implemented, FALSE
    *   should be returned.
    */
+// @codingStandardsIgnoreStart
   public function stream_set_option($option, $arg1, $arg2) {
+// @codingStandardsIgnoreEnd
     return FALSE;
   }
 
@@ -435,14 +443,16 @@ class FileExampleSessionStreamWrapper implements StreamWrapperInterface {
    *   This one actually makes sense for the example.
    *   https://www.drupal.org/project/examples/issues/2986437
    */
+// @codingStandardsIgnoreStart
   public function stream_truncate($new_size) {
+// @codingStandardsIgnoreEnd
     return FALSE;
   }
 
   /**
    * Support for flock().
    *
-   * The $_SESSION variable has no locking capability, so return TRUE.
+   * The session object has no locking capability, so return TRUE.
    *
    * @param int $operation
    *   One of the following:
@@ -457,7 +467,9 @@ class FileExampleSessionStreamWrapper implements StreamWrapperInterface {
    *
    * @see http://php.net/manual/en/streamwrapper.stream-lock.php
    */
+// @codingStandardsIgnoreStart
   public function stream_lock($operation) {
+// @codingStandardsIgnoreEnd
     return TRUE;
   }
 
@@ -472,7 +484,9 @@ class FileExampleSessionStreamWrapper implements StreamWrapperInterface {
    *
    * @see http://php.net/manual/en/streamwrapper.stream-read.php
    */
+// @codingStandardsIgnoreStart
   public function stream_read($count) {
+// @codingStandardsIgnoreEnd
     if (is_string($this->sessionContent)) {
       $remaining_chars = strlen($this->sessionContent) - $this->streamPointer;
       $number_to_read = min($count, $remaining_chars);
@@ -496,7 +510,9 @@ class FileExampleSessionStreamWrapper implements StreamWrapperInterface {
    *
    * @see http://php.net/manual/en/streamwrapper.stream-write.php
    */
+// @codingStandardsIgnoreStart
   public function stream_write($data) {
+// @codingStandardsIgnoreEnd
     // Sanitize the data in a simple way since we're putting it into the
     // session variable.
     $data = Html::escape($data);
@@ -513,7 +529,9 @@ class FileExampleSessionStreamWrapper implements StreamWrapperInterface {
    *
    * @see http://php.net/manual/en/streamwrapper.stream-eof.php
    */
+// @codingStandardsIgnoreStart
   public function stream_eof() {
+// @codingStandardsIgnoreEnd
     return FALSE;
   }
 
@@ -530,7 +548,9 @@ class FileExampleSessionStreamWrapper implements StreamWrapperInterface {
    *
    * @see http://php.net/manual/en/streamwrapper.stream-seek.php
    */
+// @codingStandardsIgnoreStart
   public function stream_seek($offset, $whence = SEEK_SET) {
+// @codingStandardsIgnoreEnd
     if (strlen($this->sessionContent) >= $offset) {
       $this->streamPointer = $offset;
       return TRUE;
@@ -548,11 +568,13 @@ class FileExampleSessionStreamWrapper implements StreamWrapperInterface {
    *
    * @see http://php.net/manual/en/streamwrapper.stream-flush.php
    */
+// @codingStandardsIgnoreStart
   public function stream_flush() {
+// @codingStandardsIgnoreEnd
     if ($this->streamMode == 'w') {
       // Since we aren't writing directly to the session, we need to send
       // the bytes on to the store.
-      $helper = $this->getSessionWrapper();
+      $helper = $this->getSessionHelper();
       $path = $this->getLocalPath($this->uri);
       $helper->setPath($path, $this->sessionContent);
       $this->sessionContent = '';
@@ -569,7 +591,9 @@ class FileExampleSessionStreamWrapper implements StreamWrapperInterface {
    *
    * @see http://php.net/manual/en/streamwrapper.stream-tell.php
    */
+// @codingStandardsIgnoreStart
   public function stream_tell() {
+// @codingStandardsIgnoreEnd
     return $this->streamPointer;
   }
 
@@ -582,7 +606,9 @@ class FileExampleSessionStreamWrapper implements StreamWrapperInterface {
    *
    * @see http://php.net/manual/en/streamwrapper.stream-stat.php
    */
+// @codingStandardsIgnoreStart
   public function stream_stat() {
+// @codingStandardsIgnoreEnd
     return [
       'size' => strlen($this->sessionContent),
     ];
@@ -596,7 +622,9 @@ class FileExampleSessionStreamWrapper implements StreamWrapperInterface {
    *
    * @see http://php.net/manual/en/streamwrapper.stream-close.php
    */
+// @codingStandardsIgnoreStart
   public function stream_close() {
+// @codingStandardsIgnoreEnd
     $this->streamPointer = 0;
     // Unassign the reference.
     unset($this->sessionContent);
@@ -616,7 +644,7 @@ class FileExampleSessionStreamWrapper implements StreamWrapperInterface {
    */
   public function unlink($uri) {
     $path = $this->getLocalPath($uri);
-    $helper = $this->getSessionWrapper();
+    $helper = $this->getSessionHelper();
     $helper->clearPath($path);
     return TRUE;
   }
@@ -639,7 +667,7 @@ class FileExampleSessionStreamWrapper implements StreamWrapperInterface {
     // to a new key, erase the old key.
     $from_path = $this->getLocalPath($from_uri);
     $to_path = $this->getLocalPath($to_uri);
-    $helper = $this->getSessionWrapper();
+    $helper = $this->getSessionHelper();
     if (!$helper->checkPath($from_path)) {
       return FALSE;
     }
@@ -701,7 +729,7 @@ class FileExampleSessionStreamWrapper implements StreamWrapperInterface {
       return FALSE;
     }
     $path = $this->getLocalPath($uri);
-    $helper = $this->getSessionWrapper();
+    $helper = $this->getSessionHelper();
     $new_dir = ['isadir.txt' => TRUE];
     $helper->setPath($path, $new_dir);
     return TRUE;
@@ -722,7 +750,7 @@ class FileExampleSessionStreamWrapper implements StreamWrapperInterface {
    */
   public function rmdir($uri, $options) {
     $path = $this->getLocalPath($uri);
-    $helper = $this->getSessionWrapper();
+    $helper = $this->getSessionHelper();
     if (!$helper->checkPath($path) or !is_array($helper->getPath($path))) {
       return FALSE;
     }
@@ -750,9 +778,11 @@ class FileExampleSessionStreamWrapper implements StreamWrapperInterface {
    *
    * @see http://php.net/manual/en/streamwrapper.url-stat.php
    */
+// @codingStandardsIgnoreStart
   public function url_stat($uri, $flags) {
+// @codingStandardsIgnoreEnd
     $path = $this->getLocalPath($uri);
-    $helper = $this->getSessionWrapper();
+    $helper = $this->getSessionHelper();
     if (!$helper->checkPath($path)) {
       return FALSE;
       // No file.
@@ -814,9 +844,11 @@ class FileExampleSessionStreamWrapper implements StreamWrapperInterface {
    *
    * @see http://php.net/manual/en/streamwrapper.dir-opendir.php
    */
+// @codingStandardsIgnoreStart
   public function dir_opendir($uri, $options) {
+// @codingStandardsIgnoreEnd
     $path = $this->getLocalPath($uri);
-    $helper = $this->getSessionWrapper();
+    $helper = $this->getSessionHelper();
     if (!$helper->checkPath($path)) {
       return FALSE;
     }
@@ -842,7 +874,9 @@ class FileExampleSessionStreamWrapper implements StreamWrapperInterface {
    *
    * @see http://php.net/manual/en/streamwrapper.dir-readdir.php
    */
+// @codingStandardsIgnoreStart
   public function dir_readdir() {
+// @codingStandardsIgnoreEnd
     if ($this->directoryPointer < count($this->directoryKeys)) {
       $next = $this->directoryKeys[$this->directoryPointer];
       $this->directoryPointer++;
@@ -859,7 +893,9 @@ class FileExampleSessionStreamWrapper implements StreamWrapperInterface {
    *
    * @see http://php.net/manual/en/streamwrapper.dir-rewinddir.php
    */
+// @codingStandardsIgnoreStart
   public function dir_rewinddir() {
+// @codingStandardsIgnoreEnd
     $this->directoryPointer = 0;
     return TRUE;
   }
@@ -872,7 +908,9 @@ class FileExampleSessionStreamWrapper implements StreamWrapperInterface {
    *
    * @see http://php.net/manual/en/streamwrapper.dir-closedir.php
    */
+// @codingStandardsIgnoreStart
   public function dir_closedir() {
+// @codingStandardsIgnoreEnd
     $this->directoryPointer = 0;
     unset($this->directoryKeys);
     return TRUE;

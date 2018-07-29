@@ -28,7 +28,7 @@ stream_wrapper_example.files:
 # we also need a route defintion to make our URLs.  This is never referenced by the
 # routing system, but is used by our stream wrapper class to create external URLs.
 #
-# @see FileExampleSessionStreamWrapper::getExternalUrl()
+# @see SessionStreamWrapper::getExternalUrl()
 #
 stream_wrapper_example.files.session:
   path: '/examples/stream_wrapper_example/files/{filepath}'

@@ -2,7 +2,7 @@
 
 namespace Drupal\Tests\stream_wrapper_example\Traits;
 
-use Drupal\stream_wrapper_example\StreamWrapper\SessionWrapper;
+use Drupal\stream_wrapper_example\SessionHelper;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
@@ -71,10 +71,10 @@ trait MockSessionTrait {
   }
 
   /**
-   * Get a session wrapper.
+   * Get a session helper.
    */
-  public function getSessionWrapper() {
-    return new SessionWrapper($this->requestStack);
+  public function getSessionHelper() {
+    return new SessionHelper($this->requestStack);
   }
 
   /**

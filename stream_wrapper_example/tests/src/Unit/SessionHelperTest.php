@@ -2,17 +2,17 @@
 
 namespace Drupal\Tests\stream_wrapper_example\Unit;
 
-use Drupal\stream_wrapper_example\StreamWrapper\SessionWrapper;
+use Drupal\stream_wrapper_example\SessionHelper;
 use Drupal\Tests\stream_wrapper_example\Traits\MockSessionTrait;
 use Drupal\Tests\UnitTestCase;
 
 /**
- * PHPUnit test for the SessionWrapper session manipulation class.
+ * PHPUnit test for the SessionHelper session manipulation class.
  *
- * The SessionWrapper class is a utility used to manipulate an associative
+ * The SessionHelper class is a utility used to manipulate an associative
  * array stored in the session object as if it were a file system.  This
  * greatly simplifies the code in our stream wrapper class, since
- * SessionWrapper handles things like interacting with the session object,
+ * SessionHelper handles things like interacting with the session object,
  * and also deals with translating path strings into nested arrays.
  *
  * The test class covers the equivalent of adding directories and files,
@@ -22,8 +22,10 @@ use Drupal\Tests\UnitTestCase;
  * @ingroup stream_wrapper_example
  * @group stream_wrapper_example
  * @group examples
+ *
+ * @coversDefaultClass \Drupal\stream_wrapper_example\SessionHelper
  */
-class SessionWrapperTest extends UnitTestCase {
+class SessionHelperTest extends UnitTestCase {
 
   use MockSessionTrait;
 
@@ -37,8 +39,7 @@ class SessionWrapperTest extends UnitTestCase {
     $this->createSessionMock();
 
     // Set up the example.
-    $helper = new SessionWrapper($this->requestStack);
-    $helper->setUpStore();
+    $helper = new SessionHelper($this->requestStack);
   }
 
   /**
@@ -46,19 +47,19 @@ class SessionWrapperTest extends UnitTestCase {
    */
   public function testWrapper() {
     // Check out root.
-    $helper = new SessionWrapper($this->requestStack);
+    $helper = new SessionHelper($this->requestStack);
     $root = $helper->getPath('');
-    $this->assertTrue(is_array($root), "The root is an array");
-    $this->assertTrue(empty($root), "The root is empty.");
+    $this->assertInternalType('array', $root);
+    $this->assertEmpty($root);
 
     // Add a top level file.
-    $helper = new SessionWrapper($this->requestStack);
+    $helper = new SessionHelper($this->requestStack);
     $helper->setPath('drupal.txt', "Stuff");
     $text = $helper->getPath('drupal.txt');
     $this->assertEquals($text, "Stuff", "File at base of hierarchy can be read.");
 
     // Add a "directory".
-    $helper = new SessionWrapper($this->requestStack);
+    $helper = new SessionHelper($this->requestStack);
     $dir = [
       'file.txt' => 'More stuff',
     ];
@@ -67,21 +68,21 @@ class SessionWrapperTest extends UnitTestCase {
     $this->assertEquals($fetched_dir['file.txt'], "More stuff", "File inside of directory can be read.");
 
     // Check file existance.
-    $helper = new SessionWrapper($this->requestStack);
+    $helper = new SessionHelper($this->requestStack);
     $this->assertTrue($helper->checkPath('drupal.txt'), "File at root still exists.");
     $this->assertFalse($helper->checkPath('file.txt'), "Non-existant file at root does not exist.");
     $this->assertTrue($helper->checkPath('directory1'), "Directory at root still exists.");
     $this->assertTrue($helper->checkPath('directory1/file.txt'), "File in directory at root still exists.");
 
     // Two deep.
-    $helper = new SessionWrapper($this->requestStack);
+    $helper = new SessionHelper($this->requestStack);
     $helper->setPath('directory1/directory2', []);
     $helper->setPath('directory1/directory2/junk.txt', "Store some junk");
     $text = $helper->getPath('directory1/directory2/junk.txt');
     $this->assertEquals($text, "Store some junk", "File inside of nested directory can be read.");
 
     // Clear references.
-    $helper = new SessionWrapper($this->requestStack);
+    $helper = new SessionHelper($this->requestStack);
     $before = $helper->checkPath('directory1/directory2/junk.txt');
     $this->assertTrue($before, "File 2 deep exists.");
     $helper->clearPath('directory1/directory2/junk.txt');
@@ -89,7 +90,7 @@ class SessionWrapperTest extends UnitTestCase {
     $this->assertFalse($after, "File 2 deep should be gone.");
 
     // Clean up test.
-    $helper = new SessionWrapper($this->requestStack);
+    $helper = new SessionHelper($this->requestStack);
     $store = $helper->getPath('');
     $this->assertNotEmpty($store, "Before cleanup store is not empty.");
     $helper->cleanUpStore();

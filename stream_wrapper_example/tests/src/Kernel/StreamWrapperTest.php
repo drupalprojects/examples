@@ -10,9 +10,8 @@ use Drupal\Tests\stream_wrapper_example\Traits\MockSessionTrait;
  * Test of the Session Stream Wrapper Class.
  *
  * This test covers the PHP-level (i.e., not Drupal-specific) functions of the
- * FileExampleSessionStreamWrapper class. It's not directly loaded here because
- * it loads in background automatically as soon as the stream_wrapper_example
- * module loads.
+ * SessionStreamWrapper class. It's not directly loaded here because it loads in
+ * background automatically as soon as the stream_wrapper_example module loads.
  *
  * The tests invoke the stream wrapper's functionality indirectly by calling
  * PHP's file functions.
@@ -130,7 +129,7 @@ class StreamWrapperTest extends KernelTestBase {
    * Get the contents of the complete array stored in the session.
    */
   protected function getCurrentStore() {
-    $handle = $this->getSessionWrapper();
+    $handle = $this->getSessionHelper();
     return $handle->getPath('');
   }
 
@@ -138,7 +137,7 @@ class StreamWrapperTest extends KernelTestBase {
    * Clear the session storage area.
    */
   protected function resetStore() {
-    $handle = $this->getSessionWrapper();
+    $handle = $this->getSessionHelper();
     $handle->cleanUpStore();
   }
 
