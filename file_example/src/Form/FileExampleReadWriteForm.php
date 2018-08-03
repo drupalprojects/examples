@@ -2,7 +2,7 @@
 
 namespace Drupal\file_example\Form;
 
-use Drupal\Core\Database\Database;
+use Drupal\Core\Entity\EntityTypeManagerInterface;
 use Drupal\Core\Extension\ModuleHandlerInterface;
 use Drupal\Core\File\FileSystemInterface;
 use Drupal\Core\Form\FormBase;
@@ -10,7 +10,6 @@ use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\State\StateInterface;
 use Drupal\Core\StreamWrapper\StreamWrapperManagerInterface;
 use Drupal\Core\Url;
-use Drupal\file\Entity\File;
 use Drupal\file\FileInterface;
 use Drupal\stream_wrapper_example\StreamWrapper\SessionWrapper;
 use Symfony\Component\DependencyInjection\ContainerInterface;
@@ -55,6 +54,10 @@ class FileExampleReadWriteForm extends FormBase {
    * Indicator variable for the session:// scheme being available.
    *
    * @var bool
+   *
+   * @todo Remove this since we have a hard dependency on
+   *   stream_wrapper_example.
+   *   https://www.drupal.org/project/examples/issues/2990336
    */
   protected $sessionSchemeEnabled;
 
@@ -64,6 +67,13 @@ class FileExampleReadWriteForm extends FormBase {
    * @var \Drupal\Core\Extension\ModuleHandlerInterface
    */
   protected $moduleHandler;
+
+  /**
+   * Entity type manager service.
+   *
+   * @var \Drupal\Core\Entity\EntityTypeManagerInterface
+   */
+  protected $entityTypeManager;
 
   /**
    * Constructs a new FileExampleReadWriteForm page.
@@ -86,13 +96,15 @@ class FileExampleReadWriteForm extends FormBase {
     FileSystemInterface $file_system,
     StreamWrapperManagerInterface $stream_wrapper_manager,
     ModuleHandlerInterface $module_handler,
-    RequestStack $request_stack
+    RequestStack $request_stack,
+    EntityTypeManagerInterface $entity_type_manager
   ) {
     $this->state = $state;
     $this->fileSystem = $file_system;
+    $this->streamWrapperManager = $stream_wrapper_manager;
     $this->moduleHandler = $module_handler;
     $this->requestStack = $request_stack;
-    $this->streamWrapperManager = $stream_wrapper_manager;
+    $this->entityTypeManager = $entity_type_manager;
     $this->sessionSchemeEnabled = $this->moduleHandler->moduleExists('stream_wrapper_example');
   }
 
@@ -105,7 +117,8 @@ class FileExampleReadWriteForm extends FormBase {
       $container->get('file_system'),
       $container->get('stream_wrapper_manager'),
       $container->get('module_handler'),
-      $container->get('request_stack')
+      $container->get('request_stack'),
+      $container->get('entity_type.manager')
     );
     $form->setMessenger($container->get('messenger'));
     return $form;
@@ -204,15 +217,18 @@ class FileExampleReadWriteForm extends FormBase {
    *   May be other alternatives.
    *   https://www.drupal.org/project/examples/issues/2986438
    */
-  private static function getManagedFile($uri) {
-    $fid = Database::getConnection('default')->query(
-      'SELECT fid FROM {file_managed} WHERE uri = :uri',
-      [':uri' => $uri]
-    )->fetchField();
+  protected function getManagedFile($uri) {
+    // We'll use an entity query to get the managed part of the file.
+    $storage = $this->entityTypeManager->getStorage('file');
+    $query = $storage->getQuery()
+      ->condition('uri', $uri);
+    $fid = $query->execute();
     if (!empty($fid)) {
-      $file_object = File::load($fid);
+      // Now that we have a fid, we can load it.
+      $file_object = $storage->load(reset($fid));
       return $file_object;
     }
+    // Return FALSE because there's no managed file for that URI.
     return FALSE;
   }
 
@@ -674,7 +690,7 @@ class FileExampleReadWriteForm extends FormBase {
     // Since we don't know if the file is managed or not, look in the database
     // to see. Normally, code would be working with either managed or unmanaged
     // files, so this is not a typical situation.
-    $file_object = self::getManagedFile($uri);
+    $file_object = $this->getManagedFile($uri);
 
     // If a managed file, use file_delete().
     if (!empty($file_object)) {
