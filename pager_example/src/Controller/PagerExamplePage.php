@@ -61,58 +61,21 @@ class PagerExamplePage extends ControllerBase {
    */
   public function getContent() {
     // First we'll tell the user what's going on. This content can be found
-    // in the twig template file: templates/description.html.twig.
-    // @todo: Set up links to create nodes and point to devel module.
-    // https://www.drupal.org/project/examples/issues/2986434
+    // in the twig template file: templates/description.html.twig. It will be
+    // inserted by the theming function pager_example_description().
     $build = [
       'description' => [
         '#theme' => 'pager_example_description',
-        '#description' => 'foo',
+        '#description' => 'description',
         '#attributes' => [],
       ],
     ];
 
-    // We need to count the number of nodes so that we can tell the user to add
-    // some if there aren't any.
-    $query = $this->nodeStorage->getQuery()
-      ->addTag('node_access')
-      ->count();
-
-    // The node_access tag does not trigger a check on whether a user has the
-    // ability to view unpublished content. The 'bypass node access' permission
-    // is really more than we need. But, there is no separate permission for
-    // viewing unpublished content. There is a permission to 'view own
-    // unpublished content', but we don't have a good way of using that in this
-    // query. So, unfortunately this query will incorrectly eliminate even those
-    // unpublished nodes that the user may, in fact, be allowed to view.
-    if (!$this->currentUser->hasPermission('bypass node access')) {
-      $query->condition('status', 1);
-    }
-    $count_nodes = $query->execute();
-
-    if ($count_nodes == 0) {
-      if ($this->currentUser->hasPermission('create page content')) {
-        $build['no-nodes'] = [
-          '#markup' => $this->t('There are no nodes to display.
-            Please <a href=":url">create a node</a>.',
-            [
-              ':url' => Url::fromRoute('node.add', ['node_type' => 'page'])->toString(),
-            ]
-          ),
-        ];
-      }
-      else {
-        $build['no-nodes'] = [
-          '#markup' => $this->t('There are no nodes to display.'),
-        ];
-      }
-
-      // Ensure that Drupal clears the cache when nodes have been published,
-      // unpublished, added or deleted; and when user permissions change.
-      $build['#cache']['tags'][] = 'node_list';
-      $build['#cache']['contexts'][] = 'user.permissions';
-      return $build;
-    }
+    // Ensure that this page's cache is invalidated when nodes have been
+    // published, unpublished, added or deleted; and when user permissions
+    // change.
+    $build['#cache']['tags'][] = 'node_list';
+    $build['#cache']['contexts'][] = 'user.permissions';
 
     // Now we want to get our tabular data. We select nodes from node storage
     // limited by 2 per page and sort by nid DESC because we want to show newest
@@ -155,20 +118,19 @@ class PagerExamplePage extends ControllerBase {
 
     // Build a render array which will be themed as a table with a pager.
     $build['pager_example'] = [
-      '#rows' => $rows,
-      '#header' => [$this->t('NID'), $this->t('Title')],
       '#type' => 'table',
-      '#empty' => $this->t('No content available.'),
+      '#header' => [$this->t('NID'), $this->t('Title')],
+      '#rows' => $rows,
+      '#empty' => $this->t('There are no nodes to display. Please <a href=":url">create a node</a>.', [
+        ':url' => Url::fromRoute('node.add', ['node_type' => 'page'])->toString(),
+      ]),
     ];
+    // Add our pager element so the user can choose which pagination to see.
+    // This will add a '?page=1' fragment to the links to subsequent pages.
     $build['pager'] = [
       '#type' => 'pager',
       '#weight' => 10,
     ];
-
-    // Ensure that Drupal clears the cache when nodes have been published,
-    // unpublished, added or deleted; and when user permissions change.
-    $build['#cache']['tags'][] = 'node_list';
-    $build['#cache']['contexts'][] = 'user.permissions';
 
     return $build;
   }
